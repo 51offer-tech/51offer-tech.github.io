@@ -6,6 +6,7 @@
 <meta name="generator" content="Hexo 4.0.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="baidu-site-verification" content="up4BoDUY22" />
 
 <title>基于redis key失效机制实现状态实时更新 - 农民工学编程</title>
 
@@ -13,14 +14,14 @@
     <meta name="description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于redis key失效机制实现状态实时更新">
-<meta property="og:url" content="blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
 <meta property="og:description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-24T06:34:53.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
 
 

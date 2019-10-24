@@ -6,6 +6,7 @@
 <meta name="generator" content="Hexo 4.0.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="baidu-site-verification" content="up4BoDUY22" />
 
 <title>Linux中inode引起的故障 - 农民工学编程</title>
 
@@ -13,14 +14,14 @@
     <meta name="description" content="ETL脚本调度故障今日一大早，用户群就炸了，很多人说脚本调度无法运行，一直是未开始状态，起初，我并未引起重视，猜想可能是pieline服务阻塞引起的，由于情况紧急，就直接进入到tomcat manager进行reload操作，但是奇怪的是，reload之后，大批量的作业都直接终止掉，查看日志，发现是ETL脚本日志创建失败， 遂想到，肯定是文件系统占满，就开始rm一部分，然后，df -h，发现还有1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux中inode引起的故障">
-<meta property="og:url" content="blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;Linux%E4%B8%ADinode%E5%BC%95%E8%B5%B7%E7%9A%84%E6%95%85%E9%9A%9C&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;Linux%E4%B8%ADinode%E5%BC%95%E8%B5%B7%E7%9A%84%E6%95%85%E9%9A%9C&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
 <meta property="og:description" content="ETL脚本调度故障今日一大早，用户群就炸了，很多人说脚本调度无法运行，一直是未开始状态，起初，我并未引起重视，猜想可能是pieline服务阻塞引起的，由于情况紧急，就直接进入到tomcat manager进行reload操作，但是奇怪的是，reload之后，大批量的作业都直接终止掉，查看日志，发现是ETL脚本日志创建失败， 遂想到，肯定是文件系统占满，就开始rm一部分，然后，df -h，发现还有1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-24T06:03:30.820Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
 
 
