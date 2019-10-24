@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>基于redis key失效机制实现状态实时更新 - 农民工学编程</title>
+
+
+    <meta name="description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于redis key失效机制实现状态实时更新">
+<meta property="og:url" content="blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0&#x2F;index.html">
+<meta property="og:site_name" content="农民工学编程">
+<meta property="og:description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-10-24T06:34:53.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="基于redis key失效机制实现状态实时更新" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/eyiadmin/meizitu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-24T06:32:19.000Z">2019-10-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 667 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                基于redis key失效机制实现状态实时更新
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。</p>
+</blockquote>
+<p>一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：<br>1、定时（采用quartz定时执行作业，去扫描数据库）<br>2、用hangfire、rabbitmq等实现延迟执行<br>3、redis key失效事件，实时处理<br>经过评估，最后选择了redis key失效机制来处理这个业务。</p>
+<h3 id="redis-key失效事件监听"><a href="#redis-key失效事件监听" class="headerlink" title="redis key失效事件监听"></a>redis key失效事件监听</h3><p>redis自2.8之后就提供Keyspace Notifications功能，允许客户订阅Pub/Sub。</p>
+<h3 id="开启事件通知"><a href="#开启事件通知" class="headerlink" title="开启事件通知"></a>开启事件通知</h3><p>默认情况下，redis是没有开启事件通知的，所以我们需要手动配置：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">打开redis.conf配置文件</span><br><span class="line">搜索notify-keyspace-events，该配置默认是被注释掉的，需要将其修改为notify-keyspace-events Ex ,然后重启便可生效</span><br></pre></td></tr></table></figure>
+<p>值说明:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># K    键空间通知，以__keyspace@&lt;db&gt;__为前缀</span><br><span class="line"># E    键事件通知，以__keysevent@&lt;db&gt;__为前缀</span><br><span class="line"># g    del , expipre , rename 等类型无关的通用命令的通知, ...</span><br><span class="line"># $    String命令</span><br><span class="line"># l    List命令</span><br><span class="line"># s    Set命令</span><br><span class="line"># h    Hash命令</span><br><span class="line"># z    有序集合命令</span><br><span class="line"># x    过期事件（每次key过期时生成）</span><br><span class="line"># e    驱逐事件（当key在内存满了被清除时生成）</span><br><span class="line"># A    g$lshzxe的别名，因此”AKE”意味着所有的事件</span><br></pre></td></tr></table></figure>
+<h3 id="spring-boot实现消息监听器类"><a href="#spring-boot实现消息监听器类" class="headerlink" title="spring boot实现消息监听器类"></a>spring boot实现消息监听器类</h3><p>pom.xml:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   &lt;!-- https://mvnrepository.com/artifact/redis.clients/jedis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">	&lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">	&lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">      &lt;!-- https://mvnrepository.com/artifact/com.alibaba/druid --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.1.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class RedisMsgPubSubListener extends JedisPubSub &#123;</span><br><span class="line"></span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ITaskService taskService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void unsubscribe() &#123;</span><br><span class="line">        super.unsubscribe();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void unsubscribe(String... channels) &#123;</span><br><span class="line">        super.unsubscribe(channels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void subscribe(String... channels) &#123;</span><br><span class="line">        super.subscribe(channels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void psubscribe(String... patterns) &#123;</span><br><span class="line">        super.psubscribe(patterns);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void punsubscribe() &#123;</span><br><span class="line">        super.punsubscribe();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void punsubscribe(String... patterns) &#123;</span><br><span class="line">        super.punsubscribe(patterns);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onMessage(String channel, String message) &#123;</span><br><span class="line">        System.out.println(&quot;channel:&quot; + channel + &quot;receives message :&quot; + message);</span><br><span class="line">        String key = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPMessage(String pattern, String channel, String message) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onSubscribe(String channel, int subscribedChannels) &#123;</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPUnsubscribe(String pattern, int subscribedChannels) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPSubscribe(String pattern, int subscribedChannels) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onUnsubscribe(String channel, int subscribedChannels) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个Runner：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class RedisApplicationRunner implements ApplicationRunner &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    RedisMsgPubSubListener redisMsgPubSubListener;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    JedisPool jedisPool;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(ApplicationArguments applicationArguments) throws Exception &#123;</span><br><span class="line">      </span><br><span class="line">        Jedis jedis = jedisPool.getResource();</span><br><span class="line">//        jedis.set(&quot;zhcj:mobile:13548074395:2018122222212&quot;,&quot;1&quot;);</span><br><span class="line">//        jedis.expire(&quot;zhcj:mobile:13548074395:2018122222212&quot;,10);</span><br><span class="line">          jedis.subscribe(redisMsgPubSubListener, &quot;__keyevent@0__:expired&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终效果:<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191012165952.png" alt></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/">
+                <span class="level-item">AccessibilityService自动刷视频</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Your name">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Your name
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Your title
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/ppoffice">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基于redis key失效机制实现状态实时更新">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:32:19.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于redis key失效机制实现状态实时更新</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="AccessibilityService自动刷视频">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:29:07.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">AccessibilityService自动刷视频</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:27:28.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">高德地图和google地图整合</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="golang下载妹子图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:21:06.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang下载妹子图</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="golang平滑升级服务">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:13:35.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang平滑升级服务</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="基于redis key失效机制实现状态实时更新">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:32:19.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于redis key失效机制实现状态实时更新</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="AccessibilityService自动刷视频">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:29:07.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">AccessibilityService自动刷视频</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:27:28.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">高德地图和google地图整合</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="golang下载妹子图">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:21:06.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang下载妹子图</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="golang平滑升级服务">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-24T06:13:35.000Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang平滑升级服务</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="基于redis key失效机制实现状态实时更新" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 eyiadmin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
