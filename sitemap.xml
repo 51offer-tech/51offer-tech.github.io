@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/03/Go%25E5%259C%25A8Windows%25E4%25B8%258B%25E7%25BC%2596%25E8%25AF%2591linux%25E5%258F%25AF%25E6%2589%25A7%25E8%25A1%258C%25E4%25BA%258C%25E8%25BF%259B%25E5%2588%25B6%25E6%2596%2587%25E4%25BB%25B6/</loc>
+    
+    <lastmod>2019-11-03T09:46:24.098Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/10/31/net-core%25E4%25BD%25BF%25E7%2594%25A8Topshelf%25E6%25B3%25A8%25E5%2586%258Cwindows%25E6%259C%258D%25E5%258A%25A1/</loc>
     
     <lastmod>2019-10-31T00:43:54.879Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://blog.52fx.biz/2019/10/24/Linux%25E4%25B8%25ADinode%25E5%25BC%2595%25E8%25B5%25B7%25E7%259A%2584%25E6%2595%2585%25E9%259A%259C/</loc>
     
     <lastmod>2019-10-24T06:03:30.820Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/10/24/hello-world/</loc>
-    
-    <lastmod>2019-10-24T04:44:38.002Z</lastmod>
     
   </url>
   
