@@ -11,15 +11,15 @@
 <title>基于redis key失效机制实现状态实时更新 - 农民工学编程</title>
 
 
-    <meta name="description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
+    <meta name="description" content="基于redis key失效事件通知机制来处理状态实时更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于redis key失效机制实现状态实时更新">
 <meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。  一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：1、定时（采用quartz定时执行作业，去扫描数据库）2、用hangfire、rabbit">
+<meta property="og:description" content="基于redis key失效事件通知机制来处理状态实时更新">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-24T06:34:53.180Z">
+<meta property="og:updated_time" content="2019-11-04T01:06:39.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 667 个字)
+                    5 分钟 读完 (大约 689 个字)
                 </span>
                 
                 
@@ -167,7 +167,9 @@
             
         </h1>
         <div class="content">
-            <blockquote>
+            <p>基于redis key失效事件通知机制来处理状态实时更新</p>
+<a id="more"></a>
+<blockquote>
 <p>在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。</p>
 </blockquote>
 <p>一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：<br>1、定时（采用quartz定时执行作业，去扫描数据库）<br>2、用hangfire、rabbitmq等实现延迟执行<br>3、redis key失效事件，实时处理<br>经过评估，最后选择了redis key失效机制来处理这个业务。</p>
@@ -512,7 +514,7 @@
             
             <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                    <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
                 </p>
             </a>
             
@@ -675,7 +677,7 @@
             
             <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                    <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
                 </p>
             </a>
             
@@ -750,6 +752,7 @@
     <footer class="footer">
        
     <div class="container">
+           
         <div class="level">
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
@@ -758,8 +761,9 @@
                 
                 </a>
                 <p class="is-size-7">
-                        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                        <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+                       
+                             
+                        
                 &copy; 2019 eyiadmin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>

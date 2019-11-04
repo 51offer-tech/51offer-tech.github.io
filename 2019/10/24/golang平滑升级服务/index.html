@@ -11,15 +11,15 @@
 <title>golang平滑升级服务 - 农民工学编程</title>
 
 
-    <meta name="description" content="最近在学习go语言，想着用gin+gorm来做一个微信小程序，在gin的github中看到了如何优雅的重启或者停止，因为在生产项目中，如果强行kill掉的话会造成正在执行的业务中断、用户访问被拒绝。显然，平滑的重启或升级我们的应用是多么的重要。  .net的发布过程我做了很多年的.net ，但是从来没有想过如何去平滑更新服务端，也是因为业务要求的可用性不高。一般发布新版本都是采用最笨拙的方式，就">
+    <meta name="description" content="不中断服务进行服务升级">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang平滑升级服务">
 <meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="最近在学习go语言，想着用gin+gorm来做一个微信小程序，在gin的github中看到了如何优雅的重启或者停止，因为在生产项目中，如果强行kill掉的话会造成正在执行的业务中断、用户访问被拒绝。显然，平滑的重启或升级我们的应用是多么的重要。  .net的发布过程我做了很多年的.net ，但是从来没有想过如何去平滑更新服务端，也是因为业务要求的可用性不高。一般发布新版本都是采用最笨拙的方式，就">
+<meta property="og:description" content="不中断服务进行服务升级">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-24T06:19:46.183Z">
+<meta property="og:updated_time" content="2019-11-04T01:04:59.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 681 个字)
+                    5 分钟 读完 (大约 693 个字)
                 </span>
                 
                 
@@ -167,7 +167,9 @@
             
         </h1>
         <div class="content">
-            <blockquote>
+            <p>不中断服务进行服务升级</p>
+<a id="more"></a>
+<blockquote>
 <p>最近在学习go语言，想着用gin+gorm来做一个微信小程序，在gin的github中看到了如何优雅的重启或者停止，因为在生产项目中，如果强行kill掉的话会造成正在执行的业务中断、用户访问被拒绝。显然，平滑的重启或升级我们的应用是多么的重要。</p>
 </blockquote>
 <h3 id="net的发布过程"><a href="#net的发布过程" class="headerlink" title=".net的发布过程"></a>.net的发布过程</h3><p>我做了很多年的.net ，但是从来没有想过如何去平滑更新服务端，也是因为业务要求的可用性不高。一般发布新版本都是采用最笨拙的方式，就是发通知(xx时间升级会暂停服务)-&gt;到点停止服务备份、copy新文件-&gt;启动服务。</p>
@@ -516,7 +518,7 @@
             
             <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                    <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
                 </p>
             </a>
             
@@ -679,7 +681,7 @@
             
             <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="高德地图和google地图整合">
+                    <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
                 </p>
             </a>
             
@@ -754,6 +756,7 @@
     <footer class="footer">
        
     <div class="container">
+           
         <div class="level">
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
@@ -762,8 +765,9 @@
                 
                 </a>
                 <p class="is-size-7">
-                        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                        <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+                       
+                             
+                        
                 &copy; 2019 eyiadmin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
