@@ -8,19 +8,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>归档 - 农民工学编程</title>
+<title>Docker常用命令整理 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;archives&#x2F;index.html">
+    <meta name="description" content="Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker常用命令整理">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;11&#x2F;08&#x2F;Docker-compose-ymal&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;img1.imgtn.bdimg.com&#x2F;it&#x2F;u=2488786183,2523709342&amp;fm=26&amp;gp=0.jpg">
+<meta property="og:updated_time" content="2019-11-08T04:54:57.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;img1.imgtn.bdimg.com&#x2F;it&#x2F;u=2488786183,2523709342&amp;fm=26&amp;gp=0.jpg">
 
 
 
@@ -86,7 +87,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Docker常用命令整理" height="28">
             
             </a>
         </div>
@@ -97,7 +98,7 @@
                 <a class="navbar-item"
                 href="/">主页</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/archives">归档</a>
                 
                 <a class="navbar-item"
@@ -136,212 +137,153 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img1.imgtn.bdimg.com/it/u=2488786183,2523709342&amp;fm=26&amp;gp=0.jpg" alt="Docker常用命令整理">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-<div class="card widget">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-08T01:37:37.000Z">2019-11-08</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 分钟 读完 (大约 2521 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Docker常用命令整理
+            
+        </h1>
+        <div class="content">
+            <p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+<a id="more"></a>
+<h3 id="Docker基础命令"><a href="#Docker基础命令" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h3><p>docker images 查看当前下载镜像列表</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_175_142_centos ~]# docker images</span><br><span class="line">REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">hwdsl2/ipsec-vpn-server   latest              62e5a169190a        7 months ago        206MB</span><br><span class="line">postgres                  latest              30bf4f039abe        8 months ago        312MB</span><br><span class="line">redis                     latest              0f88f9be5839        8 months ago        95MB</span><br></pre></td></tr></table></figure>
+<p>docker search {镜像名}  (镜像仓库中的镜像)<br>docker pull  {镜像名}:{版本号} (拉取指定版本镜像,如果不指定版本， 将默认使用 latest 镜像)<br>docker run -t -i {镜像名}    (启动镜像,如果主机不存在，会自动下载镜像)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">-d, --detach=false， 设置容器上前台运行还是后台运行，默认为false后台运行</span><br><span class="line">-i, --interactive=false， 打开STDIN，用于控制台交互</span><br><span class="line">-t, --tty=false， 分配tty设备，可以支持终端登录，默认为false</span><br><span class="line">-u, --user=&quot;&quot;， 设置容器的用户</span><br><span class="line">-a, --attach=[]            登录容器（必须是以docker run -d启动的容器）  </span><br><span class="line">-w, --workdir=&quot;&quot;           指定容器的工作目录  </span><br><span class="line">-c, --cpu-shares=0         设置容器CPU权重，在CPU共享场景使用    </span><br><span class="line">-e, --env=[]               指定环境变量，容器中可以使用该环境变量   </span><br><span class="line">-m, --memory=&quot;&quot;            指定容器的内存上限  </span><br><span class="line">-P, --publish-all=false， 指定容器暴露的端口</span><br><span class="line">-p, --publish=[]， 指定容器暴露的端口</span><br><span class="line">-h, --hostname=&quot;&quot;， 指定容器的主机名</span><br><span class="line">-v, --volume=[]， 给容器挂载存储卷，挂载到容器的某个目录</span><br><span class="line">--volumes-from=[]， 给容器挂载其他容器上的卷，挂载到容器的某个目录</span><br><span class="line">--cap-add=[]， 添加权限，权限清单详见：http://linux.die.net/man/7/capabilities</span><br><span class="line">--cap-drop=[]， 删除权限，权限清单详见：http://linux.die.net/man/7/capabilities</span><br><span class="line">--cidfile=&quot;&quot;， 运行容器后，在指定文件中写入容器PID值，一种典型的监控系统用法</span><br><span class="line">--cpuset=&quot;&quot;， 设置容器可以使用哪些CPU，此参数可以用来容器独占CPU</span><br><span class="line">--device=[]， 添加主机设备给容器，相当于设备直通</span><br><span class="line">--dns=[]， 指定容器的dns服务器</span><br><span class="line">--dns-search=[]， 指定容器的dns搜索域名，写入到容器的/etc/resolv.conf文件</span><br><span class="line">--entrypoint=&quot;&quot;， 覆盖image的入口点</span><br><span class="line">--env-file=[]， 指定环境变量文件，文件格式为每行一个环境变量</span><br><span class="line">--expose=[]， 指定容器暴露的端口，即修改镜像的暴露端口</span><br><span class="line">--link=[]， 指定容器间的关联，使用其他容器的IP、env等信息</span><br><span class="line">--lxc-conf=[]， 指定容器的配置文件，只有在指定--exec-driver=lxc时使用</span><br><span class="line">--name=&quot;&quot;， 指定容器名字，后续可以通过名字进行容器管理，links特性需要使用名字</span><br><span class="line">--net=&quot;bridge&quot;             容器网络设置:</span><br><span class="line">                                bridge 使用docker daemon指定的网桥</span><br><span class="line">                                   host     //容器使用主机的网络</span><br><span class="line">                                  container:NAME_or_ID  &gt;//使用其他容器的网路，共享IP和PORT等网络资源</span><br><span class="line">                                  none 容器使用自己的网络（类似--net=bridge),但是不进行配置</span><br><span class="line"></span><br><span class="line">--privileged=false         指定容器是否为特权容器，特权容器拥有所有的capabilities    </span><br><span class="line">--restart=&quot;no&quot;             指定容器停止后的重启策略:</span><br><span class="line">                                  no：容器退出时不重启</span><br><span class="line">                                  on-failure：容器故障退出（返回值非零）时重启</span><br><span class="line">                                  always：容器退出时总是重启    </span><br><span class="line">--rm=false                 指定容器停止后自动删除容器(不支持以docker run -d启动的容器)    </span><br><span class="line">--sig-proxy=true           设置由代理接受并处理信号，但是SIGCHLD、SIGSTOP和SIGKILL不能被代理 </span><br><span class="line"></span><br><span class="line">docker run -d --name=nginx  nginx:latest -p 宿主机端口:容器端口 -v 宿主机目录:容器目录</span><br></pre></td></tr></table></figure>
+
+<p>docker ps #查看正在运行的容器<br>docker ps -l #查看最后退出的容器的ID<br>docker ps -a #查看所有的容器，包括退出的。<br>docker logs {容器ID|容器名称} #查询某个容器的所有操作记录。<br>docker logs -f {容器ID|容器名称} #实时查看容易的操作记录。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker rm$(docker ps -a -q) #删除所有容器</span><br><span class="line">docker rm &#123;容器ID|容器名&#125;    #删除单个容器</span><br><span class="line">docker rmi &#123;镜像ID&#125;         #删除单个镜像</span><br><span class="line">docker rmi$(docker images | grep none | awk &apos;&#123;print $3&#125;&apos; | sort -r) #删除所有镜像</span><br></pre></td></tr></table></figure>
+
+<p>docker stop {容器ID|容器名} #停止某个容器<br>docker start {容器ID|容器名} #启动某个容器<br>docker kill {容器ID|容器名} #杀掉某个容器</p>
+<p>docker export {容器ID|容器名} -o /root/文件名.tar(或者docker export {容器ID|容器名} &gt; /root/文件名.tar) #导出<br>docker import {容器文件} {镜像名}:{tag} #导入后生成的是镜像不是容器，docker load也可以导入，其中两者人区别如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker load 保留了容器的完整记录</span><br><span class="line">docker import 仅保存容器当时的快照状态，在导入的时候自己定义标签、名称等元数据</span><br></pre></td></tr></table></figure>
+<p> docker container inspect {容器ID|容器名} #返回容器的ID、创建时间、路径、状态、镜像等信息<br> docker container stats {容器ID|容器名} #查看容器的CPU、内存、存储、网络等资源的使用情况可以使用<br> docker cp {宿主机目录} {容器ID}:{容器目录} #将宿主机内的指定目录文件传输至容器内部的指定目录<br> docker cp {容器ID}:{容器目录} {宿主机目录}  #将容器内部的指定目录文件复制到宿主机指定目录<br> docker commit {容器ID} {镜像名}:{tag} #将容器重新打包成镜像<br> <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a :提交的镜像作者；</span><br><span class="line"></span><br><span class="line">-c :使用Dockerfile指令来创建镜像；</span><br><span class="line"></span><br><span class="line">-m :提交时的说明文字；</span><br><span class="line"></span><br><span class="line">-p :在commit时，将容器暂停。</span><br></pre></td></tr></table></figure><br> docker push {镜像名|镜像ID} #推送在镜像仓库</p>
+<h3 id="Dockerfile文件参数"><a href="#Dockerfile文件参数" class="headerlink" title="Dockerfile文件参数"></a>Dockerfile文件参数</h3><p> FROM         #指定基础镜像，必须为第一个命令<br> MAINTAINER   #作者信息<br> RUN          #构建镜像时执行的命令<br> ADD          #复制文件到容器中<br> COPY         #复制文本到容器中COPY &lt;源路径&gt;… &lt;目标路径&gt;<br> <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD和COPY的差别：ADD命令tar类型文件会自动解压(网络压缩资源不会被解压)，可以访问网络资源，COPY不会自动解压文件，也不能访问网络资源</span><br></pre></td></tr></table></figure><br> CMD          #容器启动时执行的命令。shell 格式： CMD &lt;命令&gt; exec 格式： CMD [“可执行文件”, “参数1”, “参数2”…]<br> ENTRYPOINT   #配置容器<br> LABEL        #为镜像添加元数据<br> ENV          #设置环境变量<br> EXPOSE       #指定外界交互的容器端口EXPOSE &lt;端口1&gt; [&lt;端口2&gt;…]<br> VOLUME       #指定持久化目录VOLUME [“&lt;路径1&gt;”, “&lt;路径2&gt;”…]<br> WORKDIR      #工作目录，自动cd到执行目录</p>
+<p> 示例：<br> <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> # FROM代表此次构建的镜像的基础镜像基础,可在镜像名后带版本号，不带版本号默认latest</span><br><span class="line">FROM python</span><br><span class="line"># COPY是拷贝宿主机文件到镜像中</span><br><span class="line">COPY ./spider /work</span><br><span class="line"># RUN则是在镜像中执行命令，有时候可能需要安装依赖环境，也可以在run中执行</span><br><span class="line">RUN ls /work</span><br><span class="line"># 切换工作目录，相当于cd work</span><br><span class="line">WORKDIR /work</span><br><span class="line">#EXPOSE 外界交互的端口</span><br><span class="line">EXPOSE 8080</span><br><span class="line"># CMD是镜像启动后默认执行，CMD加中括号等同于exec执行命令，不加中括号等同于 sh -c 执行命令</span><br><span class="line">CMD [&quot;python&quot;,&quot;spider.py&quot;]</span><br></pre></td></tr></table></figure><br> docker build ocnfig #用于检查dockerfile文件是否有误<br> docker build . -t spider:v1.0 #构建镜像，构建好之后可以使用docker images命令进行查询</p>
+<h3 id="Docker-compose-yml文件配置"><a href="#Docker-compose-yml文件配置" class="headerlink" title="Docker-compose.yml文件配置"></a>Docker-compose.yml文件配置</h3><p>build：定义镜像生成，可以指定Dockerfile构建，在up 启动之时执行构建任务</p>
+<p>image：指定镜像启动容器，如果镜像不存在会自动拉去最新镜像</p>
+<p>environment：环境变量和配置</p>
+<p>ports：端口映射，将容器端口映射在宿主机</p>
+<p>depends_on：指定依赖关系。适用于需要按顺序启动的服务，会先启动所依赖的镜像</p>
+<p>volumes：挂载宿主机目录或者数据容器卷</p>
+<p>volumes_from: 从容器挂载</p>
+<p>context：指定Dockerfile文件或者是远程网络文件</p>
+<p>args：构建参数，这些参数只能在构建过程中访问</p>
+<p>container_name：指定容器名称</p>
+<p>links: 链接其他容器</p>
+<p>command: 启动执行命令</p>
+<p>示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  pgsql: </span><br><span class="line">    image: postgres</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;15432:5432&quot;</span><br><span class="line">    environment:</span><br><span class="line">      POSTGRES_PASSWORD: scyd!</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data/postgresql_data1:/var/lib/postgresql/data</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">  redis:</span><br><span class="line">    image: redis</span><br><span class="line">    command: redis-server --requirepass scyd!</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;16379:6379&quot;</span><br><span class="line">    volumes: </span><br><span class="line">      - ./data/redis_data1:/data</span><br><span class="line">    restart: always</span><br></pre></td></tr></table></figure>
+<p>执行docker-compose ps：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_175_142_centos ~]# docker-compose ps</span><br><span class="line">    Name                  Command               State            Ports         </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">root_pgsql_1   docker-entrypoint.sh postgres    Up      0.0.0.0:15432-&gt;5432/tcp</span><br><span class="line">root_redis_1   docker-entrypoint.sh redis ...   Up      0.0.0.0:16379-&gt;6379/tcp</span><br></pre></td></tr></table></figure>
+<p>容器名：{目录名}<em>{服务名}</em>{容器序号} 从1开始</p>
+<p>docker-compose up -d    #构建并启动容器,首次运行会执行docker-compose build</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-d：后台进程</span><br><span class="line"></span><br><span class="line">--scale：指定服务运行的容器个数（如果服务有对外的端口就不能指定多个容器，因为端口已经被占用）  </span><br><span class="line"> Eg：docker-compose up -d --scale web=1 --scale redis=2</span><br></pre></td></tr></table></figure>
+
+<p>docker-compose exec {服务名称} bash          #登录到某个容器中</p>
+<p>docker-compose down                         #删除所有容器,镜像</p>
+<p>docker-compose ps                           #显示所有容器</p>
+<p>docker-compose restart {服务名称}            #重新启动容器</p>
+<p>docker-compose build {服务名称}              #构建镜像 。        </p>
+<p>docker-compose build –no-cache {服务名称}   #不带缓存的构建。</p>
+<p>docker-compose logs  {服务名称}       #查看容器的日志 </p>
+<p>docker-compose logs -f {服务名称}     #查看容器的实时日志</p>
+<p>docker-compose rm {服务名称}          #删除compose服务</p>
+<p>docker-compose kill {服务名称}        #kill compose服务</p>
+<p>docker-compose stop {服务名称}        #重启compose服务</p>
+<p>docker-compose start {服务名称}       #启动容器</p>
+<p>docker-compose config  -q            #验证yml文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息</p>
+<p>docker-compose run {服务名} {cmd}    #在某个服务上运行shell命令</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
                 
-                <a href="/2019/11/08/Docker-compose-ymal/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://img1.imgtn.bdimg.com/it/u=2488786183,2523709342&amp;fm=26&amp;gp=0.jpg" alt="Docker常用命令整理">
-                    </p>
-                </a>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-11-08T01:37:37.000Z">2019-11-08</time>
-                        <a href="/2019/11/08/Docker-compose-ymal/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker常用命令整理</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-11-06T00:19:50.000Z">2019-11-06</time>
-                        <a href="/2019/11/06/%E4%BD%BF%E7%94%A8Lombok%E7%AE%80%E5%8C%96java%E4%BB%A3%E7%A0%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">使用Lombok简化java代码</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <a href="/2019/11/05/%E6%B2%A1%E6%9C%89java%E6%BA%90%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9bug/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=297403758,211371758&amp;fm=26&amp;gp=0.jpg" alt="没有java源代码如何修改bug">
-                    </p>
-                </a>
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-11-05T00:40:39.000Z">2019-11-05</time>
-                        <a href="/2019/11/05/%E6%B2%A1%E6%9C%89java%E6%BA%90%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9bug/" class="title has-link-black-ter is-size-6 has-text-weight-normal">没有java源代码如何修改bug</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-11-03T09:36:43.000Z">2019-11-03</time>
-                        <a href="/2019/11/03/Go%E5%9C%A8Windows%E4%B8%8B%E7%BC%96%E8%AF%91linux%E5%8F%AF%E6%89%A7%E8%A1%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Go在Windows下编译linux可执行二进制文件</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-31T00:24:19.000Z">2019-10-31</time>
-                        <a href="/2019/10/31/net-core%E4%BD%BF%E7%94%A8Topshelf%E6%B3%A8%E5%86%8Cwindows%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">.net core使用Topshelf注册windows服务</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:32:19.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于redis key失效机制实现状态实时更新</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:29:07.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">AccessibilityService自动刷视频</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:27:28.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%92%8Cgoogle%E5%9C%B0%E5%9B%BE%E6%95%B4%E5%90%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">高德地图和google地图整合</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://pic.topmeizi.com/wp-content/uploads/2012a/01/29/05.jpg" alt="golang下载妹子图">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:21:06.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang下载妹子图</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:13:35.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang平滑升级服务</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
-    
 
-    
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/0/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/06/%E4%BD%BF%E7%94%A8Lombok%E7%AE%80%E5%8C%96java%E4%BB%A3%E7%A0%81/">
+                <span class="level-item">使用Lombok简化java代码</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/2/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -847,7 +789,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Docker常用命令整理" height="28">
                 
                 </a>
                 <p class="is-size-7">

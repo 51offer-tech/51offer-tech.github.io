@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.52fx.biz/2019/11/08/Docker-compose-ymal/</loc>
+    <lastmod>2019-11-08</lastmod>
+  </url>  <url>
     <loc>http://blog.52fx.biz/2019/11/06/%E4%BD%BF%E7%94%A8Lombok%E7%AE%80%E5%8C%96java%E4%BB%A3%E7%A0%81/</loc>
     <lastmod>2019-11-06</lastmod>
   </url>  <url>
