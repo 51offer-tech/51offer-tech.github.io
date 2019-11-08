@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/08/Nginx-agent-configuration/</loc>
+    
+    <lastmod>2019-11-08T07:06:24.407Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/10/24/nginx%25E6%2590%25AD%25E5%25BB%25BAhttps%25E6%259C%258D%25E5%258A%25A1/</loc>
+    
+    <lastmod>2019-11-08T05:53:56.694Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/08/Docker-compose-ymal/</loc>
     
-    <lastmod>2019-11-08T04:54:57.799Z</lastmod>
+    <lastmod>2019-11-08T05:51:17.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/tags/index.html</loc>
+    
+    <lastmod>2019-11-08T05:51:05.386Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/categories/index.html</loc>
+    
+    <lastmod>2019-11-08T05:44:58.405Z</lastmod>
     
   </url>
   
@@ -47,13 +75,6 @@
     <loc>http://blog.52fx.biz/2019/10/31/net-core%25E4%25BD%25BF%25E7%2594%25A8Topshelf%25E6%25B3%25A8%25E5%2586%258Cwindows%25E6%259C%258D%25E5%258A%25A1/</loc>
     
     <lastmod>2019-11-05T00:46:19.918Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/10/24/nginx%25E6%2590%25AD%25E5%25BB%25BAhttps%25E6%259C%258D%25E5%258A%25A1/</loc>
-    
-    <lastmod>2019-11-05T00:23:38.276Z</lastmod>
     
   </url>
   
