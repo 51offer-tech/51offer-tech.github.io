@@ -8,19 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>归档 - 农民工学编程</title>
+<title>.net core 3.0使用Swagger - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;archives&#x2F;page&#x2F;2&#x2F;index.html">
+    <meta name="description" content=".net core3.0问世已经两个多月了，我并没有急着将生产上的项目升级到3.0，因为怕踩坑，这不3.1马上就要出来了，想着core3.x逐渐稳定，所以就开始来琢磨一下，此次就简单是说一下.net core3.0中使丝袜哥(Swagger)生成API文档。">
+<meta name="keywords" content=".net core,swagger">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".net core 3.0使用Swagger">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;11&#x2F;12&#x2F;net-core-3-0-use-swagger-ui&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content=".net core3.0问世已经两个多月了，我并没有急着将生产上的项目升级到3.0，因为怕踩坑，这不3.1马上就要出来了，想着core3.x逐渐稳定，所以就开始来琢磨一下，此次就简单是说一下.net core3.0中使丝袜哥(Swagger)生成API文档。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;xxnote.51offer.wang&#x2F;swagger.png">
+<meta property="og:updated_time" content="2019-11-12T02:22:22.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.51offer.wang&#x2F;swagger.png">
 
 
 
@@ -86,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt=".net core 3.0使用Swagger" height="28">
             
             </a>
         </div>
@@ -136,123 +138,136 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://xxnote.51offer.wang/swagger.png" alt=".net core 3.0使用Swagger">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-<div class="card widget">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-12T01:05:34.000Z">2019-11-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 724 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                .net core 3.0使用Swagger
+            
+        </h1>
+        <div class="content">
+            <p>.net core3.0问世已经两个多月了，我并没有急着将生产上的项目升级到3.0，因为怕踩坑，这不3.1马上就要出来了，想着core3.x逐渐稳定，所以就开始来琢磨一下，此次就简单是说一下.net core3.0中使丝袜哥(Swagger)生成API文档。</p>
+<a id="more"></a>
+<p>在这里，我使用的开发工具是VS2019,Swashbuckle.AspNetCore 5.0.0-rc4，</p>
+<h3 id="安装Swashbuckle-AspNetCore"><a href="#安装Swashbuckle-AspNetCore" class="headerlink" title="安装Swashbuckle.AspNetCore"></a>安装Swashbuckle.AspNetCore</h3><p>1、首先新建一个Web API项目<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112091937.png" alt="项目结构"><br>2、安装swagger,打开程序包管理器控制台执行：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc4</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112092251.png" alt="打开程序包管理器控制台"><br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112092450.png" alt="输入安装命令"></p>
+<h3 id="引用Swagger"><a href="#引用Swagger" class="headerlink" title="引用Swagger"></a>引用Swagger</h3><p>1、在Startup.cs中引入命名空间</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using Microsoft.OpenApi.Models;</span><br><span class="line">using Swashbuckle.AspNetCore.Swagger;</span><br></pre></td></tr></table></figure>
+<p>2、在ConfigureServices中添加Swagger</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(swagger =&gt;</span><br><span class="line">           &#123;</span><br><span class="line">               swagger.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo &#123; Description = &quot;Demo API Description&quot;, Version = &quot;v1.0&quot;, Title = &quot;Demo API&quot; &#125;);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
+<p>3、在Configure中添加Swagger中间件,我们最好放在env.IsDevelopment()中</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if (env.IsDevelopment())</span><br><span class="line">          &#123;</span><br><span class="line">              app.UseSwagger();</span><br><span class="line">              app.UseSwaggerUI(c =&gt;</span><br><span class="line">              &#123;</span><br><span class="line">                  c.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;Demo API&quot;);</span><br><span class="line">              &#125;);</span><br><span class="line">              app.UseDeveloperExceptionPage();</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+<p>4、配置完后，运行一下，在浏览器中输入<a href="http://localhost:5000/swagger" target="_blank" rel="noopener">http://localhost:5000/swagger</a>, 看看效果：<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112094408.png" alt="Swagger"></p>
+<h3 id="为Api添加注释"><a href="#为Api添加注释" class="headerlink" title="为Api添加注释"></a>为Api添加注释</h3><p>刚才的配置，只是能看到我们的API方法，并且可以发送调试请求，但是没有注释，接下来，我们就给API加上注释<br>1、在想要添加注释的API对应分方法上添加注释,格式如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">        /// 获取天气预报信息</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">        [HttpGet]</span><br><span class="line">        public IEnumerable&lt;WeatherForecast&gt; Get()</span><br><span class="line">        &#123;</span><br><span class="line">            var rng = new Random();</span><br><span class="line">            return Enumerable.Range(1, 5).Select(index =&gt; new WeatherForecast</span><br><span class="line">            &#123;</span><br><span class="line">                Date = DateTime.Now.AddDays(index),</span><br><span class="line">                TemperatureC = rng.Next(-20, 55),</span><br><span class="line">                Summary = Summaries[rng.Next(Summaries.Length)]</span><br><span class="line">            &#125;)</span><br><span class="line">            .ToArray();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>2、在项目属性选项卡中，设置生成中的XML文档输出目录:<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112095703.png" alt="设置生成路径"><br>3、在AddSwaggerGen中添加xml文件路径:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(swagger =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                swagger.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo &#123; Description = &quot;Demo API Description&quot;, Version = &quot;v1.0&quot;, Title = &quot;Demo API&quot;, Contact = new OpenApiContact() &#123; Name = &quot;eyiadmin&quot;, Email = &quot;188781475@qq.com&quot; &#125; &#125;);</span><br><span class="line">                var docXmlPath = Path.Combine(AppContext.BaseDirectory, &quot;Web.xml&quot;);</span><br><span class="line">                swagger.IncludeXmlComments(docXmlPath);</span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure>
+<p>4、最终效果:<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112100342.png" alt="效果"><br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112100458.png" alt="效果2"></p>
+<p>每次启动都会打开默认的IE浏览器，由于个人喜欢Google浏览器，所以，现在修改vs启动的默认浏览器：<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112100847.png" alt="设置默认浏览器"><br>另外，每次启动，在浏览中打开的是默认的Controller，我们可以设置一下启动参数，让每次启动都是Swagger目录，就不需要我们每次都手动输入Swagger目录：<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191112101123.png" alt="设置默认启动路径">。</p>
+<p>这次写的是Swagger最基本的设置,后面我们会继续学习一些常用的高级功能。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>, <a class="has-link-grey -link" href="/tags/swagger/" rel="tag">swagger</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
                 
-                <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://pic.topmeizi.com/wp-content/uploads/2012a/01/29/05.jpg" alt="golang下载妹子图">
-                    </p>
-                </a>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:21:06.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang下载妹子图</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:13:35.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">golang平滑升级服务</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:09:13.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">微信小程序上传图片到七牛云</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T06:05:03.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/nginx%E6%90%AD%E5%BB%BAhttps%E6%9C%8D%E5%8A%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">nginx搭建https服务</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-10-24T05:56:46.000Z">2019-10-24</time>
-                        <a href="/2019/10/24/Linux%E4%B8%ADinode%E5%BC%95%E8%B5%B7%E7%9A%84%E6%95%85%E9%9A%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Linux中inode引起的故障</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
     </div>
 </div>
 
-    
 
-    
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/08/Nginx-agent-configuration/">
+                <span class="level-item">Nginx HTTP/TCP代理配置</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -845,7 +860,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt=".net core 3.0使用Swagger" height="28">
                 
                 </a>
                 <p class="is-size-7">
