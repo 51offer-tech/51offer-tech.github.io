@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/08/Nginx-agent-configuration/</loc>
+    
+    <lastmod>2019-11-19T02:22:54.240Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/11/08/Docker-compose-ymal/</loc>
+    
+    <lastmod>2019-11-19T02:21:57.387Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
     
     <lastmod>2019-11-19T02:18:52.051Z</lastmod>
@@ -23,23 +37,9 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/08/Nginx-agent-configuration/</loc>
-    
-    <lastmod>2019-11-08T07:06:24.407Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.52fx.biz/2019/10/24/nginx%25E6%2590%25AD%25E5%25BB%25BAhttps%25E6%259C%258D%25E5%258A%25A1/</loc>
     
     <lastmod>2019-11-08T05:53:56.694Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/11/08/Docker-compose-ymal/</loc>
-    
-    <lastmod>2019-11-08T05:51:17.366Z</lastmod>
     
   </url>
   
