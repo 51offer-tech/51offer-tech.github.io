@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/14/shell-command/</loc>
+    <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
     
-    <lastmod>2019-11-14T01:31:05.516Z</lastmod>
+    <lastmod>2019-11-19T02:18:52.051Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.52fx.biz/2019/11/12/net-core-3-0-use-swagger-ui/</loc>
     
-    <lastmod>2019-11-12T02:22:22.717Z</lastmod>
+    <lastmod>2019-11-18T00:12:35.534Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/11/14/shell-command/</loc>
+    
+    <lastmod>2019-11-14T01:31:05.516Z</lastmod>
     
   </url>
   
