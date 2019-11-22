@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.52fx.biz/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-11-21</lastmod>
+    <loc>http://blog.52fx.biz/2019/11/22/ES6-7-8-9-10/</loc>
+    <lastmod>2019-11-22</lastmod>
   </url>  <url>
     <loc>http://blog.52fx.biz/2019/11/20/Driud-SqlParse/</loc>
-    <lastmod>2019-11-20</lastmod>
+    <lastmod>2019-11-22</lastmod>
+  </url>  <url>
+    <loc>http://blog.52fx.biz/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2019-11-21</lastmod>
   </url>  <url>
     <loc>http://blog.52fx.biz/2019/11/08/Nginx-agent-configuration/</loc>
     <lastmod>2019-11-19</lastmod>
