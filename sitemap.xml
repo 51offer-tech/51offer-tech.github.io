@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/26/mysql-slow-explain/</loc>
+    
+    <lastmod>2019-11-27T01:15:25.159Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/23/AngularJS-v1-4-5/</loc>
     
-    <lastmod>2019-11-23T09:12:35.978Z</lastmod>
+    <lastmod>2019-11-26T00:44:51.292Z</lastmod>
     
   </url>
   
