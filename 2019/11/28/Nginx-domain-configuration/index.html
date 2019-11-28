@@ -8,19 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>分类: .net core - 农民工学编程</title>
+<title>Nginx二级域名转发到不同端口/服务器 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;categories&#x2F;net-core&#x2F;index.html">
+    <meta name="description" content="有时候，我们资源有限，那么就会遇到一台主机对应1-N个域名，那么就会出现主机80端口占用完了，其他应用就只能占用其他的端口了，但是如果在域名后面带上端口号(如www.xxxx.com:8080 ),这显然很不优雅,而且像开发微信的时候，配置的域名只能使用80端口。那么有没有更好的处理方式能让我们不在域名后添加端口号呢？答案是肯定是，这里我们可以借助强大的Nginx来帮我们解决这个问题。">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx二级域名转发到不同端口&#x2F;服务器">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;11&#x2F;28&#x2F;Nginx-domain-configuration&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="有时候，我们资源有限，那么就会遇到一台主机对应1-N个域名，那么就会出现主机80端口占用完了，其他应用就只能占用其他的端口了，但是如果在域名后面带上端口号(如www.xxxx.com:8080 ),这显然很不优雅,而且像开发微信的时候，配置的域名只能使用80端口。那么有没有更好的处理方式能让我们不在域名后添加端口号呢？答案是肯定是，这里我们可以借助强大的Nginx来帮我们解决这个问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gss3.bdstatic.com&#x2F;7Po3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike92%2C5%2C5%2C92%2C30&#x2F;sign=aa5ef6b12234349b600b66d7a8837eab&#x2F;94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg">
+<meta property="og:updated_time" content="2019-11-28T01:29:45.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gss3.bdstatic.com&#x2F;7Po3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike92%2C5%2C5%2C92%2C30&#x2F;sign=aa5ef6b12234349b600b66d7a8837eab&#x2F;94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg">
 
 
 
@@ -86,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Nginx二级域名转发到不同端口/服务器" height="28">
             
             </a>
         </div>
@@ -135,135 +137,132 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx二级域名转发到不同端口/服务器">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-28T00:18:20.000Z">2019-11-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 948 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Nginx二级域名转发到不同端口/服务器
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>有时候，我们资源有限，那么就会遇到一台主机对应1-N个域名，那么就会出现主机80端口占用完了，其他应用就只能占用其他的端口了，但是如果在域名后面带上端口号(如<a href="http://www.xxxx.com:8080" target="_blank" rel="noopener">www.xxxx.com:8080</a> ),这显然很不优雅,而且像开发微信的时候，配置的域名只能使用80端口。那么有没有更好的处理方式能让我们不在域名后添加端口号呢？答案是肯定是，这里我们可以借助强大的Nginx来帮我们解决这个问题。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="Nginx通过二级目录方式"><a href="#Nginx通过二级目录方式" class="headerlink" title="Nginx通过二级目录方式"></a>Nginx通过二级目录方式</h3><p>我们知道Nginx location强大的匹配模式，那么我们就可以通过location来匹配请求目录从而在内部转发到不同的端口/服务器。当然也可以使用Nginx+Lua(openresty、tengine)来判断请求参数也可以处理.但是现在我暂时还是才用的Nginx自身的一些API来实现.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       443 ssl;</span><br><span class="line">       server_name  localhost;</span><br><span class="line">	</span><br><span class="line">	  location / &#123;</span><br><span class="line">           root   html;</span><br><span class="line">           index  index.html index.htm;</span><br><span class="line"></span><br><span class="line">          </span><br><span class="line">       &#125;</span><br><span class="line">        location /api/ &#123;</span><br><span class="line">           proxy_pass http://xxx.xxx.xxx.xx:8000/api/;</span><br><span class="line">           proxy_redirect  off;     </span><br><span class="line">           proxy_set_header        Host    $http_host;     </span><br><span class="line">           proxy_set_header        X-Real-IP       $remote_addr;     </span><br><span class="line">           proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;     </span><br><span class="line">           proxy_set_header   Cookie $http_cookie;</span><br><span class="line">           #proxy_cookie_path</span><br><span class="line">           chunked_transfer_encoding       off;   </span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我们通过<a href="http://www.xxx.com/api" target="_blank" rel="noopener">www.xxx.com/api</a> 就可以转发到 <a href="http://xxx.xxx.xxx.xx:8000/api" target="_blank" rel="noopener">http://xxx.xxx.xxx.xx:8000/api</a> ,这里还有可以设置更高端的，比如才用Nginx Rewrite等。 </p>
+<h3 id="Nginx匹配二级域名进行代理"><a href="#Nginx匹配二级域名进行代理" class="headerlink" title="Nginx匹配二级域名进行代理"></a>Nginx匹配二级域名进行代理</h3><h4 id="多个server模块通过server-name匹配代理"><a href="#多个server模块通过server-name匹配代理" class="headerlink" title="多个server模块通过server_name匹配代理"></a>多个server模块通过server_name匹配代理</h4><p>server_name 是虚拟服务器的识别路径，不同的域名请求会带上相应的HOST请求头来匹配Nginx的server模块</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.cddj.top;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.51offer.wang;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html1;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  sub.51offer.wang;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html2;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.51offer.wang/www.cddj.top.png" alt="www.cddj.top"><br><img src="http://xxnote.51offer.wang/www.51offer.wang.png" alt="www.51offer.wang"><br><img src="http://xxnote.51offer.wang/sub.51offer.wang.png" alt="sub.51offer.wang"><br>我们可以看到访问不同的域名就转到了不同的server模块,这里只是简单是静态显示，我们可以再server模块中做转发,例如:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  sub.51offer.wang;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">             proxy_pass http://localhost:8000/;</span><br><span class="line">            proxy_redirect  off;     </span><br><span class="line">            proxy_set_header        Host    $http_host;     </span><br><span class="line">            proxy_set_header        X-Real-IP       $remote_addr;     </span><br><span class="line">            proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;     </span><br><span class="line">            proxy_set_header   Cookie $http_cookie;</span><br><span class="line">            #proxy_cookie_path</span><br><span class="line">            chunked_transfer_encoding       off;   </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="一个server模块IF指令判断转发"><a href="#一个server模块IF指令判断转发" class="headerlink" title="一个server模块IF指令判断转发"></a>一个server模块IF指令判断转发</h4><p>可以借助Nginx if指令判断$host中的域名来转发到不同的端口:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       80;</span><br><span class="line">       server_name  localhost;</span><br><span class="line"></span><br><span class="line">       #charset koi8-r;</span><br><span class="line"></span><br><span class="line">       #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">       location / &#123;</span><br><span class="line">            if ($host = &quot;www.cddj.top&quot;) &#123;</span><br><span class="line">              proxy_pass http://localhost:801;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          if ($host = &quot;www.51offer.wang&quot;) &#123;</span><br><span class="line">              proxy_pass http://localhost:802;</span><br><span class="line">          &#125;</span><br><span class="line">	   if ($host = &quot;sub.51offer.wang&quot;) &#123;</span><br><span class="line">              proxy_pass http://localhost:803;</span><br><span class="line">          &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">       listen       801;</span><br><span class="line">       server_name  www.cddj.top;</span><br><span class="line"></span><br><span class="line">       #charset koi8-r;</span><br><span class="line"></span><br><span class="line">       #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">       location / &#123;</span><br><span class="line">           root   html;</span><br><span class="line">           index  index.html index.htm;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">       listen       802;</span><br><span class="line">       server_name  www.51offer.wang;</span><br><span class="line"></span><br><span class="line">       #charset koi8-r;</span><br><span class="line"></span><br><span class="line">       #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">       location / &#123;</span><br><span class="line">           root   html1;</span><br><span class="line">           index  index.html index.htm;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">server &#123;</span><br><span class="line">       listen       803;</span><br><span class="line">       server_name  sub.51offer.wang;</span><br><span class="line"></span><br><span class="line">       #charset koi8-r;</span><br><span class="line"></span><br><span class="line">       #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">       location / &#123;</span><br><span class="line">           root   html2;</span><br><span class="line">           index  index.html index.htm;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>结果和上面的图片一样，这里就不追加了。</p>
+<h3 id="Nginx-Lua"><a href="#Nginx-Lua" class="headerlink" title="Nginx+Lua"></a>Nginx+Lua</h3><p>我们可以借助Nginx+Lua来判断转发，这里也暂时就不说明，有兴趣的 可以自己去查找资料，在使用Lua的时候需要自行下载Nginx源码加Lua模块编译进去，或者使用openresty、tengine这种已经集成好的工具，个人比较喜欢openresty,因为社区相对比较活跃，有很多强大的插件如waf等。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/nginx/" rel="tag">nginx</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-            <li class="is-active"><a href="#" aria-current="page">.net core</a></li>
-        </ul>
-        </nav>
-    </div>
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
 </div>
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/11/18/swagger-add-apiversion/" class="image is-7by1">
-            <img class="thumbnail" src="http://xxnote.51offer.wang/swagger.png" alt=".net core 3.x Web API使用Swagger添加多版本以及JWT Authorization">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-18T10:18:18.000Z">2019-11-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1071 个字)
-                </span>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
                 
-            </div>
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/18/swagger-add-apiversion/">.net core 3.x Web API使用Swagger添加多版本以及JWT Authorization</a>
-            
-        </h1>
-        <div class="content">
-            <p>很多时候，要给我们的接口升级，但是又怕影响之前的接口业务或者是要开发特定的接口，我们会给接口加上一个版本号，保障老接口依然能稳定运行，例如百度的坐标转换服务</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://api.map.baidu.com/geoconv/v1/?coords=114.21892734521,29.575429778924&amp;from=1&amp;to=5&amp;ak=你的密钥 //GET请求</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/18/swagger-add-apiversion/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/11/12/net-core-3-0-use-swagger-ui/" class="image is-7by1">
-            <img class="thumbnail" src="http://xxnote.51offer.wang/swagger.png" alt=".net core 3.x使用Swagger">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-12T01:05:34.000Z">2019-11-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 724 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/26/mysql-slow-explain/">
+                <span class="level-item">mysql慢查询语句分析总结</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/12/net-core-3-0-use-swagger-ui/">.net core 3.x使用Swagger</a>
-            
-        </h1>
-        <div class="content">
-            <p>.net core3.0问世已经两个多月了，我并没有急着将生产上的项目升级到3.0，因为怕踩坑，这不3.1马上就要出来了，想着core3.x逐渐稳定，所以就开始来琢磨一下，此次就简单是说一下.net core3.0中使丝袜哥(Swagger)生成API文档。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/12/net-core-3-0-use-swagger-ui/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -1010,7 +1009,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Nginx二级域名转发到不同端口/服务器" height="28">
                 
                 </a>
                 <p class="is-size-7">
