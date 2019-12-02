@@ -8,19 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>使用Lombok简化java代码 - 农民工学编程</title>
+<title>标签: autofac - 农民工学编程</title>
 
 
-    <meta name="description" content="Lombok是一款提高javaer开发效率的插件工具，特别是在繁多是bean类中的getter、setter，使用Lombok可以使用注解的方式省去了添加getter、setter的时间">
+    <meta name="description" content="日常学习记录">
 <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用Lombok简化java代码">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;11&#x2F;06&#x2F;%E4%BD%BF%E7%94%A8Lombok%E7%AE%80%E5%8C%96java%E4%BB%A3%E7%A0%81&#x2F;index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="农民工学编程">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;tags&#x2F;autofac&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="Lombok是一款提高javaer开发效率的插件工具，特别是在繁多是bean类中的getter、setter，使用Lombok可以使用注解的方式省去了添加getter、setter的时间">
+<meta property="og:description" content="日常学习记录">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-06T00:49:41.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -88,7 +87,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="使用Lombok简化java代码" height="28">
+                <img src="/images/logo.svg" alt="农民工学编程" height="28">
             
             </a>
         </div>
@@ -137,51 +136,64 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">autofac</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/12/02/net-core3-x-autofac-ioc/" class="image is-7by1">
+            <img class="thumbnail" src="https://docs.autofac.org/en/latest/_images/logo.png" alt=".Net Core 3.x 使用Autofac替换默认Ioc容器">
+        </a>
+    </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-06T00:19:50.000Z">2019-11-06</time>
+                <time class="level-item has-text-grey" datetime="2019-12-02T00:22:49.000Z">2019-12-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 616 个字)
+                    5 分钟 读完 (大约 750 个字)
                 </span>
                 
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                使用Lombok简化java代码
+                <a class="has-link-black-ter" href="/2019/12/02/net-core3-x-autofac-ioc/">.Net Core 3.x 使用Autofac替换默认Ioc容器</a>
             
         </h1>
         <div class="content">
-            <p>Lombok是一款提高javaer开发效率的插件工具，特别是在繁多是bean类中的getter、setter，使用Lombok可以使用注解的方式省去了添加getter、setter的时间</p>
-<a id="more"></a>
-<p>在使用Lombok之前，需要在IDE上安装插件，eclipse安装步骤稍微多一点，具体请自行百度或者去官方查看<a href="https://projectlombok.org/features/configuration" target="_blank" rel="noopener">https://projectlombok.org/features/configuration</a>，IntelliJ安装就相对来说比较方便，直接在插件中心搜索Lombok,安装Lombok Plugin即可。<br>接下来，我们在程序中引入jar包：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18.10&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>我们平时的POJO类一般都是这样写:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">public class DataFileDownloadAudit &#123;</span><br><span class="line">    private Timestamp startTime;</span><br><span class="line">    private String userName;</span><br><span class="line">    private String operator;</span><br><span class="line">    private String source;</span><br><span class="line">    private String displayName;</span><br><span class="line">    private String filePath;</span><br><span class="line">    private long fileSize;</span><br><span class="line">    private String creator;</span><br><span class="line">    private Timestamp createTime;</span><br><span class="line"></span><br><span class="line">    public DataFileDownloadAudit() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return this.userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getOperator() &#123;</span><br><span class="line">        return this.operator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOperator(String operator) &#123;</span><br><span class="line">        this.operator = operator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getSource() &#123;</span><br><span class="line">        return this.source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSource(String source) &#123;</span><br><span class="line">        this.source = source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getDisplayName() &#123;</span><br><span class="line">        return this.displayName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDisplayName(String displayName) &#123;</span><br><span class="line">        this.displayName = displayName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getFilePath() &#123;</span><br><span class="line">        return this.filePath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setFilePath(String filePath) &#123;</span><br><span class="line">        this.filePath = filePath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCreator() &#123;</span><br><span class="line">        return this.creator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCreator(String creator) &#123;</span><br><span class="line">        this.creator = creator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Timestamp getStartTime() &#123;</span><br><span class="line">        return this.startTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setStartTime(Timestamp startTime) &#123;</span><br><span class="line">        this.startTime = startTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Timestamp getCreateTime() &#123;</span><br><span class="line">        return this.createTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCreateTime(Timestamp createTime) &#123;</span><br><span class="line">        this.createTime = createTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public long getFileSize() &#123;</span><br><span class="line">        return this.fileSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setFileSize(long fileSize) &#123;</span><br><span class="line">        this.fileSize = fileSize;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果属性更多的话，添加getter、setter就需要花更多的时间。如果使用Lombok插件的话，不仅可以节省时间，而且代码也更加简洁:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class DataFileDownloadAudit &#123;</span><br><span class="line">    @Setter(AccessLevel.PUBLIC)</span><br><span class="line">    @Getter(AccessLevel.PROTECTED)</span><br><span class="line">    private Timestamp startTime;</span><br><span class="line"></span><br><span class="line">    @Setter(AccessLevel.PUBLIC)</span><br><span class="line">    @Getter(AccessLevel.PROTECTED)</span><br><span class="line">    private String userName;</span><br><span class="line">    private String operator;</span><br><span class="line">    private String source;</span><br><span class="line">    private String displayName;</span><br><span class="line">    private String filePath;</span><br><span class="line">    private long fileSize;</span><br><span class="line">    private String creator;</span><br><span class="line">    private Timestamp createTime;</span><br><span class="line"></span><br><span class="line">    public DataFileDownloadAudit() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样只是给属性加getter、setter，我们也可以用@Data来继续简化:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class DataFileDownloadAudit &#123;</span><br><span class="line">    private Timestamp startTime;</span><br><span class="line">    private String userName;</span><br><span class="line">    private String operator;</span><br><span class="line">    private String source;</span><br><span class="line">    private String displayName;</span><br><span class="line">    private String filePath;</span><br><span class="line">    private long fileSize;</span><br><span class="line">    private String creator;</span><br><span class="line">    private Timestamp createTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这两种方式有什么差异呢？@Getter和@Setter是作用在bean属性上，可以自动生成getter、setter方法，@Data是作用在类上，他结合了@ToString, @EqualsAndHashCode, @Getter,@Setter,@RequiredArgsConstructor注解的功能。<br>这仅仅说了Lombok两个常用的注解，总的来说，它会给我们带来更加简洁的代码和快速的开发效率，其他更加强大的功能可以去<a href="https://projectlombok.org/features/all" target="_blank" rel="noopener">https://projectlombok.org/features/all</a>自行查看。</p>
-
+            <p>.net 中的IOC容器也不少，如Autofac、Windsor Castle、Spring.NET、Unity、Ninject等，现在使用Autofac作为IOC容器的较多,据说速度是最快的一个。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/12/02/net-core3-x-autofac-ioc/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -189,62 +201,9 @@
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
-
-<div class="notification is-danger">
-    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-                
-<div class="notification is-danger">
-    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
-</div>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/08/Docker-compose-ymal/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Docker常用命令整理</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/05/%E6%B2%A1%E6%9C%89java%E6%BA%90%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9bug/">
-                <span class="level-item">没有java源代码如何修改bug</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
 </div>
@@ -1041,7 +1000,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="使用Lombok简化java代码" height="28">
+                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
                 
                 </a>
                 <p class="is-size-7">

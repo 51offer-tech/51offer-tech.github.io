@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/12/02/net-core3-x-autofac-ioc/</loc>
+    
+    <lastmod>2019-12-02T04:53:39.330Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/12/02/hexo-blog/</loc>
+    
+    <lastmod>2019-12-02T04:52:11.939Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/28/net-core3-x-publish/</loc>
     
     <lastmod>2019-11-29T01:36:29.694Z</lastmod>
