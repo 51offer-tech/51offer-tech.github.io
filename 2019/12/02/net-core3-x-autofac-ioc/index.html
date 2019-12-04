@@ -20,7 +20,7 @@
 <meta property="og:description" content=".net 中的IOC容器也不少，如Autofac、Windsor Castle、Spring.NET、Unity、Ninject等，现在使用Autofac作为IOC容器的较多,据说速度是最快的一个。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;docs.autofac.org&#x2F;en&#x2F;latest&#x2F;_images&#x2F;logo.png">
-<meta property="og:updated_time" content="2019-12-02T04:53:39.330Z">
+<meta property="og:updated_time" content="2019-12-02T04:55:40.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;docs.autofac.org&#x2F;en&#x2F;latest&#x2F;_images&#x2F;logo.png">
 
@@ -192,9 +192,10 @@
 <li>Instance Per Matching Lifetime Scope  每个匹配生命周期作用域的组件在每个名称匹配的嵌套生命周期作用域中最多只会有一个单一实例.</li>
 <li>Instance Per Request 每个请求一个实例建立于每个匹配生命周期一个实例之上</li>
 <li>Instance Per Owned Owned<t> 隐式关系类型 创建了一个嵌套的生命周期作用域. 使用每次被拥有一个实例注册, 可以把该依赖的作用域绑定到拥有它的实例上.</t></li>
-<li>Thread Scope 每个线程就有了它各自的生命周期作用域,在这种多线程场景中, 你必须得注意父级作用域不能在派生出的线程下被释放了<h4 id="新建一个ITransientDependency空接口"><a href="#新建一个ITransientDependency空接口" class="headerlink" title="新建一个ITransientDependency空接口"></a>新建一个ITransientDependency空接口</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ITransientDependency</span><br><span class="line">   &#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-这里的主要目的是为了标识接口注册不同的声明周期。你们可以根据自己的情况新增不同的标识注入不同的生命周期</li>
+<li>Thread Scope 每个线程就有了它各自的生命周期作用域,在这种多线程场景中, 你必须得注意父级作用域不能在派生出的线程下被释放了</li>
 </ul>
+<h4 id="新建一个ITransientDependency空接口"><a href="#新建一个ITransientDependency空接口" class="headerlink" title="新建一个ITransientDependency空接口"></a>新建一个ITransientDependency空接口</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ITransientDependency</span><br><span class="line">   &#123;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这里的主要目的是为了标识接口注册不同的声明周期。你们可以根据自己的情况新增不同的标识注入不同的生命周期</p>
 <h4 id="新建一个WebModule类继承Autofac的Module"><a href="#新建一个WebModule类继承Autofac的Module" class="headerlink" title="新建一个WebModule类继承Autofac的Module"></a>新建一个WebModule类继承Autofac的Module</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class WebModule : Module</span><br><span class="line">   &#123;</span><br><span class="line">       protected override void Load(ContainerBuilder builder)</span><br><span class="line">       &#123;</span><br><span class="line">           //获取当前程序集</span><br><span class="line">           var dataAccess = Reflection.Assembly.GetExecutingAssembly();</span><br><span class="line"></span><br><span class="line">           var transientDependencyType = typeof(ITransientDependency);</span><br><span class="line"></span><br><span class="line">           //查找ITransientDependency接口类型程序并注册为每次调用创建一个实例</span><br><span class="line">           builder.RegisterAssemblyTypes(dataAccess)</span><br><span class="line">      .Where(t =&gt; transientDependencyType.IsAssignableFrom(t) &amp;&amp; t != transientDependencyType)</span><br><span class="line">      .AsImplementedInterfaces().InstancePerLifetimeScope().PropertiesAutowired();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>主要是查找程序集，批量注册相应依赖，</p>
 <h4 id="配置使用"><a href="#配置使用" class="headerlink" title="配置使用"></a>配置使用</h4><p>在Program中稍作修改</p>
@@ -271,7 +272,7 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/02/hexo-blog/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">hexo搭建个人博客锦集</span>
+                <span class="level-item">Hexo搭建个人博客锦集</span>
             </a>
         </div>
         
@@ -544,14 +545,14 @@
             
             <a href="/2019/12/02/hexo-blog/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo搭建个人博客锦集">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo搭建个人博客锦集">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-02T02:39:50.000Z">2019-12-02</time></div>
-                    <a href="/2019/12/02/hexo-blog/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo搭建个人博客锦集</a>
+                    <a href="/2019/12/02/hexo-blog/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo搭建个人博客锦集</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -816,14 +817,14 @@
             
             <a href="/2019/12/02/hexo-blog/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo搭建个人博客锦集">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo搭建个人博客锦集">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-02T02:39:50.000Z">2019-12-02</time></div>
-                    <a href="/2019/12/02/hexo-blog/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo搭建个人博客锦集</a>
+                    <a href="/2019/12/02/hexo-blog/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo搭建个人博客锦集</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
