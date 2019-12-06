@@ -8,19 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>基于redis key失效机制实现状态实时更新 - 农民工学编程</title>
+<title>Spring Boot集成Swagger - 农民工学编程</title>
 
 
-    <meta name="description" content="基于redis key失效事件通知机制来处理状态实时更新">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="description" content="大部分人应该都知道Swagger是帮我们的Web API快速生成接口文档，前面我们也有提到.Net Core3.x集成Swagger，这里，我们再来归纳一下Spring Boot集成Swagger的常规操作">
+<meta name="keywords" content="Java,Spring Boot,Swagger">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于redis key失效机制实现状态实时更新">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0&#x2F;index.html">
+<meta property="og:title" content="Spring Boot集成Swagger">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;12&#x2F;06&#x2F;Spring-Boot-Swagger&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="基于redis key失效事件通知机制来处理状态实时更新">
+<meta property="og:description" content="大部分人应该都知道Swagger是帮我们的Web API快速生成接口文档，前面我们也有提到.Net Core3.x集成Swagger，这里，我们再来归纳一下Spring Boot集成Swagger的常规操作">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-04T01:06:39.936Z">
+<meta property="og:updated_time" content="2019-12-06T01:36:50.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -88,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="基于redis key失效机制实现状态实时更新" height="28">
+                <img src="/images/logo.svg" alt="Spring Boot集成Swagger" height="28">
             
             </a>
         </div>
@@ -144,13 +144,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T06:32:19.000Z">2019-10-24</time>
+                <time class="level-item has-text-grey" datetime="2019-12-06T00:16:04.000Z">2019-12-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 689 个字)
+                    4 分钟 读完 (大约 543 个字)
                 </span>
                 
                 
@@ -164,28 +168,36 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                基于redis key失效机制实现状态实时更新
+                Spring Boot集成Swagger
             
         </h1>
         <div class="content">
-            <p>基于redis key失效事件通知机制来处理状态实时更新</p>
+            <p>大部分人应该都知道Swagger是帮我们的Web API快速生成接口文档，前面我们也有提到.Net Core3.x集成Swagger，这里，我们再来归纳一下Spring Boot集成Swagger的常规操作</p>
 <a id="more"></a>
-<blockquote>
-<p>在我们的业务中，有这样一个场景，在手机端实时采集用用户经纬度，判断用户是否在某个场景(小区、商场等)内,如果再场景内则变更用户任务状态为”执行中”，当用户离开场景超过20分钟，需要将用户任务状态更改为”离场”状态。</p>
-</blockquote>
-<p>一般，我们更新状态，要么定时去扫描数据库，要么就是触发某个事件，在最开始，有想到几种方案：<br>1、定时（采用quartz定时执行作业，去扫描数据库）<br>2、用hangfire、rabbitmq等实现延迟执行<br>3、redis key失效事件，实时处理<br>经过评估，最后选择了redis key失效机制来处理这个业务。</p>
-<h3 id="redis-key失效事件监听"><a href="#redis-key失效事件监听" class="headerlink" title="redis key失效事件监听"></a>redis key失效事件监听</h3><p>redis自2.8之后就提供Keyspace Notifications功能，允许客户订阅Pub/Sub。</p>
-<h3 id="开启事件通知"><a href="#开启事件通知" class="headerlink" title="开启事件通知"></a>开启事件通知</h3><p>默认情况下，redis是没有开启事件通知的，所以我们需要手动配置：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">打开redis.conf配置文件</span><br><span class="line">搜索notify-keyspace-events，该配置默认是被注释掉的，需要将其修改为notify-keyspace-events Ex ,然后重启便可生效</span><br></pre></td></tr></table></figure>
-<p>值说明:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># K    键空间通知，以__keyspace@&lt;db&gt;__为前缀</span><br><span class="line"># E    键事件通知，以__keysevent@&lt;db&gt;__为前缀</span><br><span class="line"># g    del , expipre , rename 等类型无关的通用命令的通知, ...</span><br><span class="line"># $    String命令</span><br><span class="line"># l    List命令</span><br><span class="line"># s    Set命令</span><br><span class="line"># h    Hash命令</span><br><span class="line"># z    有序集合命令</span><br><span class="line"># x    过期事件（每次key过期时生成）</span><br><span class="line"># e    驱逐事件（当key在内存满了被清除时生成）</span><br><span class="line"># A    g$lshzxe的别名，因此”AKE”意味着所有的事件</span><br></pre></td></tr></table></figure>
-<h3 id="spring-boot实现消息监听器类"><a href="#spring-boot实现消息监听器类" class="headerlink" title="spring boot实现消息监听器类"></a>spring boot实现消息监听器类</h3><p>pom.xml:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   &lt;!-- https://mvnrepository.com/artifact/redis.clients/jedis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">	&lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">	&lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">      &lt;!-- https://mvnrepository.com/artifact/com.alibaba/druid --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.1.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class RedisMsgPubSubListener extends JedisPubSub &#123;</span><br><span class="line"></span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    ITaskService taskService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void unsubscribe() &#123;</span><br><span class="line">        super.unsubscribe();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void unsubscribe(String... channels) &#123;</span><br><span class="line">        super.unsubscribe(channels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void subscribe(String... channels) &#123;</span><br><span class="line">        super.subscribe(channels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void psubscribe(String... patterns) &#123;</span><br><span class="line">        super.psubscribe(patterns);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void punsubscribe() &#123;</span><br><span class="line">        super.punsubscribe();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void punsubscribe(String... patterns) &#123;</span><br><span class="line">        super.punsubscribe(patterns);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onMessage(String channel, String message) &#123;</span><br><span class="line">        System.out.println(&quot;channel:&quot; + channel + &quot;receives message :&quot; + message);</span><br><span class="line">        String key = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPMessage(String pattern, String channel, String message) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onSubscribe(String channel, int subscribedChannels) &#123;</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPUnsubscribe(String pattern, int subscribedChannels) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPSubscribe(String pattern, int subscribedChannels) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onUnsubscribe(String channel, int subscribedChannels) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>创建一个Runner：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class RedisApplicationRunner implements ApplicationRunner &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    RedisMsgPubSubListener redisMsgPubSubListener;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    JedisPool jedisPool;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(ApplicationArguments applicationArguments) throws Exception &#123;</span><br><span class="line">      </span><br><span class="line">        Jedis jedis = jedisPool.getResource();</span><br><span class="line">//        jedis.set(&quot;zhcj:mobile:13548074395:2018122222212&quot;,&quot;1&quot;);</span><br><span class="line">//        jedis.expire(&quot;zhcj:mobile:13548074395:2018122222212&quot;,10);</span><br><span class="line">          jedis.subscribe(redisMsgPubSubListener, &quot;__keyevent@0__:expired&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最终效果:<br><img src="http://xxnote.51offer.wang/QQ%E5%9B%BE%E7%89%8720191012165952.png" alt></p>
+<h3 id="创建一个Spring-Boot项目"><a href="#创建一个Spring-Boot项目" class="headerlink" title="创建一个Spring Boot项目"></a>创建一个Spring Boot项目</h3><p>创建Spring Boot应用的方式有很多，如：直接访问spring提供的项目生成工具<a href="https://start.spring.io/" target="_blank" rel="noopener">https://start.spring.io/</a>、或者Idea里面的Spring Initializr模块创建等等。<br>这里我们就直接通过Idea工具来创建，<br><img src="http://xxnote.51offer.wang/boot1.png" alt><br><img src="http://xxnote.51offer.wang/boot2.png" alt><br><img src="http://xxnote.51offer.wang/boot3.png" alt><br>创建完成后，就是maven自动安装包了。</p>
+<h3 id="集成Swagger"><a href="#集成Swagger" class="headerlink" title="集成Swagger"></a>集成Swagger</h3><p>首先，我们需要引入引入jar包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.9.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.9.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h4><ol>
+<li>新建一个<code>SwaggerConfiguration</code>类，添加注解<code>@Configuration</code>、<code>@EnableSwagger2</code><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class SwaggerConfiguration &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo( new ApiInfoBuilder()</span><br><span class="line">                        //页面标题</span><br><span class="line">                        .title(&quot;Demo Web Api文档&quot;)</span><br><span class="line">                        //创建人</span><br><span class="line">                        .contact(new Contact(&quot;eyiadmin&quot;, &quot;https://springfox.github.io/springfox/&quot;, &quot;eyiadmin@163.com&quot;))</span><br><span class="line">                        .version(&quot;1.0&quot;)</span><br><span class="line">                        .description(&quot;Demo Web Api文档&quot;)</span><br><span class="line">                        .build())</span><br><span class="line">                .select()</span><br><span class="line">                //API接口所在的包位置</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.eyiadmin.demo.controller&quot;))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>配置Controller:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Api(value = &quot;Swagger Demo API展示&quot;)</span><br><span class="line">@RequestMapping(&quot;/demo&quot;)</span><br><span class="line">@RestController</span><br><span class="line">public class DemoController &#123;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;示例&quot;, notes = &quot;通过名字打个招呼&quot;)</span><br><span class="line">    @RequestMapping(value = &quot;hello/&#123;name&#125;&quot;, method= RequestMethod.GET)</span><br><span class="line">    public ResponseEntity&lt;String&gt; Hello(@ApiParam(value = &quot;用户姓名&quot;,required = true) @PathVariable String name)</span><br><span class="line">    &#123;</span><br><span class="line">        return new ResponseEntity&lt;&gt;(String.format(&quot;Hello %s!&quot;,name), HttpStatus.OK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+启动起来，访问localhost:8080/swagger-ui.html，还是那个熟悉的界面:<br><img src="http://xxnote.51offer.wang/boot_swagger1.png" alt></li>
+</ol>
+<h4 id="使用Swagger增强版knife4j-spring-ui"><a href="#使用Swagger增强版knife4j-spring-ui" class="headerlink" title="使用Swagger增强版knife4j-spring-ui"></a>使用Swagger增强版knife4j-spring-ui</h4><p>在<a href="https://gitee.com/xiaoym/knife4j" target="_blank" rel="noopener">https://gitee.com/xiaoym/knife4j</a>提供了<code>swagger-bootstrap-ui</code>,界面相对来说更加美观,也可以导出md文档，同时可以借助其他工具转成pdf等文档<br>我们把修改一下pom.xml文件，将swagger替换成knife4j:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;knife4j-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.9.6&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>修改配置类:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">@EnableSwaggerBootstrapUi</span><br><span class="line">@Import(BeanValidatorPluginsConfiguration.class)</span><br></pre></td></tr></table></figure>
+<p>启动Spring Boot，访问localhost:8080/doc.html：<br><img src="http://xxnote.51offer.wang/boot_swagger2.png" alt><br>至此，Spring Boot集成Swagger暂时告一段落,下面，我会整理一些Swagger 常用注解.</p>
+<p>未完待续</p>
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>, <a class="has-link-grey -link" href="/tags/Swagger/" rel="tag">Swagger</a>
+                </div>
+            </div>
         </div>
         
         
@@ -234,17 +246,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/31/net-core%E4%BD%BF%E7%94%A8Topshelf%E6%B3%A8%E5%86%8Cwindows%E6%9C%8D%E5%8A%A1/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">.net core使用Topshelf注册windows服务</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91/">
-                <span class="level-item">AccessibilityService自动刷视频</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/05/github-routine-operation/">
+                <span class="level-item">展示一下Github的常规操作</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1111,7 +1116,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="基于redis key失效机制实现状态实时更新" height="28">
+                    <img src="/images/logo.svg" alt="Spring Boot集成Swagger" height="28">
                 
                 </a>
                 <p class="is-size-7">
