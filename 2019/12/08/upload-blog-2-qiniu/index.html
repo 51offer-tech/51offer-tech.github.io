@@ -20,7 +20,7 @@
 <meta property="og:description" content="很多人都是把Hexo、hugo等工具生成的静态页面都是上传到Github,这样虽然很方便，但是毕竟在国外，而且百度爬虫老是失败，虽然有盆友说可以上传到Gitee上，域名识别不同的访问线路解析不同的空间。我也这样搞过，但是最近发现，好像七牛云可以托管静态页面。那么就来搞搞咯">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-07T05:24:32.040Z">
+<meta property="og:updated_time" content="2019-12-07T06:08:55.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 642 个字)
+                    4 分钟 读完 (大约 643 个字)
                 </span>
                 
                 
@@ -232,7 +232,7 @@
 <li>回到七牛云的内容空间，设置默认域名<br><img src="http://xxnote.51offer.wang/qiniu_set_domain.png" alt><br>这时候，我们的博客就可以正常访问了<br><img src="http://xxnote.51offer.wang/qiniu_end.png" alt></li>
 </ol>
 <p>小技巧:我们可以再<code>package.json</code>自定义一个我们的命令, 如下:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;build&quot;: &quot;hexo generate&quot;,</span><br><span class="line">    &quot;clean&quot;: &quot;hexo clean&quot;,</span><br><span class="line">    &quot;deploy&quot;: &quot;hexo deploy&quot;,</span><br><span class="line">    &quot;server&quot;: &quot;hexo server&quot;,</span><br><span class="line">    &quot;d&quot;:&quot;hexo c &amp; hexo g &amp; hexo d &amp; qshell qupload2 --src-dir=E:/hexo/hexo/public --bucket=七牛空间&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;build&quot;: &quot;hexo generate&quot;,</span><br><span class="line">    &quot;clean&quot;: &quot;hexo clean&quot;,</span><br><span class="line">    &quot;deploy&quot;: &quot;hexo deploy&quot;,</span><br><span class="line">    &quot;server&quot;: &quot;hexo server&quot;,</span><br><span class="line">    &quot;d&quot;:&quot;hexo c &amp; hexo g &amp; hexo d &amp; qshell qupload2 --src-dir=E:/hexo/hexo/public --bucket=七牛空间 --overwrite&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 <p>这时候我们在命令行执行<code>npm run d</code> 即可清理、生成、上传文件啦</p>
 
         </div>
