@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 298 个字)
+                    3 分钟 读完 (大约 392 个字)
                 </span>
                 
                 
@@ -178,79 +178,17 @@
             
         </h1>
         <div class="content">
-            <a id="more"></a>
-<p>Go语言定义变量有多种方式，下面我们来看看具体的示例<br>var [变量名] [变量类型] = [值]</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a int = 10 //定义变量并初始化值</span><br></pre></td></tr></table></figure>
-<p>也可以不赋值，如果未显示初始化值的时候，Go会自动为对应数据类型初始化一个默认值(零值)，:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a int  //自动初始化零值</span><br></pre></td></tr></table></figure>
-<p>Go 语言中的零值大概有以下几种:</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>零值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数值</td>
-<td>0</td>
-</tr>
-<tr>
-<td>布尔</td>
-<td>false</td>
-</tr>
-<tr>
-<td>字符串</td>
-<td>“”(空字符串)</td>
-</tr>
-<tr>
-<td>slice</td>
-<td>nil</td>
-</tr>
-<tr>
-<td>map</td>
-<td>nil</td>
-</tr>
-<tr>
-<td>指针</td>
-<td>nil</td>
-</tr>
-<tr>
-<td>函数</td>
-<td>nil</td>
-</tr>
-<tr>
-<td>接口</td>
-<td>nil</td>
-</tr>
-<tr>
-<td>信道</td>
-<td>nil</td>
-</tr>
-</tbody></table>
-<p>Go变量会根据初始值自动判断数据类型:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = 10</span><br></pre></td></tr></table></figure>
-<p>简短定义:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a := 10</span><br></pre></td></tr></table></figure>
-
-<p>多变量同类型定义:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a,b int</span><br><span class="line">var a,b int = 0,1</span><br></pre></td></tr></table></figure>
-
-<p>多变量不同类型定义:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a ,b  = 0,&quot;b&quot;</span><br><span class="line"></span><br><span class="line">var(</span><br><span class="line">		a int</span><br><span class="line">		b string</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">var(</span><br><span class="line">		a int=0</span><br><span class="line">		b string=&quot;b&quot;</span><br><span class="line">	)</span><br><span class="line">a ,b :=1,2</span><br></pre></td></tr></table></figure>
-<p>变量作用域,我理解的变量作用域有三种:</p>
-<ul>
-<li>全局作用域</li>
-<li>局部作用域</li>
-<li>块级作用域</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">var a=10       //全局作用域</span><br><span class="line"></span><br><span class="line">func main()  &#123;</span><br><span class="line">	a := 9     //局部作用域</span><br><span class="line">	&#123;</span><br><span class="line">		a :=8  //块级作用域</span><br><span class="line">		println(a)</span><br><span class="line">	&#125;</span><br><span class="line">	println(a)</span><br><span class="line">	println(Get())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Get() int &#123;</span><br><span class="line">	return a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印结果：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
-<p>如有错误之处，敬请提建议，多谢。</p>
-
+            <p>变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。来源于<a href="https://www.runoob.com/go/go-variables.html" target="_blank" rel="noopener">https://www.runoob.com/go/go-variables.html</a></p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
