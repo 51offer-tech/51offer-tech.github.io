@@ -8,18 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>标签: JavaScript ECMAScript - 农民工学编程</title>
+<title>Golang基础学习总结之变量 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;tags&#x2F;JavaScript-ECMAScript&#x2F;index.html">
+    <meta name="description" content="Go语言定义变量有多种方式，下面我们来看看具体的示例var [变量名] [变量类型] = [值] 1var a int = 10 &#x2F;&#x2F;定义变量并初始化值 也可以不赋值，如果未显示初始化值的时候，Go会自动为对应数据类型初始化一个默认值(零值)，: 1var a int  &#x2F;&#x2F;自动初始化零值 Go 语言中的零值大概有以下几种:    类型 零值    数值 0   布尔 false   字符串 “">
+<meta name="keywords" content="Golang,Go基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang基础学习总结之变量">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;12&#x2F;10&#x2F;Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="Go语言定义变量有多种方式，下面我们来看看具体的示例var [变量名] [变量类型] = [值] 1var a int = 10 &#x2F;&#x2F;定义变量并初始化值 也可以不赋值，如果未显示初始化值的时候，Go会自动为对应数据类型初始化一个默认值(零值)，: 1var a int  &#x2F;&#x2F;自动初始化零值 Go 语言中的零值大概有以下几种:    类型 零值    数值 0   布尔 false   字符串 “">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-12-10T00:48:58.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -87,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Golang基础学习总结之变量" height="28">
             
             </a>
         </div>
@@ -136,58 +137,123 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">JavaScript ECMAScript</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-22T00:13:44.000Z">2019-11-22</time>
+                <time class="level-item has-text-grey" datetime="2019-12-10T00:03:13.000Z">2019-12-10</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/JavaScript/">JavaScript</a>
+                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 825 个字)
+                    2 分钟 读完 (大约 298 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/11/22/ES6-7-8-9-10/">ES6常用关键字总结</a>
+                Golang基础学习总结之变量
             
         </h1>
         <div class="content">
-            <p>ES6(ECMAScript 6.0)是JavaScript 语言的新一代标准，2015年6月正式发布。其提供了一些新特性使代码更加简洁。由于目前有些版本浏览兼容性不足，所以需要实用babel这类工具讲我们的ES6转换为ES5.</p>
+            <a id="more"></a>
+<p>Go语言定义变量有多种方式，下面我们来看看具体的示例<br>var [变量名] [变量类型] = [值]</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a int = 10 //定义变量并初始化值</span><br></pre></td></tr></table></figure>
+<p>也可以不赋值，如果未显示初始化值的时候，Go会自动为对应数据类型初始化一个默认值(零值)，:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a int  //自动初始化零值</span><br></pre></td></tr></table></figure>
+<p>Go 语言中的零值大概有以下几种:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>零值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数值</td>
+<td>0</td>
+</tr>
+<tr>
+<td>布尔</td>
+<td>false</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>“”(空字符串)</td>
+</tr>
+<tr>
+<td>slice</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>map</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>指针</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>信道</td>
+<td>nil</td>
+</tr>
+</tbody></table>
+<p>Go变量会根据初始值自动判断数据类型:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = 10</span><br></pre></td></tr></table></figure>
+<p>简短定义:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a := 10</span><br></pre></td></tr></table></figure>
+
+<p>多变量同类型定义:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a,b int</span><br><span class="line">var a,b int = 0,1</span><br></pre></td></tr></table></figure>
+
+<p>多变量不同类型定义:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a ,b  = 0,&quot;b&quot;</span><br><span class="line"></span><br><span class="line">var(</span><br><span class="line">		a int</span><br><span class="line">		b string</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">var(</span><br><span class="line">		a int=0</span><br><span class="line">		b string=&quot;b&quot;</span><br><span class="line">	)</span><br><span class="line">a ,b :=1,2</span><br></pre></td></tr></table></figure>
+<p>变量作用域,我理解的变量作用域有三种:</p>
+<ul>
+<li>全局作用域</li>
+<li>局部作用域</li>
+<li>块级作用域</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">var a=10       //全局作用域</span><br><span class="line"></span><br><span class="line">func main()  &#123;</span><br><span class="line">	a := 9     //局部作用域</span><br><span class="line">	&#123;</span><br><span class="line">		a :=8  //块级作用域</span><br><span class="line">		println(a)</span><br><span class="line">	&#125;</span><br><span class="line">	println(a)</span><br><span class="line">	println(Get())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Get() int &#123;</span><br><span class="line">	return a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<p>如有错误之处，敬请提建议，多谢。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/22/ES6-7-8-9-10/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Golang/" rel="tag">Golang</a>, <a class="has-link-grey -link" href="/tags/Go%E5%9F%BA%E7%A1%80/" rel="tag">Go基础</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -195,9 +261,55 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/08/upload-blog-2-qiniu/">
+                <span class="level-item">Hexo静态网页上传到七牛云</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -1072,7 +1184,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Golang基础学习总结之变量" height="28">
                 
                 </a>
                 <p class="is-size-7">
