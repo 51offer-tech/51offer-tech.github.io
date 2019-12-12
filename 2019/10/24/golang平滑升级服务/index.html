@@ -20,7 +20,7 @@
 <meta property="og:description" content="不中断服务进行服务升级">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-04T01:04:59.129Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -186,9 +186,9 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET GOARCH=amd64</span><br><span class="line">SET GOOS=linux</span><br><span class="line">go build main.go</span><br></pre></td></tr></table></figure>
 <p>把生成好的文件复制到linux上，先启动起来(我是用的nohup ./grace &amp;来启动的)，这时候我们查看pid是多少</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep grace</span><br><span class="line"></span><br><span class="line">root     11915 11364  0 13:06 pts/0    00:00:00 ./grace</span><br><span class="line">root     11921 11364  0 13:08 pts/0    00:00:00 grep --color=auto grace</span><br></pre></td></tr></table></figure>
-<p>此时访问服务结果：<br><img src="http://xxnote.51offer.wang/v1.png" alt="web1"><br>这时候，我们把之前的文件备份，将v2的代码编译好并拷贝上去，执行命令</p>
+<p>此时访问服务结果：<br><img src="http://xxnote.52fx.biz/v1.png" alt="web1"><br>这时候，我们把之前的文件备份，将v2的代码编译好并拷贝上去，执行命令</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kill -USR2 11915</span><br><span class="line">这时候在看看应用进程</span><br><span class="line">ps -ef|grep grace</span><br><span class="line"></span><br><span class="line">root     11928     1  0 13:11 pts/0    00:00:00 ./grace</span><br><span class="line">root     11935 11364  0 13:12 pts/0    00:00:00 grep --color=auto grace</span><br></pre></td></tr></table></figure>
-<p>pid已经变为11928,此时访问服务结果：<br><img src="http://xxnote.51offer.wang/v2.png" alt="web2"><br>[参考]<br><a href="https://github.com/facebookarchive/grace" target="_blank" rel="noopener">https://github.com/facebookarchive/grace</a><br><a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener">https://github.com/gin-gonic/gin</a></p>
+<p>pid已经变为11928,此时访问服务结果：<br><img src="http://xxnote.52fx.biz/v2.png" alt="web2"><br>[参考]<br><a href="https://github.com/facebookarchive/grace" target="_blank" rel="noopener">https://github.com/facebookarchive/grace</a><br><a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener">https://github.com/gin-gonic/gin</a></p>
 
         </div>
         

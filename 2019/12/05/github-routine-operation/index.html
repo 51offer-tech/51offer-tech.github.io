@@ -20,7 +20,7 @@
 <meta property="og:description" content="一般情况下，大部分人会自己使用Gitlab搭建一个私有的Git服务器，但是有时候为了避免麻烦，也可以使用诸如：Gitee,Github等免费的Git服务器来托管代码，这里个人使用的是Github">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-06T08:52:34.544Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -177,9 +177,9 @@
 </blockquote>
 <a id="more"></a>
 
-<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>Github账号注册很简单，这里就不说了。我们来看看怎么创建项目，登录到Github之后，右上角会有一个加号，从这里来<code>new repository</code>创建一个新repository<br><img src="http://xxnote.51offer.wang/github_create_repository.png" alt><br>这里public(公开项目),private(私有项目)都是免费的，根据个人情况选择<br><img src="http://xxnote.51offer.wang/repository.png" alt><br>常见完成后，会有操作提示，可以使用git clone到本地或者直接下载。这里我们还是使用git init来初始化一个项目吧</p>
+<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>Github账号注册很简单，这里就不说了。我们来看看怎么创建项目，登录到Github之后，右上角会有一个加号，从这里来<code>new repository</code>创建一个新repository<br><img src="http://xxnote.52fx.biz/github_create_repository.png" alt><br>这里public(公开项目),private(私有项目)都是免费的，根据个人情况选择<br><img src="http://xxnote.52fx.biz/repository.png" alt><br>常见完成后，会有操作提示，可以使用git clone到本地或者直接下载。这里我们还是使用git init来初始化一个项目吧</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 先创建一个存放项目的文件夹，随意创建一个文件，通过cmd命令行cd到该目录开始执行命令</span><br><span class="line">2. git init #初始化仓库</span><br><span class="line">3. git add * #添加所有文件到暂存区</span><br><span class="line">4. git commit -m &quot;仓库初始化&quot; #此次的提交注释说明,并提交到本地仓库</span><br><span class="line">5. git remote add origin https://github.com/eyiadmin/demo.git  # 与远程仓库建立关联关系</span><br><span class="line">6. git push -u origin master  # 提交到远程仓库</span><br></pre></td></tr></table></figure>
-<p><img src="http://xxnote.51offer.wang/github_init.png" alt><br><img src="http://xxnote.51offer.wang/github_init1.png" alt></p>
+<p><img src="http://xxnote.52fx.biz/github_init.png" alt><br><img src="http://xxnote.52fx.biz/github_init1.png" alt></p>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
 <li><code>git add 文件名</code> 添加单个文件到暂存区</li>
 <li><code>git add -A</code> 添加当前目录所有文件到暂存区</li>

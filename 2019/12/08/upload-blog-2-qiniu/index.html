@@ -20,7 +20,7 @@
 <meta property="og:description" content="很多人都是把Hexo、hugo等工具生成的静态页面都是上传到Github,这样虽然很方便，但是毕竟在国外，而且百度爬虫老是失败，虽然有盆友说可以上传到Gitee上，域名识别不同的访问线路解析不同的空间。我也这样搞过，但是最近发现，好像七牛云可以托管静态页面。那么就来搞搞咯">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-07T06:23:44.857Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -177,7 +177,7 @@
 <p>要上传到七牛云，当然得有个七牛云账号啦，这个没有的自己去搞一下，就不说了。下面我们来说说具体的操作。</p>
 <h3 id="配置对象空间"><a href="#配置对象空间" class="headerlink" title="配置对象空间"></a>配置对象空间</h3><ol>
 <li>新建一个对象空间</li>
-<li>在空间设置中打开【默认首页设置】<br><img src="http://xxnote.51offer.wang/hexo_qiniu.png" alt></li>
+<li>在空间设置中打开【默认首页设置】<br><img src="http://xxnote.52fx.biz/hexo_qiniu.png" alt></li>
 </ol>
 <h3 id="安装七牛云上传工具"><a href="#安装七牛云上传工具" class="headerlink" title="安装七牛云上传工具"></a>安装七牛云上传工具</h3><p>qshell是利用七牛文档上公开的API实现的一个方便开发者测试和使用七牛API服务的命令行工具,下载<a href="https://github.com/qiniu/qshell" target="_blank" rel="noopener">qshell</a>,下载之后解压，</p>
 <table>
@@ -212,11 +212,11 @@
 <td></td>
 </tr>
 <tr>
-<td><img src="http://xxnote.51offer.wang/win_path.png" alt></td>
+<td><img src="http://xxnote.52fx.biz/win_path.png" alt></td>
 <td></td>
 </tr>
 <tr>
-<td><img src="http://xxnote.51offer.wang/qiniu_command.png" alt></td>
+<td><img src="http://xxnote.52fx.biz/qiniu_command.png" alt></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -224,12 +224,12 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell account &lt;Your AccessKey&gt; &lt;Your SecretKey&gt; &lt;Your Name&gt;</span><br></pre></td></tr></table></figure>
 <p><code>qshell</code>有<code>qupload</code>配置文件方式和<code>qupload2</code>命令行方式，具体操作去<a href="https://github.com/qiniu/qshell" target="_blank" rel="noopener">https://github.com/qiniu/qshell</a>查看详细文档，这里我更倾向于命令行:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qshell qupload2 --src-dir=E:/hexo/hexo/public --bucket=空间名</span><br></pre></td></tr></table></figure>
-<p><img src="http://xxnote.51offer.wang/qiniu_upload1.png" alt></p>
+<p><img src="http://xxnote.52fx.biz/qiniu_upload1.png" alt></p>
 <h3 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h3><ol>
 <li>进入域名管理</li>
-<li>新增域名,输入域名点击创建<br><img src="http://xxnote.51offer.wang/qiniu_domain_create.png" alt></li>
-<li>创建成功后，会有一个CNAME，复制CNAME去解析域名:<br><img src="http://xxnote.51offer.wang/qiniu_domain_config.png" alt></li>
-<li>回到七牛云的内容空间，设置默认域名<br><img src="http://xxnote.51offer.wang/qiniu_set_domain.png" alt><br>这时候，我们的博客就可以正常访问了<br><img src="http://xxnote.51offer.wang/qiniu_end.png" alt></li>
+<li>新增域名,输入域名点击创建<br><img src="http://xxnote.52fx.biz/qiniu_domain_create.png" alt></li>
+<li>创建成功后，会有一个CNAME，复制CNAME去解析域名:<br><img src="http://xxnote.52fx.biz/qiniu_domain_config.png" alt></li>
+<li>回到七牛云的内容空间，设置默认域名<br><img src="http://xxnote.52fx.biz/qiniu_set_domain.png" alt><br>这时候，我们的博客就可以正常访问了<br><img src="http://xxnote.52fx.biz/qiniu_end.png" alt></li>
 </ol>
 <p>小技巧:我们可以再<code>package.json</code>自定义一个我们的命令, 如下:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;build&quot;: &quot;hexo generate&quot;,</span><br><span class="line">    &quot;clean&quot;: &quot;hexo clean&quot;,</span><br><span class="line">    &quot;deploy&quot;: &quot;hexo deploy&quot;,</span><br><span class="line">    &quot;server&quot;: &quot;hexo server&quot;,</span><br><span class="line">    &quot;d&quot;:&quot;hexo clean &amp; hexo g &amp; hexo d &amp; qshell qupload2 --overwrite=true --rescan-local=true --src-dir=E:/hexo/hexo/public --bucket=七牛云空间名称&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>

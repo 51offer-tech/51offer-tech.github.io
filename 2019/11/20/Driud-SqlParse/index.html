@@ -20,7 +20,7 @@
 <meta property="og:description" content="Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-22T05:47:17.712Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -174,7 +174,7 @@
         <div class="content">
             <p>Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。</p>
 <a id="more"></a>
-<p>先来看看我们要达到的效果:<br><img src="http://xxnote.51offer.wang/20191120085149.png" alt="界面效果"><br>这个项目的目的是让业务用户通过手动拖拽自己想要的字段即可展示、分析、下载数据，之前的流程是先添加数据源-&gt;在系统中导入表-&gt;配置分析模型-选择分析模型展示数据。这里的分析模型其实就是通过拖拽表类配置表与表之间是关联关系。然后拖拽字段后，前端就发送选择的字段表达式和过滤条件表达式到后端，通过配置是分析模型关系，解析出相应数据库的SQL语句发送到数据库执行。<br>现在有一种场景，就是用户能只需要查询单张表，如果这样也需要去配置分析模型，那么就增加了复杂度。所以，需要给用户提供一种直接通过数据源直接选择未建立关联关系的原表来查询、分析、下载数据。由于项目是没有源代码，而且之前的解析那一块都是基于分析模型，内部逻辑比较复杂。所以我选择了一种相对来说要方便一点的方式就是通过Driud来解析生成SQL语句。<br>我们都知道Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件,我们一般都是拿来做JDBC连接池和SQL语句监控使用。这里，我只是把这次SQL Parser组件的使用过程记录一下。感兴趣的朋友可以去看看<a href="https://www.bookstack.cn/read/Druid/06014f428e7b0263.md" target="_blank" rel="noopener">Druid 使用手册 </a></p>
+<p>先来看看我们要达到的效果:<br><img src="http://xxnote.52fx.biz/20191120085149.png" alt="界面效果"><br>这个项目的目的是让业务用户通过手动拖拽自己想要的字段即可展示、分析、下载数据，之前的流程是先添加数据源-&gt;在系统中导入表-&gt;配置分析模型-选择分析模型展示数据。这里的分析模型其实就是通过拖拽表类配置表与表之间是关联关系。然后拖拽字段后，前端就发送选择的字段表达式和过滤条件表达式到后端，通过配置是分析模型关系，解析出相应数据库的SQL语句发送到数据库执行。<br>现在有一种场景，就是用户能只需要查询单张表，如果这样也需要去配置分析模型，那么就增加了复杂度。所以，需要给用户提供一种直接通过数据源直接选择未建立关联关系的原表来查询、分析、下载数据。由于项目是没有源代码，而且之前的解析那一块都是基于分析模型，内部逻辑比较复杂。所以我选择了一种相对来说要方便一点的方式就是通过Driud来解析生成SQL语句。<br>我们都知道Druid是一个JDBC组件库，包括数据库连接池、SQL Parser等组件,我们一般都是拿来做JDBC连接池和SQL语句监控使用。这里，我只是把这次SQL Parser组件的使用过程记录一下。感兴趣的朋友可以去看看<a href="https://www.bookstack.cn/read/Druid/06014f428e7b0263.md" target="_blank" rel="noopener">Druid 使用手册 </a></p>
 <h3 id="Druid-SQL-AST学习"><a href="#Druid-SQL-AST学习" class="headerlink" title="Druid_SQL_AST学习"></a>Druid_SQL_AST学习</h3><h4 id="什么是AST"><a href="#什么是AST" class="headerlink" title="什么是AST"></a>什么是AST</h4><p>AST是abstract syntax tree的缩写，也就是抽象语法树。和所有的Parser一样，Druid Parser会生成一个抽象语法树。</p>
 <h4 id="在Druid-SQL-Parser中有哪些AST节点类型"><a href="#在Druid-SQL-Parser中有哪些AST节点类型" class="headerlink" title="在Druid SQL Parser中有哪些AST节点类型"></a>在Druid SQL Parser中有哪些AST节点类型</h4><p>在Druid中，AST节点类型主要包括SQLObject、SQLExpr、SQLStatement三种抽象类型。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.druid.sql.ast;</span><br><span class="line"> </span><br><span class="line">interface SQLObject &#123;&#125;</span><br><span class="line">interface SQLExpr extends SQLObject &#123;&#125;</span><br><span class="line">interface SQLStatement extends SQLObject &#123;&#125;</span><br><span class="line"> </span><br><span class="line">interface SQLTableSource extends SQLObject &#123;&#125;</span><br><span class="line">class SQLSelect extends SQLObject &#123;&#125;</span><br><span class="line">class SQLSelectQueryBlock extends SQLObject &#123;&#125;</span><br></pre></td></tr></table></figure>

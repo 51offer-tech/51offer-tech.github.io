@@ -20,7 +20,7 @@
 <meta property="og:description" content="我想很多人都想有一个自己的博客网站，现在开源的博客系统也很多，但是像java，python这种开源的博客系统需要宿主机、申请域名、安装环境等稍稍复杂的操作，当然现在也可以基于阿里或者腾讯云提供的Docker容器服务搭建也是非常方便。那么，还有没有成本更低的搭建方式呢？这时候就需要提到Hexo了，什么是Hexo？Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-09T00:47:23.937Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -185,9 +185,9 @@
 
 <h3 id="新建博客"><a href="#新建博客" class="headerlink" title="新建博客"></a>新建博客</h3><p>打开cmd命令行，进入到要创建博客的目录,执行以下命令:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;文件夹名&gt; #会在当前目录创建一个文件夹,并下载hexo模版</span><br><span class="line">cd &lt;文件夹名&gt;        #进入博客文件夹</span><br><span class="line">npm install         #安装hexo相应依赖</span><br></pre></td></tr></table></figure>
-<p>构建成功后的目录如下:<br><img src="http://xxnote.51offer.wang/hexo_dir.png" alt><br>启动起来看看效果:</p>
+<p>构建成功后的目录如下:<br><img src="http://xxnote.52fx.biz/hexo_dir.png" alt><br>启动起来看看效果:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
-<p><img src="http://xxnote.51offer.wang/hexo_serve1.png" alt><br><img src="http://xxnote.51offer.wang/hexo_serve2.png" alt><br>我们可以看到hexo会自动生成一篇文章，并会提到4个常用命令:</p>
+<p><img src="http://xxnote.52fx.biz/hexo_serve1.png" alt><br><img src="http://xxnote.52fx.biz/hexo_serve2.png" alt><br>我们可以看到hexo会自动生成一篇文章，并会提到4个常用命令:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;My New Post&quot;  #创建博客,缩写hexo n &quot;My New Post&quot;</span><br><span class="line">hexo server             #启动hexo,缩写hexo s</span><br><span class="line">hexo generate           #生成静态页面,缩写hexo g</span><br><span class="line">hexo deploy             #发布到静态托管服务器,缩写hexo d</span><br></pre></td></tr></table></figure>
 <p>一般我们发布都是 <code>hexo g &amp; hexo d</code> 一起执行。</p>
 <h3 id="配置博客"><a href="#配置博客" class="headerlink" title="配置博客"></a>配置博客</h3><p>这时候需要去修改根目录下的 <code>_config.yml</code> 配置文件,我们可以参考一下<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a> </p>
@@ -330,19 +330,19 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="http://xxnote.51offer.wang/butterfly.png" alt></p>
+<p><img src="http://xxnote.52fx.biz/butterfly.png" alt></p>
 <h4 id="部署到-GitHub-Pages"><a href="#部署到-GitHub-Pages" class="headerlink" title="部署到 GitHub Pages"></a>部署到 GitHub Pages</h4><ul>
 <li>新建一个 repository。如果你希望你的站点能通过 &lt;你的 GitHub 用户名&gt;.github.io 域名访问，你的 repository 应该直接命名为 &lt;你的 GitHub 用户名&gt;.github.io</li>
 <li>修改<code>_config.yml</code>:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git </span><br><span class="line">  repository: </span><br><span class="line">      github: https://github.com/eyiadmin/eyiadmin.github.io.git   #这里我们选择HTTPS的方式,当然也可以通过SSH方式(后期更加方便)</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 因为是git，所以需要<code>npm install --save hexo-deployer-git</code>来安装插件,</li>
 <li>发布到GitHub Pages:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp; hexo d</span><br></pre></td></tr></table></figure>
-上传成功后就可以在我们的repository中看到上传的静态页面,这时候就可以通过https://&lt;你的 GitHub 用户名&gt;.github.io来访问，如：<a href="https://eyiadmin.github.io/" target="_blank" rel="noopener">https://eyiadmin.github.io/</a><br><img src="http://xxnote.51offer.wang/publish.png" alt title="发布效果图"></li>
+上传成功后就可以在我们的repository中看到上传的静态页面,这时候就可以通过https://&lt;你的 GitHub 用户名&gt;.github.io来访问，如：<a href="https://eyiadmin.github.io/" target="_blank" rel="noopener">https://eyiadmin.github.io/</a><br><img src="http://xxnote.52fx.biz/publish.png" alt title="发布效果图"></li>
 </ul>
 <h4 id="Markdown常用语法"><a href="#Markdown常用语法" class="headerlink" title="Markdown常用语法"></a>Markdown常用语法</h4><h5 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br></pre></td></tr></table></figure>
 <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h5 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[超链接名称](超链接地址 &quot;超链接title(鼠标hover显示内容)&quot;)  </span><br><span class="line">例如：</span><br><span class="line">[农民工学编程](http://blog.52fx.biz &quot;快来看农民工学编程啦&quot;)</span><br></pre></td></tr></table></figure>
 <p><a href="http://blog.52fx.biz" title="快来看农民工学编程啦">农民工学编程</a></p>
-<h5 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![图片描述(显示在图片下方,可不填)](图片连接地址 &quot;图片title(鼠标hover显示内容)&quot;)</span><br><span class="line">![](http://xxnote.51offer.wang/publish.png &quot;发布效果图&quot;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://xxnote.51offer.wang/publish.png" alt title="发布效果图"></p>
+<h5 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![图片描述(显示在图片下方,可不填)](图片连接地址 &quot;图片title(鼠标hover显示内容)&quot;)</span><br><span class="line">![](http://xxnote.52fx.biz/publish.png &quot;发布效果图&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/publish.png" alt title="发布效果图"></p>
 <h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`单行内容`</span><br></pre></td></tr></table></figure>
 <p>多行用内容<code>``` ```</code></p>
 <p><code>First Blood</code></p>

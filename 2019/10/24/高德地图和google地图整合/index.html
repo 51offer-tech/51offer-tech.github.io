@@ -19,10 +19,10 @@
 <meta property="og:site_name" content="农民工学编程">
 <meta property="og:description" content="整合百度和google地图">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;xxnote.51offer.wang&#x2F;%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png">
-<meta property="og:updated_time" content="2019-11-04T01:02:04.858Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.51offer.wang&#x2F;%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png">
 
 
 
@@ -146,7 +146,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
+            <img class="thumbnail" src="http://xxnote.52fx.biz/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt="高德地图和google地图整合">
         </span>
     </div>
     
@@ -189,7 +189,7 @@
 <h3 id="突发奇想"><a href="#突发奇想" class="headerlink" title="突发奇想"></a>突发奇想</h3><p>之后，突然想到，为何不在服务端来判断当前切片是否是正常的卫星地图切片，如果不是则去请求google地图的切片，采用这种方式的话，那么就需要修改jsapi，但是高德并不提供离线的js api，怎么办呢？</p>
 <p>当然办法是肯定有的，就是自己去下载一个高德js api，然后把卫星地图模式所指向的地址改为自己的服务端地址即可，项目中就引用自己下载的离线js。<br>js api修改代码：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在离线js中查询关键字:</span><br><span class="line">autonavi.com/appmaptile?style=6</span><br><span class="line">可以找到这样的地址:</span><br><span class="line">http://webst0&#123;1,2,3,4&#125;.is.autonavi.com/appmaptile?style=6&amp;x=[x]&amp;y=[y]&amp;z=[z]</span><br><span class="line">将其修改为自己的代理地址:</span><br><span class="line">http://211.137.xxx.xxx/map/?style=6&amp;x=[x]&amp;y=[y]&amp;z=[z]</span><br></pre></td></tr></table></figure>
-<p>其他调用方式不变，使用这种方式之后，融合率几乎是99.99%，如果高德和google结合后还是有无卫星地图的情况，那我暂时也没想到比较好的处理方式了。<br>最终效果如下:<br><img src="http://xxnote.51offer.wang/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt></p>
+<p>其他调用方式不变，使用这种方式之后，融合率几乎是99.99%，如果高德和google结合后还是有无卫星地图的情况，那我暂时也没想到比较好的处理方式了。<br>最终效果如下:<br><img src="http://xxnote.52fx.biz/%7B%5B9K%60AVL%5B8SSEVTYL%7DA4C%29T.png" alt></p>
 
         </div>
         

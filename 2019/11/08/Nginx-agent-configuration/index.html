@@ -20,7 +20,7 @@
 <meta property="og:description" content="众所周知，nginx是一款高性能的反向代理工具，在之前nginx只能代理应用层的应用，如果是要做TCP即网络第4层的代理就只有借助HaProxy等工具，在nginx1.9版本之后即可支持TCP的代理。下面，我们来展现一下nginx强大的代理能力。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;gss3.bdstatic.com&#x2F;7Po3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike92%2C5%2C5%2C92%2C30&#x2F;sign=aa5ef6b12234349b600b66d7a8837eab&#x2F;94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg">
-<meta property="og:updated_time" content="2019-11-19T02:22:54.240Z">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;gss3.bdstatic.com&#x2F;7Po3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike92%2C5%2C5%2C92%2C30&#x2F;sign=aa5ef6b12234349b600b66d7a8837eab&#x2F;94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg">
 
@@ -196,7 +196,7 @@
 <h3 id="Nginx-代理转发TCP配置"><a href="#Nginx-代理转发TCP配置" class="headerlink" title="Nginx 代理转发TCP配置"></a>Nginx 代理转发TCP配置</h3><blockquote>
 <p>我又有另外一个场景，也是内网和办公网的交互，但是这个场景不需要那么严格，可以直连服务器，但是我们是想在办公网直连数据库。这显然形成了一个屏障</p>
 </blockquote>
-<p><img src="http://xxnote.51offer.wang/tcp.png" alt="tcp"><br>这种情况下，我们想要连接到数据库就只有做一个TCP四层代理。我们就可以借助nginx upstream的功能实现TCP转发。配置如下</p>
+<p><img src="http://xxnote.52fx.biz/tcp.png" alt="tcp"><br>这种情况下，我们想要连接到数据库就只有做一个TCP四层代理。我们就可以借助nginx upstream的功能实现TCP转发。配置如下</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">upstream proxy_redis</span><br><span class="line">&#123;</span><br><span class="line">	server xx.xxx.xx.xxx:6379;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">server &#123;</span><br><span class="line">    listen 6379;             #监听端口</span><br><span class="line">    proxy_pass proxy_redis;  #转发请求</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后刷新一下nginx配置:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
