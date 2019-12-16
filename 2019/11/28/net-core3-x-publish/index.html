@@ -20,7 +20,7 @@
 <meta property="og:description" content="我们开发完之后，需要进行发布部署，一般高端的公司是采用CI&#x2F;CD方式自动发布，但是我所处的公司都是使用手动发布，之前我都是输入命令的方式: 1dotnet publish -c Release -r win7-x64 -o .&#x2F;bin&#x2F;output 执行之后就会在相应目录生成所有dll">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
-<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
+<meta property="og:updated_time" content="2019-12-16T07:51:58.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
 
@@ -182,7 +182,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet publish -c Release -r win7-x64 -o ./bin/output</span><br></pre></td></tr></table></figure>
 <p>执行之后就会在相应目录生成所有dll</p>
 <a id="more"></a>
-<p>随迎时代潮流，我们也该有些骚气的操作了，这次咱们就把.net core3.x才用docker发布，因为我的电脑无法安装docker：<br><img src="http://xxnote.52fx.biz/docker_install.png" alt="诺"></p>
+<p>随迎时代潮流，我们也该有些骚气的操作了，这次咱们就把.net core3.x采用docker发布，因为我的电脑无法安装docker：<br><img src="http://xxnote.52fx.biz/docker_install.png" alt="诺"></p>
 <p>那么就想到要么先publish然后把DLL构建成docker镜像，要么就直接通过源码构建镜像，我就偷偷懒，选择后者。那么首先在vs添加【Docker支持】-&gt;【Linux】就会生成一个Dockerfile:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base</span><br><span class="line">WORKDIR /app</span><br><span class="line">EXPOSE 80</span><br><span class="line">EXPOSE 443</span><br><span class="line"></span><br><span class="line">FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build</span><br><span class="line"># 相当于cd /src</span><br><span class="line">WORKDIR /src</span><br><span class="line"># 将当前本地Web/Web.csproj 复制到/src/Web/目录下</span><br><span class="line">COPY [&quot;Web/Web.csproj&quot;, &quot;Web/&quot;]</span><br><span class="line"># 还原项目依赖库</span><br><span class="line">RUN dotnet restore &quot;Web/Web.csproj&quot;</span><br><span class="line">将当前本地目录复制到/src</span><br><span class="line">COPY . .</span><br><span class="line">WORKDIR &quot;/src/Web&quot;</span><br><span class="line">RUN dotnet build &quot;Web.csproj&quot; -c Release -o /app/build</span><br><span class="line"></span><br><span class="line">FROM build AS publish</span><br><span class="line">RUN dotnet publish &quot;Web.csproj&quot; -c Release -o /app/publish</span><br><span class="line"></span><br><span class="line">FROM base AS final</span><br><span class="line">WORKDIR /app</span><br><span class="line"># 从编译阶段的中的publish层镜像拷贝/app/publish目录到/app目录下</span><br><span class="line">COPY --from=publish /app/publish .</span><br><span class="line">COPY [&quot;Web/Web.xml&quot;, &quot;.&quot;]</span><br><span class="line">ENTRYPOINT [&quot;dotnet&quot;, &quot;Web.dll&quot;]</span><br></pre></td></tr></table></figure>
 <p>如果你是提前编译好的，那么可以将Dockerfile修改一下:</p>
@@ -329,7 +329,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        32
+                        33
                     </p>
                 </div>
             </div>
@@ -488,7 +488,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JavaScript/">
@@ -541,7 +541,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/net-core/" style="font-size: 20px;">.net core</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/Git/" style="font-size: 16.67px;">Git</a> <a href="/tags/Github/" style="font-size: 16.67px;">Github</a> <a href="/tags/Golang/" style="font-size: 13.33px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 13.33px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-ECMAScript/" style="font-size: 10px;">JavaScript ECMAScript</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 13.33px;">swagger</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a>
+        <a href="/tags/net-core/" style="font-size: 20px;">.net core</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/Git/" style="font-size: 16.67px;">Git</a> <a href="/tags/Github/" style="font-size: 16.67px;">Github</a> <a href="/tags/Golang/" style="font-size: 13.33px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 13.33px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-ECMAScript/" style="font-size: 10px;">JavaScript ECMAScript</a> <a href="/tags/Spring-Boot/" style="font-size: 13.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 13.33px;">swagger</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a>
     </div>
 </div>
     
@@ -553,6 +553,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot 常用注解汇总">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-16T00:31:32.000Z">2019-12-16</time></div>
+                    <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot 常用注解汇总</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -630,25 +649,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/Spring-Boot-Swagger/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot集成Swagger">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T00:16:04.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/Spring-Boot-Swagger/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot集成Swagger</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -666,7 +666,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -758,7 +758,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -779,7 +779,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -884,6 +884,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot 常用注解汇总">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-16T00:31:32.000Z">2019-12-16</time></div>
+                    <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot 常用注解汇总</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/13/Net-Core3-x%E9%83%A8%E7%BD%B2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91ACK%E4%B8%AD/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="http://xxnote.52fx.biz/swagger.png" alt=".Net Core3.x部署到阿里云ACK中">
@@ -958,25 +977,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/06/Spring-Boot-Swagger/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot集成Swagger">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T00:16:04.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/Spring-Boot-Swagger/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot集成Swagger</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -994,7 +994,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1086,7 +1086,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1107,7 +1107,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
