@@ -8,18 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>标签: Golang - 农民工学编程</title>
+<title>Nginx为同主机配置Https多域名 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;tags&#x2F;Golang&#x2F;index.html">
+    <meta name="description" content="前面，我有提到nginx多网站配置，以及nginx配置https.但是在windows下面同主机配置多Https域名暂未提及，那么这次正好遇到这个场景。我就把他记录下来">
+<meta name="keywords" content="nginx,tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx为同主机配置Https多域名">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;12&#x2F;16&#x2F;Nginx%E4%B8%BA%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AEHttps&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="前面，我有提到nginx多网站配置，以及nginx配置https.但是在windows下面同主机配置多Https域名暂未提及，那么这次正好遇到这个场景。我就把他记录下来">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-12-17T00:56:40.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -87,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Nginx为同主机配置Https多域名" height="28">
             
             </a>
         </div>
@@ -136,121 +137,124 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-16T09:14:25.000Z">2019-12-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 688 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Nginx为同主机配置Https多域名
+            
+        </h1>
+        <div class="content">
+            <p>前面，我有提到nginx多网站配置，以及nginx配置https.但是在windows下面同主机配置多Https域名暂未提及，那么这次正好遇到这个场景。我就把他记录下来</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在做一个私活，因为老板考虑到节约成本，就只有一台2核4G的windows主机，可是现在是要独立出来多个微信小程序，故会涉及到多个应用。当然我也以才用nginx强大的<code>location</code>配置功能转发到不同的目录这也是可以实现的。但是感觉不是很优雅，所以还是使用强大的<code>Server</code>模块吧。我们来看看官网介绍<a href="http://nginx.org/en/docs/http/configuring_https_servers.html" target="_blank" rel="noopener">http://nginx.org/en/docs/http/configuring_https_servers.html</a>,官方文档也是很详细的</p>
+<h3 id="下载Nginx"><a href="#下载Nginx" class="headerlink" title="下载Nginx"></a>下载Nginx</h3><p>windows使用nginx很简单，直接下载官方编译好的即可(如果自己来编译的话,操作还是有些繁琐).下载<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">nginx</a>的zip压缩包，如果想使用nginx+lua的话，那么就去下载<a href="http://openresty.org/cn/download.html" target="_blank" rel="noopener">OpenResty</a>吧。</p>
+<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><p>首先肯定是去域名注册商去下载nginx的SSL证书，然后把我们的证书放在nginx的conf目录下。接下来就是编辑我们的nginx.conf配置文件。配置如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen              443 ssl;</span><br><span class="line">    server_name         xxxxx.baoqipai.com;</span><br><span class="line">    ssl_certificate     cert/xxxxx.baoqipai.com.pem;</span><br><span class="line">    ssl_certificate_key cert/xxxxx.baoqipai.com.key;</span><br><span class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">          location / &#123;</span><br><span class="line">          proxy_pass http://127.0.0.1:8002;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	server &#123;</span><br><span class="line">    listen              443 ssl;</span><br><span class="line">    server_name         admin.xxxxx.nationallab.cn;</span><br><span class="line">    ssl_certificate     cert/admin.xxxxx.nationallab.cn.pem;</span><br><span class="line">    ssl_certificate_key cert/admin.xxxxx.nationallab.cn.key;</span><br><span class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">          location / &#123;</span><br><span class="line">          proxy_pass http://127.0.0.1:8001;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	server &#123;</span><br><span class="line">    listen              443 ssl;</span><br><span class="line">    server_name         host.xxxxx.nationallab.cn;</span><br><span class="line">    ssl_certificate     cert/host.xxxxx.nationallab.cn.pem;</span><br><span class="line">    ssl_certificate_key cert/host.xxxxx.nationallab.cn.key;</span><br><span class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">          location / &#123;</span><br><span class="line">          proxy_pass http://127.0.0.1:8001;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>启动nginx，解析域名，此时不出意外应该可以正常访问了。</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>这里有个会有一个小问题,会报<code>could not build server_names_hash, you should increase server_names_hash_bucket_size: 32</code>,这是因为server配置中server_name的值过长导致，<a href="http://nginx.org/en/docs/http/server_names.html" target="_blank" rel="noopener">http://nginx.org/en/docs/http/server_names.html</a>提到修改<code>server_names_hash_bucket_size</code>的值:</p>
+<blockquote>
+<p>http {<br>    server_names_hash_bucket_size  64;<br>    …<br>那么<code>server_names_hash_bucket_size</code>的默认值是多少呢？<br>在<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_names_hash_bucket_size" target="_blank" rel="noopener">官网文档</a>中有提到:</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	server_names_hash_bucket_size size;</span><br><span class="line">Default:	server_names_hash_bucket_size 32|64|128;</span><br><span class="line">Context:	http</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Sets the bucket size for the server names hash tables. The default value depends on the size of the processor’s cache line. The details of setting up hash tables are provided in a separate <a href="http://nginx.org/en/docs/hash.html" target="_blank" rel="noopener">document</a>.</p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/nginx/" rel="tag">nginx</a>, <a class="has-link-grey -link" href="/tags/tool/" rel="tag">tool</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Golang</a></li>
-        </ul>
-        </nav>
-    </div>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
 </div>
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-10T00:03:13.000Z">2019-12-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 392 个字)
-                </span>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
                 
-            </div>
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/">Golang基础学习总结之变量</a>
-            
-        </h1>
-        <div class="content">
-            <p>变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。来源于<a href="https://www.runoob.com/go/go-variables.html" target="_blank" rel="noopener">https://www.runoob.com/go/go-variables.html</a></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-21T00:35:43.000Z">2019-11-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 509 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/">
+                <span class="level-item">Spring Boot 常用注解汇总</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">Golang基础学习总结之开篇</a>
-            
-        </h1>
-        <div class="content">
-            <p>Go, also known as Golang, is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -1175,7 +1179,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Nginx为同主机配置Https多域名" height="28">
                 
                 </a>
                 <p class="is-size-7">
