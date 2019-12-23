@@ -72,6 +72,13 @@
   </url>
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/21/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593/</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/08/Nginx-agent-configuration/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -93,14 +100,7 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/21/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/12/03/hexo-blog/</loc>
+    <loc>http://blog.52fx.biz/2019/10/24/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/26/mysql-slow-explain/</loc>
+    <loc>http://blog.52fx.biz/2019/12/03/hexo-blog/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/10/24/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1/</loc>
+    <loc>http://blog.52fx.biz/2019/11/26/mysql-slow-explain/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
