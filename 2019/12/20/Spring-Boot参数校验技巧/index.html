@@ -11,16 +11,16 @@
 <title>Spring Boot基于javax.validation进行参数校验 - 农民工学编程</title>
 
 
-    <meta name="description" content="在我们使用Spring Boot开发Web Api的时候，肯定会少不参数校验，一般情况下，大部分是使用if来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是if。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。">
+    <meta name="description" content="在我们使用Spring Boot开发Web Api的时候，肯定会少不了参数校验，一般情况下，大部分是使用if来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是if。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。">
 <meta name="keywords" content="Java,Spring Boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot基于javax.validation进行参数校验">
 <meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;12&#x2F;20&#x2F;Spring-Boot%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%8A%80%E5%B7%A7&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="在我们使用Spring Boot开发Web Api的时候，肯定会少不参数校验，一般情况下，大部分是使用if来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是if。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。">
+<meta property="og:description" content="在我们使用Spring Boot开发Web Api的时候，肯定会少不了参数校验，一般情况下，大部分是使用if来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是if。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-20T05:38:23.812Z">
+<meta property="og:updated_time" content="2019-12-23T02:58:44.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1341 个字)
+                    9 分钟 读完 (大约 1342 个字)
                 </span>
                 
                 
@@ -172,7 +172,7 @@
             
         </h1>
         <div class="content">
-            <p>在我们使用Spring Boot开发Web Api的时候，肯定会少不参数校验，一般情况下，大部分是使用<code>if</code>来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是<code>if</code>。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。</p>
+            <p>在我们使用Spring Boot开发Web Api的时候，肯定会少不了参数校验，一般情况下，大部分是使用<code>if</code>来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是<code>if</code>。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。</p>
 <a id="more"></a>
 <p>为了体现说明，我们事先创建好一个<code>StudentVO</code>类和一个<code>StudentController</code>.在<code>StudentVO</code>中加入几个简单的属性，仅做展示：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import io.swagger.annotations.ApiModel;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">@ApiModel(&quot;StudentVO&quot;)</span><br><span class="line">@Data</span><br><span class="line">public class StudentVO &#123;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;学生名字&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">    </span><br><span class="line">    @ApiModelProperty(&quot;学生年龄&quot;)</span><br><span class="line">    private Integer age;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(&quot;学生住址&quot;)</span><br><span class="line">    private String address;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -329,7 +329,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        37
+                        38
                     </p>
                 </div>
             </div>
@@ -488,7 +488,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Java/Spring-Boot/">
@@ -496,7 +496,7 @@
                 <span class="level-item">Spring Boot</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/JavaScript/">
@@ -557,7 +557,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/net-core/" style="font-size: 18px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Github/" style="font-size: 14px;">Github</a> <a href="/tags/Golang/" style="font-size: 12px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-ECMAScript/" style="font-size: 10px;">JavaScript ECMAScript</a> <a href="/tags/Spring-Boot/" style="font-size: 16px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 12px;">swagger</a> <a href="/tags/tool/" style="font-size: 12px;">tool</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
+        <a href="/tags/net-core/" style="font-size: 18px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Github/" style="font-size: 14px;">Github</a> <a href="/tags/Golang/" style="font-size: 12px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-ECMAScript/" style="font-size: 10px;">JavaScript ECMAScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 12px;">swagger</a> <a href="/tags/tool/" style="font-size: 12px;">tool</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
     </div>
 </div>
     
@@ -569,6 +569,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/24/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot统一异常处理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-24T00:16:45.000Z">2019-12-24</time></div>
+                    <a href="/2019/12/24/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot统一异常处理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Spring-Boot/">Spring Boot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -646,25 +665,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot 常用注解汇总">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-16T00:31:32.000Z">2019-12-16</time></div>
-                    <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot 常用注解汇总</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Spring-Boot/">Spring Boot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -682,7 +682,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -781,7 +781,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -802,7 +802,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -921,6 +921,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/24/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot统一异常处理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-24T00:16:45.000Z">2019-12-24</time></div>
+                    <a href="/2019/12/24/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot统一异常处理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Spring-Boot/">Spring Boot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/23/Spring-Boot%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot 自定义Validation注解">
@@ -995,25 +1014,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot 常用注解汇总">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-16T00:31:32.000Z">2019-12-16</time></div>
-                    <a href="/2019/12/16/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot 常用注解汇总</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Spring-Boot/">Spring Boot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1031,7 +1031,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -1130,7 +1130,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -1151,7 +1151,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
