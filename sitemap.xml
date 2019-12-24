@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.52fx.biz/2019/10/24/%25E9%25AB%2598%25E5%25BE%25B7%25E5%259C%25B0%25E5%259B%25BE%25E5%2592%258Cgoogle%25E5%259C%25B0%25E5%259B%25BE%25E6%2595%25B4%25E5%2590%2588/</loc>
+    
+    <lastmod>2019-12-24T01:57:46.555Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/11/22/ES6-7-8-9-10/</loc>
+    
+    <lastmod>2019-12-24T01:57:24.627Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/12/06/Spring-Boot-Swagger/</loc>
+    
+    <lastmod>2019-12-24T01:56:52.641Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/12/23/Spring-Boot%25E7%25BB%259F%25E4%25B8%2580%25E5%25BC%2582%25E5%25B8%25B8%25E5%25A4%2584%25E7%2590%2586/</loc>
     
     <lastmod>2019-12-24T01:50:22.502Z</lastmod>
@@ -100,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/12/06/Spring-Boot-Swagger/</loc>
+    <loc>http://blog.52fx.biz/2019/10/24/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -108,13 +129,6 @@
   
   <url>
     <loc>http://blog.52fx.biz/2019/10/24/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/10/24/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -149,13 +163,6 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.52fx.biz/2019/12/08/upload-blog-2-qiniu/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -163,14 +170,14 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/10/24/%25E5%259F%25BA%25E4%25BA%258Eredis-key%25E5%25A4%25B1%25E6%2595%2588%25E6%259C%25BA%25E5%2588%25B6%25E5%25AE%259E%25E7%258E%25B0%25E7%258A%25B6%25E6%2580%2581%25E5%25AE%259E%25E6%2597%25B6%25E6%259B%25B4%25E6%2596%25B0/</loc>
+    <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/10/24/%25E9%25AB%2598%25E5%25BE%25B7%25E5%259C%25B0%25E5%259B%25BE%25E5%2592%258Cgoogle%25E5%259C%25B0%25E5%259B%25BE%25E6%2595%25B4%25E5%2590%2588/</loc>
+    <loc>http://blog.52fx.biz/2019/10/24/%25E5%259F%25BA%25E4%25BA%258Eredis-key%25E5%25A4%25B1%25E6%2595%2588%25E6%259C%25BA%25E5%2588%25B6%25E5%25AE%259E%25E7%258E%25B0%25E7%258A%25B6%25E6%2580%2581%25E5%25AE%259E%25E6%2597%25B6%25E6%259B%25B4%25E6%2596%25B0/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -194,13 +201,6 @@
     <loc>http://blog.52fx.biz/2019/11/23/AngularJS-v1-4-5/</loc>
     
     <lastmod>2019-11-26T00:44:51.292Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/11/22/ES6-7-8-9-10/</loc>
-    
-    <lastmod>2019-11-22T06:11:19.017Z</lastmod>
     
   </url>
   
