@@ -20,7 +20,7 @@
 <meta property="og:description" content="日志可以帮我们在开发过程中乃至于生产上快速有效的定位问题的好帮手，所以如何记录有效的日子变得更加重要，在Spring Boot中，已经为我们默认添加了logback和log4j2,默认情况下，Spring Boot采用的是logback。关于日志组件的性能，我并没有亲自验证过，只是在logback log4j log4j2 性能实测中说log4j2性能是最高的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-25T02:37:39.976Z">
+<meta property="og:updated_time" content="2019-12-25T03:01:02.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1550 个字)
+                    10 分钟 读完 (大约 1562 个字)
                 </span>
                 
                 
@@ -188,7 +188,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 10:14:38.086 ERROR com.eyiadmin.demo.handler.GlobalExceptionHandler.handleValidationException(GlobalExceptionHandler.java:21) 2CNU7X5OLAUE004 --- [nio-8080-exec-2] c.e.d.h.GlobalExceptionHandler           : 学生名字不能为空</span><br></pre></td></tr></table></figure>
 <p>至此， <code>log4j2.xml</code>整合完毕,但是我们的工作还没有完，我们在需要记录日志的每个类文件都要写一个<code>private static final Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);</code>,虽然工作量不大，但有时候可能会马虎的忽视掉<code>GlobalExceptionHandler.class</code>，那么我们有没有更简便的使用方式呢？这里我们可以借助强大的<code>Lombok</code>插件为我们提供好的<code>@Log4j2</code>注解，在需要打印日志的类上加上这个注解即可。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.SOURCE)</span><br><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">public @interface Log4j2 &#123;</span><br><span class="line">    String topic() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以看到<code>@Log4j2</code>有一个参数默认为空，它用于标识我们打印的是哪个topic，接下来我们来尝试一下:</p>
+<p>我们可以看到<code>@Log4j2</code>有一个参数，它用于标识我们记录器的类别，默认情况下，它会将使用注解的类型，接下来我们来尝试一下:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@RestControllerAdvice</span><br><span class="line">@Log4j2</span><br><span class="line">public class GlobalExceptionHandler &#123;</span><br><span class="line">    @ExceptionHandler(BindException.class)</span><br><span class="line">    public ResponseResult&lt;?&gt; handleValidationException(BindException ex) &#123;</span><br><span class="line">        BindingResult validResult = ex.getBindingResult();</span><br><span class="line">        if (validResult.hasErrors()) &#123;</span><br><span class="line">            log.error(validResult.getAllErrors().stream().map(err-&gt;err.getDefaultMessage()).collect(Collectors.joining(&quot;|&quot;)));</span><br><span class="line">            return ResponseResult.error(validResult.getAllErrors().get(0).getDefaultMessage());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return ResponseResult.error(&quot;操作失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //捕捉所有Exception异常，这里可以捕捉自定义的业务异常</span><br><span class="line">    @ExceptionHandler(Exception.class)</span><br><span class="line">    ResponseResult&lt;?&gt; handleException(Exception ex)&#123;</span><br><span class="line">        log.error(ex.getMessage());</span><br><span class="line">        log.error(ex.getStackTrace());</span><br><span class="line">        return ResponseResult.error(ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后打印的日志如下:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 10:21:33.684 ERROR com.eyiadmin.demo.handler.GlobalExceptionHandler.handleValidationException(GlobalExceptionHandler.java:22) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] c.e.d.h.GlobalExceptionHandler           : 学生名字不能为空</span><br></pre></td></tr></table></figure>
