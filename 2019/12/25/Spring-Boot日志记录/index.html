@@ -20,7 +20,7 @@
 <meta property="og:description" content="日志可以帮我们在开发过程中乃至于生产上快速有效的定位问题的好帮手，所以如何记录有效的日子变得更加重要，在Spring Boot中，已经为我们默认添加了logback和log4j2,默认情况下，Spring Boot采用的是logback。关于日志组件的性能，我并没有亲自验证过，只是在logback log4j log4j2 性能实测中说log4j2性能是最高的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-25T03:01:02.629Z">
+<meta property="og:updated_time" content="2019-12-25T06:29:19.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1562 个字)
+                    11 分钟 读完 (大约 1656 个字)
                 </span>
                 
                 
@@ -178,7 +178,9 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">            &lt;exclusions&gt;&lt;!-- 去掉springboot默认配置 --&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--log4j2--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <p>然后在<code>resources</code>目录下新建一个<code>log4j2.xml</code>配置文件，配置如下：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!--日志级别以及优先级排序: OFF &gt; FATAL &gt; ERROR &gt; WARN &gt; INFO &gt; DEBUG &gt; TRACE &gt; ALL --&gt;</span><br><span class="line">&lt;!--status=&quot;WARN&quot; :用于设置log4j2自身内部日志的信息输出级别，默认是OFF--&gt;</span><br><span class="line">&lt;!--monitorInterval=&quot;30&quot;  :间隔秒数,自动检测配置文件的变更和重新配置本身--&gt;</span><br><span class="line">&lt;configuration status=&quot;WARN&quot; monitorInterval=&quot;30&quot;&gt;</span><br><span class="line">    &lt;Properties&gt;</span><br><span class="line">        &lt;!--自定义一些常量，之后使用$&#123;变量名&#125;引用--&gt;</span><br><span class="line">        &lt;Property name=&quot;logFilePath&quot;&gt;D://log&lt;/Property&gt;</span><br><span class="line">        &lt;Property name=&quot;logFileName&quot;&gt;test.log&lt;/Property&gt;</span><br><span class="line">        &lt;Property name=&quot;logPattern&quot;&gt;</span><br><span class="line">            %d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; %5p %l $&#123;hostName&#125; -&amp;#45;&amp;#45; [%15.15t] %-40.40c&#123;1.&#125; : %m%n%ex</span><br><span class="line">        &lt;/Property&gt;</span><br><span class="line">    &lt;/Properties&gt;</span><br><span class="line">    &lt;!--appenders:定义输出内容,输出格式,输出方式,日志保存策略等,常用其下三种标签[console,File,RollingFile]--&gt;</span><br><span class="line">    &lt;appenders&gt;</span><br><span class="line">        &lt;!--console :控制台输出的配置--&gt;</span><br><span class="line">        &lt;console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--PatternLayout :输出日志的格式,LOG4J2定义了输出代码,详见第二部分--&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;$&#123;logPattern&#125;&quot;/&gt;</span><br><span class="line">        &lt;/console&gt;</span><br><span class="line">        &lt;!--File :同步输出日志到本地文件--&gt;</span><br><span class="line">        &lt;!--append=&quot;false&quot; :根据其下日志策略,每次清空文件重新输入日志,可用于测试--&gt;</span><br><span class="line">&lt;!--        &lt;File name=&quot;log&quot; fileName=&quot;$&#123;logFilePath&#125;/logs/info.log&quot; append=&quot;false&quot;&gt;--&gt;</span><br><span class="line">&lt;!--            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot;/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;/File&gt;--&gt;</span><br><span class="line">        &lt;!--SMTP :邮件发送日志--&gt;</span><br><span class="line">&lt;!--        &lt;SMTP name=&quot;Mail&quot; subject=&quot;****SaaS系统正式版异常信息&quot; to=&quot;message@message.info&quot; from=&quot;message@lengjing.info&quot; smtpUsername=&quot;message@message.info&quot; smtpPassword=&quot;LENG****1234&quot; smtpHost=&quot;mail.lengjing.info&quot; smtpDebug=&quot;false&quot; smtpPort=&quot;25&quot; bufferSize=&quot;10&quot;&gt;--&gt;</span><br><span class="line">&lt;!--            &lt;PatternLayout pattern=&quot;[%-5p]:%d&#123;YYYY-MM-dd HH:mm:ss&#125; [%t] %c&#123;1&#125;:%L - %msg%n&quot; /&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;/SMTP&gt;--&gt;</span><br><span class="line">        &lt;!-- $&#123;sys:user.home&#125; :项目路径 --&gt;</span><br><span class="line">        &lt;RollingFile name=&quot;RollingFileInfo&quot; fileName=&quot;$&#123;logFilePath&#125;/logs/info.log&quot;</span><br><span class="line">                     filePattern=&quot;$&#123;logFilePath&#125;/logs/$$&#123;date:yyyy-MM&#125;/info-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;&gt;</span><br><span class="line">            &lt;!--ThresholdFilter :日志输出过滤--&gt;</span><br><span class="line">            &lt;!--level=&quot;info&quot; :日志级别,onMatch=&quot;ACCEPT&quot; :级别在info之上则接受,onMismatch=&quot;DENY&quot; :级别在info之下则拒绝--&gt;</span><br><span class="line">            &lt;ThresholdFilter level=&quot;info&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;/&gt;</span><br><span class="line">            &lt;!-- Policies :日志滚动策略--&gt;</span><br><span class="line">            &lt;Policies&gt;</span><br><span class="line">                &lt;!-- TimeBasedTriggeringPolicy :时间滚动策略,默认0点小时产生新的文件,interval=&quot;6&quot; : 自定义文件滚动时间间隔,每隔6小时产生新文件, modulate=&quot;true&quot; : 产生文件是否以0点偏移时间,即6点,12点,18点,0点--&gt;</span><br><span class="line">                &lt;TimeBasedTriggeringPolicy interval=&quot;6&quot; modulate=&quot;true&quot;/&gt;</span><br><span class="line">                &lt;!-- SizeBasedTriggeringPolicy :文件大小滚动策略--&gt;</span><br><span class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;100 MB&quot;/&gt;</span><br><span class="line">            &lt;/Policies&gt;</span><br><span class="line">            &lt;!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 --&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy max=&quot;20&quot;/&gt;</span><br><span class="line">        &lt;/RollingFile&gt;</span><br><span class="line"></span><br><span class="line">        &lt;RollingFile name=&quot;RollingFileWarn&quot; fileName=&quot;$&#123;logFilePath&#125;/logs/warn.log&quot;</span><br><span class="line">                     filePattern=&quot;$&#123;logFilePath&#125;/logs/$$&#123;date:yyyy-MM&#125;/warn-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;&gt;</span><br><span class="line">            &lt;ThresholdFilter level=&quot;warn&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;/&gt;</span><br><span class="line">            &lt;Policies&gt;</span><br><span class="line">                &lt;TimeBasedTriggeringPolicy/&gt;</span><br><span class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;100 MB&quot;/&gt;</span><br><span class="line">            &lt;/Policies&gt;</span><br><span class="line">        &lt;/RollingFile&gt;</span><br><span class="line">        &lt;RollingFile name=&quot;RollingFileError&quot; fileName=&quot;$&#123;logFilePath&#125;/logs/error.log&quot;</span><br><span class="line">                     filePattern=&quot;$&#123;logFilePath&#125;/logs/$$&#123;date:yyyy-MM&#125;/error-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;&gt;</span><br><span class="line">            &lt;ThresholdFilter level=&quot;error&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;[%d&#123;HH:mm:ss:SSS&#125;] [%p] - %l - %m%n&quot;/&gt;</span><br><span class="line">            &lt;Policies&gt;</span><br><span class="line">                &lt;TimeBasedTriggeringPolicy/&gt;</span><br><span class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;100 MB&quot;/&gt;</span><br><span class="line">            &lt;/Policies&gt;</span><br><span class="line">        &lt;/RollingFile&gt;</span><br><span class="line">    &lt;/appenders&gt;</span><br><span class="line">    &lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效--&gt;</span><br><span class="line">    &lt;loggers&gt;</span><br><span class="line">        &lt;!--过滤掉spring和mybatis的一些无用的DEBUG信息--&gt;</span><br><span class="line">        &lt;!--Logger节点用来单独指定日志的形式，name为包路径,比如要为org.springframework包下所有日志指定为INFO级别等。 --&gt;</span><br><span class="line">        &lt;logger name=&quot;org.springframework&quot; level=&quot;INFO&quot;&gt;&lt;/logger&gt;</span><br><span class="line">        &lt;logger name=&quot;org.mybatis&quot; level=&quot;INFO&quot;&gt;&lt;/logger&gt;</span><br><span class="line">        &lt;!-- Root节点用来指定项目的根日志，如果没有单独指定Logger，那么就会默认使用该Root日志输出 --&gt;</span><br><span class="line">        &lt;Root level=&quot;ALL&quot;&gt;</span><br><span class="line">            &lt;appender-ref ref=&quot;Console&quot;/&gt;</span><br><span class="line">            &lt;appender-ref ref=&quot;RollingFileInfo&quot;/&gt;</span><br><span class="line">            &lt;appender-ref ref=&quot;RollingFileWarn&quot;/&gt;</span><br><span class="line">            &lt;appender-ref ref=&quot;RollingFileError&quot;/&gt;</span><br><span class="line">        &lt;/Root&gt;</span><br><span class="line">        &lt;!--AsyncLogger :异步日志,LOG4J有三种日志模式,全异步日志,混合模式,同步日志,性能从高到底,线程越多效率越高,也可以避免日志卡死线程情况发生--&gt;</span><br><span class="line">        &lt;!--additivity=&quot;false&quot; : additivity设置事件是否在root logger输出，为了避免重复输出，可以在Logger 标签下设置additivity为”false”--&gt;</span><br><span class="line">&lt;!--        &lt;AsyncLogger name=&quot;AsyncLogger&quot; level=&quot;ALL&quot; includeLocation=&quot;true&quot; additivity=&quot;false&quot;&gt;--&gt;</span><br><span class="line">&lt;!--            &lt;appender-ref ref=&quot;RollingFileError&quot;/&gt;--&gt;</span><br><span class="line">&lt;!--            &lt;appender-ref ref=&quot;RollingFileInfo&quot;/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;/AsyncLogger&gt;--&gt;</span><br><span class="line">    &lt;/loggers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<p>以上配置类源于<a href="https://www.jianshu.com/p/d13c2e50a89c" target="_blank" rel="noopener">LOG4J2 完整配置详解</a>,Spring Boot是可以自动识别<code>log4j2.xml</code>或者log4j2.yaml等配置文件,当然，如果是其他命名方式，可以在<code>application.properties</code>配置文件中配置,如:<code>logging.config=classpath:log4j2-config.xml</code>,yaml配置类似。接下来就是在我们的程序中使用，</p>
+<p>以上配置类源于<a href="https://www.jianshu.com/p/d13c2e50a89c" target="_blank" rel="noopener">LOG4J2 完整配置详解</a>,在代码中:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">protected void loadDefaults(LoggingInitializationContext initializationContext, LogFile logFile) &#123;</span><br><span class="line">		if (logFile != null) &#123;</span><br><span class="line">			loadConfiguration(getPackagedConfigFile(&quot;log4j2-file.xml&quot;), logFile);</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			loadConfiguration(getPackagedConfigFile(&quot;log4j2.xml&quot;), logFile);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    @Override</span><br><span class="line">	protected String[] getStandardConfigLocations() &#123;</span><br><span class="line">		return getCurrentlySupportedConfigLocations();</span><br><span class="line">	&#125;</span><br><span class="line">private String[] getCurrentlySupportedConfigLocations() &#123;</span><br><span class="line">		List&lt;String&gt; supportedConfigLocations = new ArrayList&lt;&gt;();</span><br><span class="line">		supportedConfigLocations.add(&quot;log4j2.properties&quot;);</span><br><span class="line">		if (isClassAvailable(&quot;com.fasterxml.jackson.dataformat.yaml.YAMLParser&quot;)) &#123;</span><br><span class="line">			Collections.addAll(supportedConfigLocations, &quot;log4j2.yaml&quot;, &quot;log4j2.yml&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		if (isClassAvailable(&quot;com.fasterxml.jackson.databind.ObjectMapper&quot;)) &#123;</span><br><span class="line">			Collections.addAll(supportedConfigLocations, &quot;log4j2.json&quot;, &quot;log4j2.jsn&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		supportedConfigLocations.add(&quot;log4j2.xml&quot;);</span><br><span class="line">		return StringUtils.toStringArray(supportedConfigLocations);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>大概可以看出Spring Boot是可以自动识别<code>log4j2.xml</code>或者<code>log4j2.yaml</code>等配置文件,当然，如果是其他命名方式，可以在<code>application.properties</code>配置文件中配置,如:<code>logging.config=classpath:log4j2-config.xml</code>,yaml配置类似。接下来就是在我们的程序中使用，</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/exception&quot;)</span><br><span class="line">@RestController</span><br><span class="line">@Api(tags = &quot;制造bug&quot;)</span><br><span class="line">public class ExceptionController &#123;</span><br><span class="line">     private static final Logger logger = LogManager.getLogger(ExceptionController.class);</span><br><span class="line">     @GetMapping(&quot;err&quot;)</span><br><span class="line">     public String getErr()&#123;</span><br><span class="line">          logger.info(&quot;制造一个bug&quot;);</span><br><span class="line">          int calc= 1/0;</span><br><span class="line">          return &quot;error&quot;;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>调用结果:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 09:49:31.199 DEBUG springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping.lookupHandlerMethod(PropertySourcedRequestMappingHandlerMapping.java:108) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] pertySourcedRequestMappingHandlerMapping : looking up handler for path: /exception/err</span><br><span class="line">2019-12-25 09:49:31.205  INFO com.eyiadmin.demo.controller.ExceptionController.getErr(ExceptionController.java:17) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] c.e.d.c.ExceptionController              : 制造一个bug</span><br></pre></td></tr></table></figure>
@@ -255,6 +257,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/26/Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">.Net Core3.x使用NLog记录日志</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/23/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
@@ -311,7 +320,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        39
+                        40
                     </p>
                 </div>
             </div>
@@ -438,7 +447,7 @@
                 <span class="level-item">.net core</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker/">
@@ -539,7 +548,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/net-core/" style="font-size: 16.67px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 13.33px;">Github</a> <a href="/tags/Golang/" style="font-size: 11.67px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 11.67px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/tool/" style="font-size: 11.67px;">tool</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
+        <a href="/tags/net-core/" style="font-size: 18px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Github/" style="font-size: 14px;">Github</a> <a href="/tags/Golang/" style="font-size: 12px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 12px;">swagger</a> <a href="/tags/tool/" style="font-size: 12px;">tool</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
     </div>
 </div>
     
@@ -551,6 +560,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/12/26/Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".Net Core3.x使用NLog记录日志">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T07:01:31.000Z">2019-12-26</time></div>
+                    <a href="/2019/12/26/Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">.Net Core3.x使用NLog记录日志</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -628,25 +656,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/DataX%E5%B0%86DB2%E4%B8%8A%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0GBase%E4%B8%AD/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cloud.githubusercontent.com/assets/1067175/17879841/93b7fc1c-6927-11e6-8cda-7cf8420fc65f.png" alt="DataX将DB2数据同步到GBase中">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-18T00:09:54.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/DataX%E5%B0%86DB2%E4%B8%8A%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0GBase%E4%B8%AD/" class="title has-link-black-ter is-size-6 has-text-weight-normal">DataX将DB2数据同步到GBase中</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -664,7 +673,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">16</span>
                 </span>
             </a>
         </li>
@@ -707,7 +716,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -910,6 +919,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/26/Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".Net Core3.x使用NLog记录日志">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T07:01:31.000Z">2019-12-26</time></div>
+                    <a href="/2019/12/26/Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">.Net Core3.x使用NLog记录日志</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/25/Spring-Boot%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot使用log4j2记录日志">
@@ -984,25 +1012,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/DataX%E5%B0%86DB2%E4%B8%8A%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0GBase%E4%B8%AD/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://cloud.githubusercontent.com/assets/1067175/17879841/93b7fc1c-6927-11e6-8cda-7cf8420fc65f.png" alt="DataX将DB2数据同步到GBase中">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-18T00:09:54.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/DataX%E5%B0%86DB2%E4%B8%8A%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0GBase%E4%B8%AD/" class="title has-link-black-ter is-size-6 has-text-weight-normal">DataX将DB2数据同步到GBase中</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1020,7 +1029,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">16</span>
                 </span>
             </a>
         </li>
@@ -1063,7 +1072,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 

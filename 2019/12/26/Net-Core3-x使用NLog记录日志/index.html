@@ -8,18 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>归档: 2019/12 - 农民工学编程</title>
+<title>.Net Core3.x使用NLog记录日志 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;archives&#x2F;2019&#x2F;12&#x2F;page&#x2F;2&#x2F;index.html">
+    <meta name="description" content="在.net core中，常用的日志组件大概就是Logging(自带)、Log4net和NLog等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种日志写入方式。">
+<meta name="keywords" content=".net core">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".Net Core3.x使用NLog记录日志">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2019&#x2F;12&#x2F;26&#x2F;Net-Core3-x%E4%BD%BF%E7%94%A8NLog%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="在.net core中，常用的日志组件大概就是Logging(自带)、Log4net和NLog等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种日志写入方式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-12-26T10:08:37.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -87,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt=".Net Core3.x使用NLog记录日志" height="28">
             
             </a>
         </div>
@@ -137,158 +138,144 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-26T07:01:31.000Z">2019-12-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 973 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                .Net Core3.x使用NLog记录日志
+            
+        </h1>
+        <div class="content">
+            <p>在.net core中，常用的日志组件大概就是Logging(自带)、<a href="http://logging.apache.org/log4net/" target="_blank" rel="noopener">Log4net</a>和<a href="https://github.com/NLog/NLog" target="_blank" rel="noopener">NLog</a>等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种<a href="https://nlog-project.org/config/?tab=targets" target="_blank" rel="noopener">日志写入方式</a>。</p>
+<a id="more"></a>
+<h3 id="安装NLog"><a href="#安装NLog" class="headerlink" title="安装NLog"></a>安装NLog</h3><p>首先，我们通过Nuget安装<code>NLog</code>和<code>NLog.Web.AspNetCore</code>两个组件，我安装的版本是：<br><img src="http://xxnote.52fx.biz/core_nlog_1.png" alt></p>
+<h3 id="创建NLog配置文件"><a href="#创建NLog配置文件" class="headerlink" title="创建NLog配置文件"></a>创建NLog配置文件</h3><p>在web目录新建一个<code>nlog.config</code>文件，内容 如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;</span><br><span class="line">      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">      autoReload=&quot;true&quot;</span><br><span class="line">      internalLogLevel=&quot;Info&quot;</span><br><span class="line">      internalLogFile=&quot;logs\internal-nlog.txt&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- enable asp.net core layout renderers --&gt;</span><br><span class="line">  &lt;extensions&gt;</span><br><span class="line">    &lt;add assembly=&quot;NLog.Web.AspNetCore&quot;/&gt;</span><br><span class="line">  &lt;/extensions&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- the targets to write to --&gt;</span><br><span class="line">  &lt;targets&gt;</span><br><span class="line">    &lt;!-- write logs to file  --&gt;</span><br><span class="line">    &lt;target xsi:type=&quot;File&quot; name=&quot;allfile&quot; fileName=&quot;logs\nlog-all-$&#123;shortdate&#125;.log&quot;</span><br><span class="line">            layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|$&#123;threadid&#125;|$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;&quot;</span><br><span class="line">            maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- another file log, only own logs. Uses some ASP.NET core renderers --&gt;</span><br><span class="line">    &lt;target xsi:type=&quot;File&quot; name=&quot;ownFile-web&quot; fileName=&quot;logs\nlog-own-$&#123;shortdate&#125;.log&quot;</span><br><span class="line">            layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;&quot;</span><br><span class="line">            maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line">    &lt;target name=&quot;file&quot; xsi:type=&quot;AsyncWrapper&quot; queueLimit=&quot;5000&quot; overflowAction=&quot;Discard&quot;&gt;</span><br><span class="line">      &lt;target xsi:type=&quot;File&quot; fileName=&quot;$&#123;basedir&#125;/logs/$&#123;level&#125;.txt&quot; keepFileOpen=&quot;true&quot;  layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;&quot;</span><br><span class="line">              maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line">    &lt;/target&gt;</span><br><span class="line">  &lt;/targets&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- rules to map from logger name to target --&gt;</span><br><span class="line">  &lt;rules&gt;</span><br><span class="line">    &lt;!--All logs, including from Microsoft--&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Trace&quot; writeTo=&quot;allfile&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--Skip non-critical Microsoft logs and so log only own logs--&gt;</span><br><span class="line">    &lt;logger name=&quot;Microsoft.*&quot; maxlevel=&quot;Info&quot; final=&quot;true&quot; /&gt; &lt;!-- BlackHole without writeTo --&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Trace&quot; writeTo=&quot;ownFile-web&quot; /&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Debug&quot; writeTo=&quot;file&quot; /&gt;</span><br><span class="line">  &lt;/rules&gt;</span><br><span class="line">&lt;/nlog&gt;</span><br></pre></td></tr></table></figure>
 
-<div class="card widget">
+<h3 id="使用NLog"><a href="#使用NLog" class="headerlink" title="使用NLog"></a>使用NLog</h3><p>我们首先在<code>Program</code>使用注册NLog:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static IHostBuilder CreateHostBuilder(string[] args) =&gt;</span><br><span class="line">           Host.CreateDefaultBuilder(args)</span><br><span class="line">           .UseServiceProviderFactory(new AutofacServiceProviderFactory())</span><br><span class="line">               .ConfigureWebHostDefaults(webBuilder =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   webBuilder.UseStartup&lt;Startup&gt;();</span><br><span class="line">               &#125;).ConfigureLogging(logging =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   logging.ClearProviders();  //删除日志组件</span><br><span class="line">                   logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);</span><br><span class="line">               &#125;).UseNLog();</span><br></pre></td></tr></table></figure>
+<p>然后，我们就可以再相应的地方调用:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ApiVersion(&quot;1.0&quot;)]</span><br><span class="line">   [Route(&quot;api/v&#123;version:apiVersion&#125;/[controller]&quot;)]</span><br><span class="line">   [ApiController]</span><br><span class="line">   public class ExampleController : ControllerBase</span><br><span class="line">   &#123;</span><br><span class="line">       private readonly ILogger&lt;ExampleController&gt; _logger;</span><br><span class="line">       IExampleService _exampleService;</span><br><span class="line">       public ExampleController(IExampleService exampleService, ILogger&lt;ExampleController&gt; logger)</span><br><span class="line">       &#123;</span><br><span class="line">           _logger = logger;</span><br><span class="line">           _exampleService = exampleService;</span><br><span class="line"></span><br><span class="line">           _logger.LogDebug(&quot;NLog injected&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:09:48.5355||DEBUG|Web.Controllers.v1.ExampleController|NLog injected</span><br></pre></td></tr></table></figure>
+<p>NLog类似于<code>string.Format</code>的格式,如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_logger.LogInformation(&quot;Hello, &#123;0&#125;&quot;, Name);</span><br></pre></td></tr></table></figure>
+<p>最终结果:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:35:57.4098||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello, Jane |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+<p>也支持格式化和对象:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_logger.LogInformation(&quot;Hello,&#123;name&#125;&quot;,Name);</span><br><span class="line">_logger.LogInformation(&quot;Hello,&#123;Name&#125;&quot;, new &#123; Name = Name &#125;);</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2019-12-25 17:35:57.4288||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br><span class="line">2019-12-25 17:35:57.4288||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello,&#123; Name = Jane &#125; |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+<p>更多配置看<a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging" target="_blank" rel="noopener">NLog</a>的文档。</p>
+<h3 id="上下文信息"><a href="#上下文信息" class="headerlink" title="上下文信息"></a>上下文信息</h3><p>如果是单体应用的话，用上面的配置即可, 但是，我们现在经常会用到微服务或者是异步。微服务一般使用MDC的方式，这里我们暂时只说说异步，大家都知道异步是会在创新新线程执行，这时候的线程Id就不和主线程在同一个上下文中了。我们来试试看:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">       /// 异步调用</span><br><span class="line">       /// &lt;/summary&gt;</span><br><span class="line">       /// &lt;param name=&quot;Name&quot;&gt;&lt;/param&gt;</span><br><span class="line">       /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">       [HttpGet]</span><br><span class="line">       [Route(&quot;GetNameAsync/&#123;Name&#125;&quot;)]</span><br><span class="line">       public async Task&lt;string&gt; GetNameAsync(string Name)</span><br><span class="line">       &#123;</span><br><span class="line">           _logger.LogInformation(&quot;Hello,&#123;0&#125;&quot;, Name);</span><br><span class="line">           string result = &quot;&quot;;</span><br><span class="line">           await Task.Run(() =&gt;</span><br><span class="line">           &#123;</span><br><span class="line">               _logger.LogInformation(&quot;Hello,&#123;0&#125;&quot;, Name);</span><br><span class="line">               result = $&quot;Hello,&#123;Name&#125;&quot;;</span><br><span class="line">           &#125;);</span><br><span class="line">           return result;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>打印两次, 最终日志为:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:55:45.5634||threadid-5|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-25 17:55:45.5634||threadid-4|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+<p>可以看到我们的threadid不一样。这样在我们捕捉日志的时候会变得很困难，这时候，<code>NLog</code>的<code>ndlc</code>就可以帮我们解决这个问题,我们修改一下<code>nlog.config</code>的layout配置:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|NDLC-$&#123;ndlc&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-26 08:58:30.6271||NDLC-ConnectionId:0HLS9JGU66BD8 RequestPath:/api/v1.0/Example/GetNameAsync/Jane RequestId:0HLS9JGU66BD8:00000001, SpanId:|59ece683-4c05d632d98d1cac., TraceId:59ece683-4c05d632d98d1cac, ParentId: Web.Controllers.v1.ExampleController.GetNameAsync (Web)|threadid-5|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-26 08:58:30.6598||NDLC-ConnectionId:0HLS9JGU66BD8 RequestPath:/api/v1.0/Example/GetNameAsync/Jane RequestId:0HLS9JGU66BD8:00000001, SpanId:|59ece683-4c05d632d98d1cac., TraceId:59ece683-4c05d632d98d1cac, ParentId: Web.Controllers.v1.ExampleController.GetNameAsync (Web)|threadid-10|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+<p>但是有些信息可能我们不需要,那么我们再修改一下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|NDLC-$&#123;ndlc:bottomFrames=1&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-26 10:56:53.0233||NDLC-ConnectionId:0HLS9LSTP4B7D|threadid-4|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-26 10:56:53.4459||NDLC-ConnectionId:0HLS9LSTP4B7D|threadid-15|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+<p>这样一来，我们就可以看到我们是否是同一个请求处理，其他更加强大的功能，有待探究。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        十二月 2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-10T00:03:13.000Z">2019-12-10</time>
-                        <a href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Golang基础学习总结之变量</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-08T04:16:06.000Z">2019-12-08</time>
-                        <a href="/2019/12/08/upload-blog-2-qiniu/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo静态网页上传到七牛云</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-06T00:16:04.000Z">2019-12-06</time>
-                        <a href="/2019/12/06/Spring-Boot-Swagger/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot集成Swagger</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-05T00:07:08.000Z">2019-12-05</time>
-                        <a href="/2019/12/05/github-routine-operation/" class="title has-link-black-ter is-size-6 has-text-weight-normal">展示一下Github的常规操作</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-03T02:39:50.000Z">2019-12-03</time>
-                        <a href="/2019/12/03/hexo-blog/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo搭建个人博客锦集</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Git/">Git</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/2019/12/02/net-core3-x-autofac-ioc/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://docs.autofac.org/en/latest/_images/logo.png" alt=".Net Core 3.x 使用Autofac替换默认Ioc容器">
-                    </p>
-                </a>
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-02T00:22:49.000Z">2019-12-02</time>
-                        <a href="/2019/12/02/net-core3-x-autofac-ioc/" class="title has-link-black-ter is-size-6 has-text-weight-normal">.Net Core 3.x 使用Autofac替换默认Ioc容器</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
 
 
-    
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/12/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/25/Spring-Boot%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/">
+                <span class="level-item">Spring Boot使用log4j2记录日志</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/12/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/12/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/2019/12/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -1283,7 +1270,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt=".Net Core3.x使用NLog记录日志" height="28">
                 
                 </a>
                 <p class="is-size-7">
