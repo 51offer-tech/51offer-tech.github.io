@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.52fx.biz/2019/12/31/Nginx-Proxy-Pass%25E5%2592%258CRewirte%25E7%259A%2584%25E7%2594%25A8%25E6%25B3%2595/</loc>
+    <loc>http://blog.52fx.biz/2020/01/02/Vue%25E5%2588%25B6%25E4%25BD%259C%25E9%259D%2599%25E6%2580%2581%25E9%25A1%25B5%25E9%259D%25A2%25E7%25AE%2580%25E5%258E%2586%25E5%25B9%25B6%25E5%258F%2591%25E5%25B8%2583%25E5%2588%25B0%25E4%25B8%2583%25E7%2589%259B%25E4%25BA%2591%25E4%25B8%258A/</loc>
     
-    <lastmod>2019-12-31T08:54:21.458Z</lastmod>
+    <lastmod>2020-01-02T08:15:18.431Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2020/01/01/Vue%25E5%259F%25BA%25E7%25A1%2580%25E6%2580%25BB%25E7%25BB%2593/</loc>
+    <loc>http://blog.52fx.biz/2020/01/01/Vue%25E5%2585%25A5%25E9%2597%25A8/</loc>
     
-    <lastmod>2019-12-31T06:54:40.350Z</lastmod>
+    <lastmod>2020-01-02T01:47:40.477Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/12/31/Nginx-Proxy-Pass%25E5%2592%258CRewirte%25E7%259A%2584%25E7%2594%25A8%25E6%25B3%2595/</loc>
+    
+    <lastmod>2019-12-31T08:54:21.458Z</lastmod>
     
   </url>
   
@@ -135,13 +142,6 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/20/Driud-SqlParse/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.52fx.biz/2019/11/21/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -156,21 +156,14 @@
   </url>
   
   <url>
+    <loc>http://blog.52fx.biz/2019/11/20/Driud-SqlParse/</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/28/Nginx-domain-configuration/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/10/24/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE/</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.52fx.biz/2019/11/26/mysql-slow-explain/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -184,6 +177,13 @@
   </url>
   
   <url>
+    <loc>http://blog.52fx.biz/2019/10/24/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE/</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.52fx.biz/2019/11/12/net-core-3-0-use-swagger-ui/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -191,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/10/24/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1/</loc>
+    <loc>http://blog.52fx.biz/2019/11/26/mysql-slow-explain/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -205,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
+    <loc>http://blog.52fx.biz/2019/10/24/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -213,6 +213,13 @@
   
   <url>
     <loc>http://blog.52fx.biz/2019/12/08/upload-blog-2-qiniu/</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.52fx.biz/2019/11/18/swagger-add-apiversion/</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
