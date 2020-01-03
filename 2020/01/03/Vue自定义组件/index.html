@@ -8,20 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>标签: Golang - 农民工学编程</title>
+<title>Vue自定义组件 - 农民工学编程</title>
 
 
-    <meta name="description" content="日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;tags&#x2F;Golang&#x2F;index.html">
+    <meta name="description" content="现在比较流行的就是组件化、模块化，因为这可以给我们带来快速和方便、提高开发效率。在React、Angular、Vue已经为自定义可复用组件提供了方便快捷的方式，这就是我们今天要说的内容-在Vue中如何自定义可复用组件。">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue自定义组件">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;2020&#x2F;01&#x2F;03&#x2F;Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6&#x2F;index.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="日常学习记录">
+<meta property="og:description" content="现在比较流行的就是组件化、模块化，因为这可以给我们带来快速和方便、提高开发效率。在React、Angular、Vue已经为自定义可复用组件提供了方便快捷的方式，这就是我们今天要说的内容-在Vue中如何自定义可复用组件。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cn.vuejs.org&#x2F;images&#x2F;logo.png">
+<meta property="og:updated_time" content="2020-01-03T03:16:27.002Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;cn.vuejs.org&#x2F;images&#x2F;logo.png">
 
 
 
@@ -87,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Vue自定义组件" height="28">
             
             </a>
         </div>
@@ -136,121 +137,168 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1103 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Vue自定义组件
+            
+        </h1>
+        <div class="content">
+            <p>现在比较流行的就是组件化、模块化，因为这可以给我们带来快速和方便、提高开发效率。在<code>React</code>、<code>Angular</code>、<code>Vue</code>已经为自定义可复用组件提供了方便快捷的方式，这就是我们今天要说的内容-在<code>Vue</code>中如何自定义可复用组件。</p>
+<a id="more"></a>
+<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><h4 id="全局定义注册"><a href="#全局定义注册" class="headerlink" title="全局定义注册"></a>全局定义注册</h4><p>首先，我们先在<code>main.js</code>定义一个简单的全局组件:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;MyComponent&apos;, &#123;</span><br><span class="line">  template: &apos;&lt;span&gt;自定义组件&lt;/span&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="局部注册定义"><a href="#局部注册定义" class="headerlink" title="局部注册定义"></a>局部注册定义</h4><p>我们直接在<code>HelloWorld.vue</code>定义我们的组件:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">let myComponent=&#123;</span><br><span class="line">  template: &apos;&lt;span&gt;自定义组件&lt;/span&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">export default &#123;</span><br><span class="line">  components:&#123;</span><br><span class="line">    &quot;MyComponent&quot;:myComponent</span><br><span class="line">  &#125;,</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &apos;Welcome to Your Vue.js App&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="组件使用"><a href="#组件使用" class="headerlink" title="组件使用"></a>组件使用</h4><p>在<code>HelloWorld.vue</code>引入我们自定义的组件:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;my-component&gt;&lt;/my-component&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>最后我们可以看到：<br><img src="http://xxnote.52fx.biz/vue_component_1.png" alt><br>这里组件的名字支持：</p>
+<ul>
+<li>短横线,如:<code>my-component</code>,用法:<code>&lt;my-component&gt;&lt;/my-component&gt;</code></li>
+<li>小驼峰,如:<code>myComponent</code>,用法:<code>&lt;my-component&gt;&lt;/my-component&gt;</code></li>
+<li>大驼峰,如:<code>MyComponent</code>,用法:<code>&lt;my-component&gt;&lt;/my-component&gt;</code></li>
+</ul>
+<h3 id="组件Prop属性"><a href="#组件Prop属性" class="headerlink" title="组件Prop属性"></a>组件Prop属性</h3><p>既然自定组件，那么肯定会有一些属性字段需要动态绑定值，这里我们就要借助<code>Prop</code>来实现我们的组件属性。我們先來熟悉一下<code>Prop</code>屬性的用法:</p>
+<ul>
+<li>數組類型,如:<code>props: [&#39;authorName&#39;,&#39;age&#39;]</code>;</li>
+<li>對象,對象方式支持指定屬性的值類型:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">   authorName: String,</span><br><span class="line">   age:Number,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+對象方式支持屬性值驗證，如：<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">   authorName: &#123;type:String,required: true&#125;,</span><br><span class="line">   age:&#123;type:Number,default: 100&#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+這裡的類型支持一下幾種:</li>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Array</li>
+<li>Object</li>
+<li>Date</li>
+<li>Function</li>
+<li>Symbol</li>
+</ul>
+<blockquote>
+<p>HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名。</p>
+</blockquote>
+<h4 id="Prop示例"><a href="#Prop示例" class="headerlink" title="Prop示例"></a>Prop示例</h4><p>我們將上面的組件稍作修改:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let myComponent = &#123;</span><br><span class="line">  template: &quot;&lt;span&gt;自定义组件的作者:&#123;&#123;authorName&#125;&#125;,年齡:&#123;&#123;age&#125;&#125;歲&lt;/span&gt;&quot;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    authorName: String,</span><br><span class="line">    age:Number,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> &lt;my-component author-name=&quot;eyiadmin&quot; age=&quot;1024&quot;&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<p>最終呈現:<br><img src="http://xxnote.52fx.biz/vue_component_2.png" alt>.<br>我們剛才的值的靜態屬性值,如果我們想動態綁定屬性值怎麼做呢？直接上代碼:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    myComponent: myComponent</span><br><span class="line">  &#125;,</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &quot;Welcome to Your Vue.js App&quot;,</span><br><span class="line">      name:&apos;eyiadmin&apos;,</span><br><span class="line">      age:1024</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&lt;my-component v-bind:author-name=&quot;name&quot; v-bind:age=&quot;age&quot;&gt;&lt;/my-component&gt;</span><br><span class="line">或者這樣</span><br><span class="line">&lt;my-component :author-name=&quot;name&quot; :age=&quot;age&quot;&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="傳入對象"><a href="#傳入對象" class="headerlink" title="傳入對象"></a>傳入對象</h5><p>我們把屬性值當做對象傳遞，這樣我們就需要做一些調整:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    myComponent: myComponent</span><br><span class="line">  &#125;,</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &quot;Welcome to Your Vue.js App&quot;,</span><br><span class="line">      authorInfo: &#123;</span><br><span class="line">        authorName: &quot;eyiadmin&quot;,</span><br><span class="line">        age: 1024</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"># 指定對象屬性值</span><br><span class="line">&lt;my-component :author-name=&quot;authorInfo.authorName&quot; :age=&quot;authorInfo.age&quot;&gt;&lt;/my-component&gt;</span><br><span class="line"># 傳遞整個對象</span><br><span class="line">&lt;my-component v-bind=&quot;authorInfo&quot;&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<p>最終效果和上面一樣，就不再附效果圖。在<code>Vue</code>的<code>Prop</code>類型只支持单向数据流，即父级 prop 的更新会向下流动到子组件中，但是反过来则不行。但是我們會有場景用到子組件改變父組件的值，這個我們後面再說。</p>
+<h3 id="組件插槽"><a href="#組件插槽" class="headerlink" title="組件插槽"></a>組件插槽</h3><p><code>Vue</code>的<code>slot</code>有什麼用呢？剛才我們在自定義組件的時候，我們的使用方式是這樣的：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component :author-name=&quot;authorInfo.authorName&quot; :age=&quot;authorInfo.age&quot;&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<p>但是我們不能這樣:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component :author-name=&quot;authorInfo.authorName&quot; :age=&quot;authorInfo.age&quot;&gt;hello world&lt;/my-component&gt;</span><br><span class="line">或者</span><br><span class="line">&lt;my-component :author-name=&quot;authorInfo.authorName&quot; :age=&quot;authorInfo.age&quot;&gt;&lt;my-component :author-name=&quot;authorInfo.authorName&quot; :age=&quot;authorInfo.age&quot;&gt;&lt;/my-component&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<p>顯然，有時候我們是希望能不能不能這樣的變為可以這樣。這時候<code>slot</code>就可以發揮作用了。我們將我們的組件模版稍作調整:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">template: &quot;&lt;span&gt;自定义组件的作者:&#123;&#123;authorName&#125;&#125;,年齡:&#123;&#123;age&#125;&#125;歲&lt;br/&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/span&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>這下我們就可以這樣用：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    myComponent: myComponent</span><br><span class="line">  &#125;,</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &quot;Welcome to Your Vue.js App&quot;,</span><br><span class="line">      authorInfo: &#123;</span><br><span class="line">        authorName: &quot;eyiadmin&quot;,</span><br><span class="line">        age:1024</span><br><span class="line">      &#125;,</span><br><span class="line">      childInfo: &#123;</span><br><span class="line">        authorName: &quot;eyiadmin_child&quot;,</span><br><span class="line">        age:100</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> &lt;my-component v-bind=&quot;authorInfo&quot;&gt;</span><br><span class="line">      &lt;my-component v-bind=&quot;childInfo&quot;&gt;&lt;/my-component&gt;</span><br><span class="line">    &lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+<p>我就可以看到<br><img src="http://xxnote.52fx.biz/vue_component_3.png" alt>,<br>我們再來簡單看看<code>element</code>的使用方式，就拿我們常用的<code>header</code>為例:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;header class=&quot;el-header&quot; :style=&quot;&#123; height &#125;&quot;&gt;</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &apos;ElHeader&apos;,</span><br><span class="line">    componentName: &apos;ElHeader&apos;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      height: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        default: &apos;60px&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在<code>Header</code>的<code>index.js</code>中來註冊</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import Header from &apos;./src/main&apos;;</span><br><span class="line"></span><br><span class="line">/* istanbul ignore next */</span><br><span class="line">Header.install = function(Vue) &#123;</span><br><span class="line">  Vue.component(Header.name, Header);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Header;</span><br></pre></td></tr></table></figure>
+<p>當然，自定義組件還有很多東西沒有說，今天在忙著吧一百多億的數據遷移到其他數據庫，有點小忙，所有其他的東西後面我們再來細說，比如自定義組件中的自定義事件等。大家如果有深入研究的興趣，可以去<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">https://cn.vuejs.org/</a>，在結合一個開源的UI框架邊學習邊分析源碼，對學習的幫助比較大，例如可以結合<code>element</code>的<a href="https://github.com/ElemeFE/element" target="_blank" rel="noopener">源碼</a>來一起學習。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Vue/" rel="tag">Vue</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Golang</a></li>
-        </ul>
-        </nav>
-    </div>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
 </div>
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-10T00:03:13.000Z">2019-12-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 392 个字)
-                </span>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
                 
-            </div>
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/">Golang基础学习总结之变量</a>
-            
-        </h1>
-        <div class="content">
-            <p>变量来源于数学，是计算机语言中能储存计算结果或能表示值抽象概念。变量可以通过变量名访问。Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。来源于<a href="https://www.runoob.com/go/go-variables.html" target="_blank" rel="noopener">https://www.runoob.com/go/go-variables.html</a></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/12/10/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-21T00:35:43.000Z">2019-11-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Golang/">Golang</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 509 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/02/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/">
+                <span class="level-item">Vue制作静态页面简历并发布到七牛云上</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">Golang基础学习总结之开篇</a>
-            
-        </h1>
-        <div class="content">
-            <p>Go, also known as Golang, is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing, and CSP-style concurrency</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/21/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -1269,7 +1317,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Vue自定义组件" height="28">
                 
                 </a>
                 <p class="is-size-7">
