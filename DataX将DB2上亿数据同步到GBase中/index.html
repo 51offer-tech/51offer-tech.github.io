@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="baidu-site-verification" content="up4BoDUY22" />
+
+<title>DataX将DB2数据同步到GBase中 - 农民工学编程</title>
+
+
+    <meta name="description" content="DataX 是阿里开源的异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、ODPS、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。阿里云开源离线同步工具DataX3.0介绍">
+<meta name="keywords" content="Java,Datax,数据同步,Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataX将DB2数据同步到GBase中">
+<meta property="og:url" content="http:&#x2F;&#x2F;blog.52fx.biz&#x2F;DataX%E5%B0%86DB2%E4%B8%8A%E4%BA%BF%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%88%B0GBase%E4%B8%AD&#x2F;index.html">
+<meta property="og:site_name" content="农民工学编程">
+<meta property="og:description" content="DataX 是阿里开源的异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、ODPS、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。阿里云开源离线同步工具DataX3.0介绍">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;cloud.githubusercontent.com&#x2F;assets&#x2F;1067175&#x2F;17879841&#x2F;93b7fc1c-6927-11e6-8cda-7cf8420fc65f.png">
+<meta property="og:updated_time" content="2019-12-23T00:26:52.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;cloud.githubusercontent.com&#x2F;assets&#x2F;1067175&#x2F;17879841&#x2F;93b7fc1c-6927-11e6-8cda-7cf8420fc65f.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+        // var windowWidth = $(window).width();
+        // if (windowWidth > 480) {
+          document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
+        //}
+      </script>
+  
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="DataX将DB2数据同步到GBase中" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/eyiadmin/meizitu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://cloud.githubusercontent.com/assets/1067175/17879841/93b7fc1c-6927-11e6-8cda-7cf8420fc65f.png" alt="DataX将DB2数据同步到GBase中">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-18T00:09:54.000Z">2019-12-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25 分钟 读完 (大约 3798 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                DataX将DB2数据同步到GBase中
+            
+        </h1>
+        <div class="content">
+            <p>DataX 是阿里开源的异构数据源离线同步工具，致力于实现包括关系型数据库(MySQL、Oracle等)、HDFS、Hive、ODPS、HBase、FTP等各种异构数据源之间稳定高效的数据同步功能。<a href="https://github.com/alibaba/DataX/blob/master/introduction.md" target="_blank" rel="noopener">阿里云开源离线同步工具DataX3.0介绍</a></p>
+<a id="more"></a>
+<p>在2015年的时候，项目有用到DataX1.0来开发提数功能，使用很方便，我们自己也扩展一些插件,如DB2Writer、DB2Reader、GBaseWriter、GBaseReader等，不得不说，DataX的插件功能真的很强大很灵活。<br>再到后来，2018年的时候，涉及到跨库数据定时同步。因为当时所涉及的数据量不大，也就几万，最多十几万的数据处理和同步。所以选用了<code>Kettle</code>,这款工具上手也比较快，图形化操作，我们在GUI中设计好我们的ktr和kjb，在定时通过命令的方式来执行kjb的方式实现定时ETL数据处理、同步功能。<br>但是,<code>Kettle</code>已经满足不了我们了，因为我们要把上亿的指标数据从DB2同步到GBase中，当然比较好的方式多是从DB2导出文件然后load到GBase中，但是目前权限不够，也因为只有一台主机，没办法做相应的操作。那么就又得请出我们的DataX杀手锏。</p>
+<h3 id="手动编译DataX"><a href="#手动编译DataX" class="headerlink" title="手动编译DataX"></a>手动编译DataX</h3><p>工具:</p>
+<ul>
+<li>Maven</li>
+<li>Git</li>
+<li>Idea</li>
+<li>Jdk1.8<br>当然你也可以不用Git和Idea直接下载下来执行<code>Maven</code>命令即可.<br>使用Idea导入DataX:<br><img src="http://xxnote.52fx.biz/Datax_Git_1.png" alt><br><img src="http://xxnote.52fx.biz/Datax_Git_2.png" alt><br>点击clone后，就会下载代码，下载完成后就会下载依赖包。<br><img src="http://xxnote.52fx.biz/DataX_Git_3.png" alt><br>等待依赖包安装完成,执行打包命令:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">mvn -U clean package assembly:assembly -Dmaven.test.skip=true</span><br><span class="line">[INFO] Reading assembly descriptor: package.xml</span><br><span class="line">[INFO] datax/lib\commons-io-2.4.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-lang3-3.3.2.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-math3-3.1.1.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-common-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-transformer-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\fastjson-1.1.46.sec01.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\hamcrest-core-1.3.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-classic-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-core-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\slf4j-api-1.7.10.jar already added, skipping</span><br><span class="line">[INFO] Building tar : F:\WorkAbout\work\DataX\target\datax.tar.gz</span><br><span class="line">[INFO] datax/lib\commons-io-2.4.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-lang3-3.3.2.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-math3-3.1.1.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-common-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-transformer-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\fastjson-1.1.46.sec01.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\hamcrest-core-1.3.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-classic-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-core-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\slf4j-api-1.7.10.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-io-2.4.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-lang3-3.3.2.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-math3-3.1.1.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-common-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-transformer-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\fastjson-1.1.46.sec01.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\hamcrest-core-1.3.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-classic-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-core-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\slf4j-api-1.7.10.jar already added, skipping</span><br><span class="line">[INFO] Copying files to F:\WorkAbout\work\DataX\target\datax</span><br><span class="line">[INFO] datax/lib\commons-io-2.4.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-lang3-3.3.2.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\commons-math3-3.1.1.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-common-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\datax-transformer-0.0.1-SNAPSHOT.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\fastjson-1.1.46.sec01.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\hamcrest-core-1.3.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-classic-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\logback-core-1.0.13.jar already added, skipping</span><br><span class="line">[INFO] datax/lib\slf4j-api-1.7.10.jar already added, skipping</span><br><span class="line">[WARNING] Assembly file: F:\WorkAbout\work\DataX\target\datax is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Reactor Summary:</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] datax-all 0.0.1-SNAPSHOT ........................... SUCCESS [14:23 min]</span><br><span class="line">[INFO] datax-common ....................................... SUCCESS [  3.743 s]</span><br><span class="line">[INFO] datax-transformer .................................. SUCCESS [  4.746 s]</span><br><span class="line">[INFO] datax-core ......................................... SUCCESS [ 35.608 s]</span><br><span class="line">[INFO] plugin-rdbms-util .................................. SUCCESS [  2.233 s]</span><br><span class="line">[INFO] mysqlreader ........................................ SUCCESS [  3.712 s]</span><br><span class="line">[INFO] drdsreader ......................................... SUCCESS [  2.849 s]</span><br><span class="line">[INFO] sqlserverreader .................................... SUCCESS [  2.668 s]</span><br><span class="line">[INFO] postgresqlreader ................................... SUCCESS [  3.018 s]</span><br><span class="line">[INFO] oraclereader ....................................... SUCCESS [  2.720 s]</span><br><span class="line">[INFO] odpsreader ......................................... SUCCESS [  4.960 s]</span><br><span class="line">[INFO] otsreader .......................................... SUCCESS [  5.210 s]</span><br><span class="line">[INFO] otsstreamreader .................................... SUCCESS [  4.729 s]</span><br><span class="line">[INFO] plugin-unstructured-storage-util ................... SUCCESS [  1.542 s]</span><br><span class="line">[INFO] txtfilereader ...................................... SUCCESS [ 11.342 s]</span><br><span class="line">[INFO] hdfsreader ......................................... SUCCESS [ 36.736 s]</span><br><span class="line">[INFO] streamreader ....................................... SUCCESS [  2.925 s]</span><br><span class="line">[INFO] ossreader .......................................... SUCCESS [ 12.321 s]</span><br><span class="line">[INFO] ftpreader .......................................... SUCCESS [ 12.288 s]</span><br><span class="line">[INFO] mongodbreader ...................................... SUCCESS [ 11.568 s]</span><br><span class="line">[INFO] rdbmsreader ........................................ SUCCESS [  3.784 s]</span><br><span class="line">[INFO] hbase11xreader ..................................... SUCCESS [ 15.342 s]</span><br><span class="line">[INFO] hbase094xreader .................................... SUCCESS [ 13.149 s]</span><br><span class="line">[INFO] tsdbreader ......................................... SUCCESS [  3.722 s]</span><br><span class="line">[INFO] opentsdbreader ..................................... SUCCESS [  6.592 s]</span><br><span class="line">[INFO] cassandrareader .................................... SUCCESS [ 11.834 s]</span><br><span class="line">[INFO] mysqlwriter ........................................ SUCCESS [  3.282 s]</span><br><span class="line">[INFO] drdswriter ......................................... SUCCESS [  9.150 s]</span><br><span class="line">[INFO] odpswriter ......................................... SUCCESS [ 13.498 s]</span><br><span class="line">[INFO] txtfilewriter ...................................... SUCCESS [ 21.791 s]</span><br><span class="line">[INFO] ftpwriter .......................................... SUCCESS [ 19.378 s]</span><br><span class="line">[INFO] hdfswriter ......................................... SUCCESS [ 32.956 s]</span><br><span class="line">[INFO] streamwriter ....................................... SUCCESS [  5.611 s]</span><br><span class="line">[INFO] otswriter .......................................... SUCCESS [  5.545 s]</span><br><span class="line">[INFO] oraclewriter ....................................... SUCCESS [  4.152 s]</span><br><span class="line">[INFO] sqlserverwriter .................................... SUCCESS [  2.689 s]</span><br><span class="line">[INFO] postgresqlwriter ................................... SUCCESS [  2.502 s]</span><br><span class="line">[INFO] osswriter .......................................... SUCCESS [ 12.467 s]</span><br><span class="line">[INFO] mongodbwriter ...................................... SUCCESS [ 12.070 s]</span><br><span class="line">[INFO] adswriter .......................................... SUCCESS [  9.578 s]</span><br><span class="line">[INFO] ocswriter .......................................... SUCCESS [  5.485 s]</span><br><span class="line">[INFO] rdbmswriter ........................................ SUCCESS [  2.927 s]</span><br><span class="line">[INFO] hbase11xwriter ..................................... SUCCESS [ 15.926 s]</span><br><span class="line">[INFO] hbase094xwriter .................................... SUCCESS [ 15.623 s]</span><br><span class="line">[INFO] hbase11xsqlwriter .................................. SUCCESS [ 27.912 s]</span><br><span class="line">[INFO] hbase11xsqlreader .................................. SUCCESS [ 35.410 s]</span><br><span class="line">[INFO] elasticsearchwriter ................................ SUCCESS [  7.341 s]</span><br><span class="line">[INFO] tsdbwriter ......................................... SUCCESS [  3.051 s]</span><br><span class="line">[INFO] adbpgwriter ........................................ SUCCESS [  5.857 s]</span><br><span class="line">[INFO] gdbwriter .......................................... SUCCESS [ 11.935 s]</span><br><span class="line">[INFO] cassandrawriter .................................... SUCCESS [  6.054 s]</span><br><span class="line">[INFO] hbase20xsqlreader .................................. SUCCESS [  3.264 s]</span><br><span class="line">[INFO] hbase20xsqlwriter 0.0.1-SNAPSHOT ................... SUCCESS [  3.577 s]</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 23:03 min</span><br><span class="line">[INFO] Finished at: 2019-12-18T11:59:17+08:00</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+打包成功后，会在对应目录下生成target文件夹.我这儿打包好的文件有1.12G，因为里面包含了很多插件以及插件所需要的依赖包。我只留下了mysql和rdbms两个插件。</li>
+</ul>
+<p>因为我是按照的Python3.6.5如果直接使用官网的命令的话，会报错:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F:\WorkAbout\work\DataX\target\datax\datax\bin&gt;python datax.py -r mysqlreader -w mysqlwriter</span><br><span class="line">  File &quot;datax.py&quot;, line 114</span><br><span class="line">    print readerRef</span><br><span class="line">                  ^</span><br><span class="line">SyntaxError: Missing parentheses in call to &apos;print&apos;. Did you mean print(readerRef)?</span><br></pre></td></tr></table></figure>
+<p>所以，咱们得转换一下啦，Python3.x已经为我们提供了2to3的工具,在安装目录下面的<code>Tools\scripts</code>中,来体验一下它的强大:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">D:\Programs\Python\Python36-32\Tools\scripts&gt;2to3.py --output-dir=D:/datax -W -n F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py</span><br><span class="line">WARNING: --write-unchanged-files/-W implies -w.</span><br><span class="line">lib2to3.main: Output in &apos;D:/datax&apos; will mirror the input directory &apos;F:\\WorkAbout\\work\\DataX\\target\\datax\\datax\\bin&apos; layout.</span><br><span class="line">RefactoringTool: Skipping optional fixer: buffer</span><br><span class="line">RefactoringTool: Skipping optional fixer: idioms</span><br><span class="line">RefactoringTool: Skipping optional fixer: set_literal</span><br><span class="line">RefactoringTool: Skipping optional fixer: ws_comma</span><br><span class="line">RefactoringTool: Refactored F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py</span><br><span class="line">--- F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py     (original)</span><br><span class="line">+++ F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py     (refactored)</span><br><span class="line">@@ -52,13 +52,13 @@</span><br><span class="line"></span><br><span class="line"> def suicide(signum, e):</span><br><span class="line">     global child_process</span><br><span class="line">-    print &gt;&gt; sys.stderr, &quot;[Error] DataX receive unexpected signal %d, starts to suicide.&quot; % (signum)</span><br><span class="line">+    print(&quot;[Error] DataX receive unexpected signal %d, starts to suicide.&quot; % (signum), file=sys.stderr)</span><br><span class="line"></span><br><span class="line">     if child_process:</span><br><span class="line">         child_process.send_signal(signal.SIGQUIT)</span><br><span class="line">         time.sleep(1)</span><br><span class="line">         child_process.kill()</span><br><span class="line">-    print &gt;&gt; sys.stderr, &quot;DataX Process was killed ! you did ?&quot;</span><br><span class="line">+    print(&quot;DataX Process was killed ! you did ?&quot;, file=sys.stderr)</span><br><span class="line">     sys.exit(RET_STATE[&quot;KILL&quot;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@@ -111,10 +111,10 @@</span><br><span class="line"> def generateJobConfigTemplate(reader, writer):</span><br><span class="line">     readerRef = &quot;Please refer to the %s document:\n     https://github.com/alibaba/DataX/blob/master/%s/doc/%s.md \n&quot; % (reader,reader,reader)</span><br><span class="line">     writerRef = &quot;Please refer to the %s document:\n     https://github.com/alibaba/DataX/blob/master/%s/doc/%s.md \n &quot; % (writer,writer,writer)</span><br><span class="line">-    print readerRef</span><br><span class="line">-    print writerRef</span><br><span class="line">+    print(readerRef)</span><br><span class="line">+    print(writerRef)</span><br><span class="line">     jobGuid = &apos;Please save the following configuration as a json file and  use\n     python &#123;DATAX_HOME&#125;/bin/datax.py &#123;JSON_FILE_NAME&#125;.json \nto run the job.\n&apos;</span><br><span class="line">-    print jobGuid</span><br><span class="line">+    print(jobGuid)</span><br><span class="line">     jobTemplate=&#123;</span><br><span class="line">       &quot;job&quot;: &#123;</span><br><span class="line">         &quot;setting&quot;: &#123;</span><br><span class="line">@@ -134,15 +134,15 @@</span><br><span class="line">     writerTemplatePath = &quot;%s/plugin/writer/%s/plugin_job_template.json&quot; % (DATAX_HOME,writer)</span><br><span class="line">     try:</span><br><span class="line">       readerPar = readPluginTemplate(readerTemplatePath);</span><br><span class="line">-    except Exception, e:</span><br><span class="line">-       print &quot;Read reader[%s] template error: can\&apos;t find file %s&quot; % (reader,readerTemplatePath)</span><br><span class="line">+    except Exception as e:</span><br><span class="line">+       print(&quot;Read reader[%s] template error: can\&apos;t find file %s&quot; % (reader,readerTemplatePath))</span><br><span class="line">     try:</span><br><span class="line">       writerPar = readPluginTemplate(writerTemplatePath);</span><br><span class="line">-    except Exception, e:</span><br><span class="line">-      print &quot;Read writer[%s] template error: : can\&apos;t find file %s&quot; % (writer,writerTemplatePath)</span><br><span class="line">+    except Exception as e:</span><br><span class="line">+      print(&quot;Read writer[%s] template error: : can\&apos;t find file %s&quot; % (writer,writerTemplatePath))</span><br><span class="line">     jobTemplate[&apos;job&apos;][&apos;content&apos;][0][&apos;reader&apos;] = readerPar;</span><br><span class="line">     jobTemplate[&apos;job&apos;][&apos;content&apos;][0][&apos;writer&apos;] = writerPar;</span><br><span class="line">-    print json.dumps(jobTemplate, indent=4, sort_keys=True)</span><br><span class="line">+    print(json.dumps(jobTemplate, indent=4, sort_keys=True))</span><br><span class="line"></span><br><span class="line"> def readPluginTemplate(plugin):</span><br><span class="line">     with open(plugin, &apos;r&apos;) as f:</span><br><span class="line">@@ -168,7 +168,7 @@</span><br><span class="line"></span><br><span class="line">     if options.remoteDebug:</span><br><span class="line">         tempJVMCommand = tempJVMCommand + &quot; &quot; + REMOTE_DEBUG_CONFIG</span><br><span class="line">-        print &apos;local ip: &apos;, getLocalIp()</span><br><span class="line">+        print(&apos;local ip: &apos;, getLocalIp())</span><br><span class="line"></span><br><span class="line">     if options.loglevel:</span><br><span class="line">         tempJVMCommand = tempJVMCommand + &quot; &quot; + (&quot;-Dloglevel=%s&quot; % (options.loglevel))</span><br><span class="line">@@ -198,11 +198,11 @@</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> def printCopyright():</span><br><span class="line">-    print &apos;&apos;&apos;</span><br><span class="line">+    print(&apos;&apos;&apos;</span><br><span class="line"> DataX (%s), From Alibaba !</span><br><span class="line"> Copyright (C) 2010-2017, Alibaba Group. All Rights Reserved.</span><br><span class="line"></span><br><span class="line">-&apos;&apos;&apos; % DATAX_VERSION</span><br><span class="line">+&apos;&apos;&apos; % DATAX_VERSION)</span><br><span class="line">     sys.stdout.flush()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RefactoringTool: Writing converted F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py to D:/datax\datax.py.</span><br><span class="line">RefactoringTool: Files that were modified:</span><br><span class="line">RefactoringTool: F:\WorkAbout\work\DataX\target\datax\datax\bin\datax.py</span><br></pre></td></tr></table></figure>
+<p>我将转到好的py文件更名为<code>datax3.py</code>,复制到bin目录下面,重新执行命令:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">F:\WorkAbout\work\DataX\target\datax\datax\bin&gt;python datax3.py -r mysqlreader -w mysqlwriter</span><br><span class="line"></span><br><span class="line">DataX (DATAX-OPENSOURCE-3.0), From Alibaba !</span><br><span class="line">Copyright (C) 2010-2017, Alibaba Group. All Rights Reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please refer to the mysqlreader document:</span><br><span class="line">     https://github.com/alibaba/DataX/blob/master/mysqlreader/doc/mysqlreader.md</span><br><span class="line"></span><br><span class="line">Please refer to the mysqlwriter document:</span><br><span class="line">     https://github.com/alibaba/DataX/blob/master/mysqlwriter/doc/mysqlwriter.md</span><br><span class="line"></span><br><span class="line">Please save the following configuration as a json file and  use</span><br><span class="line">     python &#123;DATAX_HOME&#125;/bin/datax.py &#123;JSON_FILE_NAME&#125;.json</span><br><span class="line">to run the job.</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;job&quot;: &#123;</span><br><span class="line">        &quot;content&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;reader&quot;: &#123;</span><br><span class="line">                    &quot;name&quot;: &quot;mysqlreader&quot;,</span><br><span class="line">                    &quot;parameter&quot;: &#123;</span><br><span class="line">                        &quot;column&quot;: [],</span><br><span class="line">                        &quot;connection&quot;: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;jdbcUrl&quot;: [],</span><br><span class="line">                                &quot;table&quot;: []</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">                        &quot;password&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;username&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;where&quot;: &quot;&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;writer&quot;: &#123;</span><br><span class="line">                    &quot;name&quot;: &quot;mysqlwriter&quot;,</span><br><span class="line">                    &quot;parameter&quot;: &#123;</span><br><span class="line">                        &quot;column&quot;: [],</span><br><span class="line">                        &quot;connection&quot;: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;jdbcUrl&quot;: &quot;&quot;,</span><br><span class="line">                                &quot;table&quot;: []</span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">                        &quot;password&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;preSql&quot;: [],</span><br><span class="line">                        &quot;session&quot;: [],</span><br><span class="line">                        &quot;username&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;writeMode&quot;: &quot;&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;setting&quot;: &#123;</span><br><span class="line">            &quot;speed&quot;: &#123;</span><br><span class="line">                &quot;channel&quot;: &quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以把命令执行结果保存在文件中:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python datax3.py -r mysqlreader -w mysqlwriter &gt; mysql2gbase.json</span><br></pre></td></tr></table></figure>
+<p>会在当前目录生成<code>mysql2gbase.json</code>文件。<br>做相应的配置即可:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;job&quot;: &#123;</span><br><span class="line">		&quot;content&quot;: [&#123;</span><br><span class="line">			&quot;reader&quot;: &#123;</span><br><span class="line">				&quot;name&quot;: &quot;mysqlreader&quot;,</span><br><span class="line">				&quot;parameter&quot;: &#123;</span><br><span class="line">					&quot;column&quot;: [&quot;SCENE_ID&quot;, &quot;OP_TIME&quot;, &quot;OP_JOB_NO&quot;, &quot;REMARK&quot;],</span><br><span class="line">					&quot;connection&quot;: [&#123;</span><br><span class="line">						&quot;jdbcUrl&quot;: [&quot;jdbc:mysql://10.101.42.91:1299/zhcj_test&quot;],</span><br><span class="line">						&quot;table&quot;: [&quot;op_log&quot;]</span><br><span class="line">					&#125;],</span><br><span class="line">					&quot;password&quot;: &quot;bingosoft!&quot;,</span><br><span class="line">					&quot;username&quot;: &quot;root&quot;,</span><br><span class="line">					&quot;where&quot;: &quot;&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;writer&quot;: &#123;</span><br><span class="line">				&quot;name&quot;: &quot;mysqlwriter&quot;,</span><br><span class="line">				&quot;parameter&quot;: &#123;</span><br><span class="line">					&quot;column&quot;: [&quot;SCENE_ID&quot;, &quot;OP_TIME&quot;, &quot;OP_JOB_NO&quot;, &quot;REMARK&quot;],</span><br><span class="line">					&quot;connection&quot;: [&#123;</span><br><span class="line">						&quot;jdbcUrl&quot;: &quot;jdbc:mysql://10.101.42.91:1299/zhcs_test&quot;,</span><br><span class="line">						&quot;table&quot;: [&quot;datax_op_log&quot;]</span><br><span class="line">					&#125;],</span><br><span class="line">					&quot;password&quot;: &quot;bingosoft!&quot;,</span><br><span class="line">					&quot;preSql&quot;: [],</span><br><span class="line">					&quot;session&quot;: [],</span><br><span class="line">					&quot;username&quot;: &quot;root&quot;,</span><br><span class="line">					&quot;writeMode&quot;: &quot;insert&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;],</span><br><span class="line">		&quot;setting&quot;: &#123;</span><br><span class="line">			&quot;speed&quot;: &#123;</span><br><span class="line">				&quot;channel&quot;: &quot;4&quot;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行同步命令<code>python datax3.py mysql2gbase.json</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DataX (DATAX-OPENSOURCE-3.0), From Alibaba !</span><br><span class="line">Copyright (C) 2010-2017, Alibaba Group. All Rights Reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2019-12-18 18:38:21.572 [main] INFO  VMInfo - VMInfo# operatingSystem class =&gt; sun.management.OperatingSystemImpl</span><br><span class="line">2019-12-18 18:38:21.578 [main] INFO  Engine - the machine info  =&gt; </span><br><span class="line"></span><br><span class="line">	osInfo:	Oracle Corporation 1.8 25.231-b11</span><br><span class="line">	jvmInfo:	Windows 10 amd64 10.0</span><br><span class="line">	cpu num:	8</span><br><span class="line"></span><br><span class="line">	totalPhysicalMemory:	-0.00G</span><br><span class="line">	freePhysicalMemory:	-0.00G</span><br><span class="line">	maxFileDescriptorCount:	-1</span><br><span class="line">	currentOpenFileDescriptorCount:	-1</span><br><span class="line"></span><br><span class="line">	GC Names	[PS MarkSweep, PS Scavenge]</span><br><span class="line"></span><br><span class="line">	MEMORY_NAME                    | allocation_size                | init_size                      </span><br><span class="line">	PS Eden Space                  | 256.00MB                       | 256.00MB                       </span><br><span class="line">	Code Cache                     | 240.00MB                       | 2.44MB                         </span><br><span class="line">	Compressed Class Space         | 1,024.00MB                     | 0.00MB                         </span><br><span class="line">	PS Survivor Space              | 42.50MB                        | 42.50MB                        </span><br><span class="line">	PS Old Gen                     | 683.00MB                       | 683.00MB                       </span><br><span class="line">	Metaspace                      | -0.00MB                        | 0.00MB                         </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2019-12-18 18:38:21.594 [main] INFO  Engine - </span><br><span class="line">&#123;</span><br><span class="line">	&quot;content&quot;:[</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;reader&quot;:&#123;</span><br><span class="line">				&quot;name&quot;:&quot;mysqlreader&quot;,</span><br><span class="line">				&quot;parameter&quot;:&#123;</span><br><span class="line">					&quot;column&quot;:[</span><br><span class="line">						&quot;SCENE_ID&quot;,</span><br><span class="line">						&quot;OP_TIME&quot;,</span><br><span class="line">						&quot;OP_JOB_NO&quot;,</span><br><span class="line">						&quot;REMARK&quot;</span><br><span class="line">					],</span><br><span class="line">					&quot;connection&quot;:[</span><br><span class="line">						&#123;</span><br><span class="line">							&quot;jdbcUrl&quot;:[</span><br><span class="line">								&quot;jdbc:mysql://10.101.42.91:1299/zhcj_test&quot;</span><br><span class="line">							],</span><br><span class="line">							&quot;table&quot;:[</span><br><span class="line">								&quot;op_log&quot;</span><br><span class="line">							]</span><br><span class="line">						&#125;</span><br><span class="line">					],</span><br><span class="line">					&quot;password&quot;:&quot;**********&quot;,</span><br><span class="line">					&quot;username&quot;:&quot;root&quot;,</span><br><span class="line">					&quot;where&quot;:&quot;&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;writer&quot;:&#123;</span><br><span class="line">				&quot;name&quot;:&quot;mysqlwriter&quot;,</span><br><span class="line">				&quot;parameter&quot;:&#123;</span><br><span class="line">					&quot;column&quot;:[</span><br><span class="line">						&quot;SCENE_ID&quot;,</span><br><span class="line">						&quot;OP_TIME&quot;,</span><br><span class="line">						&quot;OP_JOB_NO&quot;,</span><br><span class="line">						&quot;REMARK&quot;</span><br><span class="line">					],</span><br><span class="line">					&quot;connection&quot;:[</span><br><span class="line">						&#123;</span><br><span class="line">							&quot;jdbcUrl&quot;:&quot;jdbc:mysql://10.101.42.91:1299/zhcs_test&quot;,</span><br><span class="line">							&quot;table&quot;:[</span><br><span class="line">								&quot;datax_op_log&quot;</span><br><span class="line">							]</span><br><span class="line">						&#125;</span><br><span class="line">					],</span><br><span class="line">					&quot;password&quot;:&quot;**********&quot;,</span><br><span class="line">					&quot;preSql&quot;:[],</span><br><span class="line">					&quot;session&quot;:[],</span><br><span class="line">					&quot;username&quot;:&quot;root&quot;,</span><br><span class="line">					&quot;writeMode&quot;:&quot;insert&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	&quot;setting&quot;:&#123;</span><br><span class="line">		&quot;speed&quot;:&#123;</span><br><span class="line">			&quot;channel&quot;:&quot;4&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">2019-12-18 18:38:21.606 [main] WARN  Engine - prioriy set to 0, because NumberFormatException, the value is: null</span><br><span class="line">2019-12-18 18:38:21.608 [main] INFO  PerfTrace - PerfTrace traceId=job_-1, isEnable=false, priority=0</span><br><span class="line">2019-12-18 18:38:21.608 [main] INFO  JobContainer - DataX jobContainer starts job.</span><br><span class="line">2019-12-18 18:38:21.609 [main] INFO  JobContainer - Set jobId = 0</span><br><span class="line">2019-12-18 18:38:21.906 [job-0] INFO  OriginalConfPretreatmentUtil - Available jdbcUrl:jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true.</span><br><span class="line">2019-12-18 18:38:21.962 [job-0] INFO  OriginalConfPretreatmentUtil - table:[op_log] has columns:[SCENE_ID,OP_TIME,OP_JOB_NO,REMARK].</span><br><span class="line">2019-12-18 18:38:22.184 [job-0] INFO  OriginalConfPretreatmentUtil - table:[datax_op_log] all columns:[</span><br><span class="line">SCENE_ID,OP_TIME,OP_JOB_NO,REMARK</span><br><span class="line">].</span><br><span class="line">2019-12-18 18:38:22.242 [job-0] INFO  OriginalConfPretreatmentUtil - Write data [</span><br><span class="line">insert INTO %s (SCENE_ID,OP_TIME,OP_JOB_NO,REMARK) VALUES(?,?,?,?)</span><br><span class="line">], which jdbcUrl like:[jdbc:mysql://10.101.42.91:1299/zhcs_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true]</span><br><span class="line">2019-12-18 18:38:22.243 [job-0] INFO  JobContainer - jobContainer starts to do prepare ...</span><br><span class="line">2019-12-18 18:38:22.243 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] do prepare work .</span><br><span class="line">2019-12-18 18:38:22.243 [job-0] INFO  JobContainer - DataX Writer.Job [mysqlwriter] do prepare work .</span><br><span class="line">2019-12-18 18:38:22.244 [job-0] INFO  JobContainer - jobContainer starts to do split ...</span><br><span class="line">2019-12-18 18:38:22.244 [job-0] INFO  JobContainer - Job set Channel-Number to 4 channels.</span><br><span class="line">2019-12-18 18:38:22.247 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] splits to [1] tasks.</span><br><span class="line">2019-12-18 18:38:22.248 [job-0] INFO  JobContainer - DataX Writer.Job [mysqlwriter] splits to [1] tasks.</span><br><span class="line">2019-12-18 18:38:22.260 [job-0] INFO  JobContainer - jobContainer starts to do schedule ...</span><br><span class="line">2019-12-18 18:38:22.262 [job-0] INFO  JobContainer - Scheduler starts [1] taskGroups.</span><br><span class="line">2019-12-18 18:38:22.264 [job-0] INFO  JobContainer - Running by standalone Mode.</span><br><span class="line">2019-12-18 18:38:22.272 [taskGroup-0] INFO  TaskGroupContainer - taskGroupId=[0] start [1] channels for [1] tasks.</span><br><span class="line">2019-12-18 18:38:22.275 [taskGroup-0] INFO  Channel - Channel set byte_speed_limit to -1, No bps activated.</span><br><span class="line">2019-12-18 18:38:22.275 [taskGroup-0] INFO  Channel - Channel set record_speed_limit to -1, No tps activated.</span><br><span class="line">2019-12-18 18:38:22.282 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] taskId[0] attemptCount[1] is started</span><br><span class="line">2019-12-18 18:38:22.284 [0-0-0-reader] INFO  CommonRdbmsReader$Task - Begin to read record by Sql: [select SCENE_ID,OP_TIME,OP_JOB_NO,REMARK from op_log </span><br><span class="line">] jdbcUrl:[jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true].</span><br><span class="line">2019-12-18 18:38:23.295 [0-0-0-reader] INFO  CommonRdbmsReader$Task - Finished read record by Sql: [select SCENE_ID,OP_TIME,OP_JOB_NO,REMARK from op_log </span><br><span class="line">] jdbcUrl:[jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true].</span><br><span class="line">2019-12-18 18:38:23.592 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] taskId[0] is successed, used[1311]ms</span><br><span class="line">2019-12-18 18:38:23.592 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] completed it&apos;s tasks.</span><br><span class="line">2019-12-18 18:38:32.281 [job-0] INFO  StandAloneJobContainerCommunicator - Total 15167 records, 849566 bytes | Speed 82.96KB/s, 1516 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 0.832s |  All Task WaitReaderTime 0.058s | Percentage 100.00%</span><br><span class="line">2019-12-18 18:38:32.281 [job-0] INFO  AbstractScheduler - Scheduler accomplished all tasks.</span><br><span class="line">2019-12-18 18:38:32.281 [job-0] INFO  JobContainer - DataX Writer.Job [mysqlwriter] do post work.</span><br><span class="line">2019-12-18 18:38:32.281 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] do post work.</span><br><span class="line">2019-12-18 18:38:32.281 [job-0] INFO  JobContainer - DataX jobId [0] completed successfully.</span><br><span class="line">2019-12-18 18:38:32.282 [job-0] INFO  HookInvoker - No hook invoked, because base dir not exists or is a file: F:\WorkAbout\work\DataX\target\datax\datax\hook</span><br><span class="line">2019-12-18 18:38:32.283 [job-0] INFO  JobContainer - </span><br><span class="line">	 [total cpu info] =&gt; </span><br><span class="line">		averageCpu                     | maxDeltaCpu                    | minDeltaCpu                    </span><br><span class="line">		-1.00%                         | -1.00%                         | -1.00%</span><br><span class="line">                        </span><br><span class="line"></span><br><span class="line">	 [total gc info] =&gt; </span><br><span class="line">		 NAME                 | totalGCCount       | maxDeltaGCCount    | minDeltaGCCount    | totalGCTime        | maxDeltaGCTime     | minDeltaGCTime     </span><br><span class="line">		 PS MarkSweep         | 0                  | 0                  | 0                  | 0.000s             | 0.000s             | 0.000s             </span><br><span class="line">		 PS Scavenge          | 0                  | 0                  | 0                  | 0.000s             | 0.000s             | 0.000s             </span><br><span class="line"></span><br><span class="line">2019-12-18 18:38:32.283 [job-0] INFO  JobContainer - PerfTrace not enable!</span><br><span class="line">2019-12-18 18:38:32.284 [job-0] INFO  StandAloneJobContainerCommunicator - Total 15167 records, 849566 bytes | Speed 82.96KB/s, 1516 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 0.832s |  All Task WaitReaderTime 0.058s | Percentage 100.00%</span><br><span class="line">2019-12-18 18:38:32.285 [job-0] INFO  JobContainer - </span><br><span class="line">任务启动时刻                    : 2019-12-18 18:38:21</span><br><span class="line">任务结束时刻                    : 2019-12-18 18:38:32</span><br><span class="line">任务总计耗时                    :                 10s</span><br><span class="line">任务平均流量                    :           82.96KB/s</span><br><span class="line">记录写入速度                    :           1516rec/s</span><br><span class="line">读出记录总数                    :               15167</span><br><span class="line">读写失败总数                    :                   0</span><br></pre></td></tr></table></figure>
+<p>上面只是一个简单的示例，接下来。我们将进入正式实践环节。首先需要开发一个<code>GbaseWriter</code>,因为没有涉及到太多细节的处理，直接按照<a href="https://github.com/alibaba/DataX/blob/master/dataxPluginDev.md" target="_blank" rel="noopener">DataX插件开发宝典</a>开发一个,打包插件<code>mvn -U clean package assembly:assembly -pl gbasewriter -am -Dmaven.test.skip=true</code>,然后执行:<code>python datax.py -r mysqlreader -w gbasewriter</code>,按照实际情况配置即可，运行效果如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">DataX (DATAX-OPENSOURCE-3.0), From Alibaba !</span><br><span class="line">Copyright (C) 2010-2017, Alibaba Group. All Rights Reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2019-12-20 15:07:22.954 [main] INFO  VMInfo - VMInfo# operatingSystem class =&gt; sun.management.OperatingSystemImpl</span><br><span class="line">2019-12-20 15:07:22.960 [main] INFO  Engine - the machine info  =&gt; </span><br><span class="line"></span><br><span class="line">	osInfo:	Oracle Corporation 1.8 25.231-b11</span><br><span class="line">	jvmInfo:	Windows 10 amd64 10.0</span><br><span class="line">	cpu num:	8</span><br><span class="line"></span><br><span class="line">	totalPhysicalMemory:	-0.00G</span><br><span class="line">	freePhysicalMemory:	-0.00G</span><br><span class="line">	maxFileDescriptorCount:	-1</span><br><span class="line">	currentOpenFileDescriptorCount:	-1</span><br><span class="line"></span><br><span class="line">	GC Names	[PS MarkSweep, PS Scavenge]</span><br><span class="line"></span><br><span class="line">	MEMORY_NAME                    | allocation_size                | init_size                      </span><br><span class="line">	PS Eden Space                  | 256.00MB                       | 256.00MB                       </span><br><span class="line">	Code Cache                     | 240.00MB                       | 2.44MB                         </span><br><span class="line">	Compressed Class Space         | 1,024.00MB                     | 0.00MB                         </span><br><span class="line">	PS Survivor Space              | 42.50MB                        | 42.50MB                        </span><br><span class="line">	PS Old Gen                     | 683.00MB                       | 683.00MB                       </span><br><span class="line">	Metaspace                      | -0.00MB                        | 0.00MB                         </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2019-12-20 15:07:22.996 [main] INFO  Engine - </span><br><span class="line">&#123;</span><br><span class="line">	&quot;content&quot;:[</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;reader&quot;:&#123;</span><br><span class="line">				&quot;name&quot;:&quot;mysqlreader&quot;,</span><br><span class="line">				&quot;parameter&quot;:&#123;</span><br><span class="line">					&quot;column&quot;:[</span><br><span class="line">						&quot;SCENE_ID&quot;,</span><br><span class="line">						&quot;OP_TIME&quot;,</span><br><span class="line">						&quot;OP_JOB_NO&quot;,</span><br><span class="line">						&quot;REMARK&quot;</span><br><span class="line">					],</span><br><span class="line">					&quot;connection&quot;:[</span><br><span class="line">						&#123;</span><br><span class="line">							&quot;jdbcUrl&quot;:[</span><br><span class="line">								&quot;jdbc:mysql://10.101.42.91:1299/zhcj_test&quot;</span><br><span class="line">							],</span><br><span class="line">							&quot;table&quot;:[</span><br><span class="line">								&quot;op_log&quot;</span><br><span class="line">							]</span><br><span class="line">						&#125;</span><br><span class="line">					],</span><br><span class="line">					&quot;password&quot;:&quot;**********&quot;,</span><br><span class="line">					&quot;username&quot;:&quot;root&quot;,</span><br><span class="line">					&quot;where&quot;:&quot;&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;writer&quot;:&#123;</span><br><span class="line">				&quot;name&quot;:&quot;gbasewriter&quot;,</span><br><span class="line">				&quot;parameter&quot;:&#123;</span><br><span class="line">					&quot;column&quot;:[</span><br><span class="line">						&quot;SCENE_ID&quot;,</span><br><span class="line">						&quot;OP_TIME&quot;,</span><br><span class="line">						&quot;OP_JOB_NO&quot;,</span><br><span class="line">						&quot;REMARK&quot;</span><br><span class="line">					],</span><br><span class="line">					&quot;connection&quot;:[</span><br><span class="line">						&#123;</span><br><span class="line">							&quot;jdbcUrl&quot;:&quot;jdbc:gbase://10.101.42.91:1238/gdb_cd&quot;,</span><br><span class="line">							&quot;table&quot;:[</span><br><span class="line">								&quot;datax_op_log&quot;</span><br><span class="line">							]</span><br><span class="line">						&#125;</span><br><span class="line">					],</span><br><span class="line">					&quot;password&quot;:&quot;********&quot;,</span><br><span class="line">					&quot;preSql&quot;:[],</span><br><span class="line">					&quot;session&quot;:[],</span><br><span class="line">					&quot;username&quot;:&quot;cd_system&quot;,</span><br><span class="line">					&quot;writeMode&quot;:&quot;insert&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	&quot;setting&quot;:&#123;</span><br><span class="line">		&quot;speed&quot;:&#123;</span><br><span class="line">			&quot;channel&quot;:&quot;2&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">2019-12-20 15:07:23.009 [main] WARN  Engine - prioriy set to 0, because NumberFormatException, the value is: null</span><br><span class="line">2019-12-20 15:07:23.011 [main] INFO  PerfTrace - PerfTrace traceId=job_-1, isEnable=false, priority=0</span><br><span class="line">2019-12-20 15:07:23.011 [main] INFO  JobContainer - DataX jobContainer starts job.</span><br><span class="line">2019-12-20 15:07:23.013 [main] INFO  JobContainer - Set jobId = 0</span><br><span class="line">2019-12-20 15:07:23.344 [job-0] INFO  OriginalConfPretreatmentUtil - Available jdbcUrl:jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true.</span><br><span class="line">2019-12-20 15:07:23.404 [job-0] INFO  OriginalConfPretreatmentUtil - table:[op_log] has columns:[SCENE_ID,OP_TIME,OP_JOB_NO,REMARK].</span><br><span class="line">2019-12-20 15:07:23.761 [job-0] INFO  OriginalConfPretreatmentUtil - table:[datax_op_log] all columns:[</span><br><span class="line">SCENE_ID,OP_TIME,OP_JOB_NO,REMARK</span><br><span class="line">].</span><br><span class="line">2019-12-20 15:07:23.962 [job-0] INFO  OriginalConfPretreatmentUtil - Write data [</span><br><span class="line">insert INTO %s (SCENE_ID,OP_TIME,OP_JOB_NO,REMARK) VALUES(?,?,?,?)</span><br><span class="line">], which jdbcUrl like:[jdbc:gbase://10.101.42.91:1238/gdb_cd]</span><br><span class="line">2019-12-20 15:07:23.962 [job-0] INFO  JobContainer - jobContainer starts to do prepare ...</span><br><span class="line">2019-12-20 15:07:23.962 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] do prepare work .</span><br><span class="line">2019-12-20 15:07:23.963 [job-0] INFO  JobContainer - DataX Writer.Job [gbasewriter] do prepare work .</span><br><span class="line">2019-12-20 15:07:23.963 [job-0] INFO  JobContainer - jobContainer starts to do split ...</span><br><span class="line">2019-12-20 15:07:23.963 [job-0] INFO  JobContainer - Job set Channel-Number to 2 channels.</span><br><span class="line">2019-12-20 15:07:24.060 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] splits to [1] tasks.</span><br><span class="line">2019-12-20 15:07:24.060 [job-0] INFO  JobContainer - DataX Writer.Job [gbasewriter] splits to [1] tasks.</span><br><span class="line">2019-12-20 15:07:24.173 [job-0] INFO  JobContainer - jobContainer starts to do schedule ...</span><br><span class="line">2019-12-20 15:07:24.199 [job-0] INFO  JobContainer - Scheduler starts [1] taskGroups.</span><br><span class="line">2019-12-20 15:07:24.201 [job-0] INFO  JobContainer - Running by standalone Mode.</span><br><span class="line">2019-12-20 15:07:24.245 [taskGroup-0] INFO  TaskGroupContainer - taskGroupId=[0] start [1] channels for [1] tasks.</span><br><span class="line">2019-12-20 15:07:24.313 [taskGroup-0] INFO  Channel - Channel set byte_speed_limit to -1, No bps activated.</span><br><span class="line">2019-12-20 15:07:24.313 [taskGroup-0] INFO  Channel - Channel set record_speed_limit to -1, No tps activated.</span><br><span class="line">2019-12-20 15:07:24.434 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] taskId[0] attemptCount[1] is started</span><br><span class="line">2019-12-20 15:07:24.441 [0-0-0-reader] INFO  CommonRdbmsReader$Task - Begin to read record by Sql: [select SCENE_ID,OP_TIME,OP_JOB_NO,REMARK from op_log </span><br><span class="line">] jdbcUrl:[jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true].</span><br><span class="line">2019-12-20 15:07:34.475 [job-0] INFO  StandAloneJobContainerCommunicator - Total 0 records, 0 bytes | Speed 0B/s, 0 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 0.000s |  All Task WaitReaderTime 0.000s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:07:44.502 [job-0] INFO  StandAloneJobContainerCommunicator - Total 2560 records, 149496 bytes | Speed 14.60KB/s, 256 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 0.142s |  All Task WaitReaderTime 0.035s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:07:54.502 [job-0] INFO  StandAloneJobContainerCommunicator - Total 2560 records, 149496 bytes | Speed 0B/s, 0 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 0.142s |  All Task WaitReaderTime 0.035s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:08:04.503 [job-0] INFO  StandAloneJobContainerCommunicator - Total 4608 records, 269164 bytes | Speed 11.69KB/s, 204 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 24.193s |  All Task WaitReaderTime 0.044s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:08:14.504 [job-0] INFO  StandAloneJobContainerCommunicator - Total 4608 records, 269164 bytes | Speed 0B/s, 0 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 24.193s |  All Task WaitReaderTime 0.044s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:08:24.505 [job-0] INFO  StandAloneJobContainerCommunicator - Total 6656 records, 390129 bytes | Speed 11.81KB/s, 204 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 43.026s |  All Task WaitReaderTime 0.050s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:08:44.505 [job-0] INFO  StandAloneJobContainerCommunicator - Total 8704 records, 510488 bytes | Speed 5.88KB/s, 102 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 60.643s |  All Task WaitReaderTime 0.053s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:08:54.506 [job-0] INFO  StandAloneJobContainerCommunicator - Total 10752 records, 612379 bytes | Speed 9.95KB/s, 204 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 78.139s |  All Task WaitReaderTime 0.055s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:09:14.506 [job-0] INFO  StandAloneJobContainerCommunicator - Total 12800 records, 731913 bytes | Speed 5.84KB/s, 102 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 94.918s |  All Task WaitReaderTime 0.058s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:09:24.507 [job-0] INFO  StandAloneJobContainerCommunicator - Total 12800 records, 731913 bytes | Speed 0B/s, 0 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 94.918s |  All Task WaitReaderTime 0.058s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:09:34.467 [0-0-0-reader] INFO  CommonRdbmsReader$Task - Finished read record by Sql: [select SCENE_ID,OP_TIME,OP_JOB_NO,REMARK from op_log </span><br><span class="line">] jdbcUrl:[jdbc:mysql://10.101.42.91:1299/zhcj_test?yearIsDateType=false&amp;zeroDateTimeBehavior=convertToNull&amp;tinyInt1isBit=false&amp;rewriteBatchedStatements=true].</span><br><span class="line">2019-12-20 15:09:34.508 [job-0] INFO  StandAloneJobContainerCommunicator - Total 14848 records, 840903 bytes | Speed 10.64KB/s, 204 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 112.371s |  All Task WaitReaderTime 0.060s | Percentage 0.00%</span><br><span class="line">2019-12-20 15:09:42.112 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] taskId[0] is successed, used[137708]ms</span><br><span class="line">2019-12-20 15:09:42.112 [taskGroup-0] INFO  TaskGroupContainer - taskGroup[0] completed it&apos;s tasks.</span><br><span class="line">2019-12-20 15:09:44.508 [job-0] INFO  AbstractScheduler - Scheduler accomplished all tasks.</span><br><span class="line">2019-12-20 15:09:44.508 [job-0] INFO  JobContainer - DataX Writer.Job [gbasewriter] do post work.</span><br><span class="line">2019-12-20 15:09:44.509 [job-0] INFO  JobContainer - DataX Reader.Job [mysqlreader] do post work.</span><br><span class="line">2019-12-20 15:09:44.509 [job-0] INFO  JobContainer - DataX jobId [0] completed successfully.</span><br><span class="line">2019-12-20 15:09:44.510 [job-0] INFO  HookInvoker - No hook invoked, because base dir not exists or is a file: F:\WorkAbout\datax\datax\hook</span><br><span class="line">2019-12-20 15:09:44.511 [job-0] INFO  JobContainer - </span><br><span class="line">	 [total cpu info] =&gt; </span><br><span class="line">		averageCpu                     | maxDeltaCpu                    | minDeltaCpu                    </span><br><span class="line">		-1.00%                         | -1.00%                         | -1.00%</span><br><span class="line">                        </span><br><span class="line"></span><br><span class="line">	 [total gc info] =&gt; </span><br><span class="line">		 NAME                 | totalGCCount       | maxDeltaGCCount    | minDeltaGCCount    | totalGCTime        | maxDeltaGCTime     | minDeltaGCTime     </span><br><span class="line">		 PS MarkSweep         | 0                  | 0                  | 0                  | 0.000s             | 0.000s             | 0.000s             </span><br><span class="line">		 PS Scavenge          | 0                  | 0                  | 0                  | 0.000s             | 0.000s             | 0.000s             </span><br><span class="line"></span><br><span class="line">2019-12-20 15:09:44.511 [job-0] INFO  JobContainer - PerfTrace not enable!</span><br><span class="line">2019-12-20 15:09:44.511 [job-0] INFO  StandAloneJobContainerCommunicator - Total 15167 records, 849566 bytes | Speed 5.93KB/s, 108 records/s | Error 0 records, 0 bytes |  All Task WaitWriterTime 129.781s |  All Task WaitReaderTime 0.061s | Percentage 100.00%</span><br><span class="line">2019-12-20 15:09:44.512 [job-0] INFO  JobContainer - </span><br><span class="line">任务启动时刻                    : 2019-12-20 15:07:23</span><br><span class="line">任务结束时刻                    : 2019-12-20 15:09:44</span><br><span class="line">任务总计耗时                    :                141s</span><br><span class="line">任务平均流量                    :            5.93KB/s</span><br><span class="line">记录写入速度                    :            108rec/s</span><br><span class="line">读出记录总数                    :               15167</span><br><span class="line">读写失败总数                    :                   0</span><br></pre></td></tr></table></figure>
+<p>没办法，机器太low。这并不是Datax真实的效果。现在就可以把Datax放在服务器上去同步数据了。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Datax/" rel="tag">Datax</a>, <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Tool/" rel="tag">Tool</a>, <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" rel="tag">数据同步</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/Spring-Boot%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%8A%80%E5%B7%A7/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring Boot基于javax.validation进行参数校验</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/Nginx%E4%B8%BA%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AEHttps/">
+                <span class="level-item">Nginx为同主机配置Https多域名</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/avatar1.png" alt="农民工学编程">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        农民工学编程
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        大龄程序员
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China,sichuan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        45
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eyiadmin" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/eyiadmin">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.baidu.com" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">百度</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.baidu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/net-core/">
+            <span class="level-start">
+                <span class="level-item">.net core</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Docker/">
+            <span class="level-start">
+                <span class="level-item">Docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gis/">
+            <span class="level-start">
+                <span class="level-item">Gis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Golang/">
+            <span class="level-start">
+                <span class="level-item">Golang</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Nginx/">
+            <span class="level-start">
+                <span class="level-item">Nginx</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/shell/">
+            <span class="level-start">
+                <span class="level-item">shell</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/net-core/" style="font-size: 18.33px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 13.33px;">Github</a> <a href="/tags/Golang/" style="font-size: 11.67px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 11.67px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 15px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time></div>
+                    <a href="/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue自定义组件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue制作静态页面简历并发布到七牛云上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-02T00:05:01.000Z">2020-01-02</time></div>
+                    <a href="/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue制作静态页面简历并发布到七牛云上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Vue%E5%85%A5%E9%97%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T05:50:15.000Z">2020-01-01</time></div>
+                    <a href="/Vue%E5%85%A5%E9%97%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx Proxy_Pass和Rewirte的用法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T10:58:18.000Z">2019-12-31</time></div>
+                    <a href="/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Nginx Proxy_Pass和Rewirte的用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/IntelliJ-IDEA-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%94%B6%E8%97%8F%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://www.jetbrains.com/idea/img/screenshots/idea_overview_2.png" alt="IntelliJ IDEA 常用快捷键整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-30T00:56:56.000Z">2019-12-30</time></div>
+                    <a href="/IntelliJ-IDEA-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%94%B6%E8%97%8F%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">IntelliJ IDEA 常用快捷键整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time></div>
+                    <a href="/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue自定义组件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue制作静态页面简历并发布到七牛云上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-02T00:05:01.000Z">2020-01-02</time></div>
+                    <a href="/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue制作静态页面简历并发布到七牛云上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Vue%E5%85%A5%E9%97%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T05:50:15.000Z">2020-01-01</time></div>
+                    <a href="/Vue%E5%85%A5%E9%97%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx Proxy_Pass和Rewirte的用法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T10:58:18.000Z">2019-12-31</time></div>
+                    <a href="/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Nginx Proxy_Pass和Rewirte的用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/IntelliJ-IDEA-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%94%B6%E8%97%8F%E6%95%B4%E7%90%86/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://www.jetbrains.com/idea/img/screenshots/idea_overview_2.png" alt="IntelliJ IDEA 常用快捷键整理">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-30T00:56:56.000Z">2019-12-30</time></div>
+                    <a href="/IntelliJ-IDEA-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%94%B6%E8%97%8F%E6%95%B4%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">IntelliJ IDEA 常用快捷键整理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+       
+    <div class="container">
+           
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="DataX将DB2数据同步到GBase中" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                       
+                             
+                        
+                &copy; 2020 eyiadmin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+               
+                蜀ICP备19030100号|本站总访问量<span id="busuanzi_value_site_pv">0</span>次
+                    |
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+       
+           
+    </div>
+	<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
