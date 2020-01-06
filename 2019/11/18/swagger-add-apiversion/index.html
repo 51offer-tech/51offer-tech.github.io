@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="baidu-site-verification" content="up4BoDUY22" />
+
+<title>.net core 3.x Web API使用Swagger添加多版本以及JWT Authorization - 农民工学编程</title>
+
+
+    <meta name="description" content="很多时候，要给我们的接口升级，但是又怕影响之前的接口业务或者是要开发特定的接口，我们会给接口加上一个版本号，保障老接口依然能稳定运行，例如百度的坐标转换服务 1http:&#x2F;&#x2F;api.map.baidu.com&#x2F;geoconv&#x2F;v1&#x2F;?coords=114.21892734521,29.575429778924&amp;amp;from=1&amp;amp;to=5&amp;amp;ak=你的密钥 &#x2F;&#x2F;GET请求">
+<meta name="keywords" content=".net core,swagger">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".net core 3.x Web API使用Swagger添加多版本以及JWT Authorization">
+<meta property="og:url" content="http:&#x2F;&#x2F;blogs.52fx.biz&#x2F;2019&#x2F;11&#x2F;18&#x2F;swagger-add-apiversion&#x2F;index.html">
+<meta property="og:site_name" content="农民工学编程">
+<meta property="og:description" content="很多时候，要给我们的接口升级，但是又怕影响之前的接口业务或者是要开发特定的接口，我们会给接口加上一个版本号，保障老接口依然能稳定运行，例如百度的坐标转换服务 1http:&#x2F;&#x2F;api.map.baidu.com&#x2F;geoconv&#x2F;v1&#x2F;?coords=114.21892734521,29.575429778924&amp;amp;from=1&amp;amp;to=5&amp;amp;ak=你的密钥 &#x2F;&#x2F;GET请求">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
+<meta property="og:updated_time" content="2019-12-12T09:08:25.549Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+        // var windowWidth = $(window).width();
+        // if (windowWidth > 480) {
+          document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
+        //}
+      </script>
+  
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt=".net core 3.x Web API使用Swagger添加多版本以及JWT Authorization" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/eyiadmin/meizitu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://xxnote.52fx.biz/swagger.png" alt=".net core 3.x Web API使用Swagger添加多版本以及JWT Authorization">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-18T10:18:18.000Z">2019-11-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1071 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                .net core 3.x Web API使用Swagger添加多版本以及JWT Authorization
+            
+        </h1>
+        <div class="content">
+            <p>很多时候，要给我们的接口升级，但是又怕影响之前的接口业务或者是要开发特定的接口，我们会给接口加上一个版本号，保障老接口依然能稳定运行，例如百度的坐标转换服务</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://api.map.baidu.com/geoconv/v1/?coords=114.21892734521,29.575429778924&amp;from=1&amp;to=5&amp;ak=你的密钥 //GET请求</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>在.net core中，想给接口加上版本号，有多种方式:</p>
+<ul>
+<li>1、通过URL Path Segment来实现;</li>
+<li>2、通过HTTP Headers来实现;</li>
+<li>3、通过QueryString来实现;<br>具体的实现可以去百度或者bing。这里暂时只讲swagger doc实现多版本切换。我个人喜欢使用第一种方式。</li>
+</ul>
+<h3 id="ApiExplorer组件的使用"><a href="#ApiExplorer组件的使用" class="headerlink" title="ApiExplorer组件的使用"></a>ApiExplorer组件的使用</h3><p>在实现多版本Web API，我们需要借助一个组件:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/apinuget.png" alt="安装包"><br>成功添加依赖包后，就可以在程序中使用相应的API了，首先我们先创建如下的目录结构(大家可随意):<br><img src="http://xxnote.52fx.biz/apidir.png" alt="目录"><br>接下来，就将我们之前的Controller类上添加相应的特性:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//当前Controller的版本号</span><br><span class="line">[ApiVersion(&quot;1.0&quot;)]</span><br><span class="line">//接口访问路径</span><br><span class="line">[Route(&quot;api/v&#123;version:apiVersion&#125;/[controller]&quot;)]</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/apiv1.png" alt="Web API V1"><br><img src="http://xxnote.52fx.biz/apiv2.png" alt="Web API V2"><br>然后在Startup的ConfigureServices中使用ApiExplorer</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">services.AddApiVersioning();</span><br><span class="line">services.AddVersionedApiExplorer(options =&gt; options.GroupNameFormat = &quot;&apos;v&apos;VVV&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Swagger中多版本API文档"><a href="#Swagger中多版本API文档" class="headerlink" title="Swagger中多版本API文档"></a>Swagger中多版本API文档</h3><p>下面，我就用Swagger来自动生成多版本文档，为了使我的Startup类相对简洁，我们新建一个ConfigureSwaggerOptions类来放置Swagger的相关配置,完整代码如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class ConfigureSwaggerOptions : IConfigureOptions&lt;SwaggerGenOptions&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       readonly IApiVersionDescriptionProvider provider;</span><br><span class="line"></span><br><span class="line">       public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) =&gt;</span><br><span class="line">         this.provider = provider;</span><br><span class="line"></span><br><span class="line">       public void Configure(SwaggerGenOptions options)</span><br><span class="line">       &#123;</span><br><span class="line">           foreach (var description in provider.ApiVersionDescriptions)</span><br><span class="line">           &#123;</span><br><span class="line">               options.SwaggerDoc(description.GroupName, new OpenApiInfo</span><br><span class="line">               &#123;</span><br><span class="line">                   Description = $&quot;Demo API &#123;description.ApiVersion&#125; Description&quot;,</span><br><span class="line">                   Version = description.ApiVersion.ToString(),</span><br><span class="line">                   Title = $&quot;Demo API 文档&#123;description.ApiVersion&#125;&quot;,</span><br><span class="line">                   Contact = new OpenApiContact() &#123; Name = &quot;eyiadmin&quot;, Email = &quot;188781475@qq.com&quot; &#125;,</span><br><span class="line">                   License = new OpenApiLicense</span><br><span class="line">                   &#123;</span><br><span class="line">                       Name = &quot;Apache 2.0&quot;,</span><br><span class="line">                       Url = new Uri(&quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;)</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           var docXmlPath = Path.Combine(AppContext.BaseDirectory, &quot;Web.xml&quot;);</span><br><span class="line">           options.IncludeXmlComments(docXmlPath);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>修改Startup类<br>ConfigureServices中:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">services.AddTransient&lt;IConfigureOptions&lt;SwaggerGenOptions&gt;, ConfigureSwaggerOptions&gt;();</span><br><span class="line">services.AddSwaggerGen();</span><br></pre></td></tr></table></figure>
+<p>Configure中</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)</span><br><span class="line">       &#123;</span><br><span class="line"></span><br><span class="line">           if (env.IsDevelopment())</span><br><span class="line">           &#123;</span><br><span class="line">               app.UseSwagger();</span><br><span class="line">               app.UseSwaggerUI(options =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   foreach (var description in provider.ApiVersionDescriptions)</span><br><span class="line">                   &#123;</span><br><span class="line">                       options.SwaggerEndpoint(</span><br><span class="line">                           $&quot;/swagger/&#123;description.GroupName&#125;/swagger.json&quot;,</span><br><span class="line">                           description.GroupName.ToUpperInvariant());</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">               app.UseDeveloperExceptionPage();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           app.UseHttpsRedirection();</span><br><span class="line"></span><br><span class="line">           app.UseRouting();</span><br><span class="line"></span><br><span class="line">           app.UseAuthorization();</span><br><span class="line">         </span><br><span class="line">           app.UseEndpoints(endpoints =&gt;</span><br><span class="line">           &#123;</span><br><span class="line">               endpoints.MapControllers();</span><br><span class="line">           &#125;);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>最终效果如下：<br><img src="http://xxnote.52fx.biz/swaggerv1.png" alt="v1"><br><img src="http://xxnote.52fx.biz/swaggerv2.png" alt="v2"><br>可以点击Select a definition切换我们不同版本的doc</p>
+<h3 id="在Swagger中添加Header-Authorization"><a href="#在Swagger中添加Header-Authorization" class="headerlink" title="在Swagger中添加Header Authorization"></a>在Swagger中添加Header Authorization</h3><blockquote>
+<p>一般情况下，我们的Web API是使用Jwt来保障接口安全，当然还有很多其他的方式，我只是选择一种相对简单一些的方式。这里只是说怎么在Swagger调试的时候带上我们的Jwt Token，具体的Jwt实现，也请自己实现。</p>
+</blockquote>
+<p>其实Swashbuckle已经给我们提供了很方便的API，只需要配置一下即可:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">options.AddSecurityDefinition(&quot;bearer&quot;, new OpenApiSecurityScheme</span><br><span class="line">           &#123;</span><br><span class="line">               Type = SecuritySchemeType.Http,</span><br><span class="line">               In = ParameterLocation.Header,</span><br><span class="line">               Name = &quot;Authorization&quot;,</span><br><span class="line">               Scheme = &quot;bearer&quot;,</span><br><span class="line">               BearerFormat = &quot;JWT&quot;,</span><br><span class="line">               Description = &quot;JWT Authorization header using the Bearer scheme.&quot;,</span><br><span class="line">               </span><br><span class="line">           &#125;);</span><br><span class="line">           </span><br><span class="line">           var req = new OpenApiSecurityRequirement();</span><br><span class="line">           req.Add(new OpenApiSecurityScheme</span><br><span class="line">           &#123;</span><br><span class="line">               Reference = new OpenApiReference &#123; Type = ReferenceType.SecurityScheme, Id = &quot;bearer&quot; &#125;</span><br><span class="line"></span><br><span class="line">           &#125;, new[] &#123; &quot;&quot; &#125;);</span><br><span class="line">           options.AddSecurityRequirement(req);</span><br></pre></td></tr></table></figure>
+<p>效果如下:<br><img src="http://xxnote.52fx.biz/Authorization.png" alt="效果"><br>我们会看到有一个Authorization的按钮，我们点击可以输入我们获取到的Jwt Token,在文本框内不需要输入Bearer关键字，Swagger会自动为我们加上Bearer关键字。在这里也需要注意到Swagger的坑，因为大写的问题可能会导致Authorization无法添加到request请求头中.下面是Swagger的build-request.js</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">else if (type === &apos;http&apos;) &#123;</span><br><span class="line">         if (schema.scheme === &apos;basic&apos;) &#123;</span><br><span class="line">         let scheme = schema.scheme;</span><br><span class="line">         if (scheme) &#123;</span><br><span class="line">           scheme = scheme.toLowerCase()</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         if (scheme === &apos;basic&apos;) &#123;</span><br><span class="line">           const &#123;username, password&#125; = value</span><br><span class="line">           const encoded = btoa(`$&#123;username&#125;:$&#123;password&#125;`)</span><br><span class="line">           result.headers.Authorization = `Basic $&#123;encoded&#125;`</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         if (schema.scheme === &apos;bearer&apos;) &#123;</span><br><span class="line">         if (scheme === &apos;bearer&apos;) &#123;</span><br><span class="line">           result.headers.Authorization = `Bearer $&#123;value&#125;`</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>大家可以自己去看看代码，我继续说Authorization的设置，点击按钮就会出现设置token的文本框:<br><img src="http://xxnote.52fx.biz/SetAuthorization.png" alt="Authorization"><br>设置完后，我们的小锁会变为关闭状态:<br><img src="http://xxnote.52fx.biz/AuthorizationEnd.png" alt="Authorization"><br>最后就可以通过Swagger UI调用我们的接口，就可以在我们的请求中看到Authorization的参数内容，后端就可以接受处理.<br><img src="http://xxnote.52fx.biz/end.png" alt="请求参数"><br>当然，Swagger还有其他的自定义UI功能，大家可以去官网查询相关文档。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>, <a class="has-link-grey -link" href="/tags/swagger/" rel="tag">swagger</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/20/Driud-SqlParse/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">借助alibaba Driud SQL Parser组件处理sql语句</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/14/shell-command/">
+                <span class="level-item">shell脚本学习</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/avatar1.png" alt="农民工学编程">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        农民工学编程
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        大龄程序员
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China,sichuan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eyiadmin" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/eyiadmin">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.baidu.com" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">百度</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.baidu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/net-core/">
+            <span class="level-start">
+                <span class="level-item">.net core</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Docker/">
+            <span class="level-start">
+                <span class="level-item">Docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gis/">
+            <span class="level-start">
+                <span class="level-item">Gis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Golang/">
+            <span class="level-start">
+                <span class="level-item">Golang</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Nginx/">
+            <span class="level-start">
+                <span class="level-item">Nginx</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/shell/">
+            <span class="level-start">
+                <span class="level-item">shell</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/net-core/" style="font-size: 18.33px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/Golang/" style="font-size: 11.67px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 15px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/06/Hexo-SEO%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo SEO优化记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-06T00:28:57.000Z">2020-01-06</time></div>
+                    <a href="/2020/01/06/Hexo-SEO%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo SEO优化记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/03/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time></div>
+                    <a href="/2020/01/03/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue自定义组件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue制作静态页面简历并发布到七牛云上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-02T00:05:01.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue制作静态页面简历并发布到七牛云上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/01/Vue%E5%85%A5%E9%97%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T05:50:15.000Z">2020-01-01</time></div>
+                    <a href="/2020/01/01/Vue%E5%85%A5%E9%97%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/31/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx Proxy_Pass和Rewirte的用法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T10:58:18.000Z">2019-12-31</time></div>
+                    <a href="/2019/12/31/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Nginx Proxy_Pass和Rewirte的用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/06/Hexo-SEO%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo SEO优化记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-06T00:28:57.000Z">2020-01-06</time></div>
+                    <a href="/2020/01/06/Hexo-SEO%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo SEO优化记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Git/">Git</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/03/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time></div>
+                    <a href="/2020/01/03/Vue%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue自定义组件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/02/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue制作静态页面简历并发布到七牛云上">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-02T00:05:01.000Z">2020-01-02</time></div>
+                    <a href="/2020/01/02/Vue%E5%88%B6%E4%BD%9C%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%AE%80%E5%8E%86%E5%B9%B6%E5%8F%91%E5%B8%83%E5%88%B0%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue制作静态页面简历并发布到七牛云上</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/01/Vue%E5%85%A5%E9%97%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T05:50:15.000Z">2020-01-01</time></div>
+                    <a href="/2020/01/01/Vue%E5%85%A5%E9%97%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/12/31/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx Proxy_Pass和Rewirte的用法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T10:58:18.000Z">2019-12-31</time></div>
+                    <a href="/2019/12/31/Nginx-Proxy-Pass%E5%92%8CRewirte%E7%9A%84%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Nginx Proxy_Pass和Rewirte的用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+       
+    <div class="container">
+           
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt=".net core 3.x Web API使用Swagger添加多版本以及JWT Authorization" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                       
+                             
+                        
+                &copy; 2020 eyiadmin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+               
+                蜀ICP备19030100号|本站总访问量<span id="busuanzi_value_site_pv">0</span>次
+                    |
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+       
+           
+    </div>
+	<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
