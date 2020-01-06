@@ -5,9 +5,9 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-
+<!-- 
     <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-    
+     -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
@@ -23,7 +23,7 @@
 <meta property="og:description" content="写博客其实是对自己工作经验和学过程的总结，可能写得不好，但是还是希望自己踩过的坑能让更多人去避开我们踩过的坑。所以，在自己记录的同时，更希望帮助更多的人去解决一些问题。但是我们写的东西别人一直都搜索不到，怎么办呢？要让别人知道，要么就是自己主动分享，要么就是朋友们自己搜索，我们今天是来说后者，那就是如何让百度收录我们的博客。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-01-06T01:42:46.893Z">
+<meta property="og:updated_time" content="2020-01-06T01:56:38.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1224 个字)
+                    8 分钟 读完 (大约 1181 个字)
                 </span>
                 
                 
@@ -193,11 +193,6 @@
 <p>然后在<code>_config.yml</code>配置</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  - type: git </span><br><span class="line">    repository: </span><br><span class="line">      github: git@github.com:51offer-tech/51offer-tech.github.io.git</span><br><span class="line">      #coding: git@git.coding.net:offer-tech/51offer-tech.git</span><br><span class="line">      coding: https://e.coding.net/offer-tech/offer-tech.git</span><br><span class="line">      gitee: https://gitee.com/eyiadmin/offer-tech.git</span><br><span class="line">    branch: master</span><br><span class="line">  - type: baidu_url_submitter</span><br><span class="line"></span><br><span class="line"># 百度链接自动提交</span><br><span class="line">baidu_url_submit:</span><br><span class="line">  count: 1000 ## 提交最新的一个链接</span><br><span class="line">  host: http://blogs.52fx.biz ## 在百度站长平台中注册的域名</span><br><span class="line">  token: xxxxxxxx ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!</span><br><span class="line">  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里</span><br></pre></td></tr></table></figure>
 <p>详细的资料大家可以去<a href="https://github.com/huiwang/hexo-baidu-url-submit" target="_blank" rel="noopener">hexo-baidu-url-submit</a> 的github查看.</p>
-<h3 id="首页title的优化"><a href="#首页title的优化" class="headerlink" title="首页title的优化"></a>首页title的优化</h3><p>更改index.swig文件，文件路径是<code>themes\next\layout</code>，将下面代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block title %&#125;  &#123;&#123; config.title &#125;&#125;  &#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block title %&#125;  &#123;&#123; config.title &#125;&#125; - &#123;&#123; theme.description &#125;&#125;  &#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
-
 <p>未完待续，持续更新中.</p>
 
         </div>
