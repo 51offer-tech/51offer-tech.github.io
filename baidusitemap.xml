@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blogs.52fx.biz/20200110/HttpRequest-Tools-On-Windows.html</loc>
+    <lastmod>2020-01-08</lastmod>
+  </url>  <url>
     <loc>https://blogs.52fx.biz/20200108/gatsbyjs-publish-web.html</loc>
     <lastmod>2020-01-07</lastmod>
   </url>  <url>
@@ -70,9 +73,6 @@
     <loc>https://blogs.52fx.biz/20191205/github-routine-operation.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
-    <loc>https://blogs.52fx.biz/20191120/Driud-SqlParse.html</loc>
-    <lastmod>2019-12-12</lastmod>
-  </url>  <url>
     <loc>https://blogs.52fx.biz/20191024/AccessibilityService%E8%87%AA%E5%8A%A8%E5%88%B7%E8%A7%86%E9%A2%91.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
@@ -88,10 +88,10 @@
     <loc>https://blogs.52fx.biz/20191024/golang%E4%B8%8B%E8%BD%BD%E5%A6%B9%E5%AD%90%E5%9B%BE.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
-    <loc>https://blogs.52fx.biz/20191126/mysql-slow-explain.html</loc>
+    <loc>https://blogs.52fx.biz/20191024/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
-    <loc>https://blogs.52fx.biz/20191024/golang%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1.html</loc>
+    <loc>https://blogs.52fx.biz/20191126/mysql-slow-explain.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
     <loc>https://blogs.52fx.biz/20191112/net-core-3-0-use-swagger-ui.html</loc>
@@ -103,13 +103,16 @@
     <loc>https://blogs.52fx.biz/20191203/hexo-blog.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
-    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
+    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
     <loc>https://blogs.52fx.biz/20191024/%E5%9F%BA%E4%BA%8Eredis-key%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
-    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
+    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
+    <lastmod>2019-12-12</lastmod>
+  </url>  <url>
+    <loc>https://blogs.52fx.biz/20191120/Driud-SqlParse.html</loc>
     <lastmod>2019-12-12</lastmod>
   </url>  <url>
     <loc>https://blogs.52fx.biz/20191210/Golang%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B9%8B%E5%8F%98%E9%87%8F.html</loc>

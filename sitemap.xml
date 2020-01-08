@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogs.52fx.biz/20200110/HttpRequest-Tools-On-Windows.html</loc>
+    
+    <lastmod>2020-01-08T09:02:23.316Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blogs.52fx.biz/20200108/gatsbyjs-publish-web.html</loc>
     
     <lastmod>2020-01-07T09:26:16.118Z</lastmod>
@@ -163,13 +170,6 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191120/Driud-SqlParse.html</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blogs.52fx.biz/20191024/AccessibilityService%25E8%2587%25AA%25E5%258A%25A8%25E5%2588%25B7%25E8%25A7%2586%25E9%25A2%2591.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -205,14 +205,14 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191126/mysql-slow-explain.html</loc>
+    <loc>https://blogs.52fx.biz/20191024/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191024/golang%25E5%25B9%25B3%25E6%25BB%2591%25E5%258D%2587%25E7%25BA%25A7%25E6%259C%258D%25E5%258A%25A1.html</loc>
+    <loc>https://blogs.52fx.biz/20191126/mysql-slow-explain.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
+    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -254,7 +254,14 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
+    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blogs.52fx.biz/20191120/Driud-SqlParse.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
