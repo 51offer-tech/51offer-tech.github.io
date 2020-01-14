@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogs.52fx.biz/20200113/NSQ-Delay-Message.html</loc>
+    
+    <lastmod>2020-01-14T08:52:38.595Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blogs.52fx.biz/20200106/Senparc-appid-not-register.html</loc>
+    
+    <lastmod>2020-01-14T02:10:47.066Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blogs.52fx.biz/20200112/Net-Core-3-X-Windows-Service.html</loc>
     
     <lastmod>2020-01-13T05:46:28.627Z</lastmod>
@@ -19,13 +33,6 @@
     <loc>https://blogs.52fx.biz/20200108/gatsbyjs-publish-web.html</loc>
     
     <lastmod>2020-01-07T09:26:16.118Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blogs.52fx.biz/20200106/Senparc-appid-not-register.html</loc>
-    
-    <lastmod>2020-01-07T01:37:25.414Z</lastmod>
     
   </url>
   
@@ -177,13 +184,6 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191121/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blogs.52fx.biz/20191024/AccessibilityService%25E8%2587%25AA%25E5%258A%25A8%25E5%2588%25B7%25E8%25A7%2586%25E9%25A2%2591.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -192,6 +192,13 @@
   
   <url>
     <loc>https://blogs.52fx.biz/20191120/Driud-SqlParse.html</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blogs.52fx.biz/20191121/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -219,7 +226,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191024/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE.html</loc>
+    <loc>https://blogs.52fx.biz/20191112/net-core-3-0-use-swagger-ui.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -233,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191112/net-core-3-0-use-swagger-ui.html</loc>
+    <loc>https://blogs.52fx.biz/20191024/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -254,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
+    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/20191118/swagger-add-apiversion.html</loc>
+    <loc>https://blogs.52fx.biz/20191208/upload-blog-2-qiniu.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
