@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogs.52fx.biz/202001/Senparc-appid-not-register.html</loc>
+    
+    <lastmod>2020-01-17T06:15:19.928Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blogs.52fx.biz/201910/%25E5%25BE%25AE%25E4%25BF%25A1%25E5%25B0%258F%25E7%25A8%258B%25E5%25BA%258F%25E4%25B8%258A%25E4%25BC%25A0%25E5%259B%25BE%25E7%2589%2587%25E5%2588%25B0%25E4%25B8%2583%25E7%2589%259B%25E4%25BA%2591.html</loc>
     
     <lastmod>2020-01-17T06:12:00.360Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>https://blogs.52fx.biz/about/index.html</loc>
     
     <lastmod>2020-01-15T06:10:40.978Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blogs.52fx.biz/202001/Senparc-appid-not-register.html</loc>
-    
-    <lastmod>2020-01-14T02:10:47.066Z</lastmod>
     
   </url>
   
@@ -226,7 +226,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201911/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
+    <loc>https://blogs.52fx.biz/201910/AccessibilityService%25E8%2587%25AA%25E5%258A%25A8%25E5%2588%25B7%25E8%25A7%2586%25E9%25A2%2591.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -240,7 +240,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201910/AccessibilityService%25E8%2587%25AA%25E5%258A%25A8%25E5%2588%25B7%25E8%25A7%2586%25E9%25A2%2591.html</loc>
+    <loc>https://blogs.52fx.biz/201911/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201912/net-core3-x-autofac-ioc.html</loc>
+    <loc>https://blogs.52fx.biz/201911/swagger-add-apiversion.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201911/swagger-add-apiversion.html</loc>
+    <loc>https://blogs.52fx.biz/201912/net-core3-x-autofac-ioc.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
