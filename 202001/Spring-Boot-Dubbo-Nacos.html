@@ -5,27 +5,28 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content="分类: Java , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta name="description" content="分类: Java , 农民工学编程 , 农民工学编程的日常学习记录">
+<meta name="keywords" content="Spring Boot整合Dubbo和Nacos , 农民工学编程 , Spring Boot,Dubbo,Nacos,Nacos注册中心,Dubbo Nacos注册中心 配置中心,Spring Cloud Alibaba">
+<meta name="description" content="Spring Boot整合Dubbo和Nacos , 农民工学编程 , Spring Boot整合Dubbo和Nacos">
 <!-- 
-    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="Spring Boot,Dubbo,Nacos,Nacos注册中心,Dubbo Nacos注册中心 配置中心,Spring Cloud Alibaba,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>分类: Java - 农民工学编程</title>
+<title>Spring Boot整合Dubbo和Nacos - 农民工学编程</title>
 
 
-    <meta name="description" content="农民工学编程的日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;categories&#x2F;Java&#x2F;index.html">
+    <meta name="description" content="Spring Boot整合Dubbo和Nacos">
+<meta name="keywords" content="Spring Boot,Dubbo,Nacos,Nacos注册中心,Dubbo Nacos注册中心 配置中心,Spring Cloud Alibaba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot整合Dubbo和Nacos">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;202001&#x2F;Spring-Boot-Dubbo-Nacos.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="农民工学编程的日常学习记录">
+<meta property="og:description" content="Spring Boot整合Dubbo和Nacos">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-01-18T09:10:24.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -93,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Spring Boot整合Dubbo和Nacos" height="28">
             
             </a>
         </div>
@@ -129,6 +130,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -142,19 +147,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">Java</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
@@ -175,26 +168,89 @@
                 </span>
                 
                 
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/202001/Spring-Boot-Dubbo-Nacos.html">Spring Boot整合Dubbo和Nacos</a>
+                Spring Boot整合Dubbo和Nacos
             
         </h1>
         <div class="content">
             <p>目前适用于Spring Cloud服务注册中心的解决方案比较多,诸如：<code>Consul</code>、<code>Spring Cloud Eureka</code>、<code>Zookeeper</code>、<code>Etcd</code>等，配置中心有：<code>Spring Cloud Config</code>、<code>Apollo</code>、<code>Disconf</code>等。总感觉这些搭建起来较为繁琐，所以考虑使用<code>Nacos</code>来做配置和服务注册中心。</p>
+<a id="more"></a>
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Apache Dubbo 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
+<p>Nacos是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。它具有:动态配置服务、服务发现及管理、动态DNS服务等功能。<br>这里我用到的环境为:</p>
+<ul>
+<li><a href="http://dubbo.apache.org/zh-cn/index.html" target="_blank" rel="noopener">Dubbo 2.7.5</a></li>
+<li><a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">Nacos 1.1.4</a></li>
+<li>MariaDB 10.3.10</li>
+<li>Windows 10</li>
+<li>IntelliJ IDEA 2019.3.1</li>
+<li>64 bit JDK 1.8.0_231</li>
+<li>Spring Boot 2.2.3.RELEASE</li>
+</ul>
+<h3 id="部署Nacos开发环境"><a href="#部署Nacos开发环境" class="headerlink" title="部署Nacos开发环境"></a>部署Nacos开发环境</h3><p>数据库安装在这里就不展开细说，大家自行探索。首先需要去<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a>下载Nacos,解压之后目录结构如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">│  LICENSE</span><br><span class="line">│  NOTICE</span><br><span class="line">│</span><br><span class="line">├─bin</span><br><span class="line">│      shutdown.cmd</span><br><span class="line">│      shutdown.sh</span><br><span class="line">│      startup.cmd</span><br><span class="line">│      startup.sh</span><br><span class="line">│</span><br><span class="line">├─conf</span><br><span class="line">│      application.properties</span><br><span class="line">│      application.properties.example</span><br><span class="line">│      cluster.conf.example</span><br><span class="line">│      nacos-logback.xml</span><br><span class="line">│      nacos-mysql.sql</span><br><span class="line">│      schema.sql</span><br><span class="line">│</span><br><span class="line">└─target</span><br><span class="line">        nacos-server.jar</span><br></pre></td></tr></table></figure>
+<ul>
+<li>先初始化<code>Nacos</code>数据库,这里我创建了一个名为<code>nacos-config</code>的数据库并导入<code>nacos-mysql.sql</code>的数据库脚本.</li>
+<li>修改conf/application.properties文件,添加mysql数据源的url、用户名和密码。<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.num=1</span><br><span class="line">db.url.0=jdbc:mysql://localhost:3306/nacos_config?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true</span><br><span class="line">db.user=root</span><br><span class="line">db.password=root</span><br></pre></td></tr></table></figure>
+我们进入到<strong>bin</strong>目录,双击<strong>startup.cmd</strong>文件启动<code>Nacos</code>服务：<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">         ,--.</span><br><span class="line">       ,--.&apos;|</span><br><span class="line">   ,--,:  : |                                           Nacos 1.1.4</span><br><span class="line">,`--.&apos;`|  &apos; :                       ,---.               Running in stand alone mode, All function modules</span><br><span class="line">|   :  :  | |                      &apos;   ,&apos;\   .--.--.    Port: 8848</span><br><span class="line">:   |   \ | :  ,--.--.     ,---.  /   /   | /  /    &apos;   Pid: 24724</span><br><span class="line">|   : &apos;  &apos;; | /       \   /     \.   ; ,. :|  :  /`./   Console: http://192.168.3.27:8848/nacos/index.html</span><br><span class="line">&apos;   &apos; ;.    ;.--.  .-. | /    / &apos;&apos;   | |: :|  :  ;_</span><br><span class="line">|   | | \   | \__\/: . ..    &apos; / &apos;   | .; : \  \    `.      https://nacos.io</span><br><span class="line">&apos;   : |  ; .&apos; ,&quot; .--.; |&apos;   ; :__|   :    |  `----.   \</span><br><span class="line">|   | &apos;`--&apos;  /  /  ,.  |&apos;   | &apos;.&apos;|\   \  /  /  /`--&apos;  /</span><br><span class="line">&apos;   : |     ;  :   .&apos;   \   :    : `----&apos;  &apos;--&apos;.     /</span><br><span class="line">;   |.&apos;     |  ,     .-./\   \  /            `--&apos;---&apos;</span><br><span class="line">&apos;---&apos;        `--`---&apos;     `----&apos;</span><br><span class="line"></span><br><span class="line">此处省略xxx行</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,063 INFO Exposing 2 endpoint(s) beneath base path &apos;/actuator&apos;</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,104 INFO Initializing ExecutorService &apos;taskScheduler&apos;</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,297 INFO Tomcat started on port(s): 8848 (http) with context path &apos;/nacos&apos;</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,304 INFO Nacos Log files: E:\tool\nacos-server-1.1.4\nacos/logs/</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,304 INFO Nacos Conf files: E:\tool\nacos-server-1.1.4\nacos/conf/</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,305 INFO Nacos Data files: E:\tool\nacos-server-1.1.4\nacos/data/</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,306 INFO Nacos started successfully in stand alone mode.</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,812 INFO Initializing Servlet &apos;dispatcherServlet&apos;</span><br><span class="line"></span><br><span class="line">2020-01-18 11:17:19,823 INFO Completed initialization in 11 ms</span><br></pre></td></tr></table></figure>
+由于只是开发环境，所以就先搭建这个<code>单机模式</code>版本，现在我们访问Nacos服务:<a href="http://192.168.3.27:8848/nacos/index.html" target="_blank" rel="noopener">http://192.168.3.27:8848/nacos/index.html</a><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_1.png" alt><br>默认用户名和密码为:nacos/nacos<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_2.png" alt></li>
+</ul>
+<h3 id="IDEA创建多模块项目"><a href="#IDEA创建多模块项目" class="headerlink" title="IDEA创建多模块项目"></a>IDEA创建多模块项目</h3><h4 id="新建一个Maven项目"><a href="#新建一个Maven项目" class="headerlink" title="新建一个Maven项目"></a>新建一个Maven项目</h4><p>步骤:<strong>Create New Project</strong>-&gt;<strong>选择Maven点击Next</strong>-&gt;<strong>输入项目名称、选择目录存放地址等,点击Finish</strong>,创建完成后,我们需要删除<strong>src</strong>目录并且在<code>pom</code>添加<code>&lt;packaging&gt;pom&lt;/packaging&gt;</code>,如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.nacos&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;dubbo-nacos&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_3.png" alt><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_5.png" alt></p>
+<h4 id="创建Provider模块"><a href="#创建Provider模块" class="headerlink" title="创建Provider模块"></a>创建Provider模块</h4><p>在项目上点击右键，<strong>New-&gt;Module</strong>输入项目信息，点击<strong>Next-&gt;Finish</strong><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_6.png" alt><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_7.png" alt><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_8.png" alt></p>
+<h4 id="创建Consumer模块"><a href="#创建Consumer模块" class="headerlink" title="创建Consumer模块"></a>创建Consumer模块</h4><p>在项目上点击右键，<strong>New-&gt;Module</strong>输入项目信息，点击<strong>Next-&gt;Finish</strong><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_9.png" alt><br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_10.png" alt></p>
+<h4 id="引入相关jar包"><a href="#引入相关jar包" class="headerlink" title="引入相关jar包"></a>引入相关jar包</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">        &lt;spring-boot.version&gt;2.2.3.RELEASE&lt;/spring-boot.version&gt;</span><br><span class="line">        &lt;dubbo.version&gt;2.7.5&lt;/dubbo.version&gt;</span><br><span class="line">        &lt;nacos.version&gt;1.1.4&lt;/nacos.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;!-- Spring Boot --&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;spring-boot.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">                &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!-- Apache Dubbo  --&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;dubbo-dependencies-bom&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;dubbo.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">                &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- Dubbo Spring Boot Starter --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.7.5&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- Dubbo Registry Nacos --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;dubbo-registry-nacos&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;dubbo.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba.nacos&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;nacos-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;nacos.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dubbo-amp-Nacos注册中心"><a href="#Dubbo-amp-Nacos注册中心" class="headerlink" title="Dubbo&amp;Nacos注册中心"></a>Dubbo&amp;Nacos注册中心</h3><p>我们首先在<strong>Provider</strong>创建一个服务并注册到<code>nacos</code>中.</p>
+<ol>
+<li>配置<code>application</code>:<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=dubbo-nacos-provider</span><br><span class="line"></span><br><span class="line"># Base packages to scan Dubbo Component: @org.apache.dubbo.config.annotation.Service</span><br><span class="line">dubbo.scan.base-packages=com.nacos.provider.service</span><br><span class="line"># Dubbo Protocol</span><br><span class="line">dubbo.protocol.name=dubbo</span><br><span class="line">## Random port</span><br><span class="line">dubbo.protocol.port=8888</span><br><span class="line"></span><br><span class="line">## Dubbo Registry</span><br><span class="line">nacos.server-address = 127.0.0.1</span><br><span class="line">nacos.port = 8848</span><br><span class="line">dubbo.registry.address=nacos://$&#123;nacos.server-address&#125;:$&#123;nacos.port&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建一个<code>DemoService</code>接口<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface DemoService &#123;</span><br><span class="line"></span><br><span class="line">    String sayHello(String name);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建实现类并引入dubbo提供的<code>@Service</code>注解：<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Service(version = &quot;1.0.0&quot;)</span><br><span class="line">public class DemoServiceImpl implements DemoService &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;dubbo.application.name&#125;&quot;)</span><br><span class="line">    private String serviceName;</span><br><span class="line"></span><br><span class="line">    public String sayHello(String name) &#123;</span><br><span class="line">        return String.format(&quot;[%s] : Hello, %s&quot;, serviceName, name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+把我们的<code>Provider</code>运行起来(请勿关闭，供下面consumer程序调用),可以看到服务已经注册到<code>Nacos</code>中<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_12.png" alt></li>
+</ol>
+<p>现在我们来实现对服务的消费.首先当然还是我们的<code>application</code>的配置:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">spring.application.name=dubbo-nacos-consumer</span><br><span class="line"></span><br><span class="line">## Dubbo Registry</span><br><span class="line">nacos.server-address = 127.0.0.1</span><br><span class="line">nacos.port = 8848</span><br><span class="line">dubbo.registry.address=nacos://$&#123;nacos.server-address&#125;:$&#123;nacos.port&#125;</span><br></pre></td></tr></table></figure>
+<p>新建了一个<code>Controller</code>：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/demo&quot;)</span><br><span class="line">@RestController</span><br><span class="line">public class DemoController &#123;</span><br><span class="line"></span><br><span class="line">    @Reference(version = &quot;1.0.0&quot;)</span><br><span class="line">    private DemoService demoService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;hello/&#123;name&#125;&quot;)</span><br><span class="line">    public ResponseEntity&lt;String&gt; sayHello(@PathVariable String name)</span><br><span class="line">    &#123;</span><br><span class="line">        return new ResponseEntity&lt;String&gt;(demoService.sayHello(name),HttpStatus.OK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并引入Provier用到的接口<strong>DemoService</strong>。<br>启动起来，调用接口:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_13.png" alt></p>
+<h3 id="Dubbo-amp-Nacos配置中心"><a href="#Dubbo-amp-Nacos配置中心" class="headerlink" title="Dubbo&amp;Nacos配置中心"></a>Dubbo&amp;Nacos配置中心</h3><p>我们还需要引入一个包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;nacos-config-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.2.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>并在配置文件中加入:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nacos.config.server-addr=127.0.0.1:8848  # 根据实际部署情况修改</span><br></pre></td></tr></table></figure>
+
+<p>配置的相关说明,</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Data ID：com.alibaba.nacos.example.properties</span><br><span class="line">Group：不填写，即使用默认的 DEFAULT_GROUP。</span><br><span class="line">配置格式：Properties</span><br><span class="line">配置内容：connectTimeoutInMills=3000</span><br></pre></td></tr></table></figure>
+<p>然后，我们进入到Nacos控制台,新建一个配置名为<strong>dubbo-nacos-config</strong>,如下:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_16.png" alt>,<br>在Spring Boot启动类加上<code>@NacosPropertySource(dataId = &quot;dubbo-nacos-config&quot;, autoRefreshed = true)</code>,<strong>autoRefreshed</strong>表示自动刷新<br>这里我们在需要用到配置的类中加入如下代码:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NacosValue(value = &quot;$&#123;service.name:default&#125;&quot;, autoRefreshed = true)</span><br><span class="line">private String serviceName</span><br></pre></td></tr></table></figure>
+<p><code>@NacosValue</code>和<code>@Value</code>的用法差不多。然后在<strong>controller</strong>添加了一个方法:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;version&quot;)</span><br><span class="line">   public ResponseEntity&lt;String&gt; getNacosConfig()</span><br><span class="line">   &#123;</span><br><span class="line">       return new ResponseEntity&lt;String&gt;(nacosConfig.getServiceName(),HttpStatus.OK);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>启动程序，访问<code>http://localhost:8080/demo/version</code>,可以看到我们获取到了nacos中的配置数据:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_17.png" alt><br>我在<strong>nacos</strong>中修改配置文件的值:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.name=demo</span><br></pre></td></tr></table></figure>
+<p>直接刷新页面可以发现我们的值自动改变了,<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_18.png" alt></p>
+<p>[参考]<br><a href="https://nacos.io/en-us/docs/quick-start-spring-boot.html" target="_blank" rel="noopener">https://nacos.io/en-us/docs/quick-start-spring-boot.html</a><br><a href="http://dubbo.apache.org/en-us/docs/user/quick-start.html" target="_blank" rel="noopener">http://dubbo.apache.org/en-us/docs/user/quick-start.html</a></p>
+<p><strong>有问题一定要多看官方文档和Github</strong></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/202001/Spring-Boot-Dubbo-Nacos.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -202,380 +258,55 @@
 
 
 
-
-
-
-
-
-    
 <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-25T00:10:57.000Z">2019-12-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1779 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-                <a class="has-link-black-ter" href="/201912/Spring-Boot%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.html">Spring Boot使用log4j2记录日志</a>
-            
-        </h1>
-        <div class="content">
-            <p>日志可以帮我们在开发过程中乃至于生产上快速有效的定位问题的好帮手，所以如何记录有效的日子变得更加重要，在Spring Boot中，已经为我们默认添加了<code>logback</code>和<code>log4j2</code>,默认情况下，Spring Boot采用的是<code>logback</code>。关于日志组件的性能，我并没有亲自验证过，只是在<a href="https://www.cnblogs.com/java-zzl/p/10026563.html" target="_blank" rel="noopener">logback log4j log4j2 性能实测</a>中说<code>log4j2</code>性能是最高的。</p>
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-23T00:16:45.000Z">2019-12-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 902 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/202001/NSQ-High-Availability.html">
+                <span class="level-item">NSQ的可用性和可靠性</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201912/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">Spring Boot统一异常处理</a>
-            
-        </h1>
-        <div class="content">
-            <p>异常可以说像大宝一样天天见，一不小心就可能写了一个bug.不过有异常不可怕，可怕是出了问题连异常的都没有，一般情况下，我们也都是<code>try catch</code>的方式在程序里面捕捉，但是这样有时候可能一疏忽，连try catch都忘了写，这时候如果出现问题，就比较尴尬了，所以，我们需要更加方便、优雅的全局异常处理的方式来优化我们的异常捕捉机制。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-22T00:27:55.000Z">2019-12-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 875 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201912/Spring-Boot%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3.html">Spring Boot 自定义Validation注解</a>
-            
-        </h1>
-        <div class="content">
-            <p>在项目开发过程中，注解给我们带来方便、快捷的极简编程体验，前面也有记录了一些常用的注解命令，可见注解是比较常用且重要的功能，有时候validation自带的注解可能不能满足我们的个性化需要时，我们能不能根据自己的情况自定义注解命令呢?</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-20T00:12:05.000Z">2019-12-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1342 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201912/Spring-Boot%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%8A%80%E5%B7%A7.html">Spring Boot基于javax.validation进行参数校验</a>
-            
-        </h1>
-        <div class="content">
-            <p>在我们使用Spring Boot开发Web Api的时候，肯定会少不了参数校验，一般情况下，大部分是使用<code>if</code>来判断参数是否合法，在参数较少的情况下，这样做除了少量的重复工作外，也没有较大的工作量。但是当遇到一个复杂的参数的时候，可能整个方法大部分的代码都是<code>if</code>。工作量大不说，代码也精简。那么有没有更好的方式来处理呢？这就是我们这里要说到的参数校验技巧。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%8A%80%E5%B7%A7.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-16T00:31:32.000Z">2019-12-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2134 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201912/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB.html">Spring Boot 常用注解汇总</a>
-            
-        </h1>
-        <div class="content">
-            <p>Spring Boot是越来越火了也主要是因为其注解给我们带来了莫大的帮助，使我们开发更加的快速便捷，所以，我们有必要简单的整理一下工作中常用的注解命令。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-06T00:16:04.000Z">2019-12-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 693 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201912/Spring-Boot-Swagger.html">Spring Boot集成Swagger</a>
-            
-        </h1>
-        <div class="content">
-            <p>大部分人应该都知道Swagger是帮我们的Web API快速生成接口文档，前面我们也有提到.Net Core3.x集成Swagger，这里，我们再来归纳一下Spring Boot集成Swagger的常规操作</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201912/Spring-Boot-Swagger.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-20T00:34:04.000Z">2019-11-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2025 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/201911/Driud-SqlParse.html">借助alibaba Driud SQL Parser组件处理sql语句</a>
-            
-        </h1>
-        <div class="content">
-            <p>Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/201911/Driud-SqlParse.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -698,6 +429,54 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#简介">
+        <span class="has-mr-6">1</span>
+        <span>简介</span>
+        </a></li><li>
+        <a class="is-flex" href="#部署Nacos开发环境">
+        <span class="has-mr-6">2</span>
+        <span>部署Nacos开发环境</span>
+        </a></li><li>
+        <a class="is-flex" href="#IDEA创建多模块项目">
+        <span class="has-mr-6">3</span>
+        <span>IDEA创建多模块项目</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#新建一个Maven项目">
+        <span class="has-mr-6">3.1</span>
+        <span>新建一个Maven项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建Provider模块">
+        <span class="has-mr-6">3.2</span>
+        <span>创建Provider模块</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建Consumer模块">
+        <span class="has-mr-6">3.3</span>
+        <span>创建Consumer模块</span>
+        </a></li><li>
+        <a class="is-flex" href="#引入相关jar包">
+        <span class="has-mr-6">3.4</span>
+        <span>引入相关jar包</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Dubbo-amp-Nacos注册中心">
+        <span class="has-mr-6">4</span>
+        <span>Dubbo&amp;Nacos注册中心</span>
+        </a></li><li>
+        <a class="is-flex" href="#Dubbo-amp-Nacos配置中心">
+        <span class="has-mr-6">5</span>
+        <span>Dubbo&amp;Nacos配置中心</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1688,7 +1467,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Spring Boot整合Dubbo和Nacos" height="28">
                 
                 </a>
                 <p class="is-size-7">
