@@ -25,10 +25,10 @@
 <meta property="og:site_name" content="农民工学编程">
 <meta property="og:description" content="Spring Boot整合Dubbo和Nacos">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-01-18T09:10:24.375Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;dubbo.apache.org&#x2F;img&#x2F;architecture.png">
+<meta property="og:updated_time" content="2020-01-19T00:35:20.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;dubbo.apache.org&#x2F;img&#x2F;architecture.png">
 
 
 
@@ -150,6 +150,12 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -164,7 +170,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1517 个字)
+                    11 分钟 读完 (大约 1662 个字)
                 </span>
                 
                 
@@ -185,11 +191,11 @@
             <p>目前适用于Spring Cloud服务注册中心的解决方案比较多,诸如：<code>Consul</code>、<code>Spring Cloud Eureka</code>、<code>Zookeeper</code>、<code>Etcd</code>等，配置中心有：<code>Spring Cloud Config</code>、<code>Apollo</code>、<code>Disconf</code>等。总感觉这些搭建起来较为繁琐，所以考虑使用<code>Nacos</code>来做配置和服务注册中心。</p>
 <a id="more"></a>
 
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Apache Dubbo 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="http://dubbo.apache.org/img/architecture.png" alt><br>Apache Dubbo 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。Dubbo的注册中心有多种:Multicast、zookeeper、Nacos、Redis、Simple，官方推荐使用<code>Zookeeper</code>作为注册中心，不过在我之前搭建大数据的时候，总感觉<code>Zookeeper</code>太重了，觉得Nacos才是我想要的。</p>
 <p>Nacos是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。它具有:动态配置服务、服务发现及管理、动态DNS服务等功能。<br>这里我用到的环境为:</p>
 <ul>
-<li><a href="http://dubbo.apache.org/zh-cn/index.html" target="_blank" rel="noopener">Dubbo 2.7.5</a></li>
-<li><a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">Nacos 1.1.4</a></li>
+<li><a href="http://dubbo.apache.org/zh-cn/index.html" target="_blank" rel="noopener">Dubbo 2.7.5</a> <img src="https://img.shields.io/github/stars/apache/dubbo.svg" alt></li>
+<li><a href="https://nacos.io/zh-cn/index.html" target="_blank" rel="noopener">Nacos 1.1.4</a> <img src="https://img.shields.io/github/stars/alibaba/nacos.svg" alt></li>
 <li>MariaDB 10.3.10</li>
 <li>Windows 10</li>
 <li>IntelliJ IDEA 2019.3.1</li>
@@ -223,21 +229,22 @@
 <p>新建了一个<code>Controller</code>：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/demo&quot;)</span><br><span class="line">@RestController</span><br><span class="line">public class DemoController &#123;</span><br><span class="line"></span><br><span class="line">    @Reference(version = &quot;1.0.0&quot;)</span><br><span class="line">    private DemoService demoService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;hello/&#123;name&#125;&quot;)</span><br><span class="line">    public ResponseEntity&lt;String&gt; sayHello(@PathVariable String name)</span><br><span class="line">    &#123;</span><br><span class="line">        return new ResponseEntity&lt;String&gt;(demoService.sayHello(name),HttpStatus.OK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>并引入Provier用到的接口<strong>DemoService</strong>。<br>启动起来，调用接口:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_13.png" alt></p>
-<h3 id="Dubbo-amp-Nacos配置中心"><a href="#Dubbo-amp-Nacos配置中心" class="headerlink" title="Dubbo&amp;Nacos配置中心"></a>Dubbo&amp;Nacos配置中心</h3><p>我们还需要引入一个包:</p>
+<h3 id="Nacos作为配置中心"><a href="#Nacos作为配置中心" class="headerlink" title="Nacos作为配置中心"></a>Nacos作为配置中心</h3><p>如果要使用<code>Nacos</code>作为我们的配置中心的话，这里还需要引入一个包:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;nacos-config-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.2.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>并在配置文件中加入:</p>
+<p>并在配置文件中加入<code>nacos.config.server-addr</code>的配置:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nacos.config.server-addr=127.0.0.1:8848  # 根据实际部署情况修改</span><br></pre></td></tr></table></figure>
 
-<p>配置的相关说明,</p>
+
+<p>然后，我们进入到Nacos控制台,新建一个配置名为<strong>dubbo-nacos-config</strong>,如下:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_16.png" alt><br>配置的相关说明,</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Data ID：com.alibaba.nacos.example.properties</span><br><span class="line">Group：不填写，即使用默认的 DEFAULT_GROUP。</span><br><span class="line">配置格式：Properties</span><br><span class="line">配置内容：connectTimeoutInMills=3000</span><br></pre></td></tr></table></figure>
-<p>然后，我们进入到Nacos控制台,新建一个配置名为<strong>dubbo-nacos-config</strong>,如下:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_16.png" alt>,<br>在Spring Boot启动类加上<code>@NacosPropertySource(dataId = &quot;dubbo-nacos-config&quot;, autoRefreshed = true)</code>,<strong>autoRefreshed</strong>表示自动刷新<br>这里我们在需要用到配置的类中加入如下代码:</p>
+<p>在Spring Boot启动类加上<code>@NacosPropertySource(dataId = &quot;dubbo-nacos-config&quot;, autoRefreshed = true)</code>,<strong>autoRefreshed</strong>表示自动刷新<br>这里我们在需要用到配置的类中加入如下代码:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NacosValue(value = &quot;$&#123;service.name:default&#125;&quot;, autoRefreshed = true)</span><br><span class="line">private String serviceName</span><br></pre></td></tr></table></figure>
 <p><code>@NacosValue</code>和<code>@Value</code>的用法差不多。然后在<strong>controller</strong>添加了一个方法:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;version&quot;)</span><br><span class="line">   public ResponseEntity&lt;String&gt; getNacosConfig()</span><br><span class="line">   &#123;</span><br><span class="line">       return new ResponseEntity&lt;String&gt;(nacosConfig.getServiceName(),HttpStatus.OK);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>启动程序，访问<code>http://localhost:8080/demo/version</code>,可以看到我们获取到了nacos中的配置数据:<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_17.png" alt><br>我在<strong>nacos</strong>中修改配置文件的值:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.name=demo</span><br></pre></td></tr></table></figure>
 <p>直接刷新页面可以发现我们的值自动改变了,<br><img src="http://xxnote.52fx.biz/spring_dubbo_nacos_18.png" alt></p>
-<p>[参考]<br><a href="https://nacos.io/en-us/docs/quick-start-spring-boot.html" target="_blank" rel="noopener">https://nacos.io/en-us/docs/quick-start-spring-boot.html</a><br><a href="http://dubbo.apache.org/en-us/docs/user/quick-start.html" target="_blank" rel="noopener">http://dubbo.apache.org/en-us/docs/user/quick-start.html</a></p>
+<p>[参考]<br><a href="https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples" target="_blank" rel="noopener">https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples</a><br><a href="https://nacos.io/en-us/docs/quick-start-spring-boot.html" target="_blank" rel="noopener">https://nacos.io/en-us/docs/quick-start-spring-boot.html</a><br><a href="http://dubbo.apache.org/en-us/docs/user/quick-start.html" target="_blank" rel="noopener">http://dubbo.apache.org/en-us/docs/user/quick-start.html</a></p>
 <p><strong>有问题一定要多看官方文档和Github</strong></p>
 
         </div>
@@ -469,9 +476,9 @@
         <span class="has-mr-6">4</span>
         <span>Dubbo&amp;Nacos注册中心</span>
         </a></li><li>
-        <a class="is-flex" href="#Dubbo-amp-Nacos配置中心">
+        <a class="is-flex" href="#Nacos作为配置中心">
         <span class="has-mr-6">5</span>
-        <span>Dubbo&amp;Nacos配置中心</span>
+        <span>Nacos作为配置中心</span>
         </a></li></ul>
             </div>
         </div>
@@ -670,7 +677,7 @@
             
             <a href="/202001/Spring-Boot-Dubbo-Nacos.html" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot整合Dubbo和Nacos">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
                 </p>
             </a>
             
@@ -1072,7 +1079,7 @@
             
             <a href="/202001/Spring-Boot-Dubbo-Nacos.html" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot整合Dubbo和Nacos">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
                 </p>
             </a>
             
