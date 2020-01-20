@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogs.52fx.biz/202001/Spring-Boot-Druid-Mybatis-Plus.html</loc>
+    
+    <lastmod>2020-01-20T04:51:16.650Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blogs.52fx.biz/201910/golang%25E4%25B8%258B%25E8%25BD%25BD%25E5%25A6%25B9%25E5%25AD%2590%25E5%259B%25BE.html</loc>
     
     <lastmod>2020-01-19T00:37:39.095Z</lastmod>
@@ -240,6 +247,13 @@
   </url>
   
   <url>
+    <loc>https://blogs.52fx.biz/201911/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
+    
+    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blogs.52fx.biz/201910/AccessibilityService%25E8%2587%25AA%25E5%258A%25A8%25E5%2588%25B7%25E8%25A7%2586%25E9%25A2%2591.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
@@ -254,7 +268,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201911/Golang%25E5%259F%25BA%25E7%25A1%2580%25E5%25AD%25A6%25E4%25B9%25A0%25E6%2580%25BB%25E7%25BB%2593.html</loc>
+    <loc>https://blogs.52fx.biz/201911/Nginx-agent-configuration.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -268,7 +282,7 @@
   </url>
   
   <url>
-    <loc>https://blogs.52fx.biz/201911/Nginx-agent-configuration.html</loc>
+    <loc>https://blogs.52fx.biz/201911/mysql-slow-explain.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
@@ -276,13 +290,6 @@
   
   <url>
     <loc>https://blogs.52fx.biz/201912/hexo-blog.html</loc>
-    
-    <lastmod>2019-12-12T09:08:25.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blogs.52fx.biz/201911/mysql-slow-explain.html</loc>
     
     <lastmod>2019-12-12T09:08:25.549Z</lastmod>
     
