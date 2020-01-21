@@ -12,5 +12,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://blog.52fx.biz/sitemap.xml
-Sitemap: http://blog.52fx.biz/baidusitemap.xml
+Sitemap: https://blogs.52fx.biz/sitemap.xml
+Sitemap: https://blogs.52fx.biz/baidusitemap.xml
