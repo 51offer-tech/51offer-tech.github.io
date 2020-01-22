@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="keywords" content="一个开源的高性能对象存储系统-MinIO , 农民工学编程 , MinIO  Thumbor,自建 OSS">
+<meta name="description" content="一个开源的高性能对象存储系统-MinIO , 农民工学编程 , 高性能的对象存储">
+<!-- 
+    <meta name="keywords" content="MinIO  Thumbor,自建 OSS,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+     -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
+<meta name="baidu-site-verification" content="up4BoDUY22" />
+
+<title>一个开源的高性能对象存储系统-MinIO - 农民工学编程</title>
+
+
+    <meta name="description" content="高性能的对象存储">
+<meta name="keywords" content="MinIO  Thumbor,自建 OSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个开源的高性能对象存储系统-MinIO">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;3832913427.html">
+<meta property="og:site_name" content="农民工学编程">
+<meta property="og:description" content="高性能的对象存储">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;minio&#x2F;minio&#x2F;master&#x2F;.github&#x2F;logo.svg?sanitize=true">
+<meta property="og:updated_time" content="2020-01-22T08:08:35.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;minio&#x2F;minio&#x2F;master&#x2F;.github&#x2F;logo.svg?sanitize=true">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+        // var windowWidth = $(window).width();
+        // if (windowWidth > 480) {
+          document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
+        //}
+      </script>
+  
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="一个开源的高性能对象存储系统-MinIO" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/eyiadmin/meizitu"  rel="external nofollow">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true" alt="一个开源的高性能对象存储系统-MinIO">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-22T00:51:26.000Z">2020-01-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">文件存储</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1647 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                一个开源的高性能对象存储系统-MinIO
+            
+        </h1>
+        <div class="content">
+            <p>我们经常会遇到文件存储的场景，一般避免怎么运维成本，可能会选择成熟稳定且性价比高的产品，国内有很多OSS产品，比如:阿里、腾讯、七牛、青云等都有自己的对象存储产品，最终我选择了七牛，因为它<strong>0-10GB空间免费</strong>，而且提供的API也比较丰富，青云也有<strong>12个月30 GB</strong>免费政策，其他的就没看过，因为要钱嘛，我是能省则省。</p>
+<a id="more"></a>
+<p>其实在github也有多款热门的对象存储系统，如:<code>FastDFS</code>、<code>HDFS</code>、<code>Ceph</code>等，这次也是无意见看到了<a href="https://segmentfault.com/a/1190000008656825" target="_blank" rel="noopener">基于Minio和Thumbor搭建独立图片服务</a>这篇文章，所以也想着自己搭建一个类似于七牛云的私有对象存储空间,那么首先我们要先基本了解一下<code>MinIO</code>和<code>thumbor</code>的用途:</p>
+<ul>
+<li><a href="https://github.com/minio/minio" target="_blank" rel="noopener">MinIO</a><img src="https://camo.githubusercontent.com/c42d84b17fc03f182c135642eebdfca8bd7b2c02/68747470733a2f2f696d672e736869656c64732e696f2f646f636b65722f70756c6c732f6d696e696f2f6d696e696f2e7376673f6d61784167653d363034383030" alt>,是与Amazon S3云存储服务API兼容的高性能对象存储系统</li>
+<li><a href="https://github.com/thumbor/thumbor" target="_blank" rel="noopener">thumbor</a>,是一个智能图像服务。它可以按需裁剪、调整大小和翻转图像</li>
+</ul>
+<h3 id="基于Docker搭建MinIO对象存储服务器"><a href="#基于Docker搭建MinIO对象存储服务器" class="headerlink" title="基于Docker搭建MinIO对象存储服务器"></a>基于Docker搭建MinIO对象存储服务器</h3><p>基于Docker来安装MinIO非常方便一句命令就OK了。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker run -p 19000:9000 minio/minio server /minio_data</span><br><span class="line">Unable to find image &apos;minio/minio:latest&apos; locally</span><br><span class="line">latest: Pulling from minio/minio</span><br><span class="line">89d9c30c1d48: Pull complete </span><br><span class="line">4795054645d0: Pull complete </span><br><span class="line">4f7991ccecfe: Pull complete </span><br><span class="line">Digest: sha256:53c65fca691336b77b74180937d8d6f7845ef1afea0e0ae9780598835d7a5979</span><br><span class="line">Status: Downloaded newer image for minio/minio:latest</span><br><span class="line">Endpoint:  http://172.17.0.5:9000  http://127.0.0.1:9000</span><br><span class="line"></span><br><span class="line">Browser Access:</span><br><span class="line">   http://172.17.0.5:9000  http://127.0.0.1:9000</span><br><span class="line"></span><br><span class="line">Object API (Amazon S3 compatible):</span><br><span class="line">   Go:         https://docs.min.io/docs/golang-client-quickstart-guide</span><br><span class="line">   Java:       https://docs.min.io/docs/java-client-quickstart-guide</span><br><span class="line">   Python:     https://docs.min.io/docs/python-client-quickstart-guide</span><br><span class="line">   JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide</span><br><span class="line">   .NET:       https://docs.min.io/docs/dotnet-client-quickstart-guide</span><br><span class="line">Detected default credentials &apos;minioadmin:minioadmin&apos;, please change the credentials immediately using &apos;MINIO_ACCESS_KEY&apos; and &apos;MINIO_SECRET_KEY&apos;</span><br></pre></td></tr></table></figure>
+<p>当然这不是后台运行方式,所以得加一个参数<code>docker run -d -p 19000:9000 minio/minio server /minio_data</code>,但是这时候是看不到日志的，只有通过docker logs [CONTAINER ID]来查看,我们先通过<code>docker ps -a</code>查看运行起的容器:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE                                             COMMAND                  CREATED             STATUS                     PORTS                                                                            NAMES</span><br><span class="line">9118cbd8c05d        minio/minio                                       &quot;/usr/bin/docker-ent…&quot;   29 seconds ago      Up 27 seconds              0.0.0.0:19000-&gt;9000/tcp</span><br></pre></td></tr></table></figure>
+<p>再<code>docker logs 9118cbd8c05d</code>即可看到<code>MinIO</code>启动时的日志：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker logs 9118cbd8c05d</span><br><span class="line">Endpoint:  http://172.17.0.5:9000  http://127.0.0.1:9000</span><br><span class="line"></span><br><span class="line">Browser Access:</span><br><span class="line">   http://172.17.0.5:9000  http://127.0.0.1:9000</span><br><span class="line"></span><br><span class="line">Object API (Amazon S3 compatible):</span><br><span class="line">   Go:         https://docs.min.io/docs/golang-client-quickstart-guide</span><br><span class="line">   Java:       https://docs.min.io/docs/java-client-quickstart-guide</span><br><span class="line">   Python:     https://docs.min.io/docs/python-client-quickstart-guide</span><br><span class="line">   JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide</span><br><span class="line">   .NET:       https://docs.min.io/docs/dotnet-client-quickstart-guide</span><br><span class="line">Detected default credentials &apos;minioadmin:minioadmin&apos;, please change the credentials immediately using &apos;MINIO_ACCESS_KEY&apos; and &apos;MINIO_SECRET_KEY&apos;</span><br></pre></td></tr></table></figure>
+<p>我们打开浏览器访问我们刚才映射的端口<code>19000</code>,使用默认的用户名密码<code>minioadmin:minioadmin</code>来登录我们的MinIO Web文件系统.然上传一个文件：<br><img src="http://xxnote.52fx.biz/minio_blog_2.png" alt><br>我们可以复制图片链接到其他浏览器访问.<br><img src="http://xxnote.52fx.biz/minio_blog_3.png" alt><br>至此，我们单机版的的S3对象存储服务器就搭建好了，由于设备有限，集群版就不弄了，在此附上其他人的经验:</p>
+<ul>
+<li><a href="https://www.cnblogs.com/rongfengliang/p/9197315.html" target="_blank" rel="noopener">minio 集群搭建</a></li>
+<li><a href="https://www.cnblogs.com/erdongx/p/11829726.html" target="_blank" rel="noopener">MinIO 分布式集群搭建</a></li>
+</ul>
+<h3 id="基于Docker搭建thumbor图片处理服务"><a href="#基于Docker搭建thumbor图片处理服务" class="headerlink" title="基于Docker搭建thumbor图片处理服务"></a>基于Docker搭建thumbor图片处理服务</h3><p>跟上面的MinIO类似，直接启动docker即可：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker run -d -p 1800:80 minimalcompact/thumbor</span><br><span class="line">Unable to find image &apos;minimalcompact/thumbor:latest&apos; locally</span><br><span class="line">latest: Pulling from minimalcompact/thumbor</span><br><span class="line">16ea0e8c8879: Pull complete </span><br><span class="line">50024b0106d5: Pull complete </span><br><span class="line">ff95660c6937: Pull complete </span><br><span class="line">9c7d0e5c0bc2: Pull complete </span><br><span class="line">29c4fb388fdf: Pull complete </span><br><span class="line">02ced85d1576: Pull complete </span><br><span class="line">dfe2cd30976f: Pull complete </span><br><span class="line">d3ec517ed16e: Pull complete </span><br><span class="line">ed6982ebc0cc: Pull complete </span><br><span class="line">7a410d29bed3: Pull complete </span><br><span class="line">1c062599a579: Pull complete </span><br><span class="line">2b6e7f7d0ea8: Pull complete </span><br><span class="line">c47dad1e5ead: Pull complete </span><br><span class="line">1eea835ac597: Pull complete </span><br><span class="line">77558b8bbf29: Pull complete </span><br><span class="line">156cf949b8be: Pull complete </span><br><span class="line">bb3b169ae09d: Pull complete </span><br><span class="line">a296ec13d049: Pull complete </span><br><span class="line">4c03d2a2c52d: Pull complete </span><br><span class="line">Digest: sha256:f888ed733ad57414289a6e2072b8b210ee3a18af5206d60d34619ee265e6df80</span><br><span class="line">Status: Downloaded newer image for minimalcompact/thumbor:latest</span><br><span class="line">c062f3a72259ec0835214a4da11532823cb2257827bb80c008150a4fcafb45bb</span><br><span class="line">[root@instance-p0a4erj8 ~]# docker logs c062f3a72259</span><br><span class="line">---&gt; Starting thumbor solo...</span><br></pre></td></tr></table></figure>
+<p>至此，我们的<code>thumbor</code>图片处理服务搭建好了，我们来试试它的各项功能吧.</p>
+<h5 id="thumbor图片处理"><a href="#thumbor图片处理" class="headerlink" title="thumbor图片处理"></a>thumbor图片处理</h5><p>原图<br><img src="http://xxnote.52fx.biz/minio_blog_3.png" alt><br>我直接从<a href="https://thumbor.readthedocs.io/en/latest/getting_started.html" target="_blank" rel="noopener">thumbor官网教程</a>可以知道,使用<code>http://localhost:8888/unsafe/300x200/图片地址</code>的方式就可以实现图片裁剪</p>
+<p><img src="http://xxnote.52fx.biz/minio_blog5.png" alt></p>
+<p>使用<code>http://localhost:8888/unsafe/-0x-0/图片地址</code>可以实现图片翻转<br><img src="http://xxnote.52fx.biz/minio_blog_6.png" alt><br>其功能还是比较多，其他的功能请参照<a href="https://thumbor.readthedocs.io/en/latest/getting_started.html" target="_blank" rel="noopener">Getting Started</a></p>
+<p>一般情况下，MinIO创建的<code>bucket</code>是私有的，只有通过分享链接的方式访问，但是<code>thumbor</code>无法直接访问<code>MinIO</code>,要么把<code>bucket</code>变更为<code>public</code>，要么就配置<code>thumbor</code>的<strong>LOADER</strong>为<code>tc_aws.loaders.s3_loader</code>,还需要配置其他相关属性，今天我们还是用简单点的方式把–把bucket变更为<code>public</code>。<br>这里我们要么下载一个<code>MinIO Client</code>.要么Docker。客户端下载了半个小时，最后我采用了Docker方式:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --entrypoint=/bin/sh minio/mc</span><br><span class="line">/ # mc config host ls</span><br><span class="line">gcs  </span><br><span class="line">  URL       : https://storage.googleapis.com</span><br><span class="line">  AccessKey : YOUR-ACCESS-KEY-HERE</span><br><span class="line">  SecretKey : YOUR-SECRET-KEY-HERE</span><br><span class="line">  API       : S3v2</span><br><span class="line">  Lookup    : dns</span><br><span class="line"></span><br><span class="line">local</span><br><span class="line">  URL       : http://localhost:9000</span><br><span class="line">  AccessKey : </span><br><span class="line">  SecretKey : </span><br><span class="line">  API       : </span><br><span class="line">  Lookup    : auto</span><br><span class="line"></span><br><span class="line">play </span><br><span class="line">  URL       : https://play.min.io</span><br><span class="line">  AccessKey : Q3AM3UQ867SPQQA43P2F</span><br><span class="line">  SecretKey : zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG</span><br><span class="line">  API       : S3v4</span><br><span class="line">  Lookup    : auto</span><br><span class="line"></span><br><span class="line">s3   </span><br><span class="line">  URL       : https://s3.amazonaws.com</span><br><span class="line">  AccessKey : YOUR-ACCESS-KEY-HERE</span><br><span class="line">  SecretKey : YOUR-SECRET-KEY-HERE</span><br><span class="line">  API       : S3v4</span><br><span class="line">  Lookup    : dns</span><br></pre></td></tr></table></figure>
+<p>然后新增一个</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/ # mc config host add local http://xxx.xx.xx.xx:9000 minioadmin minioadmin</span><br><span class="line">Added `local` successfully.</span><br></pre></td></tr></table></figure>
+<p>这里我新建一个bucket:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/ # mc mb local/publicbucket</span><br><span class="line">Bucket created successfully `local/publicbucket`.</span><br></pre></td></tr></table></figure>
+<p>把它变为public：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/ # mc policy set public local/publicbucket</span><br><span class="line">Access permission for `local/publicbucket` is set to `public`</span><br></pre></td></tr></table></figure>
+<p>现在我上传一张图片,后即可直接访问。<br><img src="http://xxnote.52fx.biz/minio_blog_7.png" alt><br><img src="http://xxnote.52fx.biz/minio_blog_8.png" alt><br><img src="http://xxnote.52fx.biz/minio_blog_9.png" alt></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这次只是简单的采用Docker安装了<code>thumbor</code>和<code>MinIO</code>来实现类似于七牛云的图片存储、处理服务器。也只是大概了体验了它们强大的功能，为以后再项目中实践奠定基础。后面有时间，我会针对<code>thumbor</code>和<code>MinIO</code>进行伪集群部署(条件有限)。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" rel="tag">文件存储</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/1287150620.html">
+                <span class="level-item">Spring Boot整合Mybatis Plus和Druid</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/avatar1.png" alt="农民工学编程">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        农民工学编程
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        大龄程序员
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China,sichuan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        55
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        16
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        32
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eyiadmin" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/eyiadmin">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#基于Docker搭建MinIO对象存储服务器">
+        <span class="has-mr-6">1</span>
+        <span>基于Docker搭建MinIO对象存储服务器</span>
+        </a></li><li>
+        <a class="is-flex" href="#基于Docker搭建thumbor图片处理服务">
+        <span class="has-mr-6">2</span>
+        <span>基于Docker搭建thumbor图片处理服务</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#thumbor图片处理">
+        <span class="has-mr-6">2.1</span>
+        <span>thumbor图片处理</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#小结">
+        <span class="has-mr-6">3</span>
+        <span>小结</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank"  rel="external nofollow">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.baidu.com" target="_blank"  rel="external nofollow">
+                    <span class="level-left">
+                        <span class="level-item">百度</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.baidu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/net/">
+            <span class="level-start">
+                <span class="level-item">.net</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/net-core/">
+            <span class="level-start">
+                <span class="level-item">.net core</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Docker/">
+            <span class="level-start">
+                <span class="level-item">Docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gis/">
+            <span class="level-start">
+                <span class="level-item">Gis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Golang/">
+            <span class="level-start">
+                <span class="level-item">Golang</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Nginx/">
+            <span class="level-start">
+                <span class="level-item">Nginx</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/shell/">
+            <span class="level-start">
+                <span class="level-item">shell</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%BE%AE%E4%BF%A1/">
+            <span class="level-start">
+                <span class="level-item">微信</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+            <span class="level-start">
+                <span class="level-item">文件存储</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">消息队列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 18.33px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/Go/" style="font-size: 11.67px;">Go</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.67px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 16.67px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.67px;">消息队列</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/3832913427.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true" alt="一个开源的高性能对象存储系统-MinIO">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T00:51:26.000Z">2020-01-22</time></div>
+                    <a href="/posts/3832913427.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个开源的高性能对象存储系统-MinIO</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">文件存储</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/1287150620.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot整合Mybatis Plus和Druid">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T00:01:43.000Z">2020-01-20</time></div>
+                    <a href="/posts/1287150620.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Mybatis Plus和Druid</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/619628292.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-18T01:23:48.000Z">2020-01-18</time></div>
+                    <a href="/posts/619628292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Dubbo和Nacos</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/2559044759.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ的可用性和可靠性">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-16T00:13:41.000Z">2020-01-16</time></div>
+                    <a href="/posts/2559044759.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ的可用性和可靠性</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/3853429767.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ实现消息延迟执行">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-13T08:58:58.000Z">2020-01-13</time></div>
+                    <a href="/posts/3853429767.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ实现消息延迟执行</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net/">
+                        <span class="tag">.net</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go/">
+                        <span class="tag">Go</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/">
+                        <span class="tag">微信</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+                        <span class="tag">文件存储</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/3832913427.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true" alt="一个开源的高性能对象存储系统-MinIO">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T00:51:26.000Z">2020-01-22</time></div>
+                    <a href="/posts/3832913427.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个开源的高性能对象存储系统-MinIO</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">文件存储</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/1287150620.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot整合Mybatis Plus和Druid">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T00:01:43.000Z">2020-01-20</time></div>
+                    <a href="/posts/1287150620.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Mybatis Plus和Druid</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/619628292.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-18T01:23:48.000Z">2020-01-18</time></div>
+                    <a href="/posts/619628292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Dubbo和Nacos</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/2559044759.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ的可用性和可靠性">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-16T00:13:41.000Z">2020-01-16</time></div>
+                    <a href="/posts/2559044759.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ的可用性和可靠性</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/3853429767.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ实现消息延迟执行">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-13T08:58:58.000Z">2020-01-13</time></div>
+                    <a href="/posts/3853429767.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ实现消息延迟执行</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net/">
+                        <span class="tag">.net</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go/">
+                        <span class="tag">Go</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/">
+                        <span class="tag">微信</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+                        <span class="tag">文件存储</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+       
+    <div class="container">
+           
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="一个开源的高性能对象存储系统-MinIO" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                       
+                             
+                        
+                &copy; 2020 eyiadmin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow">Icarus</a>
+                
+                <br>
+               
+                蜀ICP备19030100号|本站总访问量<span id="busuanzi_value_site_pv">0</span>次
+                    |
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+       
+           
+    </div>
+	<script>
+        var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?213766fcc08fe275b1166dab2b8fa7aa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

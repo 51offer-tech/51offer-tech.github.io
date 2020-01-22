@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="keywords" content="Spring Boot整合Mybatis Plus和Druid , 农民工学编程 , Spring Boot,Druid,Mybatis Plus,Spring Boot整合Mybatis Plus和Druid,Mybatis Plus Druid,Spring Boot Druid Mybatis Plus,Knife4j">
+<meta name="description" content="Spring Boot整合Mybatis Plus和Druid , 农民工学编程 , Spring Boot整合Mybatis Plus和Druid">
+<!-- 
+    <meta name="keywords" content="Spring Boot,Druid,Mybatis Plus,Spring Boot整合Mybatis Plus和Druid,Mybatis Plus Druid,Spring Boot Druid Mybatis Plus,Knife4j,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+     -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
+<meta name="baidu-site-verification" content="up4BoDUY22" />
+
+<title>Spring Boot整合Mybatis Plus和Druid - 农民工学编程</title>
+
+
+    <meta name="description" content="Spring Boot整合Mybatis Plus和Druid">
+<meta name="keywords" content="Spring Boot,Druid,Mybatis Plus,Spring Boot整合Mybatis Plus和Druid,Mybatis Plus Druid,Spring Boot Druid Mybatis Plus,Knife4j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot整合Mybatis Plus和Druid">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;1287150620.html">
+<meta property="og:site_name" content="农民工学编程">
+<meta property="og:description" content="Spring Boot整合Mybatis Plus和Druid">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
+<meta property="og:updated_time" content="2020-01-22T01:10:10.475Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+        // var windowWidth = $(window).width();
+        // if (windowWidth > 480) {
+          document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
+        //}
+      </script>
+  
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Spring Boot整合Mybatis Plus和Druid" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/eyiadmin/meizitu"  rel="external nofollow">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot整合Mybatis Plus和Druid">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-20T00:01:43.000Z">2020-01-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2155 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Spring Boot整合Mybatis Plus和Druid
+            
+        </h1>
+        <div class="content">
+            <p>在Java中，我比较<strong>ORM</strong>熟悉就只有<code>Hibernate</code>和<code>Mybatis</code>,其他的并未实践使用过，在这二者之间我更喜欢<code>Mybatis</code>,因为它精简、灵活(毕竟我是上年纪的程序员，喜欢自己写SQL)。</p>
+<a id="more"></a>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29717271&auto=1&height=66"></iframe>
+
+<p>刚才有提到<code>Mybatis</code>，但是这里的重点是介绍<code>Mybatis-Plus</code>，它是<code>Mybatis</code>的增强版，如果要了解<code>Mybatis</code>的细节的话<a href="https://github.com/mybatis/mybatis-3" target="_blank" rel="noopener">请点击这里</a>。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>据<a href="https://mp.baomidou.com/guide/" target="_blank" rel="noopener">MyBatis-Plus官网</a>介绍，<a href="https://github.com/baomidou/mybatis-plus" target="_blank" rel="noopener">MyBatis-Plus</a>（简称 MP）是一个 <a href="http://www.mybatis.org/mybatis-3/" target="_blank" rel="noopener">MyBatis</a> 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。这看上去挺香的，所以必须得尝尝。<br>这里涉及到的环境、组件如下:</p>
+<ul>
+<li>MariaDB 10.3.10</li>
+<li>Windows 10</li>
+<li>IntelliJ IDEA 2019.3.1</li>
+<li>64 bit JDK 1.8.0_231</li>
+<li>Spring Boot 2.2.3.RELEASE</li>
+<li>Lombok 1.18.10</li>
+<li>Knife4j 2.0.1</li>
+<li>Mybatis-plus 3.3.0 <img src="https://img.shields.io/github/stars/baomidou/mybatis-plus.svg" alt></li>
+<li>Druid <img src="https://camo.githubusercontent.com/496004a01d376ec1bb71c3d2058897e6acae6aed/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f72656c656173652f616c69626162612f64727569642e737667" alt>  <img src="https://img.shields.io/github/stars/alibaba/druid.svg" alt></li>
+</ul>
+<h3 id="Spring-Boot-整合Mybatis-Plus"><a href="#Spring-Boot-整合Mybatis-Plus" class="headerlink" title="Spring Boot 整合Mybatis-Plus"></a>Spring Boot 整合Mybatis-Plus</h3><p>我之前一直是直接用的<code>Mybatis</code>,但是作为喜欢<code>偷懒</code>的人，当然得想办法来提高我们的效率，所以就想着用<code>Mybatis-Plus</code>来省去一些单表的CRUD操作再结合<code>MyBatis-Plus</code>配套的<code>AutoGenerator</code>代码生成器，就能为我们节省不少时间。</p>
+<h4 id="引入依赖包"><a href="#引入依赖包" class="headerlink" title="引入依赖包"></a>引入依赖包</h4><p>首先，我们得引入<code>Mybatis-Plus</code>和<code>mariadb-java-client</code>等几个包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;knife4j-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.0.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">       &lt;!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client --&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.mariadb.jdbc&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mariadb-java-client&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.5.3&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>在<code>application.yml</code>配置我们的数据库连接信息:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: org.mariadb.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://127.0.0.1:3306/nacos_config?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    minimum-idle: 5</span><br><span class="line">    maximum-pool-size: 50</span><br><span class="line">    auto-commit: true</span><br><span class="line">    idle-timeout: 30000</span><br><span class="line">    max-lifetime: 1800000</span><br><span class="line">    connection-timeout: 30000</span><br><span class="line">    connection-test-query: SELECT 1</span><br></pre></td></tr></table></figure>
+<p>这里我新建一个名为<code>User</code>的实体,具体属性如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@Builder</span><br><span class="line">@TableName(&quot;users&quot;)</span><br><span class="line">public class User &#123;</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line">    private int enabled;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>新建一个<code>UserMapper</code>接口:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我们的启动类加上<code>@MapperScan</code>来指定我们的<code>Mapper</code>扫描目录:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@MapperScan(&quot;com.eyiadmin.demo.mapper&quot;)</span><br></pre></td></tr></table></figure>
+<p>我新建一个单元测试，来试试我们的<code>UserMapper</code>的<code>selectList</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class UserTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testUser() &#123;</span><br><span class="line">        List&lt;User&gt; userList = userMapper.selectList(null);</span><br><span class="line">        userList.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会看到<code>Mybatis-Plus</code>为我取出的数据:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2020-01-20 09:44:14.125 TRACE org.apache.ibatis.logging.jdbc.BaseJdbcLogger.trace(BaseJdbcLogger.java:149) 2CNU7X5OLAUE004 --- [           main] c.e.d.m.U.selectList                     : &lt;==    Columns: username, password, enabled</span><br><span class="line">2020-01-20 09:44:14.125 TRACE org.apache.ibatis.logging.jdbc.BaseJdbcLogger.trace(BaseJdbcLogger.java:149) 2CNU7X5OLAUE004 --- [           main] c.e.d.m.U.selectList                     : &lt;==        Row: nacos, $2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu, 1</span><br><span class="line">2020-01-20 09:44:14.131 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [           main] c.e.d.m.U.selectList                     : &lt;==      Total: 1</span><br><span class="line">User(username=nacos, password=$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu, enabled=1)</span><br></pre></td></tr></table></figure>
+<p>我们再试试<code>Mybatis-Plus</code>为什么封装的<code>Insert</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void TestUserInsert() &#123;</span><br><span class="line">        int row = userMapper.insert(User.builder().password(&quot;aaaa&quot;).username(&quot;bbbb&quot;).enabled(1).build());</span><br><span class="line">        Assert.assertEquals(row, 1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到日志:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2020-01-20 09:51:32.021 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [           main] c.e.d.m.U.insert                         : ==&gt;  Preparing: INSERT INTO users ( username, password, enabled ) VALUES ( ?, ?, ? ) </span><br><span class="line">2020-01-20 09:51:32.036 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [           main] c.e.d.m.U.insert                         : ==&gt; Parameters: bbbb(String), aaaa(String), 1(Integer)</span><br></pre></td></tr></table></figure>
+<p>其他高端操作请阅读相关文档<a href="https://mp.baomidou.com/guide/quick-start.html" target="_blank" rel="noopener">https://mp.baomidou.com/guide/quick-start.html</a></p>
+<h3 id="Spring-Boot整合Druid数据库连接池"><a href="#Spring-Boot整合Druid数据库连接池" class="headerlink" title="Spring Boot整合Druid数据库连接池"></a>Spring Boot整合Druid数据库连接池</h3><p>在Spring Boot 2.X默认使用了<code>HikariCP</code>作为数据库连接池,据说<code>hikariCP</code>性能最高(<strong>hikariCP&gt;druid&gt;dbcp&gt;c3p0</strong>),但是我更喜欢<code>Druid</code>全面的功能和毫不逊色的性能。<br>开撸吧，首先当然还是引入我们的需要的<code>Druid</code>依赖包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.21&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>接下来就是修改我们的的<code>application.yml</code>配置:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: org.mariadb.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://127.0.0.1:3306/nacos_config?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    ### 连接池配置</span><br><span class="line">    druid:</span><br><span class="line">      initial-size: 50</span><br><span class="line">      max-active: 200</span><br><span class="line">      min-idle: 50</span><br><span class="line">      max-wait: 50</span><br><span class="line">      validation-query: SELECT 1</span><br></pre></td></tr></table></figure>
+<p>可以看到我们的日志信息为:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2020-01-20 10:14:54.581  INFO com.alibaba.druid.pool.DruidDataSource.close(DruidDataSource.java:2003) 2CNU7X5OLAUE004 --- [extShutdownHook] c.a.d.p.DruidDataSource                  : &#123;dataSource-1&#125; closing ...</span><br><span class="line">2020-01-20 10:14:54.691  INFO com.alibaba.druid.pool.DruidDataSource.close(DruidDataSource.java:2075) 2CNU7X5OLAUE004 --- [extShutdownHook] c.a.d.p.DruidDataSource                  : &#123;dataSource-1&#125; closed</span><br></pre></td></tr></table></figure>
+<p>现在我们增加一个<code>Controller</code>来获取Druid的监控数据:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class DruidStatController &#123;</span><br><span class="line">    @GetMapping(&quot;/druid/status&quot;)</span><br><span class="line">    public Object druidStat()&#123;</span><br><span class="line">        // DruidStatManagerFacade#getDataSourceStatDataList 该方法可以获取所有数据源的监控数据，除此之外 DruidStatManagerFacade 还提供了一些其他方法，你可以按需选择使用。</span><br><span class="line">        return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问<code>http://localhost:8080/druid/status</code>可以得到一个json:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">	&quot;Identity&quot;: 1914285129,</span><br><span class="line">	&quot;Name&quot;: &quot;DataSource-1914285129&quot;,</span><br><span class="line">	&quot;DbType&quot;: &quot;mysql&quot;,</span><br><span class="line">	&quot;DriverClassName&quot;: &quot;org.mariadb.jdbc.Driver&quot;,</span><br><span class="line">	&quot;URL&quot;: &quot;jdbc:mysql://127.0.0.1:3306/nacos_config?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true&quot;,</span><br><span class="line">	&quot;UserName&quot;: &quot;root&quot;,</span><br><span class="line">	&quot;FilterClassNames&quot;: [],</span><br><span class="line">	&quot;WaitThreadCount&quot;: 0,</span><br><span class="line">	&quot;NotEmptyWaitCount&quot;: 0,</span><br><span class="line">	&quot;NotEmptyWaitMillis&quot;: 0,</span><br><span class="line">	&quot;PoolingCount&quot;: 50,</span><br><span class="line">	&quot;PoolingPeak&quot;: 50,</span><br><span class="line">	&quot;PoolingPeakTime&quot;: &quot;2020-01-20T02:26:22.466+0000&quot;,</span><br><span class="line">	&quot;ActiveCount&quot;: 0,</span><br><span class="line">	&quot;ActivePeak&quot;: 0,</span><br><span class="line">	&quot;ActivePeakTime&quot;: null,</span><br><span class="line">	&quot;InitialSize&quot;: 50,</span><br><span class="line">	&quot;MinIdle&quot;: 50,</span><br><span class="line">	&quot;MaxActive&quot;: 200,</span><br><span class="line">	&quot;QueryTimeout&quot;: 0,</span><br><span class="line">	&quot;TransactionQueryTimeout&quot;: 0,</span><br><span class="line">	&quot;LoginTimeout&quot;: 0,</span><br><span class="line">	&quot;ValidConnectionCheckerClassName&quot;: null,</span><br><span class="line">	&quot;ExceptionSorterClassName&quot;: null,</span><br><span class="line">	&quot;TestOnBorrow&quot;: false,</span><br><span class="line">	&quot;TestOnReturn&quot;: false,</span><br><span class="line">	&quot;TestWhileIdle&quot;: true,</span><br><span class="line">	&quot;DefaultAutoCommit&quot;: true,</span><br><span class="line">	&quot;DefaultReadOnly&quot;: null,</span><br><span class="line">	&quot;DefaultTransactionIsolation&quot;: null,</span><br><span class="line">	&quot;LogicConnectCount&quot;: 0,</span><br><span class="line">	&quot;LogicCloseCount&quot;: 0,</span><br><span class="line">	&quot;LogicConnectErrorCount&quot;: 0,</span><br><span class="line">	&quot;PhysicalConnectCount&quot;: 50,</span><br><span class="line">	&quot;PhysicalCloseCount&quot;: 0,</span><br><span class="line">	&quot;PhysicalConnectErrorCount&quot;: 0,</span><br><span class="line">	&quot;DiscardCount&quot;: 0,</span><br><span class="line">	&quot;ExecuteCount&quot;: 0,</span><br><span class="line">	&quot;ExecuteUpdateCount&quot;: 0,</span><br><span class="line">	&quot;ExecuteQueryCount&quot;: 0,</span><br><span class="line">	&quot;ExecuteBatchCount&quot;: 0,</span><br><span class="line">	&quot;ErrorCount&quot;: 0,</span><br><span class="line">	&quot;CommitCount&quot;: 0,</span><br><span class="line">	&quot;RollbackCount&quot;: 0,</span><br><span class="line">	&quot;PSCacheAccessCount&quot;: 0,</span><br><span class="line">	&quot;PSCacheHitCount&quot;: 0,</span><br><span class="line">	&quot;PSCacheMissCount&quot;: 0,</span><br><span class="line">	&quot;StartTransactionCount&quot;: 0,</span><br><span class="line">	&quot;TransactionHistogram&quot;: [0, 0, 0, 0, 0, 0, 0],</span><br><span class="line">	&quot;ConnectionHoldTimeHistogram&quot;: [0, 0, 0, 0, 0, 0, 0, 0],</span><br><span class="line">	&quot;RemoveAbandoned&quot;: false,</span><br><span class="line">	&quot;ClobOpenCount&quot;: 0,</span><br><span class="line">	&quot;BlobOpenCount&quot;: 0,</span><br><span class="line">	&quot;KeepAliveCheckCount&quot;: 0,</span><br><span class="line">	&quot;KeepAlive&quot;: false,</span><br><span class="line">	&quot;FailFast&quot;: false,</span><br><span class="line">	&quot;MaxWait&quot;: 50,</span><br><span class="line">	&quot;MaxWaitThreadCount&quot;: -1,</span><br><span class="line">	&quot;PoolPreparedStatements&quot;: false,</span><br><span class="line">	&quot;MaxPoolPreparedStatementPerConnectionSize&quot;: 10,</span><br><span class="line">	&quot;MinEvictableIdleTimeMillis&quot;: 1800000,</span><br><span class="line">	&quot;MaxEvictableIdleTimeMillis&quot;: 25200000,</span><br><span class="line">	&quot;LogDifferentThread&quot;: true,</span><br><span class="line">	&quot;RecycleErrorCount&quot;: 0,</span><br><span class="line">	&quot;PreparedStatementOpenCount&quot;: 0,</span><br><span class="line">	&quot;PreparedStatementClosedCount&quot;: 0,</span><br><span class="line">	&quot;UseUnfairLock&quot;: true,</span><br><span class="line">	&quot;InitGlobalVariants&quot;: false,</span><br><span class="line">	&quot;InitVariants&quot;: false</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>我们还可以打开<code>stat-view-servlet</code>,需要加入如下配置:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    druid:</span><br><span class="line">      stat-view-servlet:</span><br><span class="line">        enabled: true</span><br><span class="line">        login-username: admin</span><br><span class="line">        login-password: admin</span><br></pre></td></tr></table></figure>
+<p>这是启动后，访问<code>http://localhost:8080/druid/index.html</code>页面就会跳转到登录页面,输入我们配置的用户名和密码<code>admin/admin</code>:<br><img src="http://xxnote.52fx.biz/spring_druid_1.png" alt><br><img src="http://xxnote.52fx.biz/spring_druid_2.png" alt><br><img src="http://xxnote.52fx.biz/spring_druid_3.png" alt><br>可以看到<code>Druid</code>提供的功能是比较全面的，另外在第三张图可以看到我们的相关参数，大家也可以参照这个来配置连接池。</p>
+<h3 id="MyBatis-Plus的代码生成器"><a href="#MyBatis-Plus的代码生成器" class="headerlink" title="MyBatis-Plus的代码生成器"></a>MyBatis-Plus的代码生成器</h3><p>Mybatis有Generator工具为我们提高编码效率，MyBatis-Plus也不示弱，它也提供有MyBatis-Plus AutoGenerator 。在上面的简单实体只有3个属性，加入有几十个属性怎么办呢？这时候AutoGenerator就可以帮我们一个大忙。首先引入所需包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-generator --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;velocity-engine-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>新建<code>CodeGenerator</code>类:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">// 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中</span><br><span class="line">public class CodeGenerator &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 读取控制台内容</span><br><span class="line">     * &lt;/p&gt;</span><br><span class="line">     */</span><br><span class="line">    public static String scanner(String tip) &#123;</span><br><span class="line">        Scanner scanner = new Scanner(System.in);</span><br><span class="line">        StringBuilder help = new StringBuilder();</span><br><span class="line">        help.append(&quot;请输入&quot; + tip + &quot;：&quot;);</span><br><span class="line">        System.out.println(help.toString());</span><br><span class="line">        if (scanner.hasNext()) &#123;</span><br><span class="line">            String ipt = scanner.next();</span><br><span class="line">            if (StringUtils.isNotBlank(ipt)) &#123;</span><br><span class="line">                return ipt;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        throw new MybatisPlusException(&quot;请输入正确的&quot; + tip + &quot;！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 代码生成器</span><br><span class="line">        AutoGenerator mpg = new AutoGenerator();</span><br><span class="line"></span><br><span class="line">        // 全局配置</span><br><span class="line">        GlobalConfig gc = new GlobalConfig();</span><br><span class="line">        String projectPath = System.getProperty(&quot;user.dir&quot;);</span><br><span class="line">        gc.setOutputDir(projectPath + &quot;/src/main/java&quot;);</span><br><span class="line">        gc.setAuthor(&quot;eyiadmin&quot;);</span><br><span class="line">        gc.setOpen(false);</span><br><span class="line">        // gc.setSwagger2(true); 实体属性 Swagger2 注解</span><br><span class="line">        mpg.setGlobalConfig(gc);</span><br><span class="line"></span><br><span class="line">        // 数据源配置</span><br><span class="line">        DataSourceConfig dsc = new DataSourceConfig();</span><br><span class="line">        dsc.setUrl(&quot;jdbc:mysql://localhost:3306/nacos_config?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf8&quot;);</span><br><span class="line">        // dsc.setSchemaName(&quot;public&quot;);</span><br><span class="line">        dsc.setDriverName(&quot;org.mariadb.jdbc.Driver&quot;);</span><br><span class="line">        dsc.setUsername(&quot;root&quot;);</span><br><span class="line">        dsc.setPassword(&quot;root&quot;);</span><br><span class="line">        mpg.setDataSource(dsc);</span><br><span class="line"></span><br><span class="line">        // 包配置</span><br><span class="line">        PackageConfig pc = new PackageConfig();</span><br><span class="line">        pc.setModuleName(scanner(&quot;模块名&quot;));</span><br><span class="line">        pc.setParent(&quot;com.eyiadmin.demo&quot;);</span><br><span class="line">        mpg.setPackageInfo(pc);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        String templatePath = &quot;/templates/mapper.xml.vm&quot;;</span><br><span class="line"></span><br><span class="line">        // 自定义输出配置</span><br><span class="line">        List&lt;FileOutConfig&gt; focList = new ArrayList&lt;&gt;();</span><br><span class="line">        // 自定义配置会被优先输出</span><br><span class="line">        focList.add(new FileOutConfig(templatePath) &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public String outputFile(TableInfo tableInfo) &#123;</span><br><span class="line">                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！</span><br><span class="line">                return projectPath + &quot;/src/main/resources/mapper/&quot; + pc.getModuleName()</span><br><span class="line">                        + &quot;/&quot; + tableInfo.getEntityName() + &quot;Mapper&quot; + StringPool.DOT_XML;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        mpg.execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我用的官网提供的默认方式,运行后会生成对应的<code>controller</code>、<code>entity</code>、<code>mapper</code>、<code>service</code>代码。也支持自定义模版<a href="https://mp.baomidou.com/guide/generator.html" target="_blank" rel="noopener">https://mp.baomidou.com/guide/generator.html</a></p>
+<h3 id="Knife4j的使用"><a href="#Knife4j的使用" class="headerlink" title="Knife4j的使用"></a>Knife4j的使用</h3><p>这里我引入了<strong>Knife4j</strong>包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;knife4j-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.0.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>新建一个<code>SwaggerConfiguration</code>类配置我们的<code>Swagger</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">@EnableKnife4j</span><br><span class="line">@Import(BeanValidatorPluginsConfiguration.class)</span><br><span class="line">public class SwaggerConfiguration &#123;</span><br><span class="line">    @Bean(&quot;createRestApi&quot;)</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo( new ApiInfoBuilder()</span><br><span class="line">                        //页面标题</span><br><span class="line">                        .title(&quot;Demo Web Api文档&quot;)</span><br><span class="line">                        //创建人</span><br><span class="line">                        .contact(new Contact(&quot;eyiadmin&quot;, &quot;https://springfox.github.io/springfox/&quot;, &quot;eyiadmin@163.com&quot;))</span><br><span class="line">                        .version(&quot;1.0&quot;)</span><br><span class="line">                        .description(&quot;Demo Web Api文档&quot;)</span><br><span class="line">                        .build())</span><br><span class="line">                .select()</span><br><span class="line">                //API接口所在的包位置</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.eyiadmin.demo.controller&quot;))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>新建一个名为<code>UserController</code>的<code>Controller</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/v1/user&quot;)</span><br><span class="line">@RestController</span><br><span class="line">@Api(tags = &quot;User API展示&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/list&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getUserList()</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(userMapper.selectList(null));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动起来，访问<code>localhost:8080/doc.html</code>:<br><img src="http://xxnote.52fx.biz/spring_druid_5.png" alt><br>调用我们的接口，可以看到<code>Druid</code>监控到了我们SQL语句的执行情况<br><img src="http://xxnote.52fx.biz/spring_druid_6.png" alt><br>过于Swagger也可以看看我之前的一篇文章<a href="https://blogs.52fx.biz/20191206/Spring-Boot-Swagger.html">Spring Boot集成Swagger</a></p>
+<p><strong>若有不足之处还望指正，多谢。欢迎感兴趣的朋友与我多多交流</strong></p>
+<p>参考<br><a href="https://mp.baomidou.com/guide/" target="_blank" rel="noopener">MyBatis-Plus</a><br><a href="https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter" target="_blank" rel="noopener">https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter</a><br><a href="https://doc.xiaominfo.com/changelog/" target="_blank" rel="noopener">knife4j</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>, <a class="has-link-grey -link" href="/tags/Swagger/" rel="tag">Swagger</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/3832913427.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">一个开源的高性能对象存储系统-MinIO</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/619628292.html">
+                <span class="level-item">Spring Boot整合Dubbo和Nacos</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/avatar1.png" alt="农民工学编程">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        农民工学编程
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        大龄程序员
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China,sichuan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        55
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        16
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        32
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/eyiadmin" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/eyiadmin">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#简介">
+        <span class="has-mr-6">1</span>
+        <span>简介</span>
+        </a></li><li>
+        <a class="is-flex" href="#Spring-Boot-整合Mybatis-Plus">
+        <span class="has-mr-6">2</span>
+        <span>Spring Boot 整合Mybatis-Plus</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#引入依赖包">
+        <span class="has-mr-6">2.1</span>
+        <span>引入依赖包</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Spring-Boot整合Druid数据库连接池">
+        <span class="has-mr-6">3</span>
+        <span>Spring Boot整合Druid数据库连接池</span>
+        </a></li><li>
+        <a class="is-flex" href="#MyBatis-Plus的代码生成器">
+        <span class="has-mr-6">4</span>
+        <span>MyBatis-Plus的代码生成器</span>
+        </a></li><li>
+        <a class="is-flex" href="#Knife4j的使用">
+        <span class="has-mr-6">5</span>
+        <span>Knife4j的使用</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank"  rel="external nofollow">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.baidu.com" target="_blank"  rel="external nofollow">
+                    <span class="level-left">
+                        <span class="level-item">百度</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.baidu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/net/">
+            <span class="level-start">
+                <span class="level-item">.net</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/net-core/">
+            <span class="level-start">
+                <span class="level-item">.net core</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Docker/">
+            <span class="level-start">
+                <span class="level-item">Docker</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gis/">
+            <span class="level-start">
+                <span class="level-item">Gis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Golang/">
+            <span class="level-start">
+                <span class="level-item">Golang</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Nginx/">
+            <span class="level-start">
+                <span class="level-item">Nginx</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/mysql/">
+            <span class="level-start">
+                <span class="level-item">mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/shell/">
+            <span class="level-start">
+                <span class="level-item">shell</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%BE%AE%E4%BF%A1/">
+            <span class="level-start">
+                <span class="level-item">微信</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+            <span class="level-start">
+                <span class="level-item">文件存储</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">消息队列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 18.33px;">.net core</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/Go/" style="font-size: 11.67px;">Go</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.67px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 16.67px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/autofac/" style="font-size: 10px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.67px;">消息队列</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/3832913427.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true" alt="一个开源的高性能对象存储系统-MinIO">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T00:51:26.000Z">2020-01-22</time></div>
+                    <a href="/posts/3832913427.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个开源的高性能对象存储系统-MinIO</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">文件存储</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/1287150620.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot整合Mybatis Plus和Druid">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T00:01:43.000Z">2020-01-20</time></div>
+                    <a href="/posts/1287150620.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Mybatis Plus和Druid</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/619628292.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-18T01:23:48.000Z">2020-01-18</time></div>
+                    <a href="/posts/619628292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Dubbo和Nacos</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/2559044759.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ的可用性和可靠性">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-16T00:13:41.000Z">2020-01-16</time></div>
+                    <a href="/posts/2559044759.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ的可用性和可靠性</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/3853429767.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ实现消息延迟执行">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-13T08:58:58.000Z">2020-01-13</time></div>
+                    <a href="/posts/3853429767.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ实现消息延迟执行</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net/">
+                        <span class="tag">.net</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go/">
+                        <span class="tag">Go</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/">
+                        <span class="tag">微信</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+                        <span class="tag">文件存储</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/3832913427.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://raw.githubusercontent.com/minio/minio/master/.github/logo.svg?sanitize=true" alt="一个开源的高性能对象存储系统-MinIO">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T00:51:26.000Z">2020-01-22</time></div>
+                    <a href="/posts/3832913427.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">一个开源的高性能对象存储系统-MinIO</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">文件存储</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/1287150620.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot整合Mybatis Plus和Druid">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T00:01:43.000Z">2020-01-20</time></div>
+                    <a href="/posts/1287150620.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Mybatis Plus和Druid</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/619628292.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="http://dubbo.apache.org/img/architecture.png" alt="Spring Boot整合Dubbo和Nacos">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-18T01:23:48.000Z">2020-01-18</time></div>
+                    <a href="/posts/619628292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot整合Dubbo和Nacos</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/2559044759.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ的可用性和可靠性">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-16T00:13:41.000Z">2020-01-16</time></div>
+                    <a href="/posts/2559044759.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ的可用性和可靠性</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/3853429767.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://f.cloud.github.com/assets/187441/1700696/f1434dc8-6029-11e3-8a66-18ca4ea10aca.gif" alt="NSQ实现消息延迟执行">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-13T08:58:58.000Z">2020-01-13</time></div>
+                    <a href="/posts/3853429767.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">NSQ实现消息延迟执行</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">15</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net/">
+                        <span class="tag">.net</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/net-core/">
+                        <span class="tag">.net core</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Datax/">
+                        <span class="tag">Datax</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker%E5%91%BD%E4%BB%A4/">
+                        <span class="tag">Docker命令</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gis/">
+                        <span class="tag">Gis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Github/">
+                        <span class="tag">Github</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go/">
+                        <span class="tag">Go</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Golang/">
+                        <span class="tag">Golang</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Go%E5%9F%BA%E7%A1%80/">
+                        <span class="tag">Go基础</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Java/">
+                        <span class="tag">Java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Spring-Boot/">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Swagger/">
+                        <span class="tag">Swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tool/">
+                        <span class="tag">Tool</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ack/">
+                        <span class="tag">ack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/autofac/">
+                        <span class="tag">autofac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql-explain/">
+                        <span class="tag">mysql explain</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nginx/">
+                        <span class="tag">nginx</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redash/">
+                        <span class="tag">redash</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/">
+                        <span class="tag">微信</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="tag">数据同步</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/">
+                        <span class="tag">文件存储</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+       
+    <div class="container">
+           
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Spring Boot整合Mybatis Plus和Druid" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                       
+                             
+                        
+                &copy; 2020 eyiadmin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow">Icarus</a>
+                
+                <br>
+               
+                蜀ICP备19030100号|本站总访问量<span id="busuanzi_value_site_pv">0</span>次
+                    |
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+       
+           
+    </div>
+	<script>
+        var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?213766fcc08fe275b1166dab2b8fa7aa";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
