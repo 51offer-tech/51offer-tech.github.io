@@ -26,7 +26,7 @@
 <meta property="og:description" content="Spring Boot 2.X多数据源">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
-<meta property="og:updated_time" content="2020-02-03T05:18:46.843Z">
+<meta property="og:updated_time" content="2020-02-03T07:28:17.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
 
@@ -170,7 +170,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 647 个字)
+                    5 分钟 读完 (大约 783 个字)
                 </span>
                 
                 
@@ -203,9 +203,11 @@
 <p><code>FeedbackMapper</code>:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface FeedbackMapper extends BaseMapper&lt;Feedback&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="在controller中调用Mapper"><a href="#在controller中调用Mapper" class="headerlink" title="在controller中调用Mapper"></a>在controller中调用Mapper</h4><p>这里还是用之前的<code>UserController</code>类:</p>
+<h4 id="在controller中调用Mapper"><a href="#在controller中调用Mapper" class="headerlink" title="在controller中调用Mapper"></a>在controller中调用Mapper</h4><p>这里我们还是用之前编写的<code>UserController</code>类:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/v1/user&quot;)</span><br><span class="line">@RestController</span><br><span class="line">@Api(tags = &quot;User API展示&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    FeedbackMapper feedbackMapper;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;mariadb&quot;, notes = &quot;获取mariadb中的用户数据&quot;)</span><br><span class="line">    @GetMapping(&quot;/list&quot;)</span><br><span class="line">    @DS(&quot;mariadb&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getUserList()</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(userMapper.selectList(null));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;pgsql&quot;, notes = &quot;获取pgsql中的用户反馈数据&quot;)</span><br><span class="line">    @GetMapping(&quot;/feedbacks&quot;)</span><br><span class="line">    @DS(&quot;pgsql&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getJobs()</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(feedbackMapper.selectList(null));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>这里需要使用<code>@DS</code>注解来标识要使用的数据源,该注解可以使用在<code>Class</code>和<code>METHOD</code>上，如果是使用在类上，则表示该类都使用这个指定的数据库连接。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface DS &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * groupName or specific database name or spring SPEL name.</span><br><span class="line">   *</span><br><span class="line">   * @return the database you want to switch</span><br><span class="line">   */</span><br><span class="line">  String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我这里使用到了<code>Druid</code>,那么还需要在启动类上加上<code>@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)</code>,排除掉<code>druid-spring-boot-starter</code>中的<code>DruidDataSourceAutoConfigure</code>自动配置类。</p>
 <p>现在我们启动起来看看效果,可以再启动日志中看到</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2020-02-03 12:54:42.740  INFO com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:1010) 2CNU7X5OLAUE004 --- [           main] c.a.d.p.DruidDataSource                  : &#123;dataSource-1,mariadb&#125; inited</span><br><span class="line">2020-02-03 12:54:46.592  INFO com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:1010) 2CNU7X5OLAUE004 --- [           main] c.a.d.p.DruidDataSource                  : &#123;dataSource-2,pgsql&#125; inited</span><br><span class="line">2020-02-03 12:54:46.594  INFO com.baomidou.dynamic.datasource.DynamicRoutingDataSource.addDataSource(DynamicRoutingDataSource.java:148) 2CNU7X5OLAUE004 --- [           main] c.b.d.d.DynamicRoutingDataSource         : dynamic-datasource - load a datasource named [mariadb] success</span><br><span class="line">2020-02-03 12:54:46.594  INFO com.baomidou.dynamic.datasource.DynamicRoutingDataSource.addDataSource(DynamicRoutingDataSource.java:148) 2CNU7X5OLAUE004 --- [           main] c.b.d.d.DynamicRoutingDataSource         : dynamic-datasource - load a datasource named [pgsql] success</span><br></pre></td></tr></table></figure>
 
@@ -269,6 +271,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/1829574622.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring Boot Starter为我们做了什么?</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/posts/2083515859.html">
@@ -325,7 +334,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        61
+                        62
                     </p>
                 </div>
             </div>
@@ -536,7 +545,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JavaScript/">
@@ -629,7 +638,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 20px;">.net core</a> <a href="/tags/ABP/" style="font-size: 10px;">ABP</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker/" style="font-size: 11.67px;">Docker</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/Go/" style="font-size: 11.67px;">Go</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 11.67px;">Redis</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.67px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 16.67px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/autofac/" style="font-size: 11.67px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.67px;">消息队列</a>
+        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 18.57px;">.net core</a> <a href="/tags/ABP/" style="font-size: 10px;">ABP</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker/" style="font-size: 11.43px;">Docker</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Github/" style="font-size: 14.29px;">Github</a> <a href="/tags/Go/" style="font-size: 11.43px;">Go</a> <a href="/tags/Golang/" style="font-size: 14.29px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 14.29px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 12.86px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.43px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 11.43px;">Redis</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.43px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 15.71px;">Tool</a> <a href="/tags/Vue/" style="font-size: 12.86px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/autofac/" style="font-size: 11.43px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 15.71px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.43px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.43px;">消息队列</a>
     </div>
 </div>
     
@@ -641,6 +650,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/1829574622.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot Starter为我们做了什么?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-03T07:41:39.000Z">2020-02-03</time></div>
+                    <a href="/posts/1829574622.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot Starter为我们做了什么?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -718,25 +746,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/2841798292.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://redis.io/images/redis-white.png" alt="Redis集群无感知上线下线节点">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T05:44:10.000Z">2020-01-25</time></div>
-                    <a href="/posts/2841798292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Redis集群无感知上线下线节点</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Redis/">Redis</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -754,7 +763,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -917,7 +926,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
@@ -938,7 +947,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1099,6 +1108,25 @@
         
         <article class="media">
             
+            <a href="/posts/1829574622.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot Starter为我们做了什么?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-03T07:41:39.000Z">2020-02-03</time></div>
+                    <a href="/posts/1829574622.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot Starter为我们做了什么?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/2136619727.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot 2.X基于Mybaits-Plus实现多数据源">
@@ -1173,25 +1201,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/2841798292.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://redis.io/images/redis-white.png" alt="Redis集群无感知上线下线节点">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T05:44:10.000Z">2020-01-25</time></div>
-                    <a href="/posts/2841798292.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Redis集群无感知上线下线节点</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Redis/">Redis</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1209,7 +1218,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1372,7 +1381,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
@@ -1393,7 +1402,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
