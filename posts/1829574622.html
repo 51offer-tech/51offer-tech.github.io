@@ -26,7 +26,7 @@
 <meta property="og:description" content="Spring Boot Starter为我们做了什么,Spring Boot Starter">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-02-05T05:09:53.385Z">
+<meta property="og:updated_time" content="2020-02-05T05:29:15.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1246 个字)
+                    9 分钟 读完 (大约 1370 个字)
                 </span>
                 
                 
@@ -204,7 +204,9 @@
 <p>完整的<code>pom.xml</code>大家就去github中查看。</p>
 </blockquote>
 <h4 id="druid-spring-boot-starter的配置类DruidStatProperties"><a href="#druid-spring-boot-starter的配置类DruidStatProperties" class="headerlink" title="druid-spring-boot-starter的配置类DruidStatProperties"></a>druid-spring-boot-starter的配置类DruidStatProperties</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line">@ConfigurationProperties(&quot;spring.datasource.druid&quot;)</span><br><span class="line">public class DruidStatProperties &#123;</span><br><span class="line">    private String[] aopPatterns;</span><br><span class="line">    private StatViewServlet statViewServlet = new StatViewServlet();</span><br><span class="line">    private WebStatFilter webStatFilter = new WebStatFilter();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public String[] getAopPatterns() &#123;</span><br><span class="line">        return aopPatterns;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAopPatterns(String[] aopPatterns) &#123;</span><br><span class="line">        this.aopPatterns = aopPatterns;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public StatViewServlet getStatViewServlet() &#123;</span><br><span class="line">        return statViewServlet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setStatViewServlet(StatViewServlet statViewServlet) &#123;</span><br><span class="line">        this.statViewServlet = statViewServlet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public WebStatFilter getWebStatFilter() &#123;</span><br><span class="line">        return webStatFilter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setWebStatFilter(WebStatFilter webStatFilter) &#123;</span><br><span class="line">        this.webStatFilter = webStatFilter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class StatViewServlet &#123;</span><br><span class="line">        /**</span><br><span class="line">         * Enable StatViewServlet, default false.</span><br><span class="line">         */</span><br><span class="line">        private boolean enabled;</span><br><span class="line">        private String urlPattern;</span><br><span class="line">        private String allow;</span><br><span class="line">        private String deny;</span><br><span class="line">        private String loginUsername;</span><br><span class="line">        private String loginPassword;</span><br><span class="line">        private String resetEnable;</span><br><span class="line"></span><br><span class="line">        public boolean isEnabled() &#123;</span><br><span class="line">            return enabled;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setEnabled(boolean enabled) &#123;</span><br><span class="line">            this.enabled = enabled;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getUrlPattern() &#123;</span><br><span class="line">            return urlPattern;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setUrlPattern(String urlPattern) &#123;</span><br><span class="line">            this.urlPattern = urlPattern;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getAllow() &#123;</span><br><span class="line">            return allow;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setAllow(String allow) &#123;</span><br><span class="line">            this.allow = allow;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getDeny() &#123;</span><br><span class="line">            return deny;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setDeny(String deny) &#123;</span><br><span class="line">            this.deny = deny;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getLoginUsername() &#123;</span><br><span class="line">            return loginUsername;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setLoginUsername(String loginUsername) &#123;</span><br><span class="line">            this.loginUsername = loginUsername;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getLoginPassword() &#123;</span><br><span class="line">            return loginPassword;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setLoginPassword(String loginPassword) &#123;</span><br><span class="line">            this.loginPassword = loginPassword;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getResetEnable() &#123;</span><br><span class="line">            return resetEnable;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setResetEnable(String resetEnable) &#123;</span><br><span class="line">            this.resetEnable = resetEnable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class WebStatFilter &#123;</span><br><span class="line">        /**</span><br><span class="line">         * Enable WebStatFilter, default false.</span><br><span class="line">         */</span><br><span class="line">        private boolean enabled;</span><br><span class="line">        private String urlPattern;</span><br><span class="line">        private String exclusions;</span><br><span class="line">        private String sessionStatMaxCount;</span><br><span class="line">        private String sessionStatEnable;</span><br><span class="line">        private String principalSessionName;</span><br><span class="line">        private String principalCookieName;</span><br><span class="line">        private String profileEnable;</span><br><span class="line"></span><br><span class="line">        public boolean isEnabled() &#123;</span><br><span class="line">            return enabled;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setEnabled(boolean enabled) &#123;</span><br><span class="line">            this.enabled = enabled;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getUrlPattern() &#123;</span><br><span class="line">            return urlPattern;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setUrlPattern(String urlPattern) &#123;</span><br><span class="line">            this.urlPattern = urlPattern;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getExclusions() &#123;</span><br><span class="line">            return exclusions;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setExclusions(String exclusions) &#123;</span><br><span class="line">            this.exclusions = exclusions;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getSessionStatMaxCount() &#123;</span><br><span class="line">            return sessionStatMaxCount;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setSessionStatMaxCount(String sessionStatMaxCount) &#123;</span><br><span class="line">            this.sessionStatMaxCount = sessionStatMaxCount;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getSessionStatEnable() &#123;</span><br><span class="line">            return sessionStatEnable;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setSessionStatEnable(String sessionStatEnable) &#123;</span><br><span class="line">            this.sessionStatEnable = sessionStatEnable;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getPrincipalSessionName() &#123;</span><br><span class="line">            return principalSessionName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPrincipalSessionName(String principalSessionName) &#123;</span><br><span class="line">            this.principalSessionName = principalSessionName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getPrincipalCookieName() &#123;</span><br><span class="line">            return principalCookieName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPrincipalCookieName(String principalCookieName) &#123;</span><br><span class="line">            this.principalCookieName = principalCookieName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getProfileEnable() &#123;</span><br><span class="line">            return profileEnable;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setProfileEnable(String profileEnable) &#123;</span><br><span class="line">            this.profileEnable = profileEnable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这个类是<code>Druid</code>的配置信息类，在类上使用了<code>ConfigurationProperties</code>标识了配置前缀<code>@ConfigurationProperties(&quot;spring.datasource.druid&quot;)</code>,获取配置信息。</li>
+这个类是<code>Druid</code>的配置信息类，在类上使用了<code>ConfigurationProperties</code>标识了配置前缀<code>@ConfigurationProperties(&quot;spring.datasource.druid&quot;)</code>,该类会去获取类似如下结果的配置新信息<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.druid.initial-size=</span><br><span class="line">spring.datasource.druid.max-active=</span><br><span class="line">spring.datasource.druid.min-idle=</span><br><span class="line">spring.datasource.druid.max-wait=</span><br><span class="line">spring.datasource.druid.pool-prepared-statements=</span><br><span class="line">spring.datasource.druid.max-pool-prepared-statement-per-connection-size= </span><br><span class="line">spring.datasource.druid.max-open-prepared-statements= #和上面的等价</span><br><span class="line">spring.datasource.druid.validation-query=</span><br><span class="line">spring.datasource.druid.validation-query-timeout=</span><br><span class="line">spring.datasource.druid.test-on-borrow=</span><br><span class="line">spring.datasource.druid.test-on-return=</span><br><span class="line">spring.datasource.druid.test-while-idle=</span><br><span class="line">spring.datasource.druid.time-between-eviction-runs-millis=</span><br><span class="line">spring.datasource.druid.min-evictable-idle-time-millis=</span><br><span class="line">spring.datasource.druid.max-evictable-idle-time-millis=</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 <h4 id="自动装配类DruidDataSourceAutoConfigure"><a href="#自动装配类DruidDataSourceAutoConfigure" class="headerlink" title="自动装配类DruidDataSourceAutoConfigure"></a>自动装配类DruidDataSourceAutoConfigure</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConditionalOnClass(DruidDataSource.class)</span><br><span class="line">@AutoConfigureBefore(DataSourceAutoConfiguration.class)</span><br><span class="line">@EnableConfigurationProperties(&#123;DruidStatProperties.class, DataSourceProperties.class&#125;)</span><br><span class="line">@Import(&#123;DruidSpringAopConfiguration.class,</span><br><span class="line">    DruidStatViewServletConfiguration.class,</span><br><span class="line">    DruidWebStatFilterConfiguration.class,</span><br><span class="line">    DruidFilterConfiguration.class&#125;)</span><br><span class="line">public class DruidDataSourceAutoConfigure &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOGGER = LoggerFactory.getLogger(DruidDataSourceAutoConfigure.class);</span><br><span class="line"></span><br><span class="line">    @Bean(initMethod = &quot;init&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public DataSource dataSource() &#123;</span><br><span class="line">        LOGGER.info(&quot;Init DruidDataSource&quot;);</span><br><span class="line">        return new DruidDataSourceWrapper();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -212,7 +214,7 @@
 <li>@ConditionalOnClass在这里是需要<code>DruidDataSource</code>类才能被实例化</li>
 <li>@AutoConfigureBefore,在<code>DataSourceAutoConfiguration</code>之前加载该类</li>
 <li>@EnableConfigurationProperties注解的作用是使用<code>@ConfigurationProperties</code>注解的类生效。</li>
-<li>@Import,把相应类注入到当前容器中</li>
+<li>@Import,把未加标识注入到IOC容器的相应类注入到当前容器中</li>
 <li>@Bean(initMethod = “init”),在初始化bean时执行<code>init</code>方法<br>在装配<code>DruidDataSourceAutoConfigure</code>类的时候，会执行<code>DruidDataSource</code>类的<code>init</code>对<code>Druid</code>进行初始化。</li>
 </ul>
 <h4 id="spring-factories配置自动装配类"><a href="#spring-factories配置自动装配类" class="headerlink" title="spring.factories配置自动装配类"></a>spring.factories配置自动装配类</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure</span><br></pre></td></tr></table></figure>
@@ -278,6 +280,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/3529357174.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">.Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/posts/2136619727.html">
@@ -334,7 +343,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        62
+                        63
                     </p>
                 </div>
             </div>
@@ -505,7 +514,7 @@
                 <span class="level-item">.net core</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">12</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker/">
@@ -638,7 +647,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 18.57px;">.net core</a> <a href="/tags/ABP/" style="font-size: 10px;">ABP</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker/" style="font-size: 11.43px;">Docker</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Github/" style="font-size: 14.29px;">Github</a> <a href="/tags/Go/" style="font-size: 11.43px;">Go</a> <a href="/tags/Golang/" style="font-size: 14.29px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 14.29px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 12.86px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.43px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 11.43px;">Redis</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.43px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 15.71px;">Tool</a> <a href="/tags/Vue/" style="font-size: 12.86px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/autofac/" style="font-size: 11.43px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.43px;">docker</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 15.71px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.43px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.43px;">消息队列</a>
+        <a href="/tags/net/" style="font-size: 10px;">.net</a> <a href="/tags/net-core/" style="font-size: 20px;">.net core</a> <a href="/tags/ABP/" style="font-size: 10px;">ABP</a> <a href="/tags/Datax/" style="font-size: 10px;">Datax</a> <a href="/tags/Docker/" style="font-size: 11.67px;">Docker</a> <a href="/tags/Docker%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">Docker命令</a> <a href="/tags/ECMAScript/" style="font-size: 10px;">ECMAScript</a> <a href="/tags/Gis/" style="font-size: 10px;">Gis</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/Go/" style="font-size: 11.67px;">Go</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">Go基础</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/Redis/" style="font-size: 11.67px;">Redis</a> <a href="/tags/Spring-Boot/" style="font-size: 18.33px;">Spring Boot</a> <a href="/tags/Swagger/" style="font-size: 11.67px;">Swagger</a> <a href="/tags/Tool/" style="font-size: 16.67px;">Tool</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/ack/" style="font-size: 10px;">ack</a> <a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/autofac/" style="font-size: 11.67px;">autofac</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/mysql-explain/" style="font-size: 10px;">mysql explain</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/redash/" style="font-size: 10px;">redash</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/swagger/" style="font-size: 11.67px;">swagger</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">微信公众号</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">数据同步</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/" style="font-size: 10px;">文件存储</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 11.67px;">消息队列</a>
     </div>
 </div>
     
@@ -650,6 +659,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/3529357174.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-05T10:18:58.000Z">2020-02-05</time></div>
+                    <a href="/posts/3529357174.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">.Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -727,25 +755,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/2727768428.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="品尝ABP vNext">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T05:15:33.000Z">2020-01-26</time></div>
-                    <a href="/posts/2727768428.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">品尝ABP vNext</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -763,7 +772,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -835,7 +844,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
@@ -1108,6 +1117,25 @@
         
         <article class="media">
             
+            <a href="/posts/3529357174.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-05T10:18:58.000Z">2020-02-05</time></div>
+                    <a href="/posts/3529357174.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">.Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/1829574622.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot Starter为我们做了什么?">
@@ -1182,25 +1210,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/2727768428.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="品尝ABP vNext">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T05:15:33.000Z">2020-01-26</time></div>
-                    <a href="/posts/2727768428.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">品尝ABP vNext</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1218,7 +1227,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1290,7 +1299,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
