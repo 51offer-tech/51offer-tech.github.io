@@ -26,7 +26,7 @@
 <meta property="og:description" content=".Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-02-06T09:32:08.009Z">
+<meta property="og:updated_time" content="2020-02-07T04:37:56.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 470 个字)
+                    4 分钟 读完 (大约 542 个字)
                 </span>
                 
                 
@@ -190,6 +190,10 @@
 <p>通过<code>Docker-Compose</code>进行安装</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 kong]# docker-compose up -d</span><br><span class="line">Creating network &quot;kong_kongnet&quot; with driver &quot;bridge&quot;</span><br><span class="line">Creating network &quot;kong_default&quot; with the default driver</span><br><span class="line">Creating kong_kong-database_1   ... done</span><br><span class="line">Creating kong_consul_server_1_1 ... done</span><br><span class="line">Creating kong_konga_upgrading_1 ... done</span><br><span class="line">Creating kong_kong_migrations_1 ... done</span><br><span class="line">Creating kong_konga_1           ... done</span><br><span class="line">Creating kong_kong_1            ... done</span><br></pre></td></tr></table></figure>
 <p>这个的<code>postgres</code>选择12版本以下的，不然<code>konga</code>会初始化话失败.来看看我们搭建的环境:<br><img src="http://xxnote.52fx.biz/net_core_kong_1.png" alt><br><img src="http://xxnote.52fx.biz/net_core_kong_2.png" alt><br><img src="http://xxnote.52fx.biz/net_core_consul_2.png" alt><br><code>konga</code>是<code>kong</code>的一个UI工具，部署好之后，需要自行注册一个账号。</p>
+<blockquote>
+<p>这里只用Docker搭建的均为单机版，不适合用于生产，后面我们在搭建高可用版本的。</p>
+</blockquote>
+<h3 id="基于Consul实现服务注册发现"><a href="#基于Consul实现服务注册发现" class="headerlink" title="基于Consul实现服务注册发现"></a>基于Consul实现服务注册发现</h3><p>这里我新建了两个项目<br><img src="http://xxnote.52fx.biz/net_core_consul_5.png" alt><br>我先引入<code>Consul</code>组件</p>
 
         </div>
         
@@ -391,6 +395,10 @@
         <a class="is-flex" href="#Docker安装Kong-amp-Consul">
         <span class="has-mr-6">1</span>
         <span>Docker安装Kong&amp;Consul</span>
+        </a></li><li>
+        <a class="is-flex" href="#基于Consul实现服务注册发现">
+        <span class="has-mr-6">2</span>
+        <span>基于Consul实现服务注册发现</span>
         </a></li></ul>
             </div>
         </div>
