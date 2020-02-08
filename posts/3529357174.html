@@ -26,7 +26,7 @@
 <meta property="og:description" content=".Net Core3.x基于Kong和Consul实现服务网关以及服务的注册发现">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-02-07T04:37:56.180Z">
+<meta property="og:updated_time" content="2020-02-08T08:49:06.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 542 个字)
+                    6 分钟 读完 (大约 906 个字)
                 </span>
                 
                 
@@ -194,6 +194,34 @@
 <p>这里只用Docker搭建的均为单机版，不适合用于生产，后面我们在搭建高可用版本的。</p>
 </blockquote>
 <h3 id="基于Consul实现服务注册发现"><a href="#基于Consul实现服务注册发现" class="headerlink" title="基于Consul实现服务注册发现"></a>基于Consul实现服务注册发现</h3><p>这里我新建了两个项目<br><img src="http://xxnote.52fx.biz/net_core_consul_5.png" alt><br>我先引入<code>Consul</code>组件</p>
+<h3 id="基于Kong实现网关"><a href="#基于Kong实现网关" class="headerlink" title="基于Kong实现网关"></a>基于Kong实现网关</h3><p>这里我们可以借助<code>KongRegister</code>这时间<code>.net core</code>和<code>Kong</code>的整合。首先，我们进入到<code>Konga</code>,需要创建<code>Kong</code>和<code>Konga</code>的连接关系，这里我选择的是<code>key_auth</code>,我填的参数是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NAME:x-api-key</span><br><span class="line">KONG ADMIN URL:http://xxx.xx.xx.xx:18001/</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/net_core_kong_6.png" alt><br>我的<code>KongRegister</code>配置如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;KongRegister&quot;: &#123;</span><br><span class="line">  &quot;OnStartup&quot;: true,</span><br><span class="line">  &quot;KongApiUrl&quot;: &quot;http://182.61.35.33:18001&quot;,</span><br><span class="line">  &quot;KongApiKeyHeader&quot;: &quot;x-api-key&quot;,</span><br><span class="line">  &quot;KongApiKey&quot;: &quot;93UUvyz2oXh1bHxLDFs3rL1R2Kuto9Lr&quot;,</span><br><span class="line">  &quot;UpstreamId&quot;: &quot;demo.api.v1.upstream&quot;,</span><br><span class="line">  &quot;TargetHostDiscovery&quot;: &quot;dynamic&quot;,</span><br><span class="line">  &quot;TargetPortDiscovery&quot;: &quot;dynamic&quot;,</span><br><span class="line">  &quot;TargetWeight&quot;: 1000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先我们需要在<code>Upstreams</code>中创建一个<code>UpstreamId</code>，不然会提示404<br><img src="http://xxnote.52fx.biz/net_core_kong_7.png" alt><br>如果<code>TargetHostDiscovery</code>和<code>TargetPortDiscovery</code>使用<code>dynamic</code>参数的话，他会自动注册当前启动的IP和端口<br><img src="http://xxnote.52fx.biz/net_core_kong_8.png" alt>))<br>因为我的kong和webapi不在同一个网络中，所以这个转发是会失败<br>上面也只是作了一个 <code>Upstreams</code>注册，实际中还有一些其它的配置因为Kong是基于<code>OpenResty</code>+<code>Lua</code>实现的一个开源网关系统，所以，我们可以借鉴<code>Nginx</code>的配置思想来理解它,要配置一个完整的路由大概结构如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">       listen       8000;</span><br><span class="line">       server_name  localhost;</span><br><span class="line"></span><br><span class="line">       location / &#123;</span><br><span class="line">           #root   html;</span><br><span class="line">           #index  index.html index.htm;</span><br><span class="line">		proxy_set_header Host $http_host;</span><br><span class="line">             proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">             proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">		proxy_pass http://xxx_server_name;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   upstream xxx_server_name&#123;</span><br><span class="line">   server 192.168.10.1:80;</span><br><span class="line">   server 192.168.10.2:80;</span><br><span class="line">   server 192.168.10.3:80;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我的理解的对应关系是:</p>
+<table>
+<thead>
+<tr>
+<th>Kong</th>
+<th>Nginx</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Services</td>
+<td>server</td>
+</tr>
+<tr>
+<td>Routes</td>
+<td>location</td>
+</tr>
+<tr>
+<td>Upstreams</td>
+<td>upstream</td>
+</tr>
+</tbody></table>
 
         </div>
         
@@ -399,6 +427,10 @@
         <a class="is-flex" href="#基于Consul实现服务注册发现">
         <span class="has-mr-6">2</span>
         <span>基于Consul实现服务注册发现</span>
+        </a></li><li>
+        <a class="is-flex" href="#基于Kong实现网关">
+        <span class="has-mr-6">3</span>
+        <span>基于Kong实现网关</span>
         </a></li></ul>
             </div>
         </div>
