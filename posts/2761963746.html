@@ -5,30 +5,30 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content=".net core 3.x使用Swagger , 农民工学编程 , .net core 3.x Swagger,.net core Swagger,Swagger">
-<meta name="description" content=".net core 3.x使用Swagger , 农民工学编程 , .net core 3.x使用Swagger">
+<meta name="keywords" content="Docker安装SQL Server遇到的问题 , 农民工学编程 , Docker Mssql,Docker安装SQL Server">
+<meta name="description" content="Docker安装SQL Server遇到的问题 , 农民工学编程 , 农民工学编程的日常学习记录">
 <!-- 
-    <meta name="keywords" content=".net core 3.x Swagger,.net core Swagger,Swagger,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="Docker Mssql,Docker安装SQL Server,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>.net core 3.x使用Swagger - 农民工学编程</title>
+<title>Docker安装SQL Server遇到的问题 - 农民工学编程</title>
 
 
-    <meta name="description" content=".net core 3.x使用Swagger">
-<meta name="keywords" content=".net core 3.x Swagger,.net core Swagger,Swagger">
+    <meta name="description" content="今天正在刷牙的时候，一个朋友叫我给他弄一个MSSQL，因为之前自己买的主机装有Docker环境，所以第一反应就是使用Docker来安装，原以为就是一句脚本的问题，结果还是花了一些时间,这里记录一下所遇到的问题">
+<meta name="keywords" content="Docker Mssql,Docker安装SQL Server">
 <meta property="og:type" content="article">
-<meta property="og:title" content=".net core 3.x使用Swagger">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;685970588.html">
+<meta property="og:title" content="Docker安装SQL Server遇到的问题">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;2761963746.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content=".net core 3.x使用Swagger">
+<meta property="og:description" content="今天正在刷牙的时候，一个朋友叫我给他弄一个MSSQL，因为之前自己买的主机装有Docker环境，所以第一反应就是使用Docker来安装，原以为就是一句脚本的问题，结果还是花了一些时间,这里记录一下所遇到的问题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
-<meta property="og:updated_time" content="2020-01-22T01:12:19.891Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;gss2.bdstatic.com&#x2F;9fo3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;crop%3D0%2C156%2C1354%2C894%3Bc0%3Dbaike180%2C5%2C5%2C180%2C60&#x2F;sign=c97c7c9b9b13b07ea9f20a4831e7bd12&#x2F;f703738da977391281957edbf0198618377ae2dd.jpg">
+<meta property="og:updated_time" content="2020-02-16T14:33:45.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;xxnote.52fx.biz&#x2F;swagger.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gss2.bdstatic.com&#x2F;9fo3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;crop%3D0%2C156%2C1354%2C894%3Bc0%3Dbaike180%2C5%2C5%2C180%2C60&#x2F;sign=c97c7c9b9b13b07ea9f20a4831e7bd12&#x2F;f703738da977391281957edbf0198618377ae2dd.jpg">
 
 
 
@@ -94,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt=".net core 3.x使用Swagger" height="28">
+                <img src="/images/logo.svg" alt="Docker安装SQL Server遇到的问题" height="28">
             
             </a>
         </div>
@@ -130,6 +130,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -148,7 +152,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="http://xxnote.52fx.biz/swagger.png" alt=".net core 3.x使用Swagger">
+            <img class="thumbnail" src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D0%2C156%2C1354%2C894%3Bc0%3Dbaike180%2C5%2C5%2C180%2C60/sign=c97c7c9b9b13b07ea9f20a4831e7bd12/f703738da977391281957edbf0198618377ae2dd.jpg" alt="Docker安装SQL Server遇到的问题">
         </span>
     </div>
     
@@ -156,17 +160,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-12T01:05:34.000Z">2019-11-12</time>
+                <time class="level-item has-text-grey" datetime="2020-02-16T14:16:08.000Z">2020-02-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                <a class="has-link-grey -link" href="/categories/Docker/">Docker</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 724 个字)
+                    12 分钟 读完 (大约 1766 个字)
                 </span>
                 
                 
@@ -180,30 +184,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                .net core 3.x使用Swagger
+                Docker安装SQL Server遇到的问题
             
         </h1>
         <div class="content">
-            <p>.net core3.0问世已经两个多月了，我并没有急着将生产上的项目升级到3.0，因为怕踩坑，这不3.1马上就要出来了，想着core3.x逐渐稳定，所以就开始来琢磨一下，此次就简单是说一下.net core3.0中使丝袜哥(Swagger)生成API文档。</p>
+            <p>今天正在刷牙的时候，一个朋友叫我给他弄一个<code>MSSQL</code>，因为之前自己买的主机装有Docker环境，所以第一反应就是使用<code>Docker</code>来安装，原以为就是一句脚本的问题，结果还是花了一些时间,这里记录一下所遇到的问题</p>
 <a id="more"></a>
-<p>在这里，我使用的开发工具是VS2019,Swashbuckle.AspNetCore 5.0.0-rc4，</p>
-<h3 id="安装Swashbuckle-AspNetCore"><a href="#安装Swashbuckle-AspNetCore" class="headerlink" title="安装Swashbuckle.AspNetCore"></a>安装Swashbuckle.AspNetCore</h3><p>1、首先新建一个Web API项目<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112091937.png" alt="项目结构"><br>2、安装swagger,打开程序包管理器控制台执行：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc4</span><br></pre></td></tr></table></figure>
-<p><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112092251.png" alt="打开程序包管理器控制台"><br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112092450.png" alt="输入安装命令"></p>
-<h3 id="引用Swagger"><a href="#引用Swagger" class="headerlink" title="引用Swagger"></a>引用Swagger</h3><p>1、在Startup.cs中引入命名空间</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using Microsoft.OpenApi.Models;</span><br><span class="line">using Swashbuckle.AspNetCore.Swagger;</span><br></pre></td></tr></table></figure>
-<p>2、在ConfigureServices中添加Swagger</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(swagger =&gt;</span><br><span class="line">           &#123;</span><br><span class="line">               swagger.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo &#123; Description = &quot;Demo API Description&quot;, Version = &quot;v1.0&quot;, Title = &quot;Demo API&quot; &#125;);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
-<p>3、在Configure中添加Swagger中间件,我们最好放在env.IsDevelopment()中</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if (env.IsDevelopment())</span><br><span class="line">          &#123;</span><br><span class="line">              app.UseSwagger();</span><br><span class="line">              app.UseSwaggerUI(c =&gt;</span><br><span class="line">              &#123;</span><br><span class="line">                  c.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;Demo API&quot;);</span><br><span class="line">              &#125;);</span><br><span class="line">              app.UseDeveloperExceptionPage();</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
-<p>4、配置完后，运行一下，在浏览器中输入<a href="http://localhost:5000/swagger" target="_blank" rel="noopener">http://localhost:5000/swagger</a>, 看看效果：<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112094408.png" alt="Swagger"></p>
-<h3 id="为Api添加注释"><a href="#为Api添加注释" class="headerlink" title="为Api添加注释"></a>为Api添加注释</h3><p>刚才的配置，只是能看到我们的API方法，并且可以发送调试请求，但是没有注释，接下来，我们就给API加上注释<br>1、在想要添加注释的API对应分方法上添加注释,格式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">        /// 获取天气预报信息</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">        [HttpGet]</span><br><span class="line">        public IEnumerable&lt;WeatherForecast&gt; Get()</span><br><span class="line">        &#123;</span><br><span class="line">            var rng = new Random();</span><br><span class="line">            return Enumerable.Range(1, 5).Select(index =&gt; new WeatherForecast</span><br><span class="line">            &#123;</span><br><span class="line">                Date = DateTime.Now.AddDays(index),</span><br><span class="line">                TemperatureC = rng.Next(-20, 55),</span><br><span class="line">                Summary = Summaries[rng.Next(Summaries.Length)]</span><br><span class="line">            &#125;)</span><br><span class="line">            .ToArray();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>2、在项目属性选项卡中，设置生成中的XML文档输出目录:<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112095703.png" alt="设置生成路径"><br>3、在AddSwaggerGen中添加xml文件路径:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(swagger =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                swagger.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo &#123; Description = &quot;Demo API Description&quot;, Version = &quot;v1.0&quot;, Title = &quot;Demo API&quot;, Contact = new OpenApiContact() &#123; Name = &quot;eyiadmin&quot;, Email = &quot;188781475@qq.com&quot; &#125; &#125;);</span><br><span class="line">                var docXmlPath = Path.Combine(AppContext.BaseDirectory, &quot;Web.xml&quot;);</span><br><span class="line">                swagger.IncludeXmlComments(docXmlPath);</span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure>
-<p>4、最终效果:<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112100342.png" alt="效果"><br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112100458.png" alt="效果2"></p>
-<p>每次启动都会打开默认的IE浏览器，由于个人喜欢Google浏览器，所以，现在修改vs启动的默认浏览器：<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112100847.png" alt="设置默认浏览器"><br>另外，每次启动，在浏览中打开的是默认的Controller，我们可以设置一下启动参数，让每次启动都是Swagger目录，就不需要我们每次都手动输入Swagger目录：<br><img src="http://xxnote.52fx.biz/QQ%E5%9B%BE%E7%89%8720191112101123.png" alt="设置默认启动路径">。</p>
-<p>这次写的是Swagger最基本的设置,后面我们会继续学习一些常用的高级功能。</p>
+
+<p>由于我的主机大概只剩六百多兆，而且docker中的<code>mssql</code>默认需要2G内存，所以这里我就限制了<code>mssql</code>的内存大小为<code>512m</code>，命令如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker run --name mssql -m 512m -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=eyiadmin&apos; -p 1433:1433 -d microsoft/mssql-server-linux</span><br><span class="line">4a67d71771baabc94de453da72a215d222fcd42a2014a3e30c31690e80063eff</span><br></pre></td></tr></table></figure>
+<p>这时候，容器是没有启动成功,所以需要看看是什么原因:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2020-02-16 14:22:43.37 spid22s     ERROR: Unable to set system administrator password: Password validation failed. The password does not meet SQL Server password policy requirements because it is not complex enough. The password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols..</span><br><span class="line">2020-02-16 14:22:43.37 spid22s     An error occurred during server setup. See previous errors for more information.</span><br></pre></td></tr></table></figure>
+<p>很明显，是密码太简单了，所以增加密码的复杂度:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mssql -m 512m -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=Eyiadmin@258&apos; -p 1433:1433 -d microsoft/mssql-server-linux</span><br></pre></td></tr></table></figure>
+<p>这时候，<code>docker logs</code>没有错误信息</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-p0a4erj8 ~]# docker logs 6363e03c473d</span><br><span class="line">2020-02-16 14:05:46.05 Server      Setup step is copying system data file &apos;C:\templatedata\master.mdf&apos; to &apos;/var/opt/mssql/data/master.mdf&apos;.</span><br><span class="line">2020-02-16 14:05:46.21 Server      Did not find an existing master data file /var/opt/mssql/data/master.mdf, copying the missing default master and other system database files. If you have moved the database location, but not moved the database files, startup may fail. To repair: shutdown SQL Server, move the master database to configured location, and restart.</span><br><span class="line">2020-02-16 14:05:46.22 Server      Setup step is copying system data file &apos;C:\templatedata\mastlog.ldf&apos; to &apos;/var/opt/mssql/data/mastlog.ldf&apos;.</span><br><span class="line">2020-02-16 14:05:46.27 Server      Setup step is copying system data file &apos;C:\templatedata\model.mdf&apos; to &apos;/var/opt/mssql/data/model.mdf&apos;.</span><br><span class="line">2020-02-16 14:05:46.29 Server      Setup step is copying system data file &apos;C:\templatedata\modellog.ldf&apos; to &apos;/var/opt/mssql/data/modellog.ldf&apos;.</span><br><span class="line">2020-02-16 14:05:46.37 Server      Setup step is copying system data file &apos;C:\templatedata\msdbdata.mdf&apos; to &apos;/var/opt/mssql/data/msdbdata.mdf&apos;.</span><br><span class="line">2020-02-16 14:05:46.48 Server      Setup step is copying system data file &apos;C:\templatedata\msdblog.ldf&apos; to &apos;/var/opt/mssql/data/msdblog.ldf&apos;.</span><br><span class="line">2020-02-16 14:05:46.79 Server      Microsoft SQL Server 2017 (RTM-CU13) (KB4466404) - 14.0.3048.4 (X64) </span><br><span class="line">        Nov 30 2018 12:57:58 </span><br><span class="line">        Copyright (C) 2017 Microsoft Corporation</span><br><span class="line">        Developer Edition (64-bit) on Linux (Ubuntu 16.04.5 LTS)</span><br><span class="line">2020-02-16 14:05:46.79 Server      UTC adjustment: 0:00</span><br><span class="line">2020-02-16 14:05:46.79 Server      (c) Microsoft Corporation.</span><br><span class="line">2020-02-16 14:05:46.79 Server      All rights reserved.</span><br><span class="line">2020-02-16 14:05:46.79 Server      Server process ID is 4120.</span><br><span class="line">2020-02-16 14:05:46.79 Server      Logging SQL Server messages in file &apos;/var/opt/mssql/log/errorlog&apos;.</span><br><span class="line">2020-02-16 14:05:46.80 Server      Registry startup parameters: </span><br><span class="line">         -d /var/opt/mssql/data/master.mdf</span><br><span class="line">         -l /var/opt/mssql/data/mastlog.ldf</span><br><span class="line">         -e /var/opt/mssql/log/errorlog</span><br><span class="line">2020-02-16 14:05:46.80 Server      SQL Server detected 1 sockets with 1 cores per socket and 2 logical processors per socket, 2 total logical processors; using 2 logical processors based on SQL Server licensing. This is an informational message; no user action is required.</span><br><span class="line">2020-02-16 14:05:46.80 Server      SQL Server is starting at normal priority base (=7). This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:05:46.80 Server      Detected 1639 MB of RAM. This is an informational message; no user action is required.</span><br><span class="line">2020-02-16 14:05:46.80 Server      Using conventional memory in the memory manager.</span><br><span class="line">2020-02-16 14:05:47.31 Server      Buffer pool extension is already disabled. No action is necessary. </span><br><span class="line">2020-02-16 14:05:48.07 Server      InitializeExternalUserGroupSid failed. Implied authentication will be disabled.</span><br><span class="line">2020-02-16 14:05:48.07 Server      Implied authentication manager initialization failed. Implied authentication will be disabled.</span><br><span class="line">2020-02-16 14:05:48.12 Server      Successfully initialized the TLS configuration. Allowed TLS protocol versions are [&apos;1.0 1.1 1.2&apos;]. Allowed TLS ciphers are [&apos;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:!DHE-RSA-AES256-GCM-SHA384:!DHE-RSA-AES128-GCM-SHA256:!DHE-RSA-AES256-SHA:!DHE-RSA-AES128-SHA&apos;].</span><br><span class="line">2020-02-16 14:05:48.27 Server      The maximum number of dedicated administrator connections for this instance is &apos;1&apos;</span><br><span class="line">2020-02-16 14:05:48.27 Server      Node configuration: node 0: CPU mask: 0x0000000000000003:0 Active CPU mask: 0x0000000000000003:0. This message provides a description of the NUMA configuration for this computer. This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:05:48.28 Server      Using dynamic lock allocation.  Initial allocation of 2500 Lock blocks and 5000 Lock Owner blocks per node.  This is an informational message only.  No user action is required.</span><br><span class="line">2020-02-16 14:05:48.29 Server      In-Memory OLTP initialized on lowend machine.</span><br><span class="line">2020-02-16 14:05:48.41 Server      Database Instant File Initialization: enabled. For security and performance considerations see the topic &apos;Database Instant File Initialization&apos; in SQL Server Books Online. This is an informational message only. No user action is required.</span><br><span class="line">ForceFlush is enabled for this instance. </span><br><span class="line">2020-02-16 14:05:48.42 Server      Query Store settings initialized with enabled = 1, </span><br><span class="line">2020-02-16 14:05:48.43 Server      Software Usage Metrics is disabled.</span><br><span class="line">2020-02-16 14:05:48.45 spid6s      Starting up database &apos;master&apos;.</span><br><span class="line">ForceFlush feature is enabled for log durability.</span><br><span class="line">2020-02-16 14:05:49.22 spid6s      The tail of the log for database master is being rewritten to match the new sector size of 4096 bytes.  3072 bytes at offset 418816 in file /var/opt/mssql/data/mastlog.ldf will be written.</span><br><span class="line">2020-02-16 14:05:50.13 spid6s      Recovery completed for database master (database ID 1) in 2 second(s) (analysis 241 ms, redo 99 ms, undo 77 ms.) This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:05:57.22 spid6s      Converting database &apos;master&apos; from version 862 to the current version 869.</span><br><span class="line">2020-02-16 14:05:57.22 spid6s      Database &apos;master&apos; running the upgrade step from version 862 to version 863.</span><br><span class="line">2020-02-16 14:05:59.02 spid6s      Database &apos;master&apos; running the upgrade step from version 863 to version 864.</span><br><span class="line">2020-02-16 14:06:03.22 spid6s      Database &apos;master&apos; running the upgrade step from version 864 to version 865.</span><br><span class="line">2020-02-16 14:06:03.43 spid6s      Database &apos;master&apos; running the upgrade step from version 865 to version 866.</span><br><span class="line">2020-02-16 14:06:03.45 spid6s      Database &apos;master&apos; running the upgrade step from version 866 to version 867.</span><br><span class="line">2020-02-16 14:06:03.53 spid6s      Database &apos;master&apos; running the upgrade step from version 867 to version 868.</span><br><span class="line">2020-02-16 14:06:03.55 spid6s      Database &apos;master&apos; running the upgrade step from version 868 to version 869.</span><br><span class="line">DBSTARTUP (master, 1): FileMgrPreRecoveryTime took 170 ms</span><br><span class="line">DBSTARTUP (master, 1): LogMgrPreRecoveryTime took 129 ms</span><br><span class="line">DBSTARTUP (master, 1): AnalysisRecTime took 241 ms</span><br><span class="line">DBSTARTUP (master, 1): PhysicalRecoveryTime took 341 ms</span><br><span class="line">DBSTARTUP (master, 1): PhysicalCompletionTime took 831 ms</span><br><span class="line">DBSTARTUP (master, 1): RecoveryCompletionTime took 894 ms</span><br><span class="line">DBSTARTUP (master, 1): UpgradeTime took 6608 ms</span><br><span class="line">DBSTARTUP (master, 1): StartupInDatabaseTime took 7031 ms</span><br><span class="line">2020-02-16 14:06:04.28 spid6s      Resource governor reconfiguration succeeded.</span><br><span class="line">2020-02-16 14:06:04.28 spid6s      SQL Server Audit is starting the audits. This is an informational message. No user action is required.</span><br><span class="line">2020-02-16 14:06:04.28 spid6s      SQL Server Audit has started the audits. This is an informational message. No user action is required.</span><br><span class="line">2020-02-16 14:06:05.02 spid6s      SQL Trace ID 1 was started by login &quot;sa&quot;.</span><br><span class="line">2020-02-16 14:06:05.27 spid20s     Password policy update was successful.</span><br><span class="line">2020-02-16 14:06:05.41 spid6s      Server name is &apos;6363e03c473d&apos;. This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:06:05.43 spid22s     Always On: The availability replica manager is starting. This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:06:05.44 spid22s     Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:06:05.44 spid6s      Starting up database &apos;msdb&apos;.</span><br><span class="line">2020-02-16 14:06:05.44 spid11s     Starting up database &apos;mssqlsystemresource&apos;.</span><br><span class="line">2020-02-16 14:06:05.51 spid11s     The resource database build version is 14.00.3048. This is an informational message only. No user action is required.</span><br><span class="line">2020-02-16 14:06:05.72 spid11s     Starting up database &apos;model&apos;.</span><br><span class="line">2020-02-16 14:06:05.90 spid6s      The tail of the log for database msdb is being rewritten to match the new sector size of 4096 bytes.  512 bytes at offset 306688 in file /var/opt/mssql/data/MSDBLog.ldf will be written.</span><br><span class="line">2020-02-16 14:06:05.95 spid6s      Converting database &apos;msdb&apos; from version 862 to the current version 869.</span><br><span class="line">2020-02-16 14:06:05.95 spid6s      Database &apos;msdb&apos; running the upgrade step from version 862 to version 863.</span><br><span class="line">2020-02-16 14:06:06.02 spid20s     A self-generated certificate was successfully loaded for encryption.</span><br><span class="line">2020-02-16 14:06:06.39 spid20s     Server is listening on [ &apos;any&apos; &lt;ipv4&gt; 1433].</span><br><span class="line">2020-02-16 14:06:06.42 spid11s     The tail of the log for database model is being rewritten to match the new sector size of 4096 bytes.  2048 bytes at offset 75776 in file /var/opt/mssql/data/modellog.ldf will be written.</span><br><span class="line">2020-02-16 14:06:06.44 Server      Server is listening on [ 127.0.0.1 &lt;ipv4&gt; 1434].</span><br><span class="line">2020-02-16 14:06:06.54 Server      Dedicated admin connection support was established for listening locally on port 1434.</span><br><span class="line">2020-02-16 14:06:06.86 spid6s      Database &apos;msdb&apos; running the upgrade step from version 863 to version 864.</span><br><span class="line">2020-02-16 14:06:07.23 spid20s     SQL Server is now ready for client connections. This is an informational message; no user action is required.</span><br><span class="line">2020-02-16 14:06:07.24 spid11s     Converting database &apos;model&apos; from version 862 to the current version 869.</span><br><span class="line">2020-02-16 14:06:07.24 spid11s     Database &apos;model&apos; running the upgrade step from version 862 to version 863.</span><br><span class="line">2020-02-16 14:06:07.60 spid6s      Database &apos;msdb&apos; running the upgrade step from version 864 to version 865.</span><br><span class="line">2020-02-16 14:06:07.74 spid6s      Database &apos;msdb&apos; running the upgrade step from version 865 to version 866.</span><br><span class="line">2020-02-16 14:06:07.75 spid11s     Database &apos;model&apos; running the upgrade step from version 863 to version 864.</span><br><span class="line">2020-02-16 14:06:07.79 spid6s      Database &apos;msdb&apos; running the upgrade step from version 866 to version 867.</span><br><span class="line">2020-02-16 14:06:07.80 spid11s     Database &apos;model&apos; running the upgrade step from version 864 to version 865.</span><br><span class="line">2020-02-16 14:06:07.82 spid6s      Database &apos;msdb&apos; running the upgrade step from version 867 to version 868.</span><br><span class="line">2020-02-16 14:06:07.84 spid11s     Database &apos;model&apos; running the upgrade step from version 865 to version 866.</span><br><span class="line">2020-02-16 14:06:07.85 spid6s      Database &apos;msdb&apos; running the upgrade step from version 868 to version 869.</span><br><span class="line">2020-02-16 14:06:07.85 spid11s     Database &apos;model&apos; running the upgrade step from version 866 to version 867.</span><br><span class="line">2020-02-16 14:06:07.86 spid11s     Database &apos;model&apos; running the upgrade step from version 867 to version 868.</span><br><span class="line">2020-02-16 14:06:07.89 spid11s     Database &apos;model&apos; running the upgrade step from version 868 to version 869.</span><br><span class="line">2020-02-16 14:06:08.34 spid11s     Polybase feature disabled.</span><br><span class="line">2020-02-16 14:06:08.34 spid11s     Clearing tempdb database.</span><br><span class="line">2020-02-16 14:06:09.78 spid11s     Starting up database &apos;tempdb&apos;.</span><br><span class="line">2020-02-16 14:06:10.19 spid11s     The tempdb database has 1 data file(s).</span><br><span class="line">2020-02-16 14:06:10.21 spid22s     The Service Broker endpoint is in disabled or stopped state.</span><br><span class="line">2020-02-16 14:06:10.21 spid22s     The Database Mirroring endpoint is in disabled or stopped state.</span><br><span class="line">2020-02-16 14:06:10.27 spid22s     Service Broker manager has started.</span><br><span class="line">2020-02-16 14:06:11.95 spid6s      Recovery is complete. This is an informational message only. No user action is required.</span><br></pre></td></tr></table></figure>
+<p>而且，我的CPU飙升值100%,内存也只剩200M左右，但是没过一会，docker容器依然退了，我最开始没有想明白，最后，我才知道原来是因为内存不够用的原因，所以把一些其他的docker资源清理掉后，重新启动，mssql的容器就正常运行了。</p>
 
         </div>
         
@@ -211,7 +207,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>, <a class="has-link-grey -link" href="/tags/swagger/" rel="tag">swagger</a>
+                    <a class="has-link-grey -link" href="/tags/Docker%E5%91%BD%E4%BB%A4/" rel="tag">Docker命令</a>
                 </div>
             </div>
         </div>
@@ -262,17 +258,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/4067385871.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">shell脚本学习</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/1998726808.html">
-                <span class="level-item">Nginx HTTP/TCP代理配置</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/3984719694.html">
+                <span class="level-item">使用Vue Antd开发门户</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -403,6 +392,7 @@
 </div>
     
         
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1517,7 +1507,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt=".net core 3.x使用Swagger" height="28">
+                    <img src="/images/logo.svg" alt="Docker安装SQL Server遇到的问题" height="28">
                 
                 </a>
                 <p class="is-size-7">
