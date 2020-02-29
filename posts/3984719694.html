@@ -26,7 +26,7 @@
 <meta property="og:description" content="最近工作需要，把我当做专业前端使用了，让我开发配合后端开发一个门户项目,其实之前做过很多管理类的系统和平台，有基于JQuery和纯原生JS开发的，也有基于Vue开发是，但是还没有用过Ant Design of Vue，在开始开发之前，我先和需求人员通过清楚项目的背景和项目需要,然后与公司专业前端沟通了一下他们使用的技术栈,最后确定了用ANTD PRO VUE，所以就有了这篇文章。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;cn.vuejs.org&#x2F;images&#x2F;logo.png">
-<meta property="og:updated_time" content="2020-02-16T14:17:02.418Z">
+<meta property="og:updated_time" content="2020-02-24T05:35:57.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cn.vuejs.org&#x2F;images&#x2F;logo.png">
 
@@ -170,7 +170,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 167 个字)
+                    3 分钟 读完 (大约 455 个字)
                 </span>
                 
                 
@@ -190,7 +190,12 @@
         <div class="content">
             <p>最近工作需要，把我当做专业前端使用了，让我开发配合后端开发一个门户项目,其实之前做过很多管理类的系统和平台，有基于JQuery和纯原生JS开发的，也有基于Vue开发是，但是还没有用过<code>Ant Design of Vue</code>，在开始开发之前，我先和需求人员通过清楚项目的背景和项目需要,然后与公司专业前端沟通了一下他们使用的技术栈,最后确定了用<code>ANTD PRO VUE</code>，所以就有了这篇文章。</p>
 <a id="more"></a>
-<p>最近忙，未完待续</p>
+<h3 id="开始-ANTD-PRO-VUE"><a href="#开始-ANTD-PRO-VUE" class="headerlink" title="开始 ANTD PRO VUE"></a>开始 ANTD PRO VUE</h3><p>我们首先来看看<code>ANTD PRO VUE</code>现成的模版效果，<br><img src="http://xxnote.52fx.biz/antd_pro_vue_1.png" alt><br>我们大概可以看到<code>ANTD PRO VUE</code>为我们提供较全的后端管理组件示例和自定义的一些组件，另外大家也可以自行访问<a href="https://preview.pro.loacg.com" target="_blank" rel="noopener">https://preview.pro.loacg.com</a>查看</p>
+<h4 id="安装-ANTD-PRO-VUE"><a href="#安装-ANTD-PRO-VUE" class="headerlink" title="安装 ANTD PRO VUE"></a>安装 ANTD PRO VUE</h4><p>首先需要安装<code>Node</code>,然后就是copy项目，如果安装了git工具的话，可以使用<code>git clone --depth=1 https://github.com/sendya/ant-design-pro-vue.git your-project</code>,如果暂时没有安装也没关系，直接到<code>github</code>进行下载，这里我是选择的下载的方式，然后进入到对应的目录执行<code>npm install</code>或者<code>cnpm install</code>进行安装。安装成功后执行<code>npm run serve</code>命令运行该项目，会出现以下文字提示:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; vue-antd-pro@2.1.0 serve F:\WorkAbout\product\ant-design-pro-vue-master</span><br><span class="line">&gt; vue-cli-service serve</span><br><span class="line"></span><br><span class="line">VUE_APP_PREVIEW true</span><br><span class="line"> INFO  Starting development server...</span><br></pre></td></tr></table></figure>
+<p>启动完成后会有这样的信息提示:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DONE  Compiled successfully in 56924ms                                                                      下午1:34:03</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> App running at:</span><br><span class="line"> - Local:   http://localhost:8000/</span><br><span class="line"> - Network: http://172.20.156.196:8000/</span><br></pre></td></tr></table></figure>
+<p>这时候，我们就可以访问本地的<code>ANTD PRO VUE</code>了</p>
 
         </div>
         
@@ -312,7 +317,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        66
+                        67
                     </p>
                 </div>
             </div>
@@ -390,6 +395,25 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#开始-ANTD-PRO-VUE">
+        <span class="has-mr-6">1</span>
+        <span>开始 ANTD PRO VUE</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装-ANTD-PRO-VUE">
+        <span class="has-mr-6">1.1</span>
+        <span>安装 ANTD PRO VUE</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
 
     
         <div class="card widget">
@@ -492,7 +516,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JavaScript/">
@@ -600,6 +624,25 @@
         
         <article class="media">
             
+            <a href="/posts/3304155076.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot中几个实用的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-29T01:13:02.000Z">2020-02-29</time></div>
+                    <a href="/posts/3304155076.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot中几个实用的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/2761963746.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D0%2C156%2C1354%2C894%3Bc0%3Dbaike180%2C5%2C5%2C180%2C60/sign=c97c7c9b9b13b07ea9f20a4831e7bd12/f703738da977391281957edbf0198618377ae2dd.jpg" alt="Docker安装SQL Server遇到的问题">
@@ -674,25 +717,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/1829574622.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot Starter为我们做了什么?">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-03T07:41:39.000Z">2020-02-03</time></div>
-                    <a href="/posts/1829574622.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot Starter为我们做了什么?</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -710,7 +734,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -873,7 +897,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">13</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -894,7 +918,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1055,6 +1079,25 @@
         
         <article class="media">
             
+            <a href="/posts/3304155076.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot中几个实用的方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-29T01:13:02.000Z">2020-02-29</time></div>
+                    <a href="/posts/3304155076.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot中几个实用的方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/2761963746.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D0%2C156%2C1354%2C894%3Bc0%3Dbaike180%2C5%2C5%2C180%2C60/sign=c97c7c9b9b13b07ea9f20a4831e7bd12/f703738da977391281957edbf0198618377ae2dd.jpg" alt="Docker安装SQL Server遇到的问题">
@@ -1129,25 +1172,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/1829574622.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring Boot Starter为我们做了什么?">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-03T07:41:39.000Z">2020-02-03</time></div>
-                    <a href="/posts/1829574622.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring Boot Starter为我们做了什么?</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1165,7 +1189,7 @@
                     <span class="level-item">二月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1328,7 +1352,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Java/">
                         <span class="tag">Java</span>
-                        <span class="tag is-grey">13</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1349,7 +1373,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Spring-Boot/">
                         <span class="tag">Spring Boot</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 

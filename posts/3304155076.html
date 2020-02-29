@@ -5,27 +5,28 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content="标签: nginx , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta name="description" content="标签: nginx , 农民工学编程 , 农民工学编程的日常学习记录">
+<meta name="keywords" content="Spring Boot中几个实用的方法 , 农民工学编程 , Spring Boot,Mybatis,Mybatis plus">
+<meta name="description" content="Spring Boot中几个实用的方法 , 农民工学编程 , 农民工学编程的日常学习记录">
 <!-- 
-    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="Spring Boot,Mybatis,Mybatis plus,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>标签: nginx - 农民工学编程</title>
+<title>Spring Boot中几个实用的方法 - 农民工学编程</title>
 
 
-    <meta name="description" content="农民工学编程的日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;tags&#x2F;nginx&#x2F;index.html">
+    <meta name="description" content="也有好几周没写东西了，主要是上上周被调去前公司产品组做前端了，然后这周刚换工作也比较忙，以至于无暇他顾，着实惭愧啊。这周新工作主要是C&#x2F;S项目，C端使用C#+Devexpress,S端使用的Spring MVC+Spring Boot(Spring MVC是之前老项目，这次的新业务准备用Spring Boot，所以才有了这二者)。在项目搭建过程中想到几个比较实用的思路，所以，这里就来总结记录一下。">
+<meta name="keywords" content="Spring Boot,Mybatis,Mybatis plus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot中几个实用的方法">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;3304155076.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="农民工学编程的日常学习记录">
+<meta property="og:description" content="也有好几周没写东西了，主要是上上周被调去前公司产品组做前端了，然后这周刚换工作也比较忙，以至于无暇他顾，着实惭愧啊。这周新工作主要是C&#x2F;S项目，C端使用C#+Devexpress,S端使用的Spring MVC+Spring Boot(Spring MVC是之前老项目，这次的新业务准备用Spring Boot，所以才有了这二者)。在项目搭建过程中想到几个比较实用的思路，所以，这里就来总结记录一下。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-02-29T11:41:41.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -93,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt="Spring Boot中几个实用的方法" height="28">
             
             </a>
         </div>
@@ -129,6 +130,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -142,178 +147,102 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">nginx</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/2176214718.html" class="image is-7by1">
-            <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx Proxy_Pass和Rewirte的用法">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-31T10:58:18.000Z">2019-12-31</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    17 分钟 读完 (大约 2620 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/2176214718.html">Nginx Proxy_Pass和Rewirte的用法</a>
-            
-        </h1>
-        <div class="content">
-            <p>在<code>Nginx</code>中我们用的比较多的肯定就是<code>server</code>和<code>loction</code>模块，在模块中用的比较多的就是<code>proxy_pass</code>和<code>rewrite</code>，我们这里就来大概了解一下这二者的常用用法。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/2176214718.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-16T09:14:25.000Z">2019-12-16</time>
+                <time class="level-item has-text-grey" datetime="2020-02-29T01:13:02.000Z">2020-02-29</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 688 个字)
+                    12 分钟 读完 (大约 1767 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/posts/1168520487.html">Nginx为同主机配置Https多域名</a>
+                Spring Boot中几个实用的方法
             
         </h1>
         <div class="content">
-            <p>前面，我有提到nginx多网站配置，以及nginx配置https.但是在windows下面同主机配置多Https域名暂未提及，那么这次正好遇到这个场景。我就把他记录下来</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/1168520487.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
+            <p>也有好几周没写东西了，主要是上上周被调去前公司产品组做前端了，然后这周刚换工作也比较忙，以至于无暇他顾，着实惭愧啊。这周新工作主要是C/S项目，C端使用C#+Devexpress,S端使用的Spring MVC+Spring Boot(Spring MVC是之前老项目，这次的新业务准备用Spring Boot，所以才有了这二者)。在项目搭建过程中想到几个比较实用的思路，所以，这里就来总结记录一下。</p>
+<a id="more"></a>
 
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/1940554430.html" class="image is-7by1">
-            <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx二级域名转发到不同端口/服务器">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-28T00:18:20.000Z">2019-11-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1081 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/1940554430.html">Nginx二级域名转发到不同端口/服务器</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>有时候，我们资源有限，那么就会遇到一台主机对应1-N个域名，那么就会出现主机80端口占用完了，其他应用就只能占用其他的端口了，但是如果在域名后面带上端口号(如<a href="http://www.xxxx.com:8080" target="_blank" rel="noopener">www.xxxx.com:8080</a> ),这显然很不优雅,而且像开发微信的时候，配置的域名只能使用80端口。那么有没有更好的处理方式能让我们不在域名后添加端口号呢？答案是肯定是，这里我们可以借助强大的Nginx来帮我们解决这个问题。</p>
+<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>在系统中，经常会涉及到获取当前登录的用户信息。</p>
+<h4 id="生成Token"><a href="#生成Token" class="headerlink" title="生成Token"></a>生成Token</h4><p>现在大多情况下都是实用<code>Token</code>来使得<code>HTTP</code>有状态，所以这里我们就使用Token来获取用户信息，JWT的库也是比较多比如<a href="https://github.com/jwtk/jjwt" target="_blank" rel="noopener">jjwt</a>、<a href="https://github.com/auth0/java-jwt" target="_blank" rel="noopener">java-jwt</a>。<br>这里我选用的<code>java-jwt</code>，需要加入其依赖包</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/com.auth0/java-jwt --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.auth0&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;java-jwt&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.10.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>然后新增一个<code>TokenUtil</code>类，用于生成和解码token</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class TokenUtil &#123;</span><br><span class="line"></span><br><span class="line">    private static final String SECENT_KEY = &quot;eyiadmin&quot;;</span><br><span class="line"></span><br><span class="line">    public static String sign(String userId) &#123;</span><br><span class="line">        Algorithm algorithm = Algorithm.HMAC256(SECENT_KEY);</span><br><span class="line">        String token = JWT.create()</span><br><span class="line">                .withIssuer(&quot;auth0&quot;)</span><br><span class="line">                .withClaim(&quot;userId&quot;,userId)</span><br><span class="line">                .sign(algorithm);</span><br><span class="line">        return token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean verify(String token) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Algorithm algorithm = Algorithm.HMAC256(SECENT_KEY);</span><br><span class="line">            JWTVerifier verifier = JWT.require(algorithm)</span><br><span class="line">                    .withIssuer(&quot;auth0&quot;)</span><br><span class="line">                    .build(); //Reusable verifier instance</span><br><span class="line">            DecodedJWT jwt = verifier.verify(token);</span><br><span class="line">            return true;</span><br><span class="line">        &#125; catch (JWTVerificationException exception)&#123;</span><br><span class="line">            //Invalid signature/claims</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static DecodedJWT getClaims(String token) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Algorithm algorithm = Algorithm.HMAC256(SECENT_KEY);</span><br><span class="line">            JWTVerifier verifier = JWT.require(algorithm)</span><br><span class="line">                    .withIssuer(&quot;auth0&quot;)</span><br><span class="line">                    .build(); //Reusable verifier instance</span><br><span class="line">            DecodedJWT jwt = verifier.verify(token);</span><br><span class="line">            return jwt;</span><br><span class="line">        &#125; catch (JWTVerificationException exception)&#123;</span><br><span class="line">            //Invalid signature/claims</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们来生成一个Token，首先我创建了一个<code>UserVO</code>和一个<code>AuthController</code>类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class UserVO &#123;</span><br><span class="line">    @NotEmpty(message =&quot;用户名不能为空&quot;)</span><br><span class="line">    @ApiModelProperty(&quot;用户名&quot;)</span><br><span class="line">    private String userName;</span><br><span class="line"></span><br><span class="line">    @NotEmpty(message =&quot;密码不能为空&quot;)</span><br><span class="line">    @ApiModelProperty(&quot;密码&quot;)</span><br><span class="line">    private String password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/v1/auth&quot;)</span><br><span class="line">@RestController</span><br><span class="line">@Api(tags = &quot;jwt&quot;)</span><br><span class="line">public class AuthController &#123;</span><br><span class="line">    @PostMapping(&quot;/sign&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; Sign(@Valid UserVO userVO)</span><br><span class="line">    &#123;</span><br><span class="line">        String token= TokenUtil.sign(userVO.getUserName());</span><br><span class="line">        return ResponseResult.success(token);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/Spring_Boot_Jwt_1.png" alt></p>
+<h4 id="获取用户信息-1"><a href="#获取用户信息-1" class="headerlink" title="获取用户信息"></a>获取用户信息</h4><p>接下来我们就用过Token来获取用户信息，这里我们新建一下几个类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String userName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class CurrentUserContext &#123;</span><br><span class="line"></span><br><span class="line">    private static ThreadLocal&lt;User&gt; context = new ThreadLocal&lt;User&gt;();</span><br><span class="line"></span><br><span class="line">    public static void setUser(User user) &#123;</span><br><span class="line">        context.set(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static User getUser() &#123;</span><br><span class="line">        return context.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个拦截器</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class UserHandlerInterceptor extends HandlerInterceptorAdapter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        if (handler instanceof HandlerMethod) &#123;</span><br><span class="line">           return getUser(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">        return super.preHandle(request, response, handler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean getUser(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">        String token = request.getHeader(&quot;token&quot;);</span><br><span class="line">        if (StringUtils.isEmpty(token)) &#123;</span><br><span class="line">            toLogin(request, response);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        DecodedJWT jwt = TokenUtil.getClaims(token);</span><br><span class="line">        if (jwt == null) &#123;</span><br><span class="line">            toLogin(request, response);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        User user=new User();</span><br><span class="line">        String userName = jwt.getClaim(&quot;userId&quot;).asString();</span><br><span class="line">        user.setUserName(userName);</span><br><span class="line">        CurrentUserContext.setUser(user);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void toLogin(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">        response.setStatus(401);</span><br><span class="line">        response.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">        response.setContentType(&quot;application/json;charset=&quot; + &quot;utf-8&quot;);</span><br><span class="line">        String noLogin = &quot;&#123;\n&quot; +</span><br><span class="line">                &quot;\&quot;code\&quot;: \&quot;401\&quot;\n,&quot; +</span><br><span class="line">                &quot;\&quot;msg\&quot;:\&quot;未获取到用户信息\&quot;\n&quot; + &quot;&#125;&quot;;</span><br><span class="line">        response.getWriter().write(noLogin);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置我们的拦截器</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserHandlerInterceptor userHandlerInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(userHandlerInterceptor).excludePathPatterns(&quot;/v1/auth/*&quot;).addPathPatterns(&quot;/**&quot;); //配置拦截规则</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后新建一个http请求接口</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(value = &quot;user&quot;, notes = &quot;获取用户信息&quot;)</span><br><span class="line">   @GetMapping(&quot;/user&quot;)</span><br><span class="line">   public ResponseResult&lt;?&gt; getUser()</span><br><span class="line">   &#123;</span><br><span class="line">       return ResponseResult.success(CurrentUserContext.getUser().getUserName());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们在请求头中加入<code>token</code>，调用接口<br><img src="http://xxnote.52fx.biz/Spring_Boot_Jwt_2.png" alt><br>可以看到最后的结果，那么我们再来尝试一下更骚的操作，通过注解获取用户信息<br>这里我们新建一个注解</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;PARAMETER &#125;)</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface UserName &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在新建一个<code>HandlerMethodArgumentResolver</code>类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean supportsParameter(MethodParameter methodParameter) &#123;</span><br><span class="line">        return methodParameter.hasParameterAnnotation(UserName.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception &#123;</span><br><span class="line">        return CurrentUserContext.getUser().getUserName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再在我们的<code>WebMvcConfigurer</code>添加进去,最后代码如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserHandlerInterceptor userHandlerInterceptor;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private CurrentUserMethodArgumentResolver currentUserMethodArgumentResolver;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(userHandlerInterceptor).excludePathPatterns(&quot;/v1/auth/*&quot;).addPathPatterns(&quot;/**&quot;); //配置拦截规则</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt; resolvers)&#123;</span><br><span class="line">        resolvers.add(currentUserMethodArgumentResolver);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候我们来修改一下刚才的接口方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(value = &quot;user&quot;, notes = &quot;获取用户信息&quot;)</span><br><span class="line">    @GetMapping(&quot;/user&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getUser(@UserName String userName)</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(userName);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>最后效果如下<br><img src="http://xxnote.52fx.biz/Spring_Boot_Jwt_2.png" alt></p>
+<h3 id="自动更新字段"><a href="#自动更新字段" class="headerlink" title="自动更新字段"></a>自动更新字段</h3><p>在我们系统中，大部分表都涉及到了<code>CREATE_TIME</code>、<code>CREATE_BY</code>、<code>UPDATE_TIME</code>、<code>MODIFY_BY</code>,如果每次添加/修改的时候，都手动去操作这些公共字段，显得有些重复，所以是想着将它们处理一下,由于我们是用的<code>Mybatis-Plus</code>,可以看看相关资料<a href="https://mp.baomidou.com/guide/auto-fill-metainfo.html" target="_blank" rel="noopener">https://mp.baomidou.com/guide/auto-fill-metainfo.html</a>,这里需要继承自接口<code>MetaObjectHandler</code>来实现拦截处理,,因为是公共字段,那么我们先把这几个字段抽离成一个基类<code>BaseEntity</code>,</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class BaseEntity &#123;</span><br><span class="line">    @TableField(value = &quot;create_time&quot;, fill = FieldFill.INSERT)</span><br><span class="line">    private Date createTime;</span><br><span class="line"></span><br><span class="line">    @TableField(value = &quot;create_by&quot;, fill = FieldFill.INSERT)</span><br><span class="line">    private String createBy;</span><br><span class="line"></span><br><span class="line">    @TableField(value = &quot;update_time&quot;, fill = FieldFill.INSERT_UPDATE)</span><br><span class="line">    private Date updateTime;</span><br><span class="line"></span><br><span class="line">    @TableField(value = &quot;modify_by&quot;, fill = FieldFill.INSERT_UPDATE)</span><br><span class="line">    private String modifyBy;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意！这里的<code>@TableField(value = &quot;modify_by&quot;, fill = FieldFill.INSERT)</code>是标记为填充字段，<code>FieldFill</code>是个枚举类型</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum FieldFill &#123;</span><br><span class="line">    DEFAULT,            //默认不处理</span><br><span class="line">    INSERT,             //插入填充字段</span><br><span class="line">    UPDATE,             //更新填充字段</span><br><span class="line">    INSERT_UPDATE;      //插入和更新填充字段</span><br><span class="line"></span><br><span class="line">    private FieldFill() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来新建一个<code>MetaObjectHandler</code>实现类，类名为:<code>AutoUpdateFieldsMetaHandler</code>,具体实现如下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">public class AutoUpdateFieldsMetaHandler implements MetaObjectHandler &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void insertFill(MetaObject metaObject) &#123;</span><br><span class="line">        log.info(&quot;start insert fill ....&quot;);</span><br><span class="line">        this.strictInsertFill(metaObject, &quot;createTime&quot;, LocalDateTime.class, LocalDateTime.now());</span><br><span class="line">        this.strictInsertFill(metaObject, &quot;createBy&quot;, String.class, CurrentUserContext.getUser().getUserName());</span><br><span class="line">        this.strictInsertFill(metaObject, &quot;updateTime&quot;, LocalDateTime.class, LocalDateTime.now());</span><br><span class="line">        this.strictInsertFill(metaObject, &quot;modifyBy&quot;, String.class, CurrentUserContext.getUser().getUserName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void updateFill(MetaObject metaObject) &#123;</span><br><span class="line">        log.info(&quot;start update fill ....&quot;);</span><br><span class="line">        this.strictUpdateFill(metaObject, &quot;updateTime&quot;, LocalDateTime.class, LocalDateTime.now());</span><br><span class="line">        this.strictUpdateFill(metaObject, &quot;modifyBy&quot;, String.class, CurrentUserContext.getUser().getUserName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在类上加入<code>@Component</code>标记，会自动加载到IOC容器中，并注入到<code>Mybatis-Plus</code>的配置中，另外这里是直接给属性赋值，最好是结合实际业务，先判断，再赋值,避免出现不必要的麻烦,例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object time= this.getFieldValByName(&quot;createTime&quot;,metaObject);</span><br><span class="line">       if(null==time)</span><br><span class="line">       &#123;</span><br><span class="line">           this.strictInsertFill(metaObject, &quot;create_time&quot;, LocalDateTime.class, LocalDateTime.now());</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，这里的字段名称，是实体的属性名称，而非数据库的字段名，因为在这里是需要给实体属性赋值。</p>
 </blockquote>
+<p>接下来，我们来测试一下这个功能,首先我创建一个类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@TableName(&quot;auto_test&quot;)</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class AutoTest extends BaseEntity &#123;</span><br><span class="line">    @TableField(&quot;content&quot;)</span><br><span class="line">    private String content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在创建一个<code>Mapper</code>接口类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface AutoTestMapper extends BaseMapper&lt;AutoTest&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们来调用一下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(value = &quot;test&quot;, notes = &quot;测试自动更新&quot;)</span><br><span class="line">   @GetMapping(&quot;/test&quot;)</span><br><span class="line">   public ResponseResult&lt;?&gt; autoUpdate()</span><br><span class="line">   &#123;</span><br><span class="line">       AutoTest test=new AutoTest();</span><br><span class="line">       test.setContent(&quot;测试&quot;);</span><br><span class="line">       autoTestMapper.insert(test);</span><br><span class="line">       return ResponseResult.success();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>最后可以看到结果</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2020-02-29 19:35:43.658 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] c.e.d.m.m.A.insert                       : ==&gt;  Preparing: INSERT INTO auto_test ( content, create_time, create_by, update_time, modify_by ) VALUES ( ?, ?, ?, ?, ? ) </span><br><span class="line">2020-02-29 19:35:43.749 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] c.e.d.m.m.A.insert                       : ==&gt; Parameters: 测试(String), 2020-02-29T19:35:43.647(LocalDateTime), eyiadmin(String), 2020-02-29T19:35:43.647(LocalDateTime), eyiadmin(String)</span><br><span class="line">2020-02-29 19:35:43.815 DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:143) 2CNU7X5OLAUE004 --- [nio-8080-exec-1] c.e.d.m.m.A.insert                       : &lt;==    Updates: 1</span><br></pre></td></tr></table></figure>
+<p>Ok,今天就先到这里，后面有一些技巧，再持续更新吧。由于个人能力有限，若有不正确的地方，还请指正。万分感谢。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/1940554430.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -321,121 +250,55 @@
 
 
 
-
-
-
-
-
-    
 <div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/1998726808.html" class="image is-7by1">
-            <img class="thumbnail" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=aa5ef6b12234349b600b66d7a8837eab/94cad1c8a786c917f04d4592c33d70cf3ac757ca.jpg" alt="Nginx HTTP/TCP代理配置">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-08T05:47:21.000Z">2019-11-08</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 879 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
             
-                <a class="has-link-black-ter" href="/posts/1998726808.html">Nginx HTTP/TCP代理配置</a>
-            
-        </h1>
-        <div class="content">
-            <p>众所周知，nginx是一款高性能的反向代理工具，在之前nginx只能代理应用层的应用，如果是要做TCP即网络第4层的代理就只有借助HaProxy等工具，在nginx1.9版本之后即可支持TCP的代理。下面，我们来展现一下nginx强大的代理能力。</p>
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/1998726808.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T06:05:03.000Z">2019-10-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Nginx/">Nginx</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 549 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/2761963746.html">
+                <span class="level-item">Docker安装SQL Server遇到的问题</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/2874639355.html">nginx搭建https服务</a>
-            
-        </h1>
-        <div class="content">
-            <p>nginx搭建https服务,转发到http后端服务</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/2874639355.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -560,6 +423,34 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#获取用户信息">
+        <span class="has-mr-6">1</span>
+        <span>获取用户信息</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#生成Token">
+        <span class="has-mr-6">1.1</span>
+        <span>生成Token</span>
+        </a></li><li>
+        <a class="is-flex" href="#获取用户信息-1">
+        <span class="has-mr-6">1.2</span>
+        <span>获取用户信息</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#自动更新字段">
+        <span class="has-mr-6">2</span>
+        <span>自动更新字段</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1674,7 +1565,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt="Spring Boot中几个实用的方法" height="28">
                 
                 </a>
                 <p class="is-size-7">
