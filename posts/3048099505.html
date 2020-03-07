@@ -5,28 +5,28 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content=".Net Core3.x使用NLog记录日志 , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta name="description" content=".Net Core3.x使用NLog记录日志 , 农民工学编程 , 农民工学编程的日常学习记录">
+<meta name="keywords" content="使用Prometheus监控Spring Boot服务监控状态并预警 , 农民工学编程 , Prometheus,Spring Boot,Docker,监控Spring Boot服务">
+<meta name="description" content="使用Prometheus监控Spring Boot服务监控状态并预警 , 农民工学编程 , 农民工学编程的日常学习记录">
 <!-- 
-    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="Prometheus,Spring Boot,Docker,监控Spring Boot服务,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>.Net Core3.x使用NLog记录日志 - 农民工学编程</title>
+<title>使用Prometheus监控Spring Boot服务监控状态并预警 - 农民工学编程</title>
 
 
-    <meta name="description" content="在.net core中，常用的日志组件大概就是Logging(自带)、Log4net和NLog等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种日志写入方式。">
-<meta name="keywords" content=".net core">
+    <meta name="description" content="当我们开发了一个Web Api之类的服务上线后，总以为可以松一口，可以舒心的撸几把游戏，但是事与愿违，有时候服务突然就挖塌了，而且还不自知，还在开开心心的排位赛，此时上级领导、客户、客户的领导都来慰问、鼓励，给你加油、打气。当然这只是一种情况，但足以看出服务监控还是很重要的。">
+<meta name="keywords" content="Prometheus,Spring Boot,Docker,监控Spring Boot服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content=".Net Core3.x使用NLog记录日志">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;65255459.html">
+<meta property="og:title" content="使用Prometheus监控Spring Boot服务监控状态并预警">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;3048099505.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="在.net core中，常用的日志组件大概就是Logging(自带)、Log4net和NLog等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种日志写入方式。">
+<meta property="og:description" content="当我们开发了一个Web Api之类的服务上线后，总以为可以松一口，可以舒心的撸几把游戏，但是事与愿违，有时候服务突然就挖塌了，而且还不自知，还在开开心心的排位赛，此时上级领导、客户、客户的领导都来慰问、鼓励，给你加油、打气。当然这只是一种情况，但足以看出服务监控还是很重要的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-01-22T01:11:49.428Z">
+<meta property="og:updated_time" content="2020-03-07T08:51:26.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -79,6 +79,8 @@
 
 
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
 </head>
 <body class="is-3-column">
     <!-- 雪花特效 -->
@@ -94,7 +96,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt=".Net Core3.x使用NLog记录日志" height="28">
+                <img src="/images/logo.svg" alt="使用Prometheus监控Spring Boot服务监控状态并预警" height="28">
             
             </a>
         </div>
@@ -130,6 +132,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -150,17 +156,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-26T07:01:31.000Z">2019-12-26</time>
+                <time class="level-item has-text-grey" datetime="2020-03-07T02:01:21.000Z">2020-03-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1203 个字)
+                    5 分钟 读完 (大约 822 个字)
                 </span>
                 
                 
@@ -174,47 +180,52 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                .Net Core3.x使用NLog记录日志
+                使用Prometheus监控Spring Boot服务监控状态并预警
             
         </h1>
         <div class="content">
-            <p>在.net core中，常用的日志组件大概就是Logging(自带)、<a href="http://logging.apache.org/log4net/" target="_blank" rel="noopener">Log4net</a>和<a href="https://github.com/NLog/NLog" target="_blank" rel="noopener">NLog</a>等，其他的我目前还没有用到。我觉得NLog简单易用，性能也不错,支持多种<a href="https://nlog-project.org/config/?tab=targets" target="_blank" rel="noopener">日志写入方式</a>。</p>
+            <p>当我们开发了一个Web Api之类的服务上线后，总以为可以松一口，可以舒心的撸几把游戏，但是事与愿违，有时候服务突然就挖塌了，而且还不自知，还在开开心心的排位赛，此时上级领导、客户、客户的领导都来慰问、鼓励，给你加油、打气。当然这只是一种情况，但足以看出服务监控还是很重要的。</p>
 <a id="more"></a>
-<h3 id="安装NLog"><a href="#安装NLog" class="headerlink" title="安装NLog"></a>安装NLog</h3><p>首先，我们通过Nuget安装<code>NLog</code>和<code>NLog.Web.AspNetCore</code>两个组件，我安装的版本是：<br><img src="http://xxnote.52fx.biz/core_nlog_1.png" alt></p>
-<h3 id="创建NLog配置文件"><a href="#创建NLog配置文件" class="headerlink" title="创建NLog配置文件"></a>创建NLog配置文件</h3><p>在web目录新建一个<code>nlog.config</code>文件，内容 如下:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;</span><br><span class="line">      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">      autoReload=&quot;true&quot;</span><br><span class="line">      internalLogLevel=&quot;Info&quot;</span><br><span class="line">      internalLogFile=&quot;logs\internal-nlog.txt&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- enable asp.net core layout renderers --&gt;</span><br><span class="line">  &lt;extensions&gt;</span><br><span class="line">    &lt;add assembly=&quot;NLog.Web.AspNetCore&quot;/&gt;</span><br><span class="line">  &lt;/extensions&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- the targets to write to --&gt;</span><br><span class="line">  &lt;targets&gt;</span><br><span class="line">    &lt;!-- write logs to file  --&gt;</span><br><span class="line">    &lt;target xsi:type=&quot;File&quot; name=&quot;allfile&quot; fileName=&quot;logs\nlog-all-$&#123;shortdate&#125;.log&quot;</span><br><span class="line">            layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|$&#123;threadid&#125;|$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;&quot;</span><br><span class="line">            maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- another file log, only own logs. Uses some ASP.NET core renderers --&gt;</span><br><span class="line">    &lt;target xsi:type=&quot;File&quot; name=&quot;ownFile-web&quot; fileName=&quot;logs\nlog-own-$&#123;shortdate&#125;.log&quot;</span><br><span class="line">            layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;&quot;</span><br><span class="line">            maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line">    &lt;target name=&quot;file&quot; xsi:type=&quot;AsyncWrapper&quot; queueLimit=&quot;5000&quot; overflowAction=&quot;Discard&quot;&gt;</span><br><span class="line">      &lt;target xsi:type=&quot;File&quot; fileName=&quot;$&#123;basedir&#125;/logs/$&#123;level&#125;.txt&quot; keepFileOpen=&quot;true&quot;  layout=&quot;$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;&quot;</span><br><span class="line">              maxArchiveFiles=&quot;4&quot;</span><br><span class="line">            archiveAboveSize=&quot;10240&quot;</span><br><span class="line">            archiveEvery=&quot;Day&quot;/&gt;</span><br><span class="line">    &lt;/target&gt;</span><br><span class="line">  &lt;/targets&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- rules to map from logger name to target --&gt;</span><br><span class="line">  &lt;rules&gt;</span><br><span class="line">    &lt;!--All logs, including from Microsoft--&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Trace&quot; writeTo=&quot;allfile&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--Skip non-critical Microsoft logs and so log only own logs--&gt;</span><br><span class="line">    &lt;logger name=&quot;Microsoft.*&quot; maxlevel=&quot;Info&quot; final=&quot;true&quot; /&gt; &lt;!-- BlackHole without writeTo --&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Trace&quot; writeTo=&quot;ownFile-web&quot; /&gt;</span><br><span class="line">    &lt;logger name=&quot;*&quot; minlevel=&quot;Debug&quot; writeTo=&quot;file&quot; /&gt;</span><br><span class="line">  &lt;/rules&gt;</span><br><span class="line">&lt;/nlog&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用NLog"><a href="#使用NLog" class="headerlink" title="使用NLog"></a>使用NLog</h3><p>我们首先在<code>Program</code>使用注册NLog:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static IHostBuilder CreateHostBuilder(string[] args) =&gt;</span><br><span class="line">           Host.CreateDefaultBuilder(args)</span><br><span class="line">           .UseServiceProviderFactory(new AutofacServiceProviderFactory())</span><br><span class="line">               .ConfigureWebHostDefaults(webBuilder =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   webBuilder.UseStartup&lt;Startup&gt;();</span><br><span class="line">               &#125;).ConfigureLogging(logging =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   logging.ClearProviders();  //删除日志组件</span><br><span class="line">                   logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);</span><br><span class="line">               &#125;).UseNLog();</span><br></pre></td></tr></table></figure>
-<p>然后，我们就可以再相应的地方调用:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[ApiVersion(&quot;1.0&quot;)]</span><br><span class="line">   [Route(&quot;api/v&#123;version:apiVersion&#125;/[controller]&quot;)]</span><br><span class="line">   [ApiController]</span><br><span class="line">   public class ExampleController : ControllerBase</span><br><span class="line">   &#123;</span><br><span class="line">       private readonly ILogger&lt;ExampleController&gt; _logger;</span><br><span class="line">       IExampleService _exampleService;</span><br><span class="line">       public ExampleController(IExampleService exampleService, ILogger&lt;ExampleController&gt; logger)</span><br><span class="line">       &#123;</span><br><span class="line">           _logger = logger;</span><br><span class="line">           _exampleService = exampleService;</span><br><span class="line"></span><br><span class="line">           _logger.LogDebug(&quot;NLog injected&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>效果如下:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:09:48.5355||DEBUG|Web.Controllers.v1.ExampleController|NLog injected</span><br></pre></td></tr></table></figure>
-<p>NLog类似于<code>string.Format</code>的格式,如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_logger.LogInformation(&quot;Hello, &#123;0&#125;&quot;, Name);</span><br></pre></td></tr></table></figure>
-<p>最终结果:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:35:57.4098||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello, Jane |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br></pre></td></tr></table></figure>
-<p>也支持格式化和对象:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_logger.LogInformation(&quot;Hello,&#123;name&#125;&quot;,Name);</span><br><span class="line">_logger.LogInformation(&quot;Hello,&#123;Name&#125;&quot;, new &#123; Name = Name &#125;);</span><br></pre></td></tr></table></figure>
-<p>效果：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2019-12-25 17:35:57.4288||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br><span class="line">2019-12-25 17:35:57.4288||threadid-10||INFO|Web.Controllers.v1.ExampleController|Hello,&#123; Name = Jane &#125; |url: http://localhost/api/v1.0/Example/GetName/Jane|action: GetName</span><br></pre></td></tr></table></figure>
-<p>更多配置看<a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging" target="_blank" rel="noopener">NLog</a>的文档。</p>
-<h3 id="上下文信息"><a href="#上下文信息" class="headerlink" title="上下文信息"></a>上下文信息</h3><p>如果是单体应用的话，用上面的配置即可, 但是，我们现在经常会用到微服务或者是异步。微服务一般使用MDC的方式，这里我们暂时只说说异步，大家都知道异步是会在创新新线程执行，这时候的线程Id就不和主线程在同一个上下文中了。我们来试试看:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">       /// 异步调用</span><br><span class="line">       /// &lt;/summary&gt;</span><br><span class="line">       /// &lt;param name=&quot;Name&quot;&gt;&lt;/param&gt;</span><br><span class="line">       /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">       [HttpGet]</span><br><span class="line">       [Route(&quot;GetNameAsync/&#123;Name&#125;&quot;)]</span><br><span class="line">       public async Task&lt;string&gt; GetNameAsync(string Name)</span><br><span class="line">       &#123;</span><br><span class="line">           _logger.LogInformation(&quot;Hello,&#123;0&#125;&quot;, Name);</span><br><span class="line">           string result = &quot;&quot;;</span><br><span class="line">           await Task.Run(() =&gt;</span><br><span class="line">           &#123;</span><br><span class="line">               _logger.LogInformation(&quot;Hello,&#123;0&#125;&quot;, Name);</span><br><span class="line">               result = $&quot;Hello,&#123;Name&#125;&quot;;</span><br><span class="line">           &#125;);</span><br><span class="line">           return result;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<p>打印两次, 最终日志为:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-25 17:55:45.5634||threadid-5|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-25 17:55:45.5634||threadid-4|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
-<p>可以看到我们的threadid不一样。这样在我们捕捉日志的时候会变得很困难，这时候，<code>NLog</code>的<code>ndlc</code>就可以帮我们解决这个问题,我们修改一下<code>nlog.config</code>的layout配置:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|NDLC-$&#123;ndlc&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;</span><br></pre></td></tr></table></figure>
-<p>效果如下:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-26 08:58:30.6271||NDLC-ConnectionId:0HLS9JGU66BD8 RequestPath:/api/v1.0/Example/GetNameAsync/Jane RequestId:0HLS9JGU66BD8:00000001, SpanId:|59ece683-4c05d632d98d1cac., TraceId:59ece683-4c05d632d98d1cac, ParentId: Web.Controllers.v1.ExampleController.GetNameAsync (Web)|threadid-5|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-26 08:58:30.6598||NDLC-ConnectionId:0HLS9JGU66BD8 RequestPath:/api/v1.0/Example/GetNameAsync/Jane RequestId:0HLS9JGU66BD8:00000001, SpanId:|59ece683-4c05d632d98d1cac., TraceId:59ece683-4c05d632d98d1cac, ParentId: Web.Controllers.v1.ExampleController.GetNameAsync (Web)|threadid-10|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
+        <div id="aplayer-BAZNigYt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-BAZNigYt"),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+              title: "浩瀚",
+              author: "张杰",
+              url: "https://sharefs.yun.kugou.com/202003071046/a7ba2d0476454acd3f8ebc315f4d8a29/G014/M01/1B/19/Tg0DAFUNmzqAVPi7ADiYKGadEjQ501.mp3",
+              pic: "https://p1.music.126.net/ejEPGN6ulPSgCBXGq7dgqw==/109951163720047382.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<p>服务高可用一般就是监控+冗余，在一个应用挂掉之后，其他应用继续提供服务，并给运维及时告警，快速恢复挂掉的节点，当然，我们小公司的各种资源都是有限的，所以需要找一个部署快、成本低的监控系统，这里就找到一个开源、流行的监控系统<a href="https://prometheus.io" target="_blank" rel="noopener"><code>Prometheus</code></a>,现在，我们就搞一下咯。<br>这里需要介绍几个要用到的<strong>Prometheus</strong>组件:</p>
+<ul>
+<li>Prometheus:服务端收集、存储数据</li>
+<li>Exporter:本地服务暴露<code>metrics</code>给<code>Prometheus</code></li>
+<li>AlertManager:接收预警信息并告警</li>
+</ul>
+<h3 id="Docker安装Prometheus"><a href="#Docker安装Prometheus" class="headerlink" title="Docker安装Prometheus"></a>Docker安装Prometheus</h3><h4 id="创建Prometheus配置和规则文件"><a href="#创建Prometheus配置和规则文件" class="headerlink" title="创建Prometheus配置和规则文件"></a>创建Prometheus配置和规则文件</h4><p>首先我们需要配置好我们的Prometheus,配置方式可以去<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="noopener">https://prometheus.io/docs/prometheus/latest/configuration/configuration/</a>查看,这里还是需要对一些参数有些了解:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">global:</span><br><span class="line">  # How frequently to scrape targets by default.</span><br><span class="line">  [ scrape_interval: &lt;duration&gt; | default = 1m ]</span><br><span class="line"></span><br><span class="line">  # How long until a scrape request times out. </span><br><span class="line">  [ scrape_timeout: &lt;duration&gt; | default = 10s ]</span><br><span class="line"></span><br><span class="line">  # How frequently to evaluate rules.</span><br><span class="line">  [ evaluation_interval: &lt;duration&gt; | default = 1m ]</span><br><span class="line"></span><br><span class="line">  # The labels to add to any time series or alerts when communicating with</span><br><span class="line">  # external systems (federation, remote storage, Alertmanager).</span><br><span class="line">  external_labels:</span><br><span class="line">    [ &lt;labelname&gt;: &lt;labelvalue&gt; ... ]</span><br><span class="line"></span><br><span class="line">  # File to which PromQL queries are logged.</span><br><span class="line">  # Reloading the configuration will reopen the file.</span><br><span class="line">  [ query_log_file: &lt;string&gt; ]</span><br><span class="line"></span><br><span class="line"># Rule files specifies a list of globs. Rules and alerts are read from</span><br><span class="line"># all matching files.</span><br><span class="line">rule_files:</span><br><span class="line">  [ - &lt;filepath_glob&gt; ... ]</span><br><span class="line"></span><br><span class="line"># A list of scrape configurations.</span><br><span class="line">scrape_configs:</span><br><span class="line">  [ - &lt;scrape_config&gt; ... ]</span><br><span class="line"></span><br><span class="line"># Alerting specifies settings related to the Alertmanager.</span><br><span class="line">alerting:</span><br><span class="line">  alert_relabel_configs:</span><br><span class="line">    [ - &lt;relabel_config&gt; ... ]</span><br><span class="line">  alertmanagers:</span><br><span class="line">    [ - &lt;alertmanager_config&gt; ... ]</span><br><span class="line"></span><br><span class="line"># Settings related to the remote write feature.</span><br><span class="line">remote_write:</span><br><span class="line">  [ - &lt;remote_write&gt; ... ]</span><br><span class="line"></span><br><span class="line"># Settings related to the remote read feature.</span><br><span class="line">remote_read:</span><br><span class="line">  [ - &lt;remote_read&gt; ... ]</span><br></pre></td></tr></table></figure>
+<p>现在我们开始新建一个<code>prometheus.yml</code>并做如下配置：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">global:</span><br><span class="line">    scrape_interval:     30s</span><br><span class="line">    evaluation_interval: 30s </span><br><span class="line">alerting:       #配置AlertManager的地址</span><br><span class="line">    alertmanagers:</span><br><span class="line">    - static_configs:</span><br><span class="line">      - targets: [ &apos;182.61.35.33:9093&apos;]</span><br><span class="line">scrape_configs:</span><br><span class="line">    - job_name: &apos;spring boot&apos;</span><br><span class="line">      static_configs:</span><br><span class="line">        - targets: [&apos;182.61.35.33:8080&apos;]</span><br><span class="line">          labels: </span><br><span class="line">            appname: &apos;app&apos;</span><br></pre></td></tr></table></figure>
+<p>一个job下面可以配置多个应用，即<code>static_configs</code>,现在我们就用docker来运行一个<code>prometheus</code>吧</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9090:9090 --name=prometheus \</span><br><span class="line"> -v  /root/prometheus/:/etc/prometheus/  \</span><br><span class="line">prom/prometheus</span><br></pre></td></tr></table></figure>
+<p>这时候就可以看到这样的界面了<br><img src="http://xxnote.52fx.biz/app_alerting_1.png" alt><br>但是我们的<code>AlertManager</code>和应用都还没启动,接下来，我们慢慢的完成</p>
+<h3 id="Spring-Boot接入Prometheus"><a href="#Spring-Boot接入Prometheus" class="headerlink" title="Spring Boot接入Prometheus"></a>Spring Boot接入Prometheus</h3><h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>这里我们新建一个应用，并引入一下几个包</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.micrometer&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;micrometer-registry-prometheus&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<p>但是有些信息可能我们不需要,我先来看看<code>NDLC</code>的代码:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">protected override void Append(StringBuilder builder, LogEventInfo logEvent)</span><br><span class="line">        &#123;</span><br><span class="line">            if (TopFrames == 1)</span><br><span class="line">            &#123;</span><br><span class="line">                // Allows fast rendering of topframes=1</span><br><span class="line">                var topFrame = NestedDiagnosticsLogicalContext.PeekObject();</span><br><span class="line">                if (topFrame != null)</span><br><span class="line">                    AppendAsString(topFrame, GetFormatProvider(logEvent), builder);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var messages = NestedDiagnosticsLogicalContext.GetAllObjects();</span><br><span class="line">            if (messages.Length == 0)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            int startPos = 0;</span><br><span class="line">            int endPos = messages.Length;</span><br><span class="line"></span><br><span class="line">            if (TopFrames != -1)</span><br><span class="line">            &#123;</span><br><span class="line">                endPos = Math.Min(TopFrames, messages.Length);</span><br><span class="line">            &#125;</span><br><span class="line">            else if (BottomFrames != -1)</span><br><span class="line">            &#123;</span><br><span class="line">                startPos = messages.Length - Math.Min(BottomFrames, messages.Length);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var formatProvider = GetFormatProvider(logEvent);</span><br><span class="line">            string currentSeparator = string.Empty;</span><br><span class="line">            for (int i = endPos - 1; i &gt;= startPos; --i)</span><br><span class="line">            &#123;</span><br><span class="line">                builder.Append(currentSeparator);</span><br><span class="line">                AppendAsString(messages[i], formatProvider, builder);</span><br><span class="line">                currentSeparator = Separator;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>在VS2019启用<code>Source Link</code>,就可以进入到我们的<code>NLog</code>组件,可以看到:<br><img src="http://xxnote.52fx.biz/core_nlog_2.png" alt><br>可以看到message是一个数组,那么我们只想要<code>ConnectionId</code>的话，可以做如下修改:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;longdate&#125;|$&#123;event-properties:item=EventId_Id&#125;|NDLC-$&#123;ndlc:bottomFrames=1&#125;|threadid-$&#123;threadid&#125;|activityid-$&#123;activityid&#125;|$&#123;uppercase:$&#123;level&#125;&#125;|$&#123;logger&#125;|$&#123;message&#125; $&#123;exception:format=tostring&#125;|url: $&#123;aspnet-request-url&#125;|action: $&#123;aspnet-mvc-action&#125;</span><br></pre></td></tr></table></figure>
-<p>效果如下:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-12-26 10:56:53.0233||NDLC-ConnectionId:0HLS9LSTP4B7D|threadid-4|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br><span class="line">2019-12-26 10:56:53.4459||NDLC-ConnectionId:0HLS9LSTP4B7D|threadid-15|activityid-|INFO|Web.Controllers.v1.ExampleController|Hello,Jane |url: http://localhost/api/v1.0/Example/GetNameAsync/Jane|action: GetName</span><br></pre></td></tr></table></figure>
-<p>这样一来，我们就可以看到我们是否是同一个请求处理，其他更加强大的功能，有待探究。在这里我们有用到<code>Source Link</code>,确实还是比较方便，但是有一个更方便的工具,就是<a href="http://www.jetbrains.com/resharper/" target="_blank" rel="noopener">ReSharper</a>,但是安装<code>ReSharper</code>后，咱们的VS会有一点小卡。先到这里吧，后面有机会再单独记录一下<code>Source Link</code>以及<code>ReSharper</code>神器的强大功能。</p>
+<h4 id="配置prometheus-metrics"><a href="#配置prometheus-metrics" class="headerlink" title="配置prometheus metrics"></a>配置prometheus metrics</h4><p>在配置文件中作出以下配置</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  metrics.export:</span><br><span class="line">    appoptics.enabled: false</span><br><span class="line">    atlas.enabled: false</span><br><span class="line">    azuremonitor.enabled: false</span><br><span class="line">    datadog.enabled: false</span><br><span class="line">    dynatrace.enabled: false</span><br><span class="line">    elastic.enabled: false</span><br><span class="line">    ganglia.enabled: false</span><br><span class="line">    graphite.enabled: false</span><br><span class="line">    humio.enabled: false</span><br><span class="line">    influx.enabled: false</span><br><span class="line">    jmx.enabled: false</span><br><span class="line">    kairos.enabled: false</span><br><span class="line">    logging.enabled: false</span><br><span class="line">    newrelic.enabled: false</span><br><span class="line">    prometheus.enabled: false</span><br><span class="line">    signalfx.enabled: false</span><br><span class="line">    stackdriver.enabled: false</span><br><span class="line">    statsd.enabled: false</span><br><span class="line">    wavefront.enabled: false</span><br><span class="line"></span><br><span class="line">  endpoint.shutdown.enabled: true</span><br><span class="line"></span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="打包镜像"><a href="#打包镜像" class="headerlink" title="打包镜像"></a>打包镜像</h4><p>先编辑一个<code>Dockerfile</code></p>
 
         </div>
         
@@ -222,7 +233,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Prometheus/" rel="tag">Prometheus</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
                 </div>
             </div>
         </div>
@@ -273,17 +284,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/252628913.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">IntelliJ IDEA 常用快捷键整理</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/3023194237.html">
-                <span class="level-item">Spring Boot使用log4j2记录日志</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/1180634782.html">
+                <span class="level-item">Idea使用Alibaba Java Coding Guidelines插件形成编码规范</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -414,6 +418,42 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Docker安装Prometheus">
+        <span class="has-mr-6">1</span>
+        <span>Docker安装Prometheus</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#创建Prometheus配置和规则文件">
+        <span class="has-mr-6">1.1</span>
+        <span>创建Prometheus配置和规则文件</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Spring-Boot接入Prometheus">
+        <span class="has-mr-6">2</span>
+        <span>Spring Boot接入Prometheus</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#新建项目">
+        <span class="has-mr-6">2.1</span>
+        <span>新建项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置prometheus-metrics">
+        <span class="has-mr-6">2.2</span>
+        <span>配置prometheus metrics</span>
+        </a></li><li>
+        <a class="is-flex" href="#打包镜像">
+        <span class="has-mr-6">2.3</span>
+        <span>打包镜像</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1564,7 +1604,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt=".Net Core3.x使用NLog记录日志" height="28">
+                    <img src="/images/logo.svg" alt="使用Prometheus监控Spring Boot服务监控状态并预警" height="28">
                 
                 </a>
                 <p class="is-size-7">
