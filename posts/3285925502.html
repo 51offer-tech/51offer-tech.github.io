@@ -5,27 +5,28 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content="标签: Vue , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta name="description" content="标签: Vue , 农民工学编程 , 农民工学编程的日常学习记录">
+<meta name="keywords" content=".net中好用的Http请求库 , 农民工学编程 , .net ,http，flurl,RestSharp,httpclient,.net http 请求库">
+<meta name="description" content=".net中好用的Http请求库 , 农民工学编程 , .net强大的Http请求库">
 <!-- 
-    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content=".net ,http，flurl,RestSharp,httpclient,.net http 请求库,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>标签: Vue - 农民工学编程</title>
+<title>.net中好用的Http请求库 - 农民工学编程</title>
 
 
-    <meta name="description" content="农民工学编程的日常学习记录">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="农民工学编程">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;tags&#x2F;Vue&#x2F;index.html">
+    <meta name="description" content=".net强大的Http请求库">
+<meta name="keywords" content=".net ,http，flurl,RestSharp,httpclient,.net http 请求库">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".net中好用的Http请求库">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;3285925502.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="农民工学编程的日常学习记录">
+<meta property="og:description" content=".net强大的Http请求库">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-03-22T03:16:58.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -93,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                <img src="/images/logo.svg" alt=".net中好用的Http请求库" height="28">
             
             </a>
         </div>
@@ -129,6 +130,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -142,251 +147,127 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-22T02:07:43.000Z">2020-03-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1094 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                .net中好用的Http请求库
+            
+        </h1>
+        <div class="content">
+            <p>我们在使用.net 开发系统的时候，经常会遇到rest接口的调用，按照传统的方式，我们基本是使用<code>HttpWebRequest</code>或者<code>WebClient</code>,但是这样的话、我们会处理很多东西，代码量也就上来了，后来在.net 4.5提供了<code>HttpClient</code>这个类库，它相对于前面两个类，使用起来就更加的简洁方便，但是今天我们要说的另外两个第三方库:<code>Flurl</code>、<code>RestSharp</code></p>
+<a id="more"></a>
+<p>先说说我的业务场景，事情的起因是需要调用一个接口来同步数据，这个<code>WebAPI</code>接口是基于<code>ABP</code>开发的，接口提供者加了<code>AbpAuthorize</code>，需要登录才能调用，所以，这里需要先获取<code>accessToken</code>,添加到请求头才能调用数据接口。</p>
+<h3 id="Flurl"><a href="#Flurl" class="headerlink" title="Flurl"></a>Flurl</h3><p>Flurl是一个简单易用的Http，想要了解更多详情请至官网<a href="https://flurl.dev/" target="_blank" rel="noopener">https://flurl.dev/</a>查看。首先来看看登录接口返回的数据格式</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;result&quot;: &#123;</span><br><span class="line">		&quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6ImM0ZmZmMDY1LTcxODMtMzU5MS1lYzUxLTM5ZWVhNTI3MTI4YSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiaHR0cDovL3d3dy5hc3BuZXRib2lsZXJwbGF0ZS5jb20vaWRlbnRpdHkvY2xhaW1zL3RlbmFudElkIjoiMSIsInN1YiI6IjIiLCJqdGkiOiJhNjJkZDhmOC03MjBlLTQ2M2YtYjA4Mi1kMzk3YzY4NzUwYzciLCJpYXQiOjE1ODA2NTMxNjIsIm5iZiI6MTU4MDY1MzE2MiwiZXhwIjoxNTgwNzM5NTYyLCJpc3MiOiJKZXdlbHJ5SWRlbnRpZmljYXRpb24iLCJhdWQiOiJKZXdlbHJ5SWRlbnRpZmljYXRpb24ifQ.PM72xGAfLcS0vYnTnWip68Uy1RC5cRxnmEPLUao-W_g&quot;,</span><br><span class="line">		&quot;encryptedAccessToken&quot;: &quot;wNYmO41/48SHNstaLVXxHCCre29BZQl1NhC6NM3R3rzpXtPQxVzH6jEzA/QhXFN5tu6Fk7pO53uppm1mVXMZgxbyRVz26dnepi/FyB6axBY+6gq1GL+uRQgoiFUCjRN2p8w6LevViwKlHyWZZJZO1DGVSjAi1m2U+og9pkHw9/Rkp3UZ8A1gKoReYXpvXHc0KFXzGY3aUxaXUOjpNPSTn4LyfFvWqGRq42yefBXGrkBTbBN3h9UXPP+25Rfae1rBCQrd8mQ0G3JHpGlVZBMKMD5RSIjWMCe3sPKe05J4ZS4x7ipM9FJHtoJ0Ev/fvM08rDbeioKKXNqOF9YqzdChxSnpsH4gsiia6e+SRx0RP0ufiLeJw4KzimdOMtvVx1NYiEKG+cqKdpJOEoq8YOoG1rr0gFcVyOJJ/KXISOsZY/ZioMa/0LHvuU69Oj1832Z2nvrtFcIjtta5u8JP6EbVPaE1OqHQOdbZ+JizrfaAod2AydR1sbDPQoq6aZx9n/wiUGX1P2RCV/pek6Te8yHJXSBE6uS/+AC+OJxgHvsXoNMCu1o1DRyp+qi590X+PzPvz9Wnwl51i2QncF9128xdt4kqGjj4PDg3hS6iXEhxIBYsEVCZa9YA2FhdgUmOJAI9Gqc4mD7L56iXfARc+bzwicFCFLq+Jax4aWqWNcAnclBj4bI2MzkBjA10jfhSMPUqThLtR2ErU/utTKO8I5MlhNiU593ju4s9IN3/Z139OQc93zGWmAAvrBwrl4JL2kjCtN+ftm4F/tbEXTW1pCPKYxTk3p0Q0JjSx/sabqGvcYTdNCzaSji7cY5aT8M2huU/oUEuPuinB2BAky82zams9cHGJIX9HRvsTfJvSrveIYhGZjexYKgjbuZgm3gs4iWBi9lSNhljgzdpa56cSjbnRHYpHbLrjgzLIKEsJs1dlAsfQ62y5KeaOLUWGP+zIEdUjA1/apD+dPNvs2tShapSWWx8xK0YRby40+Mu18Z6pkVDPKT1+1zkCJtBedz5UX0MT1pY8jU+OWKd9vPSVxsNAw==&quot;,</span><br><span class="line">		&quot;expireInSeconds&quot;: 86400,</span><br><span class="line">		&quot;userId&quot;: 2,</span><br><span class="line">		&quot;authCode&quot;: 0</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;targetUrl&quot;: null,</span><br><span class="line">	&quot;success&quot;: true,</span><br><span class="line">	&quot;error&quot;: null,</span><br><span class="line">	&quot;unAuthorizedRequest&quot;: false,</span><br><span class="line">	&quot;__abp&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我们可以借助VS强大的粘贴功能，<code>编辑</code>-&gt;<code>选择性粘贴</code>-&gt;<code>将JSON粘贴为类</code>，最后的类格式如下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class UserTokenDto</span><br><span class="line">   &#123;</span><br><span class="line">       public Result result &#123; get; set; &#125;</span><br><span class="line">       public object targetUrl &#123; get; set; &#125;</span><br><span class="line">       public bool success &#123; get; set; &#125;</span><br><span class="line">       public object error &#123; get; set; &#125;</span><br><span class="line">       public bool unAuthorizedRequest &#123; get; set; &#125;</span><br><span class="line">       public bool __abp &#123; get; set; &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public class Result</span><br><span class="line">   &#123;</span><br><span class="line">       public string accessToken &#123; get; set; &#125;</span><br><span class="line">       public string encryptedAccessToken &#123; get; set; &#125;</span><br><span class="line">       public int expireInSeconds &#123; get; set; &#125;</span><br><span class="line">       public int userId &#123; get; set; &#125;</span><br><span class="line">       public int authCode &#123; get; set; &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我们就可以调用登录接口了</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var response =await &quot;http://xxxxxx/api/TokenAuth/Authenticate&quot;.PostJsonAsync(new &#123; usernameOrEmailAddress = &quot;admin&quot;, password = &quot;123qwe&quot; &#125;).ReceiveJson&lt;UserTokenDto&gt;();</span><br><span class="line">            return response.result.accessToken;</span><br></pre></td></tr></table></figure>
+<p>简单的两句代码就完成了发起请求和取返回值的操作。<br>那么接下来，我们就要调用数据同步接口了。因为ABP是使用的<code>Bearer</code>方式验证，正好``Flurl为我们提供了<code>WithOAuthBearerToken</code>方法，可以直接使用，如果是其他方式，那么可以自己在<code>WithHeader</code>中添加相应的请求头。我选择的当然是简单那的方式啦</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data= await &quot;http://xxxxxx/api/services/app/PublicityItem/GetPublicityItemFirstUnsynchronized&quot;.WithOAuthBearerToken(response.result.accessToken).GetAsync().ReceiveJson&lt;CertInfoDataDto&gt;();</span><br></pre></td></tr></table></figure>
+<p>就这样简单的一句、就完成了接口的调用，是不是很方便呢？更多信息大概去官网了解吧。</p>
+<h3 id="RestSharp"><a href="#RestSharp" class="headerlink" title="RestSharp"></a>RestSharp</h3><p>首先 当然还是需要去浏览官网啦<a href="http://restsharp.org/" target="_blank" rel="noopener">http://restsharp.org/</a>,接下来，我们就试试用的<code>RestSharp</code>来完成上面<code>Flurl</code>的操作，首先还是第一步，获取<code>accessToken</code>：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var client = new RestClient(&quot;http://bqp.natapp1.cc/api/&quot;);</span><br><span class="line">           var request = new RestRequest(&quot;TokenAuth/Authenticate&quot;, Method.POST);</span><br><span class="line">           var json = JsonConvert.SerializeObject(new &#123; usernameOrEmailAddress = &quot;admin&quot;, password = &quot;123qwe&quot; &#125;);</span><br><span class="line">           request.AddParameter(&quot;application/json&quot;, json, ParameterType.RequestBody);</span><br><span class="line">           var response = client.Execute(request);</span><br><span class="line">           var user = JsonConvert.DeserializeObject&lt;UserTokenDto&gt;(response.Content);</span><br></pre></td></tr></table></figure>
+<p>第二步调用数据同步接口</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var restRequest = new RestRequest(&quot;services/app/PublicityItem/GetPublicityItemFirstUnsynchronized&quot;, Method.GET);</span><br><span class="line">            restRequest.AddHeader(&quot;Authorization&quot;, $&quot;Bearer &#123;user.result.accessToken&#125;&quot;);</span><br><span class="line">            var restResponse = client.Execute(restRequest);</span><br></pre></td></tr></table></figure>
+<p>这里我就是手动在请求头中加入<code>Authorization</code>参数。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>经过一番简单的对比，我觉得还是<code>Flurl</code>更加的简洁方便，获取是我没有深入<code>RestSharp</code>的缘故吧，但是总的来说，还是比之前自带的类库还方便得多。那么更多详细功能，大家自行去探究吧。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/net-core/" rel="tag">.net core</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Vue</a></li>
-        </ul>
-        </nav>
-    </div>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
 </div>
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/3984719694.html" class="image is-7by1">
-            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="使用Vue Antd开发门户">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-12T07:58:58.000Z">2020-02-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                </div>
                 
                 
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 2000 个字)
-                </span>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
                 
                 
-            </div>
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/3984719694.html">使用Vue Antd开发门户</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近工作需要，把我当做专业前端使用了，让我开发配合后端开发一个门户项目,其实之前做过很多管理类的系统和平台，有基于JQuery和纯原生JS开发的，也有基于Vue开发是，但是还没有用过<code>Ant Design of Vue</code>，在开始开发之前，我先和需求人员通过清楚项目的背景和项目需要,然后与公司专业前端沟通了一下他们使用的技术栈,最后确定了用<code>ANTD PRO VUE</code>，所以就有了这篇文章。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/3984719694.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
     </div>
 </div>
 
 
 
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/2976021726.html" class="image is-7by1">
-            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue自定义组件">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-03T10:18:56.000Z">2020-01-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2055 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/3571705173.html">
+                <span class="level-item">一次故障解决总结</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/2976021726.html">Vue自定义组件</a>
-            
-        </h1>
-        <div class="content">
-            <p>现在比较流行的就是组件化、模块化，因为这可以给我们带来快速和方便、提高开发效率。在<code>React</code>、<code>Angular</code>、<code>Vue</code>已经为自定义可复用组件提供了方便快捷的方式，这就是我们今天要说的内容-在<code>Vue</code>中如何自定义可复用组件。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/2976021726.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/3897799686.html" class="image is-7by1">
-            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue制作静态页面简历并发布到七牛云上">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-02T00:05:01.000Z">2020-01-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 742 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/3897799686.html">Vue制作静态页面简历并发布到七牛云上</a>
-            
-        </h1>
-        <div class="content">
-            <p>一般情况下，我们使用word可以写出漂亮的简历。但是我们是程序员，就应该用程序员的方式来做–使用网页写简历。当然，网页简历的方式就很多了，这里我们就用<code>vue</code>来搞定这个事，因为它灵活、高效、方便。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/3897799686.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/posts/3749400616.html" class="image is-7by1">
-            <img class="thumbnail" src="https://cn.vuejs.org/images/logo.png" alt="Vue入门">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-01T05:50:15.000Z">2020-01-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    26 分钟 读完 (大约 3911 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/posts/3749400616.html">Vue入门</a>
-            
-        </h1>
-        <div class="content">
-            <p>现在前端比较火的三大家就<code>Vue</code>、<code>React</code>、<code>Angular</code>，当然现在逐渐兴趣和完善的<code>Fullter</code>,现在也有一些大厂开始用<code>Fullter</code>来开发应用了。但是我还是希望等它再成熟一点之后再开始入手，这样可以少采一些坑嘛。这次，我们先来总结一下<code>Vue</code>的一些基础知识，为什么要学<code>Vue</code>呢，因为它易用、灵活、高效.</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/posts/3749400616.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -511,6 +392,30 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Flurl">
+        <span class="has-mr-6">1</span>
+        <span>Flurl</span>
+        </a></li><li>
+        <a class="is-flex" href="#RestSharp">
+        <span class="has-mr-6">2</span>
+        <span>RestSharp</span>
+        </a></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">3</span>
+        <span>总结</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1661,7 +1566,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="农民工学编程" height="28">
+                    <img src="/images/logo.svg" alt=".net中好用的Http请求库" height="28">
                 
                 </a>
                 <p class="is-size-7">

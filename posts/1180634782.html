@@ -26,7 +26,7 @@
 <meta property="og:description" content="入职了新公司，一切肯定从熟悉业务、代码开始，在这几天拿到代码和数据库表名，字段名等看了看，说实话，有点颠覆了我的想法，因为我之前在公司大家都形成了一种默契，代码那些虽然说不是很规范，但是看着起码舒服啊。新公司的代码是，一会儿大写，一会小写，一会儿代码格式化一会不格式话，还有git提交规范也不统一。甚是恼火，所以这次就借助Alibaba Java Coding Guidelines来先行规范一下代码">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;img&#x2F;screenshots&#x2F;idea_overview_2.png">
-<meta property="og:updated_time" content="2020-03-18T08:31:38.048Z">
+<meta property="og:updated_time" content="2020-03-18T08:50:01.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;www.jetbrains.com&#x2F;idea&#x2F;img&#x2F;screenshots&#x2F;idea_overview_2.png">
 
@@ -170,7 +170,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 873 个字)
+                    6 分钟 读完 (大约 907 个字)
                 </span>
                 
                 
@@ -202,7 +202,7 @@
 <p><img src="http://xxnote.52fx.biz/blogs_idea_coding_9.png" alt><br>这时候在方法上一行输入<code>~+tab</code>，即可生成这样的注释<br><img src="http://xxnote.52fx.biz/blogs_idea_coding_10.png" alt></p>
 <h3 id="Spring-Boot多环境配置"><a href="#Spring-Boot多环境配置" class="headerlink" title="Spring Boot多环境配置"></a>Spring Boot多环境配置</h3><p>一般我们会定义三种环境:dev、test、prod,每种环境的配置会有所差异，如果我们每次开发、测试、发布都去手动改一下配置文件，一个是花时间，另外最重要是会搞错。所以我们会实现针对三中环境把配置文件配置好。这里我先针对三个配置文件简单的配置一下<code>server.port</code>,<br><code>application-dev.yml</code>:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8082</span><br></pre></td></tr></table></figure>
-<p>在启动的时候带上不同的启动参数<code>--spring.profiles.active=dev</code><br><img src="http://xxnote.52fx.biz/blogs_idea_coding_12.png" alt><br><img src="http://xxnote.52fx.biz/blogs_idea_coding_13.png" alt></p>
+<p>在启动的时候带上不同的启动参数<code>--spring.profiles.active=dev</code><br><img src="http://xxnote.52fx.biz/blogs_idea_coding_12.png" alt><br><img src="http://xxnote.52fx.biz/blogs_idea_coding_13.png" alt><br>正式启动的时候带上参数即可<code>nohup java -jar -Xmx64m -Xmx512m -XX:PermSize=32m -XX:MaxPermSize=512m app.jar --spring.profiles.active=prod &gt;/dev/null 2&gt;&amp;1 &amp;</code></p>
 <h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>
         </div>
         
@@ -324,7 +324,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        72
+                        73
                     </p>
                 </div>
             </div>
@@ -491,7 +491,7 @@
                 <span class="level-item">.net core</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker/">
@@ -639,6 +639,25 @@
         
         <article class="media">
             
+            <a href="/posts/3285925502.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".net中好用的Http请求库">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T02:07:43.000Z">2020-03-22</time></div>
+                    <a href="/posts/3285925502.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">.net中好用的Http请求库</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/3571705173.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一次故障解决总结">
@@ -713,25 +732,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/3281610209.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="项目二次开发的心得">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T02:23:26.000Z">2020-03-01</time></div>
-                    <a href="/posts/3281610209.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">项目二次开发的心得</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -749,7 +749,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -832,7 +832,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">12</span>
+                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1112,6 +1112,25 @@
         
         <article class="media">
             
+            <a href="/posts/3285925502.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt=".net中好用的Http请求库">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T02:07:43.000Z">2020-03-22</time></div>
+                    <a href="/posts/3285925502.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">.net中好用的Http请求库</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/net-core/">.net core</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/3571705173.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一次故障解决总结">
@@ -1186,25 +1205,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/3281610209.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="项目二次开发的心得">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T02:23:26.000Z">2020-03-01</time></div>
-                    <a href="/posts/3281610209.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">项目二次开发的心得</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1222,7 +1222,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1305,7 +1305,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/net-core/">
                         <span class="tag">.net core</span>
-                        <span class="tag is-grey">12</span>
+                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
