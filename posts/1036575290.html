@@ -5,28 +5,28 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content="关于我 , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta name="description" content="关于我 , 农民工学编程 , 农民工学编程的日常学习记录">
+<meta name="keywords" content="Java Http请求遇到的问题小结 , 农民工学编程 , Java Http请求遇到的问题小结,fastjson">
+<meta name="description" content="Java Http请求遇到的问题小结 , 农民工学编程 , Java Http请求遇到的问题小结">
 <!-- 
-    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="Java Http请求遇到的问题小结,fastjson,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>关于我 - 农民工学编程</title>
+<title>Java Http请求遇到的问题小结 - 农民工学编程</title>
 
 
-    <meta name="description" content="我是一个大龄低学历程序猿，虽然不是非常热爱代码，但是还是喜欢折腾.不管你是想学编程还是刚工作的小白，可以加我QQ:188781475与我们闲聊。">
-<meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;about&#x2F;index.html">
+    <meta name="description" content="Java Http请求遇到的问题小结">
+<meta name="keywords" content="Java Http请求遇到的问题小结,fastjson">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Http请求遇到的问题小结">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;1036575290.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="我是一个大龄低学历程序猿，虽然不是非常热爱代码，但是还是喜欢折腾.不管你是想学编程还是刚工作的小白，可以加我QQ:188781475与我们闲聊。">
+<meta property="og:description" content="Java Http请求遇到的问题小结">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-01-21T00:27:17.924Z">
+<meta property="og:updated_time" content="2020-04-05T05:28:35.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
@@ -94,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="关于我" height="28">
+                <img src="/images/logo.svg" alt="Java Http请求遇到的问题小结" height="28">
             
             </a>
         </div>
@@ -114,7 +114,7 @@
                 <a class="navbar-item"
                 href="/tags">标签</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/about">关于</a>
                 
             </div>
@@ -129,6 +129,10 @@
                     </a>
                     
                 
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -148,14 +152,67 @@
     
     <div class="card-content article ">
         
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-01T08:57:12.000Z">2020-04-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 713 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                关于我
+                Java Http请求遇到的问题小结
             
         </h1>
         <div class="content">
-            <p><strong>我是一个大龄低学历程序猿，虽然不是非常热爱代码，但是还是喜欢折腾.不管你是想学编程还是刚工作的小白，可以加我QQ:188781475与我们闲聊。</strong></p>
+            <p>最近在开发后端接口，需要调用<code>EBS</code>，说实话，这个<code>EBS</code>返回的数据格式真的搞得好复杂。</p>
+<a id="more"></a>
+<p>为什么说复杂呢？因为返回的数据不止是嵌套得很深，而且还是二维数组，当然，还是要眼见为实</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;OutputParameters&quot;: &#123;</span><br><span class="line">        &quot;O_COMMENTS&quot;: &quot;xxxxxx&quot;,</span><br><span class="line">        &quot;O_ERRORCODE&quot;: &quot;&quot;,</span><br><span class="line">        &quot;O_ERRORINFO&quot;: &quot;&quot;,</span><br><span class="line">        &quot;O_RESULT&quot;: &quot;0&quot;,</span><br><span class="line">        &quot;O_SYS_REFCUR&quot;: &#123;</span><br><span class="line">            &quot;Row&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;Column&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col1&quot;: &quot;xx&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col2&quot;: &quot;1&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col3&quot;: &quot;&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col4&quot;: &quot;5375&quot;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;Column&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col1&quot;: &quot;xx&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col2&quot;: &quot;1&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col3&quot;: &quot;&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;col4&quot;: &quot;5379&quot;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然还有更复杂的结构。</p>
+<h3 id="强大的fastjson"><a href="#强大的fastjson" class="headerlink" title="强大的fastjson"></a>强大的fastjson</h3><p>一般我们的json是比较规则的对象，但是他这个是动态的二维数组，而且节点也比较深，所以这里就需要用到<code>fastjson</code>中的<code>JSONPath</code>和<code>JSONArray</code>，我这里是先用<code>JSONPath.eval</code>把<code>Row</code>节点的数据转为<code>JSONArray</code>,再将其转为<code>Map</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public static HashMap&lt;String, String&gt; ebsJsonResult2Map(JSONArray jsonArray) &#123;</span><br><span class="line">       HashMap&lt;String, String&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line">       if (ObjectUtils.isEmpty(jsonArray)) &#123;</span><br><span class="line">           return hashMap;</span><br><span class="line">       &#125;</span><br><span class="line">       jsonArray.stream().forEach(jsonObject -&gt; &#123;</span><br><span class="line">           JSONObject object = (JSONObject) jsonObject;</span><br><span class="line">           Iterator&lt;String&gt; it = object.keySet().iterator();</span><br><span class="line">           while (it.hasNext()) &#123;</span><br><span class="line">               String key = it.next();</span><br><span class="line">               hashMap.put(key, object.getString(key));</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       return hashMap;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T ebsJsonResult2Object(JSONArray jsonArray, Class&lt;T&gt; tClass) &#123;</span><br><span class="line">       Map map = ebsJsonResult2Map(jsonArray);</span><br><span class="line">       return JSONObject.parseObject(JSONObject.toJSONString(map), tClass);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static &lt;T&gt; List&lt;T&gt; ebsJsonRows2Object(JSONArray jsonArray,Class&lt;T&gt; tClass) &#123;</span><br><span class="line">       HashMap&lt;String, JSONObject&gt; hashMap = new HashMap&lt;&gt;();</span><br><span class="line">       if (ObjectUtils.isEmpty(jsonArray)) &#123;</span><br><span class="line">           return new ArrayList&lt;&gt;();</span><br><span class="line">       &#125;</span><br><span class="line">       List&lt;T&gt; result=new ArrayList&lt;&gt;();</span><br><span class="line">       jsonArray.stream().forEach(jsonObject -&gt; &#123;</span><br><span class="line">           JSONObject object = (JSONObject) jsonObject;</span><br><span class="line">           result.add(ebsJsonResult2Object(object.getJSONArray(&quot;Column&quot;),tClass));</span><br><span class="line">       &#125;);</span><br><span class="line">       return result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>然后这里我就可以调用这些方法序列化为List对象</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JSONArray jsonArray = (JSONArray) JSONPath.eval(JSONObject.parseObject(response), &quot;$.OutputParameters.O_SYS_REFCUR.Row&quot;);</span><br><span class="line">       if (ObjectUtils.isEmpty(jsonArray)) &#123;</span><br><span class="line">           throw new BusinessException(&quot;未获取到xxxxxxx.&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       List&lt;AgreementProductsVo&gt; productsVo = EBSJsonUtil.ebsJsonRows2Object(jsonArray, AgreementProductsVo.class);</span><br></pre></td></tr></table></figure>
+<p>当然啦，强大的<code>JSONPath</code>不可能就只会这么用，来<a href="https://github.com/alibaba/fastjson/wiki/JSONPath" target="_blank" rel="noopener">https://github.com/alibaba/fastjson/wiki/JSONPath</a>看看。</p>
+<h3 id="好用的Http请求工具类"><a href="#好用的Http请求工具类" class="headerlink" title="好用的Http请求工具类"></a>好用的Http请求工具类</h3><p>在Java中，常用的Http请求类型确实不少，比如<code>okhttp</code>、<code>hutool</code>、<code>retrofit</code>。但是这里，我要介绍的是<code>unirest-java</code>，这个类库使用起来也是非常方便,直接引入依赖包即可进行链式调用。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.konghq&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;unirest-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.7.00&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>然后在程序里面可以这样优雅的使用</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HttpResponse&lt;JsonNode&gt; response = Unirest.post(&quot;http://httpbin.org/post&quot;)</span><br><span class="line">      .header(&quot;accept&quot;, &quot;application/json&quot;)</span><br><span class="line">      .queryString(&quot;apiKey&quot;, &quot;123&quot;)</span><br><span class="line">      .field(&quot;parameter&quot;, &quot;value&quot;)</span><br><span class="line">      .field(&quot;firstname&quot;, &quot;Gary&quot;)</span><br><span class="line">      .asJson();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Unirest.get(&quot;http://httpbin.org&quot;)</span><br><span class="line">                .queryString(&quot;fruit&quot;, &quot;apple&quot;)</span><br><span class="line">                .queryString(&quot;droid&quot;, &quot;R2D2&quot;)</span><br><span class="line">                .asString();</span><br></pre></td></tr></table></figure>
+<p>更多功能，可以去<a href="http://kong.github.io/unirest-java/" target="_blank" rel="noopener">http://kong.github.io/unirest-java/</a>看看。</p>
+<h3 id="Http请求乱码"><a href="#Http请求乱码" class="headerlink" title="Http请求乱码"></a>Http请求乱码</h3><p>调用接口测试时，我都是用的junit进行的单元测试，在单元测试的时候没有问题，用<code>IDEA</code>通过<code>Tomcat</code>的方式，请求出来的数据居然是乱码了。没办法只有百度，百度对我说，需要在Tomcat下面的<code>catalina.bat</code>配置一个参数<code>-Dfile.encoding=UTF-8</code>。这里我是这样配置的</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set &quot;JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG% -Dfile.encoding=UTF-8&quot;</span><br></pre></td></tr></table></figure>
+<p>但是加入这个参数后，在IDEA的控制台又会出来乱码，这里也需要在IDEA配置一下:<br><code>Help-&gt;Edit Custome VM Options</code><br>加入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dfile.encoding=UTF-8</span><br></pre></td></tr></table></figure>
 
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Tool/" rel="tag">Tool</a>
+                </div>
+            </div>
         </div>
         
         
@@ -200,6 +257,20 @@
 </div>
 
 
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/3285925502.html">
+                <span class="level-item">.net中好用的Http请求库</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -324,6 +395,30 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#强大的fastjson">
+        <span class="has-mr-6">1</span>
+        <span>强大的fastjson</span>
+        </a></li><li>
+        <a class="is-flex" href="#好用的Http请求工具类">
+        <span class="has-mr-6">2</span>
+        <span>好用的Http请求工具类</span>
+        </a></li><li>
+        <a class="is-flex" href="#Http请求乱码">
+        <span class="has-mr-6">3</span>
+        <span>Http请求乱码</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1496,7 +1591,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="关于我" height="28">
+                    <img src="/images/logo.svg" alt="Java Http请求遇到的问题小结" height="28">
                 
                 </a>
                 <p class="is-size-7">
