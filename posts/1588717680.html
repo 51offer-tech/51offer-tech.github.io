@@ -5,30 +5,30 @@
 
 <meta name="generator" content="Hexo 4.0.0" />
 
-<meta name="keywords" content="Spring Boot 2.X基于Mybaits-Plus实现多数据源 , 农民工学编程 , Spring Boot 2.X多数据源,多数据源,Spring Boot多数据源">
-<meta name="description" content="Spring Boot 2.X基于Mybaits-Plus实现多数据源 , 农民工学编程 , Spring Boot 2.X多数据源">
+<meta name="keywords" content="Spring Boot使用freemarker解析、替换文本内容 , 农民工学编程 , 农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+<meta name="description" content="Spring Boot使用freemarker解析、替换文本内容 , 农民工学编程 , 农民工学编程的日常学习记录">
 <!-- 
-    <meta name="keywords" content="Spring Boot 2.X多数据源,多数据源,Spring Boot多数据源,农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
+    <meta name="keywords" content="农民工学编程,编程基础学习,知识小结,Golang,.Net,.Net Core,Python,Java,Spring Boot,数据库,前端,小程序">
      -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"/>
 <meta name="baidu-site-verification" content="up4BoDUY22" />
 
-<title>Spring Boot 2.X基于Mybaits-Plus实现多数据源 - 农民工学编程</title>
+<title>Spring Boot使用freemarker解析、替换文本内容 - 农民工学编程</title>
 
 
-    <meta name="description" content="Spring Boot 2.X多数据源">
-<meta name="keywords" content="Spring Boot 2.X多数据源,多数据源,Spring Boot多数据源">
+    <meta name="description" content="没有需求，谈什么技术呢？之前有做过微信模版消息推送，今天遇到一个需求，需求方要求内容可以根据传入的字段自由组合，但是并不是毫无规则的组合，而是根据调用方传入的Json数据填充一个业务方自定义的模版。那么其实这个需求并不难，因为借助模版引擎就可以实现。那么接下来我们就进一步探究一下。">
+<meta name="keywords" content="Java,Spring Boot,微信,总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot 2.X基于Mybaits-Plus实现多数据源">
-<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;2136619727.html">
+<meta property="og:title" content="Spring Boot使用freemarker解析、替换文本内容">
+<meta property="og:url" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;posts&#x2F;1588717680.html">
 <meta property="og:site_name" content="农民工学编程">
-<meta property="og:description" content="Spring Boot 2.X多数据源">
+<meta property="og:description" content="没有需求，谈什么技术呢？之前有做过微信模版消息推送，今天遇到一个需求，需求方要求内容可以根据传入的字段自由组合，但是并不是毫无规则的组合，而是根据调用方传入的Json数据填充一个业务方自定义的模版。那么其实这个需求并不难，因为借助模版引擎就可以实现。那么接下来我们就进一步探究一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
-<meta property="og:updated_time" content="2020-02-03T07:28:17.705Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-09-05T13:54:23.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;mybatis.org&#x2F;images&#x2F;mybatis-logo.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blogs.52fx.biz&#x2F;images&#x2F;og_image.png">
 
 
 
@@ -94,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Spring Boot 2.X基于Mybaits-Plus实现多数据源" height="28">
+                <img src="/images/logo.svg" alt="Spring Boot使用freemarker解析、替换文本内容" height="28">
             
             </a>
         </div>
@@ -130,10 +130,6 @@
                     
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -150,17 +146,11 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
-    <div class="card-image">
-        <span  class="image is-7by1">
-            <img class="thumbnail" src="https://mybatis.org/images/mybatis-logo.png" alt="Spring Boot 2.X基于Mybaits-Plus实现多数据源">
-        </span>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-01T10:28:28.000Z">2020-02-01</time>
+                <time class="level-item has-text-grey" datetime="2020-09-05T00:27:55.000Z">2020-09-05</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Java/">Java</a>
@@ -170,7 +160,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 783 个字)
+                    6 分钟 读完 (大约 951 个字)
                 </span>
                 
                 
@@ -184,35 +174,90 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Spring Boot 2.X基于Mybaits-Plus实现多数据源
+                Spring Boot使用freemarker解析、替换文本内容
             
         </h1>
         <div class="content">
-            <p>一般一个项目就只会用到一个数据库，但是有时候遇到比较复杂的一点的项目就会涉及到多个数据库，比如在业务量较大的时候会涉及到分库分表，如果不增加数据库代理层的话，就只有在项目中来处理。还有像我们现在在一个项目中会涉及到<code>GBase</code>、<code>MySQL</code>、<code>DB2</code>这三种数据库，这种情况就涉及到多种数据库连接。那么我们Spring Boot中如何实现多数据库连接呢？</p>
+            <p>没有需求，谈什么技术呢？之前有做过微信模版消息推送，今天遇到一个需求，需求方要求内容可以根据传入的字段自由组合，但是并不是毫无规则的组合，而是根据调用方传入的Json数据填充一个业务方自定义的模版。那么其实这个需求并不难，因为借助模版引擎就可以实现。那么接下来我们就进一步探究一下。</p>
 <a id="more"></a>
-<p>至于单数据库连接,可以参考我之前记录的日记<a href="https://blogs.52fx.biz/posts/1287150620.html">Spring Boot整合Mybatis Plus和Druid</a>,这里我们就来直接开始多数据库连接的实战。</p>
-<h3 id="添加依赖包"><a href="#添加依赖包" class="headerlink" title="添加依赖包"></a>添加依赖包</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;dynamic-datasource-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>在Java中其实也有很多模版引擎，比如:<code>freemarker</code>、<code>thymeleaf</code>、<code>velocity</code>等，这里的选择<code>freemarker</code>作为我们这次的主角，<br><img src="http://xxnote.52fx.biz/gitbook_spring_boot_wechat_template_03.png" alt></p>
+<p>那么，在开始之前，先简单的了解它的几个基语法：</p>
+<ul>
+<li>取值：占位符方式${name}，对象方式${obj.name}</li>
+<li>判断:&lt;#if vo.CUSTCODE ?exists &gt;&lt;/#if&gt;</li>
+<li>比较：&lt;#if vo.CUSTCODE ?exists || vo.PHONE ?length gt 0&gt;&lt;/#if&gt;</li>
+<li>运算符:${num+num1},${num-num1}</li>
+</ul>
+<p>在开始之前，我们需要先引入<code>jar</code>包:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.freemarker&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;freemarker&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.3.30&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Spring-Boot多数据源连接PostgreSQL和MySQL配置"><a href="#Spring-Boot多数据源连接PostgreSQL和MySQL配置" class="headerlink" title="Spring Boot多数据源连接PostgreSQL和MySQL配置"></a>Spring Boot多数据源连接PostgreSQL和MySQL配置</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    druid:</span><br><span class="line">      stat-view-servlet:</span><br><span class="line">        enabled: true</span><br><span class="line">        login-username: admin</span><br><span class="line">        login-password: admin</span><br><span class="line">    dynamic:</span><br><span class="line">      primary: mariadb</span><br><span class="line">      datasource:</span><br><span class="line">        mariadb:</span><br><span class="line">          username: root</span><br><span class="line">          password: root</span><br><span class="line">          url: jdbc:mysql://127.0.0.1:3306/nacos_config?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true</span><br><span class="line">          driver-class-name: org.mariadb.jdbc.Driver</span><br><span class="line">          druid:</span><br><span class="line">            initial-size: 50</span><br><span class="line">            max-active: 200</span><br><span class="line">            min-idle: 50</span><br><span class="line">            max-wait: 50</span><br><span class="line">        pgsql:</span><br><span class="line">          username: postgres</span><br><span class="line">          password: postgres</span><br><span class="line">          url: jdbc:postgresql://xxx.xx.xx.xxx:5432/databasename</span><br><span class="line">          driver-class-name: org.postgresql.Driver</span><br><span class="line">          druid:</span><br><span class="line">            initial-size: 50</span><br><span class="line">            max-active: 200</span><br><span class="line">            min-idle: 50</span><br><span class="line">            max-wait: 50</span><br></pre></td></tr></table></figure>
+<p>好了，继续我们今天的主题。来，先举个例子，下面是我的微信模版配置</p>
+<table>
+<thead>
+<tr>
+<th>模版key</th>
+<th>替换内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>first</td>
+<td>该订单信息${orderNo},共支付${money}</td>
+</tr>
+<tr>
+<td>keyword1</td>
+<td>${orderNo}</td>
+</tr>
+<tr>
+<td>keyword2</td>
+<td>${orderTime}</td>
+</tr>
+<tr>
+<td>keyword3</td>
+<td>${money}</td>
+</tr>
+<tr>
+<td>keyword4</td>
+<td>${pay}</td>
+</tr>
+<tr>
+<td>remark</td>
+<td>说明${orderNo},通过${pay}支付了${money}</td>
+</tr>
+<tr>
+<td>假如我的请求参数是</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">                &quot;orderNo&quot;: &quot;5555555&quot;,</span><br><span class="line">                &quot;money&quot;: &quot;8888888&quot;,</span><br><span class="line">                &quot;orderTime&quot;:&quot;2020-09-03 15:46:56&quot;,</span><br><span class="line">                &quot;pay&quot;:&quot;支付宝&quot;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td>这里我们就借助<code>freemarker</code>来解析我们的模版,</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; template = new HashMap&lt;String,String&gt;() &#123;&#123;</span><br><span class="line">           put(&quot;first&quot;, &quot;该订单信息$&#123;orderNo&#125;,共支付$&#123;money&#125; &quot;);</span><br><span class="line">           put(&quot;keyword1&quot;, &quot;$&#123;orderNo&#125;&quot;);</span><br><span class="line">           put(&quot;keyword2&quot;, &quot;$&#123;orderTime&#125;&quot;);</span><br><span class="line">           put(&quot;keyword3&quot;, &quot;$&#123;money&#125;&quot;);</span><br><span class="line">           put(&quot;keyword4&quot;, &quot;$&#123;pay&#125;&quot;);</span><br><span class="line">           put(&quot;remark&quot;, &quot;说明$&#123;orderNo&#125;,通过$&#123;pay&#125;支付了$&#123;money&#125; &quot;);</span><br><span class="line">       &#125;&#125;;</span><br><span class="line">       List&lt;WxMpTemplateData&gt; wxMpTemplateData = new ArrayList&lt;&gt;(template.size());</span><br><span class="line">       JSONObject jsonObject= JSON.parseObject(&quot;&#123;\n&quot; +</span><br><span class="line">               &quot;                \&quot;orderNo\&quot;: \&quot;5555555\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;money\&quot;: \&quot;8888888\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;orderTime\&quot;:\&quot;2020-09-03 15:46:56\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;pay\&quot;:\&quot;支付宝\&quot;\n&quot; +</span><br><span class="line">               &quot;            &#125;&quot;);</span><br><span class="line">       template.forEach((key, value) -&gt; &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               Template tpl = new Template(null, value, null);</span><br><span class="line">               Writer out = new StringWriter(2048);</span><br><span class="line">               tpl.process(jsonObject,out);</span><br><span class="line">               wxMpTemplateData.add(new WxMpTemplateData(key,out.toString()));</span><br><span class="line">           &#125; catch (IOException | TemplateException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;);</span><br><span class="line">       TemplateParameterDto parameterDto=new TemplateParameterDto();</span><br><span class="line">       parameterDto.setAppId(&quot;wxb677b1efd92ade95&quot;);</span><br><span class="line">       parameterDto.setOpenId(&quot;oEd4cw2JNl-l_d7_RKnPzKyI-M7U&quot;);</span><br><span class="line">       parameterDto.setTemplateId(&quot;suUhCCo9owmD8QYbdcSgmG3uXwPsDE1Wn8eKThztS7U&quot;);</span><br><span class="line">       parameterDto.setUrl(&quot;https://www.baidu.com&quot;);</span><br><span class="line">       parameterDto.setTemplateDataList(wxMpTemplateData);</span><br><span class="line">       log.info(&quot;模版内容:[&#123;&#125;]&quot;,JSON.toJSONString(wxMpTemplateData));</span><br><span class="line">       pushService.sendWxTemplateMsg(parameterDto);</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td>sendWxTemplateMsg方法的逻辑在之前的文章中稍微作了一些调整</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public String sendWxTemplateMsg(TemplateParameterDto parameterDto) &#123;</span><br><span class="line">        // 发送模板消息接口</span><br><span class="line">        WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()</span><br><span class="line">                // 接收者openid</span><br><span class="line">                .toUser(parameterDto.getOpenId())</span><br><span class="line">                // 模板id</span><br><span class="line">                .templateId(parameterDto.getTemplateId())</span><br><span class="line">                // 模板跳转链接</span><br><span class="line">                .url(parameterDto.getUrl())</span><br><span class="line">                .build();</span><br><span class="line">        // 添加模板数据</span><br><span class="line">        templateMessage.setData(parameterDto.getTemplateDataList());</span><br><span class="line">        String msgId = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            //根据appId切换公众号</span><br><span class="line">            wxMpService.switchover(parameterDto.getAppId());</span><br><span class="line">            // 发送模板消息</span><br><span class="line">            msgId = wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);</span><br><span class="line">        &#125; catch (WxErrorException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return msgId;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>解析后的模版内容如下:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">模版内容:[[&#123;&quot;name&quot;:&quot;keyword3&quot;,&quot;value&quot;:&quot;8888888&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword4&quot;,&quot;value&quot;:&quot;支付宝&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword1&quot;,&quot;value&quot;:&quot;5555555&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword2&quot;,&quot;value&quot;:&quot;2020-09-03 15:46:56&quot;&#125;,&#123;&quot;name&quot;:&quot;remark&quot;,&quot;value&quot;:&quot;说明5555555,通过支付宝支付了8888888 &quot;&#125;,&#123;&quot;name&quot;:&quot;first&quot;,&quot;value&quot;:&quot;该订单信息5555555,共支付8888888 &quot;&#125;]]</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用dynamic-datasource"><a href="#使用dynamic-datasource" class="headerlink" title="使用dynamic-datasource"></a>使用dynamic-datasource</h3><h4 id="新建实体类"><a href="#新建实体类" class="headerlink" title="新建实体类"></a>新建实体类</h4><p>我这里用到了两个实体类<code>User</code>和<code>Feedback</code>,<code>User</code>类就不做展示，上一篇有,这里就直接看看我们的<code>Feddback</code>,</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@TableName(&quot;wechat_feedback&quot;)</span><br><span class="line">public class Feedback &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String title;</span><br><span class="line">    private String content;</span><br><span class="line"></span><br><span class="line">    @TableField(&quot;open_id&quot;)</span><br><span class="line">    private String openId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="新建Mapper接口类"><a href="#新建Mapper接口类" class="headerlink" title="新建Mapper接口类"></a>新建Mapper接口类</h4><p><code>UserMapper</code>:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt;&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>FeedbackMapper</code>:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface FeedbackMapper extends BaseMapper&lt;Feedback&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="在controller中调用Mapper"><a href="#在controller中调用Mapper" class="headerlink" title="在controller中调用Mapper"></a>在controller中调用Mapper</h4><p>这里我们还是用之前编写的<code>UserController</code>类:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/v1/user&quot;)</span><br><span class="line">@RestController</span><br><span class="line">@Api(tags = &quot;User API展示&quot;)</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    FeedbackMapper feedbackMapper;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;mariadb&quot;, notes = &quot;获取mariadb中的用户数据&quot;)</span><br><span class="line">    @GetMapping(&quot;/list&quot;)</span><br><span class="line">    @DS(&quot;mariadb&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getUserList()</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(userMapper.selectList(null));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(value = &quot;pgsql&quot;, notes = &quot;获取pgsql中的用户反馈数据&quot;)</span><br><span class="line">    @GetMapping(&quot;/feedbacks&quot;)</span><br><span class="line">    @DS(&quot;pgsql&quot;)</span><br><span class="line">    public ResponseResult&lt;?&gt; getJobs()</span><br><span class="line">    &#123;</span><br><span class="line">        return ResponseResult.success(feedbackMapper.selectList(null));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要使用<code>@DS</code>注解来标识要使用的数据源,该注解可以使用在<code>Class</code>和<code>METHOD</code>上，如果是使用在类上，则表示该类都使用这个指定的数据库连接。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">public @interface DS &#123;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * groupName or specific database name or spring SPEL name.</span><br><span class="line">   *</span><br><span class="line">   * @return the database you want to switch</span><br><span class="line">   */</span><br><span class="line">  String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于我这里使用到了<code>Druid</code>,那么还需要在启动类上加上<code>@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)</code>,排除掉<code>druid-spring-boot-starter</code>中的<code>DruidDataSourceAutoConfigure</code>自动配置类。</p>
-<p>现在我们启动起来看看效果,可以再启动日志中看到</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2020-02-03 12:54:42.740  INFO com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:1010) 2CNU7X5OLAUE004 --- [           main] c.a.d.p.DruidDataSource                  : &#123;dataSource-1,mariadb&#125; inited</span><br><span class="line">2020-02-03 12:54:46.592  INFO com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:1010) 2CNU7X5OLAUE004 --- [           main] c.a.d.p.DruidDataSource                  : &#123;dataSource-2,pgsql&#125; inited</span><br><span class="line">2020-02-03 12:54:46.594  INFO com.baomidou.dynamic.datasource.DynamicRoutingDataSource.addDataSource(DynamicRoutingDataSource.java:148) 2CNU7X5OLAUE004 --- [           main] c.b.d.d.DynamicRoutingDataSource         : dynamic-datasource - load a datasource named [mariadb] success</span><br><span class="line">2020-02-03 12:54:46.594  INFO com.baomidou.dynamic.datasource.DynamicRoutingDataSource.addDataSource(DynamicRoutingDataSource.java:148) 2CNU7X5OLAUE004 --- [           main] c.b.d.d.DynamicRoutingDataSource         : dynamic-datasource - load a datasource named [pgsql] success</span><br></pre></td></tr></table></figure>
-
-<p>现在来访问<code>http://localhost:8080/druid/datasource.html</code>,可以看到两个数据源</p>
-<p><img src="http://xxnote.52fx.biz/8080_druid_datasource.jpg" alt><br><img src="http://xxnote.52fx.biz/spring_boot_dynamic_datasource_1.png" alt><br><img src="http://xxnote.52fx.biz/spring_boot_dynamic_datasource_2.png" alt></p>
+<p><img src="http://xxnote.52fx.biz/gitbook_spring_boot_wechat_template_01.jpg" alt><br><img src="http://xxnote.52fx.biz/gitbook_spring_boot_wechat_template_01.png" alt></p>
+<p>刚才用freemarker填充了简单的模版，其实它还可以完成更加复杂的对象，我们来举个栗子</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; template = new HashMap&lt;String,String&gt;() &#123;&#123;</span><br><span class="line">           put(&quot;first&quot;, &quot;$&#123;ext.greet&#125;,$&#123;ext.name&#125;&quot;);</span><br><span class="line">           put(&quot;keyword1&quot;, &quot;$&#123;orderNo&#125;&quot;);</span><br><span class="line">           put(&quot;keyword2&quot;, &quot;$&#123;orderTime&#125;&quot;);</span><br><span class="line">           put(&quot;keyword3&quot;, &quot;$&#123;money&#125;&quot;);</span><br><span class="line">           put(&quot;keyword4&quot;, &quot;$&#123;pay&#125;&quot;);</span><br><span class="line">           put(&quot;remark&quot;, &quot;说明$&#123;orderNo&#125;,通过$&#123;pay&#125;支付了$&#123;money&#125;,$&#123;ext.memo&#125; &quot;);</span><br><span class="line">       &#125;&#125;;</span><br><span class="line">       List&lt;WxMpTemplateData&gt; wxMpTemplateData = new ArrayList&lt;&gt;(template.size());</span><br><span class="line">       JSONObject jsonObject= JSON.parseObject(&quot;&#123;\n&quot; +</span><br><span class="line">               &quot;                \&quot;orderNo\&quot;: \&quot;5555555\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;money\&quot;: \&quot;8888888\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;orderTime\&quot;: \&quot;2020-09-03 15:46:56\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;pay\&quot;: \&quot;支付宝\&quot;,\n&quot; +</span><br><span class="line">               &quot;                \&quot;ext\&quot;: &#123;\n&quot; +</span><br><span class="line">               &quot;                    \&quot;greet\&quot;: \&quot;你好\&quot;,\n&quot; +</span><br><span class="line">               &quot;                    \&quot;name\&quot;: \&quot;靓大叔\&quot;,\n&quot; +</span><br><span class="line">               &quot;                    \&quot;memo\&quot;: \&quot;大兄弟，感谢你的支持\&quot;\n&quot; +</span><br><span class="line">               &quot;                &#125;\n&quot; +</span><br><span class="line">               &quot;            &#125;&quot;);</span><br></pre></td></tr></table></figure>
+<p>最后解析出来的结果是这样子的</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[&#123;&quot;name&quot;:&quot;keyword3&quot;,&quot;value&quot;:&quot;8888888&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword4&quot;,&quot;value&quot;:&quot;支付宝&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword1&quot;,&quot;value&quot;:&quot;5555555&quot;&#125;,&#123;&quot;name&quot;:&quot;keyword2&quot;,&quot;value&quot;:&quot;2020-09-03 15:46:56&quot;&#125;,&#123;&quot;name&quot;:&quot;remark&quot;,&quot;value&quot;:&quot;说明5555555,通过支付宝支付了8888888,大兄弟，感谢你的支持 &quot;&#125;,&#123;&quot;name&quot;:&quot;first&quot;,&quot;value&quot;:&quot;你好,靓大叔&quot;&#125;]]</span><br></pre></td></tr></table></figure>
+<p><img src="http://xxnote.52fx.biz/gitbook_spring_boot_wechat_template_02.png" alt></p>
+<p><code>freemarker</code>还支持一些复杂的表达等，这里暂时用不上，就不继续探究了。因为业务是想尽量将控制放在我们这里，而不是调用方，所以才行想这样的方式来处理。</p>
 
         </div>
         
@@ -220,7 +265,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>, <a class="has-link-grey -link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a>, <a class="has-link-grey -link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a>
                 </div>
             </div>
         </div>
@@ -271,17 +316,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/1829574622.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Spring Boot Starter为我们做了什么?</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/2083515859.html">
-                <span class="level-item">ASP.NET Core 中的性能问题诊断工具-来自官网</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/368764291.html">
+                <span class="level-item">MUI新增iconfont字体图标</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -412,42 +450,6 @@
 </div>
     
         
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#添加依赖包">
-        <span class="has-mr-6">1</span>
-        <span>添加依赖包</span>
-        </a></li><li>
-        <a class="is-flex" href="#Spring-Boot多数据源连接PostgreSQL和MySQL配置">
-        <span class="has-mr-6">2</span>
-        <span>Spring Boot多数据源连接PostgreSQL和MySQL配置</span>
-        </a></li><li>
-        <a class="is-flex" href="#使用dynamic-datasource">
-        <span class="has-mr-6">3</span>
-        <span>使用dynamic-datasource</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#新建实体类">
-        <span class="has-mr-6">3.1</span>
-        <span>新建实体类</span>
-        </a></li><li>
-        <a class="is-flex" href="#新建Mapper接口类">
-        <span class="has-mr-6">3.2</span>
-        <span>新建Mapper接口类</span>
-        </a></li><li>
-        <a class="is-flex" href="#在controller中调用Mapper">
-        <span class="has-mr-6">3.3</span>
-        <span>在controller中调用Mapper</span>
-        </a></li></ul></li></ul>
-            </div>
-        </div>
-    </div>
-
     
         <div class="card widget">
     <div class="card-content">
@@ -1766,7 +1768,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Spring Boot 2.X基于Mybaits-Plus实现多数据源" height="28">
+                    <img src="/images/logo.svg" alt="Spring Boot使用freemarker解析、替换文本内容" height="28">
                 
                 </a>
                 <p class="is-size-7">
